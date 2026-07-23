@@ -121,5 +121,3 @@ module.exports = async (req, res) => {
 
   return res.status(405).json({ error: "method_not_allowed" });
 };
-
-fix invio email
