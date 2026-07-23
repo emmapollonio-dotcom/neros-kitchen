@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nero's Kitchen — Chef a domicilio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Karla:wght@300..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --nero:#131110; --fumo:#1e1a17; --linea:#2c2721;
+  --avorio:#f1ebdd; --carta:#f7f3e8;
+  --calendula:#e68a17; --olio:#6d9a44; --sabbia:#a5947c;
+  --inchiostro:#221d18;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Karla',sans-serif;background:var(--nero);color:var(--avorio);line-height:1.6;font-size:16px}
+img{display:block;max-width:100%}
+h1,h2,h3,.serif{font-family:'Fraunces',serif;font-weight:400;line-height:1.12}
+.mono{font-family:'IBM Plex Mono',monospace}
+.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--calendula);display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.eyebrow::after{content:"";height:1px;flex:0 0 46px;background:var(--calendula);opacity:.5}
+section{padding:84px 0}
+a{color:inherit}
+button{font-family:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--calendula);outline-offset:3px}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:50;background:rgba(19,17,16,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--linea)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:62px}
+.logo{font-family:'Fraunces',serif;font-size:1.25rem;letter-spacing:.02em;text-decoration:none}
+.logo em{color:var(--calendula);font-style:italic}
+.navlinks{display:flex;gap:26px;list-style:none}
+.navlinks a{text-decoration:none;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;opacity:.8}
+.navlinks a:hover{opacity:1;color:var(--calendula)}
+.nav-cta{background:var(--calendula);color:var(--nero);border:0;padding:9px 18px;border-radius:2px;font-weight:700;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;text-decoration:none}
+@media(max-width:760px){.navlinks{display:none}}
+
+/* HERO */
+.hero{display:grid;grid-template-columns:1fr 1fr;min-height:78vh;align-items:stretch;padding:0;border-bottom:1px solid var(--linea)}
+.hero-copy{display:flex;flex-direction:column;justify-content:center;padding:70px 6vw 70px calc((100vw - 1100px)/2 + 22px)}
+@media(max-width:1150px){.hero-copy{padding-left:22px}}
+.hero h1{font-size:clamp(2.6rem,5.4vw,4.4rem);font-weight:340;margin:14px 0 22px}
+.hero h1 em{font-style:italic;color:var(--calendula)}
+.hero p{max-width:44ch;color:#cfc6b5;margin-bottom:34px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-block;padding:14px 26px;border-radius:2px;font-weight:700;font-size:.88rem;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;border:1px solid transparent}
+.btn-primary{background:var(--calendula);color:var(--nero)}
+.btn-primary:hover{background:#f59a28}
+.btn-ghost{border-color:var(--sabbia);color:var(--avorio)}
+.btn-ghost:hover{border-color:var(--calendula);color:var(--calendula)}
+.hero-img{position:relative;min-height:420px}
+.hero-img img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.hero-img::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--nero),transparent 35%)}
+@media(max-width:820px){.hero{grid-template-columns:1fr}.hero-img{min-height:320px;order:-1}.hero-img::after{background:linear-gradient(0deg,var(--nero),transparent 55%)}}
+
+/* ABOUT */
+.about{background:var(--avorio);color:var(--inchiostro)}
+.about .eyebrow{color:#b46508}.about .eyebrow::after{background:#b46508}
+.about-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:56px;align-items:center}
+.about-grid img{border-radius:3px;box-shadow:14px 14px 0 rgba(230,138,23,.25)}
+.about h2{font-size:clamp(1.9rem,3.4vw,2.7rem);margin-bottom:20px}
+.about p{color:#4a4238;margin-bottom:14px;max-width:58ch}
+@media(max-width:820px){.about-grid{grid-template-columns:1fr;gap:34px}}
+
+/* MENU */
+.menu h2,.gallery h2,.reviews h2,.booking h2{font-size:clamp(1.9rem,3.4vw,2.6rem);margin-bottom:12px}
+.menu-sub{color:var(--sabbia);max-width:60ch;margin-bottom:44px}
+.pacchetti{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.pack{background:var(--fumo);border:1px solid var(--linea);border-radius:3px;padding:30px 26px;display:flex;flex-direction:column;transition:border-color .2s}
+.pack:hover{border-color:var(--calendula)}
+.pack.featured{border-color:var(--calendula);position:relative}
+.pack.featured::before{content:attr(data-badge);position:absolute;top:-11px;left:22px;background:var(--calendula);color:var(--nero);font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;padding:3px 10px}
+.pack h3{font-size:1.5rem;margin-bottom:4px}
+.pack .portate{font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--sabbia);margin-bottom:18px}
+.pack ul{list-style:none;margin-bottom:22px;flex:1}
+.pack li{padding:7px 0;border-bottom:1px dashed var(--linea);font-size:.94rem;color:#d6cdbd}
+.pack .prezzo{font-family:'Fraunces',serif;font-size:2rem;color:var(--calendula)}
+.pack .prezzo small{font-family:'Karla',sans-serif;font-size:.8rem;color:var(--sabbia)}
+.pack .minimo{font-size:.78rem;color:var(--sabbia);margin-top:2px}
+@media(max-width:900px){.pacchetti{grid-template-columns:1fr}}
+
+/* GALLERY */
+.gallery{background:var(--avorio);color:var(--inchiostro)}
+.gallery .eyebrow{color:#b46508}.gallery .eyebrow::after{background:#b46508}
+.gallery .menu-sub{color:#6a6053}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.grid figure{position:relative;overflow:hidden;border-radius:3px;aspect-ratio:3/4;cursor:zoom-in}
+.grid img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.grid figure:hover img{transform:scale(1.05)}
+.grid figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 12px 10px;background:linear-gradient(transparent,rgba(19,17,16,.85));color:var(--avorio);font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;opacity:0;transition:opacity .3s}
+.grid figure:hover figcaption{opacity:1}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+.lightbox{position:fixed;inset:0;background:rgba(10,9,8,.94);display:none;align-items:center;justify-content:center;z-index:99;padding:24px}
+.lightbox.open{display:flex}
+.lightbox img{max-height:90vh;max-width:92vw;object-fit:contain;border-radius:3px}
+
+/* REVIEWS */
+.reviews blockquote{background:var(--fumo);border:1px solid var(--linea);border-left:3px solid var(--calendula);padding:26px;border-radius:3px}
+.reviews .rgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:38px}
+.reviews p{font-family:'Fraunces',serif;font-style:italic;font-size:1.05rem;color:#e6ddcb;margin-bottom:16px}
+.reviews cite{font-style:normal;font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--sabbia)}
+.stars{color:var(--calendula);letter-spacing:3px;margin-bottom:10px}
+@media(max-width:900px){.reviews .rgrid{grid-template-columns:1fr}}
+
+/* BOOKING */
+.booking{background:var(--carta);color:var(--inchiostro);border-top:6px solid var(--calendula)}
+.booking .eyebrow{color:#b46508}.booking .eyebrow::after{background:#b46508}
+.booking .menu-sub{color:#6a6053}
+.book-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:44px;align-items:start}
+@media(max-width:900px){.book-grid{grid-template-columns:1fr}}
+.cal{background:#fff;border:1px solid #ddd2bd;border-radius:4px;padding:20px}
+.cal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.cal-head h3{font-size:1.15rem;text-transform:capitalize}
+.cal-head button{background:none;border:1px solid #cbbfa6;border-radius:2px;width:34px;height:34px;font-size:1rem}
+.cal-head button:hover{border-color:var(--calendula);color:var(--calendula)}
+.cal table{width:100%;border-collapse:collapse;table-layout:fixed}
+.cal th{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.1em;color:#9c8f77;padding-bottom:8px;text-transform:uppercase}
+.cal td{text-align:center;padding:2px}
+.day{width:100%;aspect-ratio:1;border:0;border-radius:3px;background:#f3ecdc;font-size:.9rem;color:var(--inchiostro)}
+.day:hover:not(:disabled){background:var(--calendula);color:#fff}
+.day.sel{background:var(--nero);color:var(--calendula);font-weight:700}
+.day:disabled{background:transparent;color:#c9bda3;cursor:not-allowed;text-decoration:line-through}
+.day.blocked{background:#e8dcc4;color:#b3a488;cursor:not-allowed;text-decoration:line-through}
+.legend{display:flex;gap:18px;margin-top:14px;font-size:.75rem;color:#7d7260;flex-wrap:wrap}
+.legend span{display:flex;align-items:center;gap:6px}
+.dot{width:11px;height:11px;border-radius:2px;display:inline-block}
+.form{background:#fff;border:1px solid #ddd2bd;border-radius:4px;padding:26px}
+.form h3{font-size:1.25rem;margin-bottom:18px}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:560px){.frow{grid-template-columns:1fr}}
+.field{margin-bottom:14px}
+label{display:block;font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:#8a7d64;margin-bottom:6px}
+input,select,textarea{width:100%;padding:11px 12px;border:1px solid #cbbfa6;border-radius:2px;background:#fdfaf2;font-family:'Karla',sans-serif;font-size:.95rem;color:var(--inchiostro)}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--calendula);border-color:transparent}
+textarea{resize:vertical;min-height:80px}
+.selected-date{font-family:'IBM Plex Mono',monospace;font-size:.8rem;background:var(--nero);color:var(--calendula);padding:8px 12px;border-radius:2px;display:inline-block;margin-bottom:16px}
+.submit{width:100%;background:var(--nero);color:var(--calendula);border:0;padding:15px;border-radius:2px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.88rem}
+.submit:hover{background:#000}
+.submit:disabled{opacity:.5;cursor:wait}
+.hint{font-size:.78rem;color:#8a7d64;margin-top:10px;text-align:center}
+.msg{padding:12px;border-radius:2px;font-size:.88rem;margin-bottom:14px;display:none}
+.msg.err{display:block;background:#f8e2d8;color:#8a3013;border:1px solid #e0b8a5}
+
+/* COMANDA ticket */
+.overlay{position:fixed;inset:0;background:rgba(19,17,16,.8);display:none;align-items:center;justify-content:center;z-index:100;padding:20px}
+.overlay.open{display:flex}
+.comanda{background:#fbf7ec;color:var(--inchiostro);width:min(380px,94vw);font-family:'IBM Plex Mono',monospace;font-size:.8rem;padding:26px 24px 30px;border-radius:2px;position:relative;box-shadow:0 24px 60px rgba(0,0,0,.5);
+ -webkit-mask:linear-gradient(#000 0 0) padding-box, radial-gradient(circle at 8px 100%, transparent 7px, #000 7.5px) bottom left/16px 14px repeat-x padding-box;}
+.comanda::before{content:"NERO'S KITCHEN · COMANDA";display:block;text-align:center;letter-spacing:.2em;border-bottom:1px dashed #b3a488;padding-bottom:12px;margin-bottom:14px;font-weight:500}
+.comanda .rowc{display:flex;justify-content:space-between;gap:12px;padding:5px 0;border-bottom:1px dotted #d8cdb2}
+.comanda .rowc b{font-weight:500;color:#8a7d64}
+.comanda .grazie{text-align:center;margin-top:16px;letter-spacing:.1em;color:#b46508}
+.comanda .chiudi{position:absolute;top:8px;right:10px;background:none;border:0;font-size:1.1rem;color:#8a7d64}
+
+/* ADMIN */
+.adminbar{display:none;background:var(--nero);color:var(--avorio);border:1px solid var(--calendula);border-radius:3px;padding:16px;margin-bottom:22px}
+.adminbar.on{display:block}
+.adminbar h4{font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--calendula);margin-bottom:10px}
+.adminbar p{font-size:.82rem;color:#cfc6b5}
+.blist{margin-top:14px;display:flex;flex-direction:column;gap:10px;max-height:300px;overflow:auto}
+.bitem{background:var(--fumo);border:1px solid var(--linea);border-radius:2px;padding:12px;font-size:.82rem}
+.bitem .mono{color:var(--calendula);font-size:.68rem;letter-spacing:.1em}
+.bitem .actions{display:flex;gap:8px;margin-top:8px}
+.bitem button{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;padding:6px 10px;border-radius:2px;border:1px solid var(--sabbia);background:none;color:var(--avorio)}
+.bitem button.ok{border-color:var(--olio);color:#9cc472}
+.bitem button.no{border-color:#a34f2f;color:#d98a67}
+.status{display:inline-block;padding:2px 8px;border-radius:2px;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase}
+.st-richiesta{background:#5a4a20;color:#f0c97a}.st-confermata{background:#31451f;color:#a9d383}.st-rifiutata{background:#4a221a;color:#dd9b80}
+
+/* FOOTER */
+footer{border-top:1px solid var(--linea);padding:44px 0;background:var(--nero)}
+footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
+footer p{font-size:.82rem;color:var(--sabbia)}
+.adminlink{background:none;border:0;color:#5d5344;font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase}
+.adminlink:hover{color:var(--calendula)}
+/* ============ MODERN PASS: motion & polish ============ */
+:root{--ease:cubic-bezier(.22,1,.36,1)}
+.btn,.nav-cta,.submit{border-radius:999px;transition:transform .3s var(--ease),box-shadow .3s var(--ease),background .3s,color .3s,border-color .3s}
+.btn:hover,.nav-cta:hover,.submit:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(230,138,23,.28)}
+.btn:active,.nav-cta:active,.submit:active{transform:translateY(-1px) scale(.98)}
+.pack,.cal,.form,.reviews blockquote,.adminbar,.bitem{border-radius:16px}
+.pack{transition:transform .45s var(--ease),border-color .3s,box-shadow .45s var(--ease)}
+.pack:hover{transform:translateY(-8px);box-shadow:0 24px 48px rgba(0,0,0,.35)}
+.grid figure{border-radius:14px;transition:box-shadow .4s var(--ease)}
+.grid figure:hover{box-shadow:0 18px 40px rgba(19,17,16,.28)}
+.grid img{transition:transform .8s var(--ease)}
+.about-grid img{border-radius:16px;transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
+.about-grid img:hover{transform:translate(-4px,-4px);box-shadow:20px 20px 0 rgba(230,138,23,.3)}
+input,select,textarea{border-radius:10px;transition:border-color .25s,box-shadow .25s}
+.day{border-radius:10px;transition:background .25s,color .25s,transform .25s var(--ease)}
+.day:hover:not(:disabled){transform:scale(1.12)}
+.day.sel{animation:pop .35s var(--ease)}
+@keyframes pop{0%{transform:scale(.7)}60%{transform:scale(1.15)}100%{transform:scale(1)}}
+.cal table{transition:opacity .25s,transform .3s var(--ease)}
+.cal.turning table{opacity:0;transform:translateX(14px)}
+.hero h1 em{background:linear-gradient(100deg,var(--calendula),#f7c46a);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-copy>*{opacity:0;transform:translateY(26px);animation:up .9s var(--ease) forwards}
+.hero-copy>*:nth-child(2){animation-delay:.12s}.hero-copy>*:nth-child(3){animation-delay:.24s}.hero-copy>*:nth-child(4){animation-delay:.36s}
+@keyframes up{to{opacity:1;transform:none}}
+.hero-img img{animation:kb 18s var(--ease) infinite alternate}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.07)}}
+.rv{opacity:0;transform:translateY(30px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.lightbox,.overlay{display:flex;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .35s var(--ease),visibility .35s}
+.lightbox.open,.overlay.open{opacity:1;visibility:visible;pointer-events:auto}
+.lightbox img,.comanda{transform:scale(.9);transition:transform .4s var(--ease)}
+.lightbox.open img,.overlay.open .comanda{transform:scale(1)}
+.comanda{border-radius:12px 12px 2px 2px}
+nav{transition:box-shadow .3s}
+nav.scrolled{box-shadow:0 8px 30px rgba(0,0,0,.45)}
+.navlinks a{transition:color .25s,opacity .25s}
+/* ============ TAKEACHEF-INSPIRED PASS ============ */
+.mosaic{position:relative;display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;padding:0 12px;overflow:hidden;align-content:center;background:var(--fumo);min-height:420px}
+.mosaic::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--nero),transparent 32%),linear-gradient(0deg,var(--nero),transparent 20%,transparent 80%,var(--nero));pointer-events:none}
+.mcol{display:flex;flex-direction:column;gap:12px;animation:floaty 24s ease-in-out infinite alternate}
+.mcol.m2{animation-duration:30s;animation-direction:alternate-reverse;margin-top:-50px}
+.mcol.m3{animation-duration:27s;animation-delay:-6s}
+.mcol img{border-radius:12px;width:100%;object-fit:cover;aspect-ratio:3/4}
+@keyframes floaty{from{transform:translateY(0)}to{transform:translateY(-70px)}}
+@media(max-width:820px){.mosaic{order:-1;min-height:330px}}
+.steps{border-top:1px solid var(--linea)}
+.stepgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:44px}
+.step{border-top:2px solid var(--linea);padding-top:20px;transition:border-color .4s}
+.step:hover{border-color:var(--calendula)}
+.step span{font-family:'IBM Plex Mono',monospace;color:var(--calendula);font-size:.8rem;letter-spacing:.2em}
+.step h3{font-size:1.25rem;margin:10px 0 8px}
+.step p{font-size:.92rem;color:#cfc6b5}
+@media(max-width:900px){.stepgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.stepgrid{grid-template-columns:1fr}}
+.stats{display:flex;gap:18px;flex-wrap:wrap;margin:38px 0 10px}
+.stats>div{flex:1;min-width:180px;background:var(--fumo);border:1px solid var(--linea);border-radius:16px;padding:24px;text-align:center}
+.stats b{font-family:'Fraunces',serif;font-weight:400;font-size:2.6rem;color:var(--calendula);display:block}
+.stats b small{font-size:1.1rem;color:var(--sabbia)}
+.stats span{font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--sabbia)}
+.vedi{margin-top:16px;background:none;border:0;border-bottom:1px solid var(--calendula);color:var(--calendula);font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;padding:0 0 3px;align-self:flex-start;transition:opacity .25s}
+.vedi:hover{opacity:.7}
+.menucard{background:var(--carta);color:var(--inchiostro);width:min(540px,94vw);max-height:86vh;overflow:auto;border-radius:16px;padding:34px 32px;position:relative;box-shadow:0 24px 60px rgba(0,0,0,.5);transform:scale(.9);transition:transform .4s var(--ease)}
+.overlay.open .menucard{transform:scale(1)}
+.menucard h3{font-size:1.7rem;margin-bottom:4px}
+.menucard .sotto{font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:#8a7d64;margin-bottom:22px}
+.corso{font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:#b46508;border-bottom:1px solid #ddd2bd;padding-bottom:6px;margin:20px 0 4px;display:flex;justify-content:space-between}
+.corso i{font-style:normal;color:#a0937a}
+.menucard ul{list-style:none}
+.menucard li{padding:9px 0;border-bottom:1px dashed #e2d8c0;font-size:.95rem}
+.menucard .chiudi{position:sticky;top:0;float:right;background:none;border:0;font-size:1.2rem;color:#8a7d64}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}html{scroll-behavior:auto}.rv,.hero-copy>*{opacity:1;transform:none}}
+
+/* ============ LEZIONI DI CUCINA ============ */
+.lezioni{background:linear-gradient(180deg,#fff,var(--cielo,#ecf5fa))}
+.lez-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:50px;align-items:center}
+@media(max-width:860px){.lez-grid{grid-template-columns:1fr;gap:30px}}
+.lez-grid img{border-radius:16px;box-shadow:14px 14px 0 rgba(245,195,66,.45)}
+.lez-copy h2{font-size:clamp(1.9rem,3.4vw,2.6rem);margin-bottom:14px}
+.lez-copy p{color:var(--muted,#5f7d8c);margin-bottom:18px;max-width:56ch}
+.formati{display:flex;flex-wrap:wrap;gap:10px;margin:6px 0 22px}
+.chip{font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--blu,#2e7fa3);color:var(--blu,#2e7fa3);border-radius:999px;padding:7px 14px;background:#fff}
+.lez-prezzo{font-family:'Fraunces',serif;font-size:1.8rem;color:var(--calendula,#f28c28);margin-bottom:4px}
+.lez-prezzo small{font-family:'Karla',sans-serif;font-size:.85rem;color:var(--muted,#5f7d8c)}
+.lez-min{font-size:.8rem;color:var(--muted,#5f7d8c);margin-bottom:22px}
+
+.lez-tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:8px 0 22px;max-width:520px}
+@media(max-width:560px){.lez-tiers{grid-template-columns:1fr}}
+.tier{background:#fff;border:1px solid var(--line2,#d9e9f1);border-radius:14px;padding:16px 14px;text-align:center;transition:transform .35s cubic-bezier(.22,1,.36,1),border-color .3s,box-shadow .35s}
+.tier:hover{transform:translateY(-4px);border-color:var(--calendula,#f28c28);box-shadow:0 14px 30px rgba(24,55,68,.12)}
+.tier h4{font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--blu,#2e7fa3);margin-bottom:6px}
+.tier b{font-family:'Fraunces',serif;font-weight:400;font-size:1.7rem;color:var(--calendula,#f28c28);display:block}
+.tier small{font-size:.72rem;color:var(--muted,#5f7d8c)}
+.menucard li b{font-family:'Karla',sans-serif;font-weight:700;display:block}
+.pdesc{display:block;font-size:.82rem;color:#5f7d8c;margin-top:2px;line-height:1.5}
+.intl{background:#12303d;color:#eaf3f8}
+.intl .eyebrow{color:#f5c342}
+.intl .eyebrow::after{background:#f5c342}
+.intl h2{font-size:clamp(1.9rem,3.4vw,2.6rem);margin-bottom:12px}
+.intl-sub{color:#b9d2de;max-width:62ch;margin-bottom:34px}
+.intl-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:26px}
+@media(max-width:900px){.intl-cards{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.intl-cards{grid-template-columns:1fr}}
+.icard{background:rgba(255,255,255,.06);border:1px solid #235062;border-radius:14px;padding:20px;transition:transform .35s cubic-bezier(.22,1,.36,1),border-color .3s}
+.icard:hover{transform:translateY(-4px);border-color:#f5c342}
+.icard h4{font-family:'Fraunces',serif;font-weight:400;font-size:1.15rem;color:#fff;margin-bottom:6px}
+.icard p{font-size:.85rem;color:#b9d2de}
+.intl-cond{font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.08em;color:#f5c342;margin-bottom:26px}
+.lingue{font-weight:700;color:#2e7fa3}
+.langs{display:flex;gap:4px}
+.langs button{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.08em;border:1px solid #bcd7e4;background:#fff;color:#2e7fa3;border-radius:999px;padding:5px 9px;transition:all .25s}
+.langs button:hover{border-color:#f28c28;color:#f28c28}
+.langs button.on{background:#2e7fa3;border-color:#2e7fa3;color:#fff}
+@media(max-width:420px){.langs button{padding:4px 7px}}
+/* ============ TEMA CHIARO: bianco · azzurro · giallo · arancio ============ */
+:root{--calendula:#f28c28;--accent2:#de7413;--giallo:#f5c342;--blu:#2e7fa3;--blunotte:#12303d;--cielo:#ecf5fa;--ink:#183744;--line2:#d9e9f1;--muted:#5f7d8c;--soft:var(--cielo)}
+body{background:#fff;color:var(--ink)}
+nav{background:rgba(255,255,255,.93);border-bottom:1px solid var(--line2)}
+nav.scrolled{box-shadow:0 8px 30px rgba(24,55,68,.08)}
+.logo em{color:var(--calendula)}
+.navlinks a:hover{color:var(--calendula)}
+.nav-cta{background:var(--calendula);color:#fff}
+.eyebrow,.about .eyebrow,.gallery .eyebrow,.booking .eyebrow{color:var(--blu)}
+.eyebrow::after,.about .eyebrow::after,.gallery .eyebrow::after,.booking .eyebrow::after{background:var(--blu)}
+.hero{border-bottom:1px solid var(--line2)}
+.hero p{color:var(--muted)}
+.hero h1 em{background:linear-gradient(100deg,var(--calendula),var(--giallo));-webkit-background-clip:text;background-clip:text;color:transparent}
+.btn-primary{background:var(--calendula);color:#fff}
+.btn-primary:hover{background:var(--accent2)}
+.btn-ghost{border-color:#bcd7e4;color:var(--ink)}
+.btn-ghost:hover{border-color:var(--calendula);color:var(--calendula)}
+.btn:hover,.nav-cta:hover,.submit:hover{box-shadow:0 12px 26px rgba(242,140,40,.30)}
+.mosaic{background:var(--cielo)}
+.mosaic::after{background:linear-gradient(90deg,#fff,transparent 32%),linear-gradient(0deg,#fff,transparent 20%,transparent 80%,#fff)}
+.about,.gallery,.reviews{background:var(--cielo);color:var(--ink)}
+.about p{color:#3f5b69}
+.about-grid img{box-shadow:14px 14px 0 rgba(245,195,66,.45)}
+.about-grid img:hover{box-shadow:20px 20px 0 rgba(242,140,40,.4)}
+.steps{background:#fff;border-top:1px solid var(--line2)}
+.step{border-top-color:var(--line2)}
+.step:hover{border-color:var(--calendula)}
+.step span{color:var(--calendula)}
+.step p{color:var(--muted)}
+.menu-sub,.gallery .menu-sub,.booking .menu-sub{color:var(--muted)}
+.pack{background:#fff;border-color:var(--line2);box-shadow:0 6px 18px rgba(24,55,68,.06)}
+.pack:hover{border-color:var(--calendula);box-shadow:0 24px 48px rgba(24,55,68,.14)}
+.pack.featured{border-color:var(--calendula)}
+.pack.featured::before{background:var(--calendula);color:#fff}
+.pack h3{color:var(--blu)}
+.pack li{color:#3f5b69;border-bottom-color:var(--line2)}
+.pack .portate,.pack .minimo,.prezzo small{color:var(--muted)}
+.pack .prezzo{color:var(--calendula)}
+.vedi{color:var(--blu);border-bottom-color:var(--blu)}
+.grid figure:hover{box-shadow:0 18px 40px rgba(24,55,68,.2)}
+.reviews blockquote{background:#fff;border-color:var(--line2);border-left-color:var(--giallo)}
+.reviews p{color:#2f4956}
+.reviews cite{color:var(--muted)}
+.stars{color:#e9ae14}
+.stats>div{background:#fff;border-color:var(--line2)}
+.stats b{color:var(--calendula)}
+.stats span{color:var(--muted)}
+.booking{background:#fff;border-top:6px solid var(--calendula)}
+.cal,.form{background:#fff;border-color:var(--line2);box-shadow:0 6px 18px rgba(24,55,68,.06)}
+.cal-head button{border-color:#bcd7e4}
+.cal-head button:hover{border-color:var(--calendula);color:var(--calendula)}
+.cal th{color:var(--muted)}
+.day{background:var(--cielo);color:var(--ink)}
+.day:hover:not(:disabled){background:var(--calendula);color:#fff}
+.day.sel{background:var(--blu);color:#fff}
+.day:disabled{color:#b9ccd6}
+.day.blocked{background:#e1ecf2;color:#9db4c0}
+.legend{color:var(--muted)}
+.form h3,.cal-head h3{color:var(--blu)}
+.selected-date{background:var(--blu);color:#fff}
+label{color:var(--muted)}
+input,select,textarea{background:#fff;border-color:#bcd7e4;color:var(--ink)}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--calendula)}
+.submit{background:var(--calendula);color:#fff}
+.submit:hover{background:var(--accent2)}
+.hint{color:var(--muted)}
+.comanda .grazie{color:var(--accent2)}
+.menucard h3{color:var(--blu)}
+.corso{color:var(--accent2);border-bottom-color:var(--line2)}
+.menucard li{border-bottom-color:#e3edf2}
+footer{background:var(--blunotte);color:#eaf3f8;border-top:0}
+footer p{color:#9fbecd}
+.adminlink{color:#6f93a5}
+.adminbar{background:var(--blunotte);border-color:var(--calendula);color:#eaf3f8}
+.adminbar p{color:#c3d8e2}
+.bitem{background:#0d2530;border-color:#1f4453}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#top">Nero's <em>Kitchen</em></a>
+    <ul class="navlinks">
+      <li><a href="#chi-sono">Chi sono</a></li>
+      <li><a href="#come-funziona">Come funziona</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#lezioni">Lezioni</a></li>
+      <li><a href="#galleria">Galleria</a></li>
+      <li><a href="#recensioni">Recensioni</a></li>
+    </ul>
+    <div style="display:flex;align-items:center;gap:14px">
+      <div class="langs" aria-label="Lingua">
+        <button data-lang="it" class="on">IT</button><button data-lang="en">EN</button><button data-lang="es">ES</button><button data-lang="fr">FR</button>
+      </div>
+      <a class="nav-cta" href="#prenota">Prenota</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-copy">
+    <div class="eyebrow">Chef a domicilio</div>
+    <h1>Il ristorante<br>è <em>casa tua</em>.</h1>
+    <p>La tradizione italiana riletta in chiave alta gastronomia, servita direttamente nella tua cucina. Tu inviti gli ospiti, al resto penso io — dalla spesa all'ultimo piatto lavato.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#prenota">Prenota la tua cena</a>
+      <a class="btn btn-ghost" href="#menu">Scopri i menu</a>
+    </div>
+  </div>
+  <div class="mosaic" aria-hidden="true">
+    <div class="mcol"><img data-img="g1" alt=""><img data-img="g4" alt=""><img data-img="g6" alt=""><img data-img="g1" alt=""></div>
+    <div class="mcol m2"><img data-img="hero" alt=""><img data-img="g3" alt=""><img data-img="g7" alt=""><img data-img="hero" alt=""></div>
+    <div class="mcol m3"><img data-img="g2" alt=""><img data-img="g5" alt=""><img data-img="g8" alt=""><img data-img="g2" alt=""></div>
+  </div>
+</header>
+
+<section class="about" id="chi-sono">
+  <div class="wrap about-grid">
+    <img data-img="about" alt="Lo chef in divisa mentre rifinisce un piatto con le pinzette">
+    <div>
+      <div class="eyebrow">Chi sono</div>
+      <h2>Cucino per persone,<br>non per coperti.</h2>
+      <p>Sono lo chef di Nero's Kitchen. Dopo anni tra cucine di ristoranti e grandi eventi, ho scelto di portare l'esperienza del fine dining dove ha più valore: attorno al tavolo di casa, tra le persone che ami.</p>
+      <p>La mia cucina si fonda sulla tradizione — la carbonara, le alici, il maritozzo — ma riletta in chiave alta gastronomia: tecnica, impiattamento e ingredienti selezionati trasformano i piatti di sempre in un'esperienza da ristorante, con il calore di una cena tra amici.</p>
+      <p>Ogni menu è costruito su misura: mi racconti l'occasione, gli ospiti e i loro gusti, e io disegno la serata.</p>
+      <p class="lingue">🌍 Servizio disponibile in italiano, inglese, spagnolo e francese.</p>
+    </div>
+  </div>
+</section>
+
+<section class="steps" id="come-funziona">
+  <div class="wrap">
+    <div class="eyebrow">Come funziona</div>
+    <h2>Dalla richiesta alla tavola</h2>
+    <div class="stepgrid">
+      <div class="step"><span>01</span><h3>Raccontami l'occasione</h3><p>Data, numero di ospiti, gusti e intolleranze: bastano due minuti dal modulo di prenotazione.</p></div>
+      <div class="step"><span>02</span><h3>Ricevi la proposta</h3><p>Entro 24 ore ti contatto con una proposta di menu e un preventivo chiaro, tutto incluso.</p></div>
+      <div class="step"><span>03</span><h3>Perfezioniamo il menu</h3><p>Adattiamo piatti e portate insieme, finché la serata non è esattamente come la immagini.</p></div>
+      <div class="step"><span>04</span><h3>Goditi la cena</h3><p>Arrivo con la spesa, cucino, servo al tavolo e ti riconsegno la cucina in perfetto ordine.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="menu" id="menu">
+  <div class="wrap">
+    <div class="eyebrow">Menu &amp; pacchetti</div>
+    <h2>Scegli la tua serata</h2>
+    <p class="menu-sub">La tradizione riletta in chiave alta gastronomia. Prezzi per persona, tutto incluso: spesa, mise en place, servizio e riordino della cucina. Ogni menu si adatta a intolleranze e preferenze.</p>
+    <div class="pacchetti">
+      <article class="pack">
+        <h3>Mediterraneo</h3>
+        <div class="portate">4 portate · cena informale</div>
+        <ul>
+          <li>Antipasto a scelta</li>
+          <li>Primo piatto a scelta</li>
+          <li>Secondo con contorno</li>
+          <li>Dessert a scelta</li>
+        </ul>
+        <div class="prezzo">€65 <small>/ persona</small></div>
+        <div class="minimo">minimo 4 ospiti</div>
+        <button type="button" class="vedi" data-menu="mediterraneo">Vedi menù completo</button>
+      </article>
+      <article class="pack featured" data-badge="Il più richiesto">
+        <h3>Percorso Degustazione</h3>
+        <div class="portate">4 portate d'autore · menu firmato</div>
+        <ul>
+          <li>Catalana di alici marinate, gel di peperoni e Tropea in agrodolce</li>
+          <li>Paccheri al cuore di zucchine, gamberi CBT e fonduta di pecorino</li>
+          <li>Pulpo a la gallega — polpo CBT, saturazione salina e paprika</li>
+          <li>Pavlova ai frutti di stagione e fiori eduli</li>
+        </ul>
+        <div class="prezzo">€90 <small>/ persona</small></div>
+        <div class="minimo">minimo 2 ospiti</div>
+        <button type="button" class="vedi" data-menu="mare">Vedi menù completo</button>
+      </article>
+      <article class="pack">
+        <h3>Eventi &amp; Buffet</h3>
+        <div class="portate">Su misura · feste e ricorrenze</div>
+        <ul>
+          <li>Finger food e isole gastronomiche</li>
+          <li>Show cooking davanti agli ospiti</li>
+          <li>Menu concordato sull'occasione</li>
+          <li>Servizio con brigata dedicata</li>
+        </ul>
+        <div class="prezzo">da €45 <small>/ persona</small></div>
+        <div class="minimo">minimo 10 ospiti</div>
+        <button type="button" class="vedi" data-menu="eventi">Vedi menù completo</button>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="lezioni" id="lezioni">
+  <div class="wrap lez-grid">
+    <img data-img="g5" alt="Lo chef durante la preparazione, come in una lezione dal vivo">
+    <div class="lez-copy">
+      <div class="eyebrow">Home Cooking Class</div>
+      <h2>Corso di gastronomia,<br>per principianti e non</h2>
+      <p>Imparare la cultura del cibo e del servire: questo è lo spirito del mio corso. Un ciclo di incontri serali (18:00–19:30) in cui si parte dalle basi — tagli, cotture, sughi — e si arriva a impiattare e servire come al ristorante. Disponibile anche come lezione singola a domicilio, per coppie, amici o team aziendali — e per i più piccoli come festa di compleanno in cucina, con torta finale preparata da loro.</p>
+      <div class="formati">
+        <span class="chip">Ciclo di incontri</span>
+        <span class="chip">Lezione singola</span>
+        <span class="chip">Basi &amp; tecniche</span>
+        <span class="chip">Impiattamento</span>
+        <span class="chip">Cultura del servire</span>
+      </div>
+      <div class="lez-tiers">
+        <div class="tier"><h4>Compleanni bambini</h4><b>€450</b><small>a festa · fino a 10 bambini</small></div>
+        <div class="tier"><h4>Ragazzi</h4><b>€60</b><small>a lezione · min 5–6</small></div>
+        <div class="tier"><h4>Adulti</h4><b>€80</b><small>a lezione · min 5–6</small></div>
+      </div>
+      <div class="lez-min">ingredienti e attrezzatura inclusi · nuove date del ciclo in arrivo</div>
+      <a class="btn btn-primary" href="#prenota">Prenota una lezione</a>
+    </div>
+  </div>
+</section>
+
+<section class="intl" id="trasferte">
+  <div class="wrap">
+    <div class="eyebrow">Trasferte internazionali</div>
+    <h2>Nero's Kitchen viaggia con te</h2>
+    <p class="intl-sub">Cene private, matrimoni ed eventi anche fuori dall'Italia. Parlo quattro lingue e porto la tradizione italiana d'alta gastronomia ovunque ci sia una cucina: villa in affitto, yacht, sede aziendale o casa di famiglia.</p>
+    <div class="intl-cards">
+      <div class="icard"><h4>Ville &amp; vacanze</h4><p>Lo chef per tutta la durata del soggiorno</p></div>
+      <div class="icard"><h4>Matrimoni &amp; eventi</h4><p>Il menu italiano del tuo grande giorno</p></div>
+      <div class="icard"><h4>Yacht &amp; charter</h4><p>Alta cucina anche in navigazione</p></div>
+      <div class="icard"><h4>Aziende</h4><p>Cene e team building gastronomici</p></div>
+    </div>
+    <p class="intl-cond">✈️ Viaggio, vitto e alloggio a carico del cliente · preventivo su misura · disponibilità prioritaria in Europa</p>
+    <a class="btn btn-primary" href="#prenota">Richiedi un preventivo estero</a>
+  </div>
+</section>
+
+<section class="gallery" id="galleria">
+  <div class="wrap">
+    <div class="eyebrow">Dalla cucina</div>
+    <h2>I piatti, dal vivo</h2>
+    <p class="menu-sub">Nessuna foto di repertorio: solo servizi reali, cucinati e impiattati a casa dei clienti.</p>
+    <div class="grid">
+      <figure><img data-img="g1" alt="Pavlova con frutta fresca e fiore di calendula" loading="lazy"><figcaption>Pavlova · frutta e calendula</figcaption></figure>
+      <figure><img data-img="g3" alt="Ravioli con pak choi e funghi orientali alla luce dorata" loading="lazy"><figcaption>Ravioli · pak choi e funghi</figcaption></figure>
+      <figure><img data-img="g4" alt="Fregola sarda con vongole e crudo croccante" loading="lazy"><figcaption>Fregola · vongole</figcaption></figure>
+      <figure><img data-img="g2" alt="Tagliata di manzo con fondo bruno e rucola" loading="lazy"><figcaption>Tagliata · fondo bruno</figcaption></figure>
+      <figure><img data-img="g5" alt="Lo chef in cucina durante la mise en place" loading="lazy"><figcaption>In cucina · mise en place</figcaption></figure>
+      <figure><img data-img="g6" alt="Spaghetti verdi con fave, piselli e fiori eduli" loading="lazy"><figcaption>Spaghetti verdi · fave e fiori</figcaption></figure>
+      <figure><img data-img="g7" alt="Bottoni ai funghi con scalogno e zeste di agrumi" loading="lazy"><figcaption>Funghi · scalogno e agrumi</figcaption></figure>
+      <figure><img data-img="g8" alt="Fritto di fiori di zucca con maionese alle erbe e petali" loading="lazy"><figcaption>Fritto di fiori · maionese</figcaption></figure>
+    </div>
+  </div>
+</section>
+<div class="lightbox" id="lightbox" role="dialog" aria-label="Foto ingrandita"><img id="lightbox-img" src="" alt=""></div>
+
+<section class="reviews" id="recensioni">
+  <div class="wrap">
+    <div class="eyebrow">Recensioni</div>
+    <h2>Parola agli ospiti</h2>
+    <div class="stats">
+      <div><b>4,9<small>/5</small></b><span>punteggio medio ospiti</span></div>
+      <div><b>120+</b><span>servizi a domicilio</span></div>
+      <div><b>100%</b><span>cucine lasciate in ordine</span></div>
+    </div>
+    <div class="rgrid">
+      <blockquote>
+        <div class="stars" aria-label="5 stelle">★★★★★</div>
+        <p>«Una cena a casa nostra al livello di un ristorante stellato. Il polpo con la patata fondente è ancora l'argomento di conversazione dei nostri amici.»</p>
+        <cite>Giulia · Cena di compleanno</cite>
+      </blockquote>
+      <blockquote>
+        <div class="stars" aria-label="5 stelle">★★★★★</div>
+        <p>«Professionale, puntuale e di una gentilezza rara. La cucina è rimasta più in ordine di come l'aveva trovata. Riprenotato subito.»</p>
+        <cite>Marco &amp; Sara · Anniversario</cite>
+      </blockquote>
+      <blockquote>
+        <div class="stars" aria-label="5 stelle">★★★★★</div>
+        <p>«Buffet per 25 persone gestito alla perfezione: piatti bellissimi, tutti serviti caldi. I fiori eduli hanno conquistato le foto della festa.»</p>
+        <cite>Federica · Evento aziendale</cite>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<section class="booking" id="prenota">
+  <div class="wrap">
+    <div class="eyebrow">Prenotazione</div>
+    <h2>Scegli la data — o chiedi un preventivo</h2>
+    <p class="menu-sub">Seleziona un giorno libero sul calendario e invia la richiesta: ti ricontatto entro 24 ore per confermare e costruire il menu insieme. Se preferisci, puoi anche inviare una richiesta senza data.</p>
+
+    <div class="adminbar" id="adminbar">
+      <h4>Area chef</h4>
+      <p>Tocca un giorno sul calendario per <b>bloccarlo o sbloccarlo</b>. Qui sotto le richieste ricevute.</p>
+      <div class="blist" id="blist"></div>
+    </div>
+
+    <div class="book-grid">
+      <div class="cal">
+        <div class="cal-head">
+          <button id="prev" aria-label="Mese precedente">‹</button>
+          <h3 class="serif" id="cal-title"></h3>
+          <button id="next" aria-label="Mese successivo">›</button>
+        </div>
+        <table>
+          <thead><tr><th>Lun</th><th>Mar</th><th>Mer</th><th>Gio</th><th>Ven</th><th>Sab</th><th>Dom</th></tr></thead>
+          <tbody id="cal-body"></tbody>
+        </table>
+        <div class="legend">
+          <span><span class="dot" style="background:#ecf5fa;border:1px solid #bcd7e4"></span> Libero</span>
+          <span><span class="dot" style="background:#e1ecf2"></span> Occupato</span>
+          <span><span class="dot" style="background:#2e7fa3"></span> Selezionato</span>
+        </div>
+      </div>
+
+      <form class="form" id="form" novalidate>
+        <h3 class="serif">La tua richiesta</h3>
+        <div class="msg err" id="err"></div>
+        <div class="selected-date" id="seldate">Nessuna data · richiesta di preventivo</div>
+        <div class="frow">
+          <div class="field"><label for="nome">Nome e cognome *</label><input id="nome" required autocomplete="name"></div>
+          <div class="field"><label for="tel">Telefono *</label><input id="tel" type="tel" required autocomplete="tel"></div>
+        </div>
+        <div class="field"><label for="email">Email *</label><input id="email" type="email" required autocomplete="email"></div>
+        <div class="frow">
+          <div class="field"><label for="pack">Pacchetto</label>
+            <select id="pack">
+              <option>Mediterraneo — €65/pp</option>
+              <option selected>Degustazione Mare — €90/pp</option>
+              <option>Eventi &amp; Buffet — su misura</option>
+              <option>Festa di compleanno in cucina — €450 (fino a 10 bambini)</option>
+              <option>Lezione di cucina Ragazzi — €60/pp</option>
+              <option>Lezione di cucina Adulti — €80/pp</option>
+              <option>Evento all'estero — preventivo su misura</option>
+              <option>Non so ancora / consigliami tu</option>
+            </select>
+          </div>
+          <div class="field"><label for="ospiti">Numero ospiti *</label><input id="ospiti" type="number" min="2" max="60" value="4" required></div>
+        </div>
+        <div class="field"><label for="indirizzo">Città / zona dell'evento *</label><input id="indirizzo" required placeholder="es. Roma, quartiere Trieste"></div>
+        <div class="field"><label for="note">Occasione, intolleranze, richieste</label><textarea id="note" placeholder="es. compleanno, un ospite celiaco, preferiamo il pesce…"></textarea></div>
+        <button class="submit" id="submit" type="submit">Invia richiesta di prenotazione</button>
+        <p class="hint">Nessun pagamento ora — la data si conferma solo dopo il contatto dello chef.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<div class="overlay" id="overlay">
+  <div class="comanda" role="dialog" aria-label="Riepilogo prenotazione">
+    <button class="chiudi" id="chiudi" aria-label="Chiudi">✕</button>
+    <div id="ticket"></div>
+    <div class="grazie">✻ GRAZIE — TI RICONTATTO ENTRO 24H ✻</div>
+  </div>
+</div>
+
+<div class="overlay" id="menuoverlay">
+  <div class="menucard" role="dialog" aria-label="Menù completo">
+    <button class="chiudi" id="mchiudi" aria-label="Chiudi">✕</button>
+    <div id="menubody"></div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <a class="logo" href="#top">Nero's <em>Kitchen</em></a>
+      <p>Chef a domicilio · eventi privati · show cooking</p>
+    </div>
+    <p>📞 +39 333 632 3365 · ✉️ e.apollonio@icloud.com · 📸 @nero_skitchen</p>
+    <button class="adminlink" id="adminlink">Area chef</button>
+  </div>
+</footer>
+
+<script>
+/* ================ IMMAGINI (una sola copia) ================ */
+const IMG = {hero:"images/hero.jpg",about:"images/about.jpg",g1:"images/g1.jpg",g2:"images/g2.jpg",g3:"images/g3.jpg",g4:"images/g4.jpg",g5:"images/g5.jpg",g6:"images/g6.jpg",g7:"images/g7.jpg",g8:"images/g8.jpg"};
+document.querySelectorAll("[data-img]").forEach(i => i.src = IMG[i.dataset.img]);
+
+/* ===================== CONFIG ===================== */
+/* ============== STORAGE (con fallback) ============ */
+const API = ""; // stessa origine del sito una volta deployato su Vercel
+async function apiGet(path){ const r = await fetch(API+path); if(!r.ok) throw new Error("API error"); return r.json(); }
+async function apiSend(path, method, body, adminPw){
+  const headers = {"Content-Type":"application/json"};
+  if(adminPw) headers["x-admin-password"] = adminPw;
+  const r = await fetch(API+path, {method, headers, body: body?JSON.stringify(body):undefined});
+  if(!r.ok) throw new Error("API error");
+  return r.json();
+}
+
+/* ===================== STATO ====================== */
+let avail = {};       // date bloccate/occupate
+let bookings = [];
+let view = new Date(); view.setDate(1);
+let selected = null;  // "YYYY-MM-DD" | null
+let admin = false;
+
+const $ = id => document.getElementById(id);
+const pad = n => String(n).padStart(2,"0");
+const key = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+let MESI = ["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"];
+const fmtIT = k => { const [y,m,g]=k.split("-"); return `${+g} ${MESI[+m-1]} ${y}`; };
+
+/* =================== CALENDARIO =================== */
+function renderCal(){
+  $("cal-title").textContent = `${MESI[view.getMonth()]} ${view.getFullYear()}`;
+  const body = $("cal-body"); body.innerHTML = "";
+  const first = new Date(view), start = (first.getDay()+6)%7; // lun=0
+  const days = new Date(view.getFullYear(), view.getMonth()+1, 0).getDate();
+  const today = new Date(); today.setHours(0,0,0,0);
+  let tr = document.createElement("tr");
+  for(let i=0;i<start;i++) tr.appendChild(document.createElement("td"));
+  for(let d=1; d<=days; d++){
+    if(tr.children.length===7){ body.appendChild(tr); tr=document.createElement("tr"); }
+    const date = new Date(view.getFullYear(), view.getMonth(), d);
+    const k = key(date);
+    const td = document.createElement("td");
+    const b = document.createElement("button");
+    b.type="button"; b.className="day"; b.textContent=d;
+    const past = date < today, busy = !!avail[k];
+    if(past){ b.disabled = true; }
+    else if(busy && !admin){ b.classList.add("blocked"); b.disabled=true; b.title=TR.busy; }
+    else if(busy && admin){ b.classList.add("blocked"); b.disabled=false; b.title="Tocca per sbloccare"; }
+    if(k===selected) b.classList.add("sel");
+    b.addEventListener("click", ()=> admin ? toggleBlock(k) : pick(k));
+    td.appendChild(b); tr.appendChild(td);
+  }
+  body.appendChild(tr);
+}
+function pick(k){
+  selected = (selected===k) ? null : k;
+  $("seldate").textContent = selected ? (TR.chosen+" "+fmtIT(selected)) : TR.nodate;
+  renderCal();
+}
+async function toggleBlock(k){
+  const action = avail[k] ? "unblock" : "block";
+  try{
+    await apiSend("/api/availability","POST",{date:k, action}, sessionStorage.getItem("nk_admin_pw"));
+    if(avail[k]) delete avail[k]; else avail[k]="blocked";
+  }catch(e){ alert("Errore nel salvare la disponibilità."); }
+  renderCal();
+}
+
+/* ===================== FORM ======================= */
+$("form").addEventListener("submit", async e => {
+  e.preventDefault();
+  const err = $("err"); err.style.display="none";
+  const nome=$("nome").value.trim(), tel=$("tel").value.trim(), email=$("email").value.trim(),
+        ospiti=$("ospiti").value, ind=$("indirizzo").value.trim();
+  if(!nome || !tel || !email.includes("@") || !ospiti || !ind){
+    err.textContent = TR.err1;
+    err.style.display="block"; return;
+  }
+  const btn = $("submit"); btn.disabled = true; btn.textContent = TR.sending;
+  const payload = {
+    data: selected, nome, tel, email,
+    pacchetto: $("pack").value, ospiti, indirizzo: ind,
+    note: $("note").value.trim(), lingua: window.CURLANG
+  };
+  try{
+    const saved = await apiSend("/api/bookings","POST",payload);
+    if(selected){ avail[selected]="booked"; }
+    showTicket(saved);
+    e.target.reset(); $("ospiti").value = 4; selected=null;
+    $("seldate").textContent=TR.nodate;
+    renderCal(); if(admin) renderAdmin();
+  }catch(ex){
+    err.textContent=TR.err2;
+    err.style.display="block";
+  }
+  btn.disabled=false; btn.textContent=TR.send;
+});
+
+function showTicket(b){
+  $("ticket").innerHTML = `
+    <div class="rowc"><b>N°</b><span>#${b.id.toUpperCase()}</span></div>
+    <div class="rowc"><b>DATA</b><span>${b.data ? fmtIT(b.data) : "da definire"}</span></div>
+    <div class="rowc"><b>OSPITE</b><span>${esc(b.nome)}</span></div>
+    <div class="rowc"><b>COPERTI</b><span>${esc(b.ospiti)}</span></div>
+    <div class="rowc"><b>MENU</b><span style="text-align:right">${esc(b.pacchetto)}</span></div>
+    <div class="rowc"><b>ZONA</b><span style="text-align:right">${esc(b.indirizzo)}</span></div>`;
+  $("overlay").classList.add("open");
+}
+const esc = s => String(s).replace(/[<>&"]/g, c=>({"<":"&lt;",">":"&gt;","&":"&amp;",'"':"&quot;"}[c]));
+$("chiudi").addEventListener("click", ()=> $("overlay").classList.remove("open"));
+$("overlay").addEventListener("click", e=>{ if(e.target.id==="overlay") e.currentTarget.classList.remove("open"); });
+
+/* ===================== ADMIN ====================== */
+$("adminlink").addEventListener("click", async ()=>{
+  if(admin){ admin=false; sessionStorage.removeItem("nk_admin_pw"); $("adminbar").classList.remove("on"); renderCal(); return; }
+  const pw = prompt("Password area chef:");
+  if(pw===null) return;
+  try{
+    bookings = await apiSend("/api/bookings","GET",null,pw);
+    sessionStorage.setItem("nk_admin_pw", pw);
+    admin=true; $("adminbar").classList.add("on");
+    renderAdmin(); renderCal();
+    location.hash="#prenota";
+  }catch(e){ alert("Password errata."); }
+});
+function renderAdmin(){
+  const list = $("blist");
+  if(!bookings.length){ list.innerHTML = `<div class="bitem">Nessuna richiesta ricevuta finora.</div>`; return; }
+  list.innerHTML = bookings.slice().reverse().map(b=>`
+    <div class="bitem">
+      <span class="mono">#${b.id.toUpperCase()} · ${b.data ? fmtIT(b.data) : "preventivo senza data"}</span>
+      <span class="status st-${b.stato}">${b.stato}</span><br>
+      <b>${esc(b.nome)}</b> · ${esc(b.ospiti)} ospiti · ${esc(b.pacchetto)}<br>
+      ${esc(b.tel)} · ${esc(b.email)} · ${esc(b.indirizzo)}
+      ${b.note?`<br><i>«${esc(b.note)}»</i>`:""}
+      <div class="actions">
+        <button class="ok" data-id="${b.id}" data-st="confermata">Conferma</button>
+        <button class="no" data-id="${b.id}" data-st="rifiutata">Rifiuta</button>
+      </div>
+    </div>`).join("");
+  list.querySelectorAll("button").forEach(btn=>btn.addEventListener("click", async ()=>{
+    const b = bookings.find(x=>x.id===btn.dataset.id); if(!b) return;
+    try{
+      await apiSend("/api/bookings","PATCH",{id:b.id, stato:btn.dataset.st}, sessionStorage.getItem("nk_admin_pw"));
+      b.stato = btn.dataset.st;
+      if(b.stato==="rifiutata" && b.data && avail[b.data]==="booked"){ delete avail[b.data]; }
+      renderAdmin(); renderCal();
+    }catch(e){ alert("Errore nell'aggiornare la richiesta."); }
+  }));
+}
+
+/* =================== LIGHTBOX ===================== */
+document.querySelectorAll(".grid figure").forEach(f=>f.addEventListener("click", ()=>{
+  $("lightbox-img").src = f.querySelector("img").src;
+  $("lightbox").classList.add("open");
+}));
+$("lightbox").addEventListener("click", ()=> $("lightbox").classList.remove("open"));
+document.addEventListener("keydown", e=>{ if(e.key==="Escape"){ $("lightbox").classList.remove("open"); $("overlay").classList.remove("open"); }});
+
+/* ==================== AVVIO ======================= */
+function turn(dir){
+  const cal = document.querySelector(".cal");
+  cal.classList.add("turning");
+  setTimeout(()=>{ view.setMonth(view.getMonth()+dir); renderCal(); cal.classList.remove("turning"); }, 220);
+}
+$("prev").addEventListener("click", ()=>turn(-1));
+$("next").addEventListener("click", ()=>turn(1));
+
+/* Reveal on scroll */
+const rvEls = document.querySelectorAll("section .eyebrow, section h2, .menu-sub, .pack, .grid figure, .reviews blockquote, .cal, .form, .about-grid img, .about-grid p, .about h2");
+rvEls.forEach(el=>el.classList.add("rv"));
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(en=>{
+    if(en.isIntersecting){
+      const sibs=[...en.target.parentElement.children].filter(c=>c.classList.contains("rv"));
+      en.target.style.transitionDelay = Math.min(sibs.indexOf(en.target),5)*70+"ms";
+      en.target.classList.add("in");
+      io.unobserve(en.target);
+    }
+  });
+},{threshold:.12, rootMargin:"0px 0px -6% 0px"});
+rvEls.forEach(el=>io.observe(el));
+
+/* Ombra nav allo scroll */
+addEventListener("scroll", ()=>document.querySelector("nav").classList.toggle("scrolled", scrollY>8), {passive:true});
+
+/* ============== MENU COMPLETI (modale) ============== */
+const MENUS = {
+ mediterraneo:{t:"Mediterraneo",s:"componi la tua cena · una scelta per portata",c:[
+  ["Antipasti","scegli 1",[
+   {n:"Alici marinate",d:"Alici freschissime marinate, maionese alla barbabietola dal sentore dolce, pane croccante e cipolla rossa di Tropea marinata."},
+   {n:"Caprese",d:"Scrigno di pomodoro ripieno con crema di mozzarella DOP, olio al basilico fresco e crumble di taralli artigianali. Su richiesta in versione vegana."},
+   {n:"Crostino dorato con uovo pochè",d:"Pane artigianale tostato, uovo pochè dal tuorlo cremoso e salsa olandese montata a mano, dalla nota burrosa e agrumata."}]],
+  ["Primi piatti","scegli 1",[
+   {n:"Carbonara",d:"Crema vellutata di uova fresche e pecorino romano DOP, pepe nero macinato al momento e guanciale dorato e croccante."},
+   {n:"Tagliolini al pomodoro a lenta cottura",d:"Salsa di pomodori maturi cotti lentamente per sprigionarne la dolcezza, con sfoglie di pomodoro fresco."},
+   {n:"Giardino di verdure",d:"Mosaico di verdure di stagione sobbollite dolcemente, servito con pane tostato caldo e fragrante."}]],
+  ["Secondi","scegli 1",[
+   {n:"Calamaro ripieno",d:"Calamaro tenero farcito e cotto con delicatezza, adagiato su una vellutata di carote setosa e leggermente dolce."},
+   {n:"Pollo alla cacciatora",d:"Pollo selezionato cotto lentamente con aromi mediterranei, servito con una delicata crema all'aglio."},
+   {n:"Millefoglie di verdure",d:"Zucchine, melanzane e peperoni arrostiti alternati a pane carasau, con fonduta di Parmigiano."}]],
+  ["Contorni","per il tavolo",[
+   {n:"Verdure di stagione ripassate",d:"Ortaggi freschi saltati con olio extravergine, aglio dorato e un tocco di peperoncino."},
+   {n:"Patata in saturazione salina",d:"Cotta lentamente per osmosi nel sale per preservarne il sapore, compatta e avvolgente."}]],
+  ["Dessert","scegli 1",[
+   {n:"Tiramisù classico italiano",d:"Savoiardi al caffè espresso, crema soffice al mascarpone, cacao amaro."},
+   {n:"Maritozzo con la panna",d:"Soffice brioche romana profumata agli agrumi, colma di panna fresca montata al momento."}]]]},
+ mare:{t:"Percorso Degustazione",s:"un percorso recente · il menu cambia con il mercato",c:[
+  ["Antipasto","",[
+   {n:"Catalana di alici marinate",d:"Crema e gel di peperone giallo e rosso, cipolla rossa di Tropea in agrodolce."}]],
+  ["Primo piatto","",[
+   {n:"Paccheri mantecati al cuore di zucchine",d:"Brunoise di zucchine, gamberi cotti a bassa temperatura, maionese di gamberi, olio al prezzemolo e fonduta di pecorino."}]],
+  ["Secondo","",[
+   {n:"Pulpo a la gallega",d:"Polpo CBT, lingotto di patate in saturazione salina, paprika, vellutata di patate, olio alle erbe e chips di patate."}]],
+  ["Dessert","",[
+   {n:"Pavlova",d:"Meringa, panna montata al momento e frutta di stagione con fiori eduli."}]],
+  ["Altri percorsi firmati","per ispirazione",[
+   {n:"Mare classico",d:"Impepata di cozze · Spaghettone ai tre pomodori, fonduta di parmigiano e olio al basilico · Calamaro ripieno, crema di carote e teste di calamaro fritte · Tiramisù."},
+   {n:"Terra",d:"\u201cCaprese\u201d a modo mio, con cialde e concentrato di pomodoro · Spaghettone dell'orto, crema di pecorino e guanciale croccante · Vitel tonné, vitello cotto a 58° · Tiramisù al limone."},
+   {n:"Tradizione contemporanea",d:"Avocado toast e uovo poché · Fregola sarda alle vongole · Agnello alla cacciatora, fondo bruno, chips di patate e olio al rosmarino · Tagliata di frutta."}]]]},
+ eventi:{t:"Eventi & Buffet",s:"su misura · alcune idee dai servizi passati",c:[
+  ["Isole gastronomiche","a scelta",["Banco del crudo di mare","Angolo delle fritture espresse","Buffet di verdure e hummus colorati"]],
+  ["Show cooking","a scelta",["Polpo alla piastra davanti agli ospiti","Pasta mantecata al momento"]],
+  ["Dolci","a scelta",["Parata di mini pavlove","Frutta scolpita e dessert al bicchiere"]]]}
+};
+document.querySelectorAll(".vedi").forEach(b=>b.addEventListener("click",()=>{
+  const m = (window.MENUS_L10N && MENUS_L10N[window.CURLANG] && MENUS_L10N[window.CURLANG][b.dataset.menu]) || MENUS[b.dataset.menu]; if(!m) return;
+  $("menubody").innerHTML = `<h3 class="serif">${m.t}</h3><div class="sotto">${m.s}</div>` +
+    m.c.map(([tit,nota,piatti])=>`<div class="corso">${tit}<i>${nota}</i></div><ul>${piatti.map(p=>typeof p==="string"?`<li>${p}</li>`:`<li><b>${p.n}</b><span class="pdesc">${p.d}</span></li>`).join("")}</ul>`).join("");
+  $("menuoverlay").classList.add("open");
+}));
+$("mchiudi").addEventListener("click",()=> $("menuoverlay").classList.remove("open"));
+$("menuoverlay").addEventListener("click",e=>{ if(e.target.id==="menuoverlay") e.currentTarget.classList.remove("open"); });
+document.addEventListener("keydown",e=>{ if(e.key==="Escape") $("menuoverlay").classList.remove("open"); });
+
+(async function init(){
+  try{ avail = await apiGet("/api/availability"); }catch(e){ avail = {}; }
+  renderCal();
+})();
+</script>
+
+<script>
+/* ================= I18N — IT · EN · ES · FR ================= */
+window.CURLANG = "it";
+window.TR = {busy:"Occupato",chosen:"Data scelta:",nodate:"Nessuna data · richiesta di preventivo",err1:"Controlla i campi obbligatori: nome, telefono, email valida, numero ospiti e città.",err2:"Invio non riuscito. Riprova tra qualche secondo.",sending:"Invio in corso…",send:"Invia richiesta di prenotazione"};
+
+const T = {
+it:{mesi:["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"],
+ wd:"<th>Lun</th><th>Mar</th><th>Mer</th><th>Gio</th><th>Ven</th><th>Sab</th><th>Dom</th>",
+ nav:["Chi sono","Come funziona","Menu","Lezioni","Galleria","Recensioni"],cta:"Prenota",
+ hero:{ey:"Chef a domicilio",h:"Il ristorante<br>è <em>casa tua</em>.",p:"La tradizione italiana riletta in chiave alta gastronomia, servita direttamente nella tua cucina. Tu inviti gli ospiti, al resto penso io — dalla spesa all'ultimo piatto lavato.",b1:"Prenota la tua cena",b2:"Scopri i menu"},
+ about:{ey:"Chi sono",h:"Cucino per persone,<br>non per coperti.",p:["Sono lo chef di Nero's Kitchen. Dopo anni tra cucine di ristoranti e grandi eventi, ho scelto di portare l'esperienza del fine dining dove ha più valore: attorno al tavolo di casa, tra le persone che ami.","La mia cucina si fonda sulla tradizione — la carbonara, le alici, il maritozzo — ma riletta in chiave alta gastronomia: tecnica, impiattamento e ingredienti selezionati trasformano i piatti di sempre in un'esperienza da ristorante, con il calore di una cena tra amici.","Ogni menu è costruito su misura: mi racconti l'occasione, gli ospiti e i loro gusti, e io disegno la serata.","🌍 Servizio disponibile in italiano, inglese, spagnolo e francese."]},
+ steps:{ey:"Come funziona",h:"Dalla richiesta alla tavola",c:["<span>01</span><h3>Raccontami l'occasione</h3><p>Data, numero di ospiti, gusti e intolleranze: bastano due minuti dal modulo di prenotazione.</p>","<span>02</span><h3>Ricevi la proposta</h3><p>Entro 24 ore ti contatto con una proposta di menu e un preventivo chiaro, tutto incluso.</p>","<span>03</span><h3>Perfezioniamo il menu</h3><p>Adattiamo piatti e portate insieme, finché la serata non è esattamente come la immagini.</p>","<span>04</span><h3>Goditi la cena</h3><p>Arrivo con la spesa, cucino, servo al tavolo e ti riconsegno la cucina in perfetto ordine.</p>"]},
+ menu:{ey:"Menu &amp; pacchetti",h:"Scegli la tua serata",sub:"La tradizione riletta in chiave alta gastronomia. Prezzi per persona, tutto incluso: spesa, mise en place, servizio e riordino della cucina. Ogni menu si adatta a intolleranze e preferenze.",badge:"Il più richiesto",vedi:"Vedi menù completo",
+  packs:[{h:"Mediterraneo",port:"4 portate · cena informale",list:"<li>Antipasto a scelta</li><li>Primo piatto a scelta</li><li>Secondo con contorno</li><li>Dessert a scelta</li>",prezzo:"€65 <small>/ persona</small>",min:"minimo 4 ospiti"},
+   {h:"Percorso Degustazione",port:"4 portate d'autore · menu firmato",list:"<li>Catalana di alici marinate, gel di peperoni e Tropea in agrodolce</li><li>Paccheri al cuore di zucchine, gamberi CBT e fonduta di pecorino</li><li>Pulpo a la gallega — polpo CBT, saturazione salina e paprika</li><li>Pavlova ai frutti di stagione e fiori eduli</li>",prezzo:"€90 <small>/ persona</small>",min:"minimo 2 ospiti"},
+   {h:"Eventi &amp; Buffet",port:"Su misura · feste e ricorrenze",list:"<li>Finger food e isole gastronomiche</li><li>Show cooking davanti agli ospiti</li><li>Menu concordato sull'occasione</li><li>Servizio con brigata dedicata</li>",prezzo:"da €45 <small>/ persona</small>",min:"minimo 10 ospiti"}]},
+ lez:{ey:"Home Cooking Class",h:"Corso di gastronomia,<br>per principianti e non",p:"Imparare la cultura del cibo e del servire: questo è lo spirito del mio corso. Un ciclo di incontri serali (18:00–19:30) in cui si parte dalle basi — tagli, cotture, sughi — e si arriva a impiattare e servire come al ristorante. Disponibile anche come lezione singola a domicilio, per coppie, amici o team aziendali — e per i più piccoli come festa di compleanno in cucina, con torta finale preparata da loro.",chips:'<span class="chip">Ciclo di incontri</span><span class="chip">Lezione singola</span><span class="chip">Basi &amp; tecniche</span><span class="chip">Impiattamento</span><span class="chip">Cultura del servire</span>',tiers:'<div class="tier"><h4>Compleanni bambini</h4><b>€450</b><small>a festa · fino a 10 bambini</small></div><div class="tier"><h4>Ragazzi</h4><b>€60</b><small>a lezione · min 5–6</small></div><div class="tier"><h4>Adulti</h4><b>€80</b><small>a lezione · min 5–6</small></div>',min:"ingredienti e attrezzatura inclusi · nuove date del ciclo in arrivo",btn:"Prenota una lezione"},
+ gal:{ey:"Dalla cucina",h:"I piatti, dal vivo",sub:"Nessuna foto di repertorio: solo servizi reali, cucinati e impiattati a casa dei clienti."},
+ rev:{ey:"Recensioni",h:"Parola agli ospiti",stats:'<div><b>4,9<small>/5</small></b><span>punteggio medio ospiti</span></div><div><b>120+</b><span>servizi a domicilio</span></div><div><b>100%</b><span>cucine lasciate in ordine</span></div>',
+  q:['<div class="stars" aria-label="5 stelle">★★★★★</div><p>«Una cena a casa nostra al livello di un ristorante stellato. Il polpo con la patata fondente è ancora l\'argomento di conversazione dei nostri amici.»</p><cite>Giulia · Cena di compleanno</cite>','<div class="stars" aria-label="5 stelle">★★★★★</div><p>«Professionale, puntuale e di una gentilezza rara. La cucina è rimasta più in ordine di come l\'aveva trovata. Riprenotato subito.»</p><cite>Marco &amp; Sara · Anniversario</cite>','<div class="stars" aria-label="5 stelle">★★★★★</div><p>«Buffet per 25 persone gestito alla perfezione: piatti bellissimi, tutti serviti caldi. I fiori eduli hanno conquistato le foto della festa.»</p><cite>Federica · Evento aziendale</cite>']},
+ book:{ey:"Prenotazione",h:"Scegli la data — o chiedi un preventivo",sub:"Seleziona un giorno libero sul calendario e invia la richiesta: ti ricontatto entro 24 ore per confermare e costruire il menu insieme. Se preferisci, puoi anche inviare una richiesta senza data.",legend:'<span><span class="dot" style="background:#ecf5fa;border:1px solid #bcd7e4"></span> Libero</span><span><span class="dot" style="background:#e1ecf2"></span> Occupato</span><span><span class="dot" style="background:#2e7fa3"></span> Selezionato</span>',fh:"La tua richiesta",l:{nome:"Nome e cognome *",tel:"Telefono *",email:"Email *",pack:"Pacchetto",ospiti:"Numero ospiti *",indirizzo:"Città / zona dell'evento *",note:"Occasione, intolleranze, richieste"},ph_ind:"es. Roma, quartiere Trieste",ph_note:"es. compleanno, un ospite celiaco, preferiamo il pesce…",opts:'<option>Mediterraneo — €65/pp</option><option selected>Percorso Degustazione — €90/pp</option><option>Eventi &amp; Buffet — su misura</option><option>Festa di compleanno in cucina — €450 (fino a 10 bambini)</option><option>Lezione di cucina Ragazzi — €60/pp</option><option>Lezione di cucina Adulti — €80/pp</option><option>Evento all\'estero — preventivo su misura</option><option>Non so ancora / consigliami tu</option>',hint:"Nessun pagamento ora — la data si conferma solo dopo il contatto dello chef.",intl:{ey:"Trasferte internazionali",h:"Nero's Kitchen viaggia con te",p:"Cene private, matrimoni ed eventi anche fuori dall'Italia. Parlo quattro lingue e porto la tradizione italiana d'alta gastronomia ovunque ci sia una cucina: villa in affitto, yacht, sede aziendale o casa di famiglia.",cards:'<div class="icard"><h4>Ville &amp; vacanze</h4><p>Lo chef per tutta la durata del soggiorno</p></div><div class="icard"><h4>Matrimoni &amp; eventi</h4><p>Il menu italiano del tuo grande giorno</p></div><div class="icard"><h4>Yacht &amp; charter</h4><p>Alta cucina anche in navigazione</p></div><div class="icard"><h4>Aziende</h4><p>Cene e team building gastronomici</p></div>',cond:"✈️ Viaggio, vitto e alloggio a carico del cliente · preventivo su misura · disponibilità prioritaria in Europa",btn:"Richiedi un preventivo estero"},ftag:"Chef a domicilio · eventi privati · show cooking",
+  tr:{busy:"Occupato",chosen:"Data scelta:",nodate:"Nessuna data · richiesta di preventivo",err1:"Controlla i campi obbligatori: nome, telefono, email valida, numero ospiti e città.",err2:"Invio non riuscito. Riprova tra qualche secondo.",sending:"Invio in corso…",send:"Invia richiesta di prenotazione"}}},
+
+en:{mesi:["January","February","March","April","May","June","July","August","September","October","November","December"],
+ wd:"<th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th>",
+ nav:["About me","How it works","Menus","Classes","Gallery","Reviews"],cta:"Book now",
+ hero:{ey:"Private chef at home",h:"The restaurant<br>is <em>your home</em>.",p:"Italian tradition reinterpreted through fine dining, served right in your kitchen. You invite the guests — I take care of everything else, from the shopping to the last washed plate.",b1:"Book your dinner",b2:"Explore the menus"},
+ about:{ey:"About me",h:"I cook for people,<br>not for covers.",p:["I'm the chef behind Nero's Kitchen. After years in restaurant kitchens and large events, I chose to bring the fine-dining experience where it matters most: around your table, among the people you love.","My cooking is rooted in tradition — carbonara, anchovies, maritozzo — reinterpreted through haute cuisine: technique, plating and selected ingredients turn timeless dishes into a restaurant-level experience, with the warmth of a dinner among friends.","Every menu is tailor-made: tell me the occasion, your guests and their tastes, and I'll design the evening.","🌍 Service available in Italian, English, Spanish and French."]},
+ steps:{ey:"How it works",h:"From request to table",c:["<span>01</span><h3>Tell me the occasion</h3><p>Date, number of guests, tastes and allergies: two minutes on the booking form is all it takes.</p>","<span>02</span><h3>Receive my proposal</h3><p>Within 24 hours I'll get back to you with a menu proposal and a clear all-inclusive quote.</p>","<span>03</span><h3>We refine the menu</h3><p>We adjust dishes and courses together until the evening is exactly as you imagine it.</p>","<span>04</span><h3>Enjoy your dinner</h3><p>I arrive with the shopping, cook, serve at the table and hand your kitchen back spotless.</p>"]},
+ menu:{ey:"Menus &amp; packages",h:"Choose your evening",sub:"Tradition reinterpreted through fine dining. Prices per person, all inclusive: shopping, mise en place, service and kitchen clean-up. Every menu adapts to allergies and preferences.",badge:"Most requested",vedi:"View full menu",
+  packs:[{h:"Mediterraneo",port:"4 courses · informal dinner",list:"<li>Starter of your choice</li><li>Pasta course of your choice</li><li>Main course with side dish</li><li>Dessert of your choice</li>",prezzo:"€65 <small>/ person</small>",min:"minimum 4 guests"},
+   {h:"Tasting Journey",port:"4 signature courses · chef's menu",list:"<li>Marinated anchovy catalana, pepper gel and sweet-and-sour Tropea onion</li><li>Paccheri with zucchini heart cream, sous-vide prawns and pecorino fondue</li><li>Pulpo a la gallega — sous-vide octopus, salt-cured potato and paprika</li><li>Pavlova with seasonal fruit and edible flowers</li>",prezzo:"€90 <small>/ person</small>",min:"minimum 2 guests"},
+   {h:"Events &amp; Buffet",port:"Bespoke · parties and celebrations",list:"<li>Finger food and gourmet stations</li><li>Show cooking in front of your guests</li><li>Menu designed around the occasion</li><li>Service with a dedicated brigade</li>",prezzo:"from €45 <small>/ person</small>",min:"minimum 10 guests"}]},
+ lez:{ey:"Home Cooking Class",h:"A gastronomy course,<br>for beginners and beyond",p:"Learning the culture of food and of serving: that's the spirit of my course. A cycle of evening sessions (6:00–7:30 pm) starting from the basics — cuts, cooking methods, sauces — up to plating and serving like a restaurant. Also available as a single at-home lesson for couples, friends or company teams — and for kids as a birthday party in the kitchen, with a final cake they make themselves.",chips:'<span class="chip">Course cycle</span><span class="chip">Single lesson</span><span class="chip">Basics &amp; techniques</span><span class="chip">Plating</span><span class="chip">Culture of serving</span>',tiers:'<div class="tier"><h4>Kids birthdays</h4><b>€450</b><small>per party · up to 10 kids</small></div><div class="tier"><h4>Teens</h4><b>€60</b><small>per lesson · min 5–6</small></div><div class="tier"><h4>Adults</h4><b>€80</b><small>per lesson · min 5–6</small></div>',min:"ingredients and equipment included · new course dates coming soon",btn:"Book a class"},
+ gal:{ey:"From the kitchen",h:"The dishes, for real",sub:"No stock photos: only real services, cooked and plated in clients' homes."},
+ rev:{ey:"Reviews",h:"In our guests' words",stats:'<div><b>4.9<small>/5</small></b><span>average guest rating</span></div><div><b>120+</b><span>at-home services</span></div><div><b>100%</b><span>kitchens left spotless</span></div>',
+  q:['<div class="stars" aria-label="5 stars">★★★★★</div><p>“A dinner at our home worthy of a starred restaurant. The octopus with fondant potato is still what our friends talk about.”</p><cite>Giulia · Birthday dinner</cite>','<div class="stars" aria-label="5 stars">★★★★★</div><p>“Professional, punctual and remarkably kind. The kitchen was tidier than he found it. Booked again right away.”</p><cite>Marco &amp; Sara · Anniversary</cite>','<div class="stars" aria-label="5 stars">★★★★★</div><p>“A buffet for 25 handled to perfection: beautiful dishes, all served hot. The edible flowers stole the party photos.”</p><cite>Federica · Corporate event</cite>']},
+ book:{ey:"Booking",h:"Pick a date — or request a quote",sub:"Select a free day on the calendar and send your request: I'll get back to you within 24 hours to confirm and build the menu together. You can also send a request without a date.",legend:'<span><span class="dot" style="background:#ecf5fa;border:1px solid #bcd7e4"></span> Available</span><span><span class="dot" style="background:#e1ecf2"></span> Booked</span><span><span class="dot" style="background:#2e7fa3"></span> Selected</span>',fh:"Your request",l:{nome:"Full name *",tel:"Phone *",email:"Email *",pack:"Package",ospiti:"Number of guests *",indirizzo:"City / area of the event *",note:"Occasion, allergies, requests"},ph_ind:"e.g. Rome, Trieste district",ph_note:"e.g. birthday, one celiac guest, we prefer fish…",opts:'<option>Mediterraneo — €65/pp</option><option selected>Tasting Journey — €90/pp</option><option>Events &amp; Buffet — bespoke</option><option>Kitchen birthday party — €450 (up to 10 kids)</option><option>Cooking class Teens — €60/pp</option><option>Cooking class Adults — €80/pp</option><option>Event abroad — tailor-made quote</option><option>Not sure yet / advise me</option>',hint:"No payment now — the date is confirmed only after the chef contacts you.",intl:{ey:"International bookings",h:"Nero's Kitchen travels with you",p:"Private dinners, weddings and events beyond Italy. I speak four languages and bring Italian fine-dining tradition wherever there's a kitchen: rental villa, yacht, company venue or family home.",cards:'<div class="icard"><h4>Villas &amp; holidays</h4><p>Your chef for the whole stay</p></div><div class="icard"><h4>Weddings &amp; events</h4><p>The Italian menu for your big day</p></div><div class="icard"><h4>Yachts &amp; charters</h4><p>Fine dining even at sea</p></div><div class="icard"><h4>Corporate</h4><p>Dinners and gastronomic team building</p></div>',cond:"✈️ Travel, board and lodging covered by the client · tailor-made quote · priority availability across Europe",btn:"Request an international quote"},ftag:"Private chef at home · private events · show cooking",
+  tr:{busy:"Booked",chosen:"Chosen date:",nodate:"No date · quote request",err1:"Please check the required fields: name, phone, valid email, number of guests and city.",err2:"Sending failed. Please try again in a few seconds.",sending:"Sending…",send:"Send booking request"}}},
+
+es:{mesi:["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"],
+ wd:"<th>Lun</th><th>Mar</th><th>Mié</th><th>Jue</th><th>Vie</th><th>Sáb</th><th>Dom</th>",
+ nav:["Sobre mí","Cómo funciona","Menús","Clases","Galería","Reseñas"],cta:"Reservar",
+ hero:{ey:"Chef privado a domicilio",h:"El restaurante<br>es <em>tu casa</em>.",p:"La tradición italiana reinterpretada en clave de alta gastronomía, servida directamente en tu cocina. Tú invitas a los comensales, del resto me ocupo yo — desde la compra hasta el último plato fregado.",b1:"Reserva tu cena",b2:"Descubre los menús"},
+ about:{ey:"Sobre mí",h:"Cocino para personas,<br>no para cubiertos.",p:["Soy el chef de Nero's Kitchen. Tras años entre cocinas de restaurantes y grandes eventos, decidí llevar la experiencia del fine dining donde más vale: alrededor de la mesa de casa, entre las personas que quieres.","Mi cocina se funda en la tradición — la carbonara, las anchoas, el maritozzo — reinterpretada en clave de alta gastronomía: técnica, emplatado e ingredientes seleccionados convierten los platos de siempre en una experiencia de restaurante, con la calidez de una cena entre amigos.","Cada menú se construye a medida: cuéntame la ocasión, los invitados y sus gustos, y yo diseño la velada.","🌍 Servicio disponible en italiano, inglés, español y francés."]},
+ steps:{ey:"Cómo funciona",h:"De la solicitud a la mesa",c:["<span>01</span><h3>Cuéntame la ocasión</h3><p>Fecha, número de invitados, gustos e intolerancias: bastan dos minutos en el formulario de reserva.</p>","<span>02</span><h3>Recibe la propuesta</h3><p>En 24 horas te contacto con una propuesta de menú y un presupuesto claro, todo incluido.</p>","<span>03</span><h3>Perfeccionamos el menú</h3><p>Ajustamos platos y pases juntos hasta que la velada sea exactamente como la imaginas.</p>","<span>04</span><h3>Disfruta de la cena</h3><p>Llego con la compra, cocino, sirvo en mesa y te devuelvo la cocina en perfecto orden.</p>"]},
+ menu:{ey:"Menús y paquetes",h:"Elige tu velada",sub:"La tradición reinterpretada en clave de alta gastronomía. Precios por persona, todo incluido: compra, mise en place, servicio y orden de la cocina. Cada menú se adapta a intolerancias y preferencias.",badge:"El más solicitado",vedi:"Ver menú completo",
+  packs:[{h:"Mediterráneo",port:"4 pases · cena informal",list:"<li>Entrante a elegir</li><li>Primer plato a elegir</li><li>Segundo con guarnición</li><li>Postre a elegir</li>",prezzo:"€65 <small>/ persona</small>",min:"mínimo 4 comensales"},
+   {h:"Menú Degustación",port:"4 pases de autor · menú firmado",list:"<li>Catalana de boquerones marinados, gel de pimientos y cebolla de Tropea en agridulce</li><li>Paccheri con crema de corazón de calabacín, gambas a baja temperatura y fondue de pecorino</li><li>Pulpo a la gallega — pulpo CBT, patata en saturación salina y pimentón</li><li>Pavlova con fruta de temporada y flores comestibles</li>",prezzo:"€90 <small>/ persona</small>",min:"mínimo 2 comensales"},
+   {h:"Eventos y Buffet",port:"A medida · fiestas y celebraciones",list:"<li>Finger food e islas gastronómicas</li><li>Show cooking delante de los invitados</li><li>Menú acordado según la ocasión</li><li>Servicio con brigada dedicada</li>",prezzo:"desde €45 <small>/ persona</small>",min:"mínimo 10 comensales"}]},
+ lez:{ey:"Home Cooking Class",h:"Curso de gastronomía,<br>para principiantes y no tanto",p:"Aprender la cultura de la comida y del servir: ese es el espíritu de mi curso. Un ciclo de encuentros vespertinos (18:00–19:30) que parte de las bases — cortes, cocciones, salsas — hasta emplatar y servir como en un restaurante. Disponible también como clase individual a domicilio, para parejas, amigos o equipos de empresa — y para los más pequeños como fiesta de cumpleaños en la cocina, con tarta final preparada por ellos.",chips:'<span class="chip">Ciclo de encuentros</span><span class="chip">Clase individual</span><span class="chip">Bases y técnicas</span><span class="chip">Emplatado</span><span class="chip">Cultura del servir</span>',tiers:'<div class="tier"><h4>Cumpleaños niños</h4><b>€450</b><small>por fiesta · hasta 10 niños</small></div><div class="tier"><h4>Jóvenes</h4><b>€60</b><small>por clase · mín 5–6</small></div><div class="tier"><h4>Adultos</h4><b>€80</b><small>por clase · mín 5–6</small></div>',min:"ingredientes y equipo incluidos · nuevas fechas del ciclo próximamente",btn:"Reserva una clase"},
+ gal:{ey:"Desde la cocina",h:"Los platos, en vivo",sub:"Nada de fotos de archivo: solo servicios reales, cocinados y emplatados en casa de los clientes."},
+ rev:{ey:"Reseñas",h:"La palabra a los invitados",stats:'<div><b>4,9<small>/5</small></b><span>valoración media</span></div><div><b>120+</b><span>servicios a domicilio</span></div><div><b>100%</b><span>cocinas en perfecto orden</span></div>',
+  q:['<div class="stars" aria-label="5 estrellas">★★★★★</div><p>«Una cena en casa al nivel de un restaurante con estrella. El pulpo con patata fondant sigue siendo el tema de conversación de nuestros amigos.»</p><cite>Giulia · Cena de cumpleaños</cite>','<div class="stars" aria-label="5 estrellas">★★★★★</div><p>«Profesional, puntual y de una amabilidad rara. La cocina quedó más ordenada de como la encontró. Reservamos de nuevo enseguida.»</p><cite>Marco y Sara · Aniversario</cite>','<div class="stars" aria-label="5 estrellas">★★★★★</div><p>«Buffet para 25 personas gestionado a la perfección: platos preciosos, todos servidos calientes. Las flores comestibles conquistaron las fotos de la fiesta.»</p><cite>Federica · Evento de empresa</cite>']},
+ book:{ey:"Reserva",h:"Elige la fecha — o pide un presupuesto",sub:"Selecciona un día libre en el calendario y envía tu solicitud: te contacto en 24 horas para confirmar y construir el menú juntos. Si lo prefieres, también puedes enviar una solicitud sin fecha.",legend:'<span><span class="dot" style="background:#ecf5fa;border:1px solid #bcd7e4"></span> Libre</span><span><span class="dot" style="background:#e1ecf2"></span> Ocupado</span><span><span class="dot" style="background:#2e7fa3"></span> Seleccionado</span>',fh:"Tu solicitud",l:{nome:"Nombre y apellidos *",tel:"Teléfono *",email:"Email *",pack:"Paquete",ospiti:"Número de comensales *",indirizzo:"Ciudad / zona del evento *",note:"Ocasión, intolerancias, peticiones"},ph_ind:"ej. Roma, barrio Trieste",ph_note:"ej. cumpleaños, un invitado celíaco, preferimos pescado…",opts:'<option>Mediterráneo — €65/pp</option><option selected>Menú Degustación — €90/pp</option><option>Eventos y Buffet — a medida</option><option>Fiesta de cumpleaños en la cocina — €450 (hasta 10 niños)</option><option>Clase de cocina Jóvenes — €60/pp</option><option>Clase de cocina Adultos — €80/pp</option><option>Evento en el extranjero — presupuesto a medida</option><option>Aún no lo sé / aconséjame</option>',hint:"Sin pago ahora — la fecha se confirma solo tras el contacto del chef.",intl:{ey:"Servicios internacionales",h:"Nero's Kitchen viaja contigo",p:"Cenas privadas, bodas y eventos también fuera de Italia. Hablo cuatro idiomas y llevo la tradición italiana de alta gastronomía allá donde haya una cocina: villa de alquiler, yate, sede de empresa o casa familiar.",cards:'<div class="icard"><h4>Villas y vacaciones</h4><p>Tu chef durante toda la estancia</p></div><div class="icard"><h4>Bodas y eventos</h4><p>El menú italiano de tu gran día</p></div><div class="icard"><h4>Yates y chárter</h4><p>Alta cocina también en navegación</p></div><div class="icard"><h4>Empresas</h4><p>Cenas y team building gastronómico</p></div>',cond:"✈️ Viaje, comida y alojamiento a cargo del cliente · presupuesto a medida · disponibilidad prioritaria en Europa",btn:"Pide un presupuesto internacional"},ftag:"Chef a domicilio · eventos privados · show cooking",
+  tr:{busy:"Ocupado",chosen:"Fecha elegida:",nodate:"Sin fecha · solicitud de presupuesto",err1:"Revisa los campos obligatorios: nombre, teléfono, email válido, número de comensales y ciudad.",err2:"Envío fallido. Inténtalo de nuevo en unos segundos.",sending:"Enviando…",send:"Enviar solicitud de reserva"}}},
+
+fr:{mesi:["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"],
+ wd:"<th>Lun</th><th>Mar</th><th>Mer</th><th>Jeu</th><th>Ven</th><th>Sam</th><th>Dim</th>",
+ nav:["Qui suis-je","Comment ça marche","Menus","Cours","Galerie","Avis"],cta:"Réserver",
+ hero:{ey:"Chef à domicile",h:"Le restaurant,<br>c'est <em>chez vous</em>.",p:"La tradition italienne relue en version haute gastronomie, servie directement dans votre cuisine. Vous invitez vos convives, je m'occupe du reste — des courses jusqu'à la dernière assiette lavée.",b1:"Réservez votre dîner",b2:"Découvrir les menus"},
+ about:{ey:"Qui suis-je",h:"Je cuisine pour des personnes,<br>pas pour des couverts.",p:["Je suis le chef de Nero's Kitchen. Après des années entre cuisines de restaurants et grands événements, j'ai choisi d'apporter l'expérience du fine dining là où elle a le plus de valeur : autour de votre table, parmi ceux que vous aimez.","Ma cuisine s'appuie sur la tradition — la carbonara, les anchois, le maritozzo — relue en version haute gastronomie : technique, dressage et ingrédients choisis transforment les plats de toujours en une expérience de restaurant, avec la chaleur d'un dîner entre amis.","Chaque menu est construit sur mesure : racontez-moi l'occasion, vos invités et leurs goûts, et je dessine la soirée.","🌍 Service disponible en italien, anglais, espagnol et français."]},
+ steps:{ey:"Comment ça marche",h:"De la demande à la table",c:["<span>01</span><h3>Racontez-moi l'occasion</h3><p>Date, nombre d'invités, goûts et intolérances : deux minutes suffisent via le formulaire.</p>","<span>02</span><h3>Recevez ma proposition</h3><p>Sous 24 heures, je vous contacte avec une proposition de menu et un devis clair, tout compris.</p>","<span>03</span><h3>On peaufine le menu</h3><p>Nous ajustons plats et services ensemble, jusqu'à ce que la soirée soit exactement celle que vous imaginez.</p>","<span>04</span><h3>Profitez du dîner</h3><p>J'arrive avec les courses, je cuisine, je sers à table et je vous rends une cuisine impeccable.</p>"]},
+ menu:{ey:"Menus &amp; formules",h:"Choisissez votre soirée",sub:"La tradition relue en version haute gastronomie. Prix par personne, tout compris : courses, mise en place, service et rangement de la cuisine. Chaque menu s'adapte aux intolérances et préférences.",badge:"Le plus demandé",vedi:"Voir le menu complet",
+  packs:[{h:"Méditerranéen",port:"4 services · dîner convivial",list:"<li>Entrée au choix</li><li>Premier plat au choix</li><li>Plat principal avec garniture</li><li>Dessert au choix</li>",prezzo:"65 € <small>/ personne</small>",min:"minimum 4 convives"},
+   {h:"Parcours Dégustation",port:"4 services signature · menu du chef",list:"<li>Catalane d'anchois marinés, gel de poivrons et oignon de Tropea aigre-doux</li><li>Paccheri au cœur de courgettes, crevettes basse température et fondue de pecorino</li><li>Pulpo a la gallega — poulpe basse température, pomme de terre en saturation saline et paprika</li><li>Pavlova aux fruits de saison et fleurs comestibles</li>",prezzo:"90 € <small>/ personne</small>",min:"minimum 2 convives"},
+   {h:"Événements &amp; Buffet",port:"Sur mesure · fêtes et célébrations",list:"<li>Finger food et ateliers gastronomiques</li><li>Show cooking devant vos invités</li><li>Menu défini selon l'occasion</li><li>Service avec brigade dédiée</li>",prezzo:"dès 45 € <small>/ personne</small>",min:"minimum 10 convives"}]},
+ lez:{ey:"Home Cooking Class",h:"Cours de gastronomie,<br>pour débutants et plus",p:"Apprendre la culture du produit et du service : voilà l'esprit de mon cours. Un cycle de rencontres en soirée (18h00–19h30) qui part des bases — découpes, cuissons, sauces — jusqu'au dressage et au service comme au restaurant. Disponible aussi en cours particulier à domicile, pour couples, amis ou équipes d'entreprise — et pour les enfants en anniversaire en cuisine, avec un gâteau final préparé par leurs soins.",chips:'<span class="chip">Cycle de cours</span><span class="chip">Cours particulier</span><span class="chip">Bases &amp; techniques</span><span class="chip">Dressage</span><span class="chip">Culture du service</span>',tiers:'<div class="tier"><h4>Anniversaires enfants</h4><b>450 €</b><small>par fête · jusqu\'à 10 enfants</small></div><div class="tier"><h4>Ados</h4><b>60 €</b><small>par cours · min 5–6</small></div><div class="tier"><h4>Adultes</h4><b>80 €</b><small>par cours · min 5–6</small></div>',min:"ingrédients et matériel inclus · nouvelles dates du cycle à venir",btn:"Réserver un cours"},
+ gal:{ey:"Depuis la cuisine",h:"Les plats, en vrai",sub:"Aucune photo de banque d'images : uniquement de vrais services, cuisinés et dressés chez les clients."},
+ rev:{ey:"Avis",h:"La parole aux convives",stats:'<div><b>4,9<small>/5</small></b><span>note moyenne</span></div><div><b>120+</b><span>services à domicile</span></div><div><b>100%</b><span>cuisines rendues impeccables</span></div>',
+  q:['<div class="stars" aria-label="5 étoiles">★★★★★</div><p>« Un dîner chez nous au niveau d\'un restaurant étoilé. Le poulpe à la pomme de terre fondante fait encore parler nos amis. »</p><cite>Giulia · Dîner d\'anniversaire</cite>','<div class="stars" aria-label="5 étoiles">★★★★★</div><p>« Professionnel, ponctuel et d\'une gentillesse rare. La cuisine était plus rangée qu\'à son arrivée. Réservé à nouveau aussitôt. »</p><cite>Marco &amp; Sara · Anniversaire de mariage</cite>','<div class="stars" aria-label="5 étoiles">★★★★★</div><p>« Buffet pour 25 personnes géré à la perfection : de très belles assiettes, toutes servies chaudes. Les fleurs comestibles ont volé la vedette sur les photos. »</p><cite>Federica · Événement d\'entreprise</cite>']},
+ book:{ey:"Réservation",h:"Choisissez la date — ou demandez un devis",sub:"Sélectionnez un jour libre sur le calendrier et envoyez votre demande : je vous recontacte sous 24 heures pour confirmer et construire le menu ensemble. Vous pouvez aussi envoyer une demande sans date.",legend:'<span><span class="dot" style="background:#ecf5fa;border:1px solid #bcd7e4"></span> Libre</span><span><span class="dot" style="background:#e1ecf2"></span> Occupé</span><span><span class="dot" style="background:#2e7fa3"></span> Sélectionné</span>',fh:"Votre demande",l:{nome:"Nom et prénom *",tel:"Téléphone *",email:"Email *",pack:"Formule",ospiti:"Nombre de convives *",indirizzo:"Ville / zone de l'événement *",note:"Occasion, intolérances, demandes"},ph_ind:"ex. Rome, quartier Trieste",ph_note:"ex. anniversaire, un invité cœliaque, plutôt poisson…",opts:'<option>Méditerranéen — 65 €/pp</option><option selected>Parcours Dégustation — 90 €/pp</option><option>Événements &amp; Buffet — sur mesure</option><option>Anniversaire en cuisine — 450 € (jusqu\'à 10 enfants)</option><option>Cours de cuisine Ados — 60 €/pp</option><option>Cours de cuisine Adultes — 80 €/pp</option><option>Événement à l\'étranger — devis sur mesure</option><option>Je ne sais pas encore / conseillez-moi</option>',hint:"Aucun paiement maintenant — la date n'est confirmée qu'après le contact du chef.",intl:{ey:"Prestations internationales",h:"Nero's Kitchen voyage avec vous",p:"Dîners privés, mariages et événements aussi hors d'Italie. Je parle quatre langues et j'apporte la tradition italienne de haute gastronomie partout où il y a une cuisine : villa de location, yacht, siège d'entreprise ou maison de famille.",cards:'<div class="icard"><h4>Villas &amp; vacances</h4><p>Votre chef pendant tout le séjour</p></div><div class="icard"><h4>Mariages &amp; événements</h4><p>Le menu italien de votre grand jour</p></div><div class="icard"><h4>Yachts &amp; charters</h4><p>La haute cuisine même en mer</p></div><div class="icard"><h4>Entreprises</h4><p>Dîners et team building gastronomiques</p></div>',cond:"✈️ Voyage, repas et hébergement à la charge du client · devis sur mesure · disponibilité prioritaire en Europe",btn:"Demander un devis international"},ftag:"Chef à domicile · événements privés · show cooking",
+  tr:{busy:"Occupé",chosen:"Date choisie :",nodate:"Sans date · demande de devis",err1:"Vérifiez les champs obligatoires : nom, téléphone, email valide, nombre de convives et ville.",err2:"Échec de l'envoi. Réessayez dans quelques secondes.",sending:"Envoi…",send:"Envoyer la demande de réservation"}}}
+};
+
+/* Menù dei piatti tradotti (nomi in italiano, descrizioni tradotte) */
+window.MENUS_L10N = {
+en:{mediterraneo:{t:"Mediterraneo",s:"build your own dinner · one choice per course",c:[
+ ["Starters","choose 1",[{n:"Alici marinate",d:"Fresh marinated anchovies, beetroot mayonnaise, crispy bread and marinated Tropea red onion."},{n:"Caprese",d:"Tomato filled with DOP mozzarella cream, fresh basil oil and artisan taralli crumble. Vegan version on request."},{n:"Crostino dorato con uovo pochè",d:"Toasted artisan bread, creamy poached egg and hand-whipped hollandaise with a buttery citrus note."}]],
+ ["Pasta courses","choose 1",[{n:"Carbonara",d:"Velvety cream of fresh eggs and DOP pecorino romano, freshly ground pepper and golden crispy guanciale."},{n:"Tagliolini al pomodoro a lenta cottura",d:"Slow-cooked ripe tomato sauce with fresh tomato petals."},{n:"Giardino di verdure",d:"A mosaic of gently simmered seasonal vegetables, served with warm toasted bread."}]],
+ ["Main courses","choose 1",[{n:"Calamaro ripieno",d:"Tender stuffed squid, gently cooked, on a silky, slightly sweet carrot velouté."},{n:"Pollo alla cacciatora",d:"Slow-cooked chicken with Mediterranean herbs, served with a delicate garlic cream."},{n:"Millefoglie di verdure",d:"Roasted zucchini, eggplant and peppers layered with carasau bread and Parmigiano fondue."}]],
+ ["Side dishes","for the table",[{n:"Verdure di stagione ripassate",d:"Fresh vegetables sautéed with extra virgin olive oil, golden garlic and a hint of chili."},{n:"Patata in saturazione salina",d:"Slowly salt-cured potato, compact and enveloping, preserving its natural flavour."}]],
+ ["Desserts","choose 1",[{n:"Tiramisù classico italiano",d:"Espresso-soaked savoiardi, soft mascarpone cream, bitter cocoa."},{n:"Maritozzo con la panna",d:"Soft Roman brioche with citrus notes, filled with freshly whipped cream."}]]]},
+ mare:{t:"Tasting Journey",s:"a recent journey · the menu changes with the market",c:[
+ ["Starter","",[{n:"Catalana di alici marinate",d:"Yellow and red pepper cream and gel, sweet-and-sour Tropea red onion."}]],
+ ["Pasta course","",[{n:"Paccheri mantecati al cuore di zucchine",d:"Zucchini brunoise, sous-vide prawns, prawn mayonnaise, parsley oil and pecorino fondue."}]],
+ ["Main course","",[{n:"Pulpo a la gallega",d:"Sous-vide octopus, salt-cured potato ingot, paprika, potato velouté, herb oil and potato chips."}]],
+ ["Dessert","",[{n:"Pavlova",d:"Meringue, freshly whipped cream and seasonal fruit with edible flowers."}]],
+ ["Other signature journeys","for inspiration",[{n:"Mare classico",d:"Peppered mussels · Spaghettone with three tomatoes, Parmigiano fondue and basil oil · Stuffed squid, carrot cream and fried squid heads · Tiramisù."},{n:"Terra",d:"“Caprese” my way, with tomato wafers and concentrate · Spaghettone dell'orto, pecorino cream and crispy guanciale · Vitel tonné, veal cooked at 58° · Lemon tiramisù."},{n:"Contemporary tradition",d:"Avocado toast with poached egg · Sardinian fregola with clams · Hunter-style lamb, brown jus, potato chips and rosemary oil · Fresh fruit selection."}]]]},
+ eventi:{t:"Events & Buffet",s:"bespoke · a few ideas from past services",c:[
+ ["Gourmet stations","your choice",["Raw seafood counter","Express frying corner","Vegetable buffet with colourful hummus"]],
+ ["Show cooking","your choice",["Octopus grilled in front of your guests","Pasta finished à la minute"]],
+ ["Desserts","your choice",["Mini pavlova parade","Carved fruit and desserts in a glass"]]]}},
+es:{mediterraneo:{t:"Mediterráneo",s:"compón tu cena · una elección por pase",c:[
+ ["Entrantes","elige 1",[{n:"Alici marinate",d:"Boquerones fresquísimos marinados, mayonesa de remolacha, pan crujiente y cebolla roja de Tropea marinada."},{n:"Caprese",d:"Tomate relleno de crema de mozzarella DOP, aceite de albahaca y crumble de taralli artesanos. Versión vegana bajo petición."},{n:"Crostino dorado con huevo pochè",d:"Pan artesano tostado, huevo pochado cremoso y holandesa montada a mano, de nota mantecosa y cítrica."}]],
+ ["Primeros","elige 1",[{n:"Carbonara",d:"Crema aterciopelada de huevos frescos y pecorino romano DOP, pimienta recién molida y guanciale dorado y crujiente."},{n:"Tagliolini al pomodoro a lenta cottura",d:"Salsa de tomates maduros de cocción lenta con pétalos de tomate fresco."},{n:"Giardino di verdure",d:"Mosaico de verduras de temporada cocidas dulcemente, con pan tostado caliente."}]],
+ ["Segundos","elige 1",[{n:"Calamaro ripieno",d:"Calamar tierno relleno, cocido con delicadeza, sobre crema sedosa de zanahoria ligeramente dulce."},{n:"Pollo alla cacciatora",d:"Pollo de cocción lenta con aromas mediterráneos, con delicada crema de ajo."},{n:"Millefoglie di verdure",d:"Calabacín, berenjena y pimientos asados en capas con pan carasau y fondue de Parmigiano."}]],
+ ["Guarniciones","para la mesa",[{n:"Verdure di stagione ripassate",d:"Verduras frescas salteadas con AOVE, ajo dorado y un toque de guindilla."},{n:"Patata in saturazione salina",d:"Patata curada lentamente en sal, compacta y envolvente."}]],
+ ["Postres","elige 1",[{n:"Tiramisù classico italiano",d:"Savoiardi al espresso, suave crema de mascarpone, cacao amargo."},{n:"Maritozzo con la panna",d:"Suave brioche romana con notas cítricas, colmada de nata recién montada."}]]]},
+ mare:{t:"Menú Degustación",s:"un recorrido reciente · el menú cambia con el mercado",c:[
+ ["Entrante","",[{n:"Catalana di alici marinate",d:"Crema y gel de pimiento amarillo y rojo, cebolla de Tropea en agridulce."}]],
+ ["Primero","",[{n:"Paccheri mantecati al cuore di zucchine",d:"Brunoise de calabacín, gambas a baja temperatura, mayonesa de gambas, aceite de perejil y fondue de pecorino."}]],
+ ["Segundo","",[{n:"Pulpo a la gallega",d:"Pulpo CBT, lingote de patata en saturación salina, pimentón, crema de patata, aceite de hierbas y chips."}]],
+ ["Postre","",[{n:"Pavlova",d:"Merengue, nata recién montada y fruta de temporada con flores comestibles."}]],
+ ["Otros recorridos firmados","para inspirarte",[{n:"Mare classico",d:"Impepata de mejillones · Spaghettone a los tres tomates con fondue de Parmigiano · Calamar relleno, crema de zanahoria y cabezas fritas · Tiramisú."},{n:"Terra",d:"«Caprese» a mi manera · Spaghettone del huerto, crema de pecorino y guanciale · Vitel tonné, ternera a 58° · Tiramisú al limón."},{n:"Tradición contemporánea",d:"Avocado toast con huevo pochado · Fregola sarda con almejas · Cordero a la cacciatora, fondo oscuro y chips · Tagliata de fruta."}]]]},
+ eventi:{t:"Eventos y Buffet",s:"a medida · algunas ideas de servicios pasados",c:[
+ ["Islas gastronómicas","a elegir",["Barra de crudos de mar","Rincón de frituras al momento","Buffet de verduras y hummus de colores"]],
+ ["Show cooking","a elegir",["Pulpo a la plancha delante de los invitados","Pasta mantecada al momento"]],
+ ["Dulces","a elegir",["Desfile de mini pavlovas","Fruta esculpida y postres en vaso"]]]}},
+fr:{mediterraneo:{t:"Méditerranéen",s:"composez votre dîner · un choix par service",c:[
+ ["Entrées","au choix (1)",[{n:"Alici marinate",d:"Anchois très frais marinés, mayonnaise à la betterave, pain croustillant et oignon rouge de Tropea mariné."},{n:"Caprese",d:"Tomate farcie à la crème de mozzarella DOP, huile au basilic frais et crumble de taralli artisanaux. Version végane sur demande."},{n:"Crostino doré à l'œuf poché",d:"Pain artisanal toasté, œuf poché au cœur crémeux et hollandaise montée à la main, note beurrée et agrumée."}]],
+ ["Premiers plats","au choix (1)",[{n:"Carbonara",d:"Crème veloutée d'œufs frais et pecorino romano DOP, poivre du moulin et guanciale doré et croustillant."},{n:"Tagliolini al pomodoro a lenta cottura",d:"Sauce de tomates mûres longuement mijotée, pétales de tomate fraîche."},{n:"Giardino di verdure",d:"Mosaïque de légumes de saison doucement mijotés, servie avec pain toasté chaud."}]],
+ ["Plats","au choix (1)",[{n:"Calamaro ripieno",d:"Calamar tendre farci, cuit avec délicatesse, sur un velouté de carottes soyeux et légèrement sucré."},{n:"Pollo alla cacciatora",d:"Poulet cuit lentement aux arômes méditerranéens, servi avec une délicate crème d'ail."},{n:"Millefoglie di verdure",d:"Courgettes, aubergines et poivrons rôtis en couches avec pain carasau et fondue de Parmigiano."}]],
+ ["Garnitures","pour la table",[{n:"Verdure di stagione ripassate",d:"Légumes frais sautés à l'huile d'olive vierge extra, ail doré et pointe de piment."},{n:"Patata in saturazione salina",d:"Pomme de terre affinée lentement au sel, compacte et enveloppante."}]],
+ ["Desserts","au choix (1)",[{n:"Tiramisù classico italiano",d:"Savoiardi imbibés d'espresso, crème onctueuse au mascarpone, cacao amer."},{n:"Maritozzo con la panna",d:"Brioche romaine moelleuse aux agrumes, garnie de crème fouettée minute."}]]]},
+ mare:{t:"Parcours Dégustation",s:"un parcours récent · le menu évolue avec le marché",c:[
+ ["Entrée","",[{n:"Catalana di alici marinate",d:"Crème et gel de poivrons jaune et rouge, oignon de Tropea aigre-doux."}]],
+ ["Premier plat","",[{n:"Paccheri mantecati al cuore di zucchine",d:"Brunoise de courgettes, crevettes basse température, mayonnaise de crevettes, huile de persil et fondue de pecorino."}]],
+ ["Plat","",[{n:"Pulpo a la gallega",d:"Poulpe basse température, lingot de pomme de terre en saturation saline, paprika, velouté de pommes de terre, huile aux herbes et chips."}]],
+ ["Dessert","",[{n:"Pavlova",d:"Meringue, crème fouettée minute et fruits de saison aux fleurs comestibles."}]],
+ ["Autres parcours signature","pour inspiration",[{n:"Mare classico",d:"Impepata de moules · Spaghettone aux trois tomates, fondue de Parmigiano · Calamar farci, crème de carottes et têtes frites · Tiramisù."},{n:"Terra",d:"« Caprese » à ma façon · Spaghettone du potager, crème de pecorino et guanciale · Vitel tonné, veau cuit à 58° · Tiramisù au citron."},{n:"Tradition contemporaine",d:"Avocado toast à l'œuf poché · Fregola sarde aux palourdes · Agneau chasseur, jus brun, chips et huile au romarin · Assiette de fruits frais."}]]]},
+ eventi:{t:"Événements & Buffet",s:"sur mesure · quelques idées de services passés",c:[
+ ["Ateliers gastronomiques","au choix",["Comptoir de la mer crue","Coin fritures minute","Buffet de légumes et houmous colorés"]],
+ ["Show cooking","au choix",["Poulpe à la plancha devant vos invités","Pâtes finies à la minute"]],
+ ["Desserts","au choix",["Défilé de mini pavlovas","Fruits sculptés et desserts en verrine"]]]}}
+};
+
+const Q = s => document.querySelector(s);
+const QA = s => document.querySelectorAll(s);
+function applyLang(l){
+  const t = T[l]; if(!t) return;
+  window.CURLANG = l; window.TR = t.book.tr;
+  document.documentElement.lang = l;
+  MESI = t.mesi;
+  QA(".langs button").forEach(b=>b.classList.toggle("on", b.dataset.lang===l));
+  QA(".navlinks a").forEach((a,i)=>{ if(t.nav[i]) a.textContent = t.nav[i]; });
+  Q(".nav-cta").textContent = t.cta;
+  Q(".hero .eyebrow").textContent = t.hero.ey;
+  Q(".hero h1").innerHTML = t.hero.h;
+  Q(".hero-copy p").textContent = t.hero.p;
+  Q(".hero-actions .btn-primary").textContent = t.hero.b1;
+  Q(".hero-actions .btn-ghost").textContent = t.hero.b2;
+  Q("#chi-sono .eyebrow").textContent = t.about.ey;
+  Q("#chi-sono h2").innerHTML = t.about.h;
+  QA("#chi-sono .about-grid div p").forEach((p,i)=>p.textContent = t.about.p[i]);
+  Q("#come-funziona .eyebrow").textContent = t.steps.ey;
+  Q("#come-funziona h2").textContent = t.steps.h;
+  QA("#come-funziona .step").forEach((s,i)=>s.innerHTML = t.steps.c[i]);
+  Q("#menu .eyebrow").innerHTML = t.menu.ey;
+  Q("#menu .wrap > h2").textContent = t.menu.h;
+  Q("#menu .menu-sub").textContent = t.menu.sub;
+  QA("#menu .pack").forEach((pk,i)=>{
+    const d = t.menu.packs[i]; if(!d) return;
+    pk.querySelector("h3").innerHTML = d.h;
+    pk.querySelector(".portate").textContent = d.port;
+    pk.querySelector("ul").innerHTML = d.list;
+    pk.querySelector(".prezzo").innerHTML = d.prezzo;
+    pk.querySelector(".minimo").textContent = d.min;
+    const v = pk.querySelector(".vedi"); if(v) v.textContent = t.menu.vedi;
+  });
+  const f = Q(".pack.featured"); if(f) f.setAttribute("data-badge", t.menu.badge);
+  Q("#lezioni .eyebrow").textContent = t.lez.ey;
+  Q("#lezioni h2").innerHTML = t.lez.h;
+  Q("#lezioni .lez-copy > p").textContent = t.lez.p;
+  Q("#lezioni .formati").innerHTML = t.lez.chips;
+  Q("#lezioni .lez-tiers").innerHTML = t.lez.tiers;
+  Q("#lezioni .lez-min").textContent = t.lez.min;
+  Q("#lezioni .btn").textContent = t.lez.btn;
+  if(t.book.intl){const it=t.book.intl;
+    Q("#trasferte .eyebrow").textContent = it.ey;
+    Q("#trasferte h2").textContent = it.h;
+    Q("#trasferte .intl-sub").textContent = it.p;
+    Q("#trasferte .intl-cards").innerHTML = it.cards;
+    Q("#trasferte .intl-cond").textContent = it.cond;
+    Q("#trasferte .btn").textContent = it.btn;}
+  Q("#galleria .eyebrow").textContent = t.gal.ey;
+  Q("#galleria h2").textContent = t.gal.h;
+  Q("#galleria .menu-sub").textContent = t.gal.sub;
+  Q("#recensioni .eyebrow").textContent = t.rev.ey;
+  Q("#recensioni h2").textContent = t.rev.h;
+  Q("#recensioni .stats").innerHTML = t.rev.stats;
+  QA("#recensioni blockquote").forEach((b,i)=>b.innerHTML = t.rev.q[i]);
+  Q("#prenota .eyebrow").textContent = t.book.ey;
+  Q("#prenota h2").textContent = t.book.h;
+  Q("#prenota .menu-sub").textContent = t.book.sub;
+  Q(".cal thead tr").innerHTML = t.wd;
+  Q(".legend").innerHTML = t.book.legend;
+  Q(".form h3").textContent = t.book.fh;
+  for(const [id,txt] of Object.entries(t.book.l)){ const lab = Q(`label[for="${id==='nome'?'nome':id}"]`); if(lab) lab.textContent = txt; }
+  Q("#indirizzo").placeholder = t.book.ph_ind;
+  Q("#note").placeholder = t.book.ph_note;
+  const sel = Q("#pack"), cur = sel.selectedIndex; sel.innerHTML = t.book.opts; if(cur>=0 && cur<sel.options.length) sel.selectedIndex = cur;
+  Q("#submit").textContent = t.book.tr.send;
+  Q(".hint").textContent = t.book.hint;
+  Q("#seldate").textContent = (typeof selected!=="undefined" && selected) ? (t.book.tr.chosen+" "+fmtIT(selected)) : t.book.tr.nodate;
+  Q("footer .wrap > div > p").textContent = t.book.ftag;
+  renderCal();
+}
+QA(".langs button").forEach(b=>b.addEventListener("click", ()=>applyLang(b.dataset.lang)));
+</script>
+</body>
+</html>
