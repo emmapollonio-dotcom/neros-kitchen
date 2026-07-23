@@ -74,19 +74,23 @@ module.exports = async (req, res) => {
       await supabase.from("availability").upsert({ data: row.data, stato: "booked" });
     }
 
-    // Email di notifica allo chef + conferma al cliente (best-effort, non blocca la risposta)
-    sendEmail(
-      process.env.CHEF_EMAIL,
-      `Nuova richiesta — ${row.nome}`,
-      `<p><b>${row.nome}</b> ha inviato una richiesta.</p>
-       <p>Data: ${row.data || "da definire"}<br>Ospiti: ${row.ospiti}<br>Pacchetto: ${row.pacchetto}<br>
-       Tel: ${row.tel}<br>Email: ${row.email}<br>Zona: ${row.indirizzo}<br>Note: ${row.note || "-"}</p>`
-    );
-    sendEmail(
-      row.email,
-      "Richiesta ricevuta — Nero's Kitchen",
-      `<p>Ciao ${row.nome}, grazie per la tua richiesta! Ti ricontattiamo entro 24 ore per confermare data e menu.</p>`
-    );
+    // Email di notifica allo chef + conferma al cliente.
+    // IMPORTANTE: le attendiamo (await) prima di rispondere, altrimenti su
+    // Vercel la funzione può terminare prima che l'invio raggiunga Resend.
+    await Promise.all([
+      sendEmail(
+        process.env.CHEF_EMAIL,
+        `Nuova richiesta — ${row.nome}`,
+        `<p><b>${row.nome}</b> ha inviato una richiesta.</p>
+         <p>Data: ${row.data || "da definire"}<br>Ospiti: ${row.ospiti}<br>Pacchetto: ${row.pacchetto}<br>
+         Tel: ${row.tel}<br>Email: ${row.email}<br>Zona: ${row.indirizzo}<br>Note: ${row.note || "-"}</p>`
+      ),
+      sendEmail(
+        row.email,
+        "Richiesta ricevuta — Nero's Kitchen",
+        `<p>Ciao ${row.nome}, grazie per la tua richiesta! Ti ricontattiamo entro 24 ore per confermare data e menu.</p>`
+      ),
+    ]);
 
     return res.status(200).json(row);
   }
@@ -104,7 +108,7 @@ module.exports = async (req, res) => {
       await supabase.from("availability").delete().eq("data", existing.data);
     }
     if (existing) {
-      sendEmail(
+      await sendEmail(
         existing.email,
         stato === "confermata" ? "Prenotazione confermata — Nero's Kitchen" : "Aggiornamento sulla tua richiesta",
         stato === "confermata"
@@ -117,3 +121,5 @@ module.exports = async (req, res) => {
 
   return res.status(405).json({ error: "method_not_allowed" });
 };
+
+fix invio email
