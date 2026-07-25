@@ -283,6 +283,23 @@ nav.scrolled{box-shadow:0 8px 30px rgba(0,0,0,.45)}
 .icard h4{font-family:'Fraunces',serif;font-weight:400;font-size:1.15rem;color:#fff;margin-bottom:6px}
 .icard p{font-size:.85rem;color:#b9d2de}
 .intl-cond{font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.08em;color:#f5c342;margin-bottom:26px}
+.carta{background:#fff}
+.carta-cat{margin-top:34px}
+.carta-cat h3{font-family:'Fraunces',serif;font-size:1.3rem;color:var(--blu,#2e7fa3);margin-bottom:16px;border-bottom:1px solid var(--line2,#d9e9f1);padding-bottom:8px}
+.piatto-riga{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;padding:14px 0;border-bottom:1px dashed var(--line2,#d9e9f1)}
+.piatto-info h4{font-family:'Fraunces',serif;font-weight:400;font-size:1.08rem;margin-bottom:4px}
+.piatto-info p{font-size:.88rem;color:var(--muted,#5f7d8c);margin-bottom:4px;max-width:56ch}
+.piatto-all{font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.06em;color:#a08a5f}
+.piatto-azione{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex:0 0 auto}
+.piatto-prezzo{font-family:'Fraunces',serif;color:var(--calendula,#f28c28);font-size:1.05rem}
+.btn-piatto{border:1px solid var(--calendula,#f28c28);color:var(--calendula,#f28c28);background:#fff;border-radius:999px;padding:6px 14px;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:all .2s}
+.btn-piatto:hover{background:var(--calendula,#f28c28);color:#fff}
+.btn-piatto.attivo{background:var(--blu,#2e7fa3);border-color:var(--blu,#2e7fa3);color:#fff}
+.carta-loading{color:var(--muted,#5f7d8c);font-size:.9rem;padding:20px 0}
+.barra-selezione{position:sticky;bottom:14px;margin-top:26px;background:var(--blunotte,#12303d);color:#fff;border-radius:999px;padding:12px 20px;display:none;align-items:center;justify-content:space-between;gap:14px;box-shadow:0 14px 30px rgba(18,48,61,.35);flex-wrap:wrap}
+.barra-selezione.visibile{display:flex}
+.barra-selezione span{font-size:.85rem}
+.barra-selezione button{background:var(--calendula,#f28c28);color:#fff;border:0;border-radius:999px;padding:9px 18px;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
 .lingue{font-weight:700;color:#2e7fa3}
 .langs{display:flex;gap:4px}
 .langs button{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.08em;border:1px solid #bcd7e4;background:#fff;color:#2e7fa3;border-radius:999px;padding:5px 9px;transition:all .25s}
@@ -376,6 +393,7 @@ footer p{color:#9fbecd}
       <li><a href="#chi-sono">Chi sono</a></li>
       <li><a href="#come-funziona">Come funziona</a></li>
       <li><a href="#menu">Menu</a></li>
+      <li><a href="#carta">La Carta</a></li>
       <li><a href="#lezioni">Lezioni</a></li>
       <li><a href="#galleria">Galleria</a></li>
       <li><a href="#recensioni">Recensioni</a></li>
@@ -478,6 +496,19 @@ footer p{color:#9fbecd}
         <div class="minimo">minimo 10 ospiti</div>
         <button type="button" class="vedi" data-menu="eventi">Vedi menù completo</button>
       </article>
+    </div>
+  </div>
+</section>
+
+<section class="carta" id="carta">
+  <div class="wrap">
+    <div class="eyebrow">La Carta</div>
+    <h2>Sfoglia i piatti veri</h2>
+    <p class="menu-sub">Questi sono i piatti realmente in rotazione in cucina. Scegli quelli che ti incuriosiscono: li aggiungi alla tua richiesta di prenotazione con un tocco.</p>
+    <div id="carta-corpo"><p class="carta-loading">Carico la carta…</p></div>
+    <div class="barra-selezione" id="barra-selezione">
+      <span id="barra-testo">0 piatti selezionati</span>
+      <button id="barra-btn" type="button">Vai alla prenotazione</button>
     </div>
   </div>
 </section>
@@ -896,6 +927,58 @@ document.querySelectorAll(".vedi").forEach(b=>b.addEventListener("click",()=>{
 $("mchiudi").addEventListener("click",()=> $("menuoverlay").classList.remove("open"));
 $("menuoverlay").addEventListener("click",e=>{ if(e.target.id==="menuoverlay") e.currentTarget.classList.remove("open"); });
 document.addEventListener("keydown",e=>{ if(e.key==="Escape") $("menuoverlay").classList.remove("open"); });
+
+/* ============== LA CARTA: piatti reali dal database ============== */
+let piattiScelti = [];
+async function caricaCarta(){
+  const corpo = $("carta-corpo");
+  try{
+    const piatti = await apiGet("/api/dishes");
+    if(!piatti || !piatti.length){ corpo.innerHTML = "<p class=\"carta-loading\">Il ricettario \u00e8 in aggiornamento, torna a trovarci a breve.</p>"; return; }
+    const gruppi = {};
+    piatti.forEach(p => { (gruppi[p.categoria] ||= []).push(p); });
+    corpo.innerHTML = Object.entries(gruppi).map(([cat, elenco]) => `
+      <div class="carta-cat">
+        <h3>${cat}</h3>
+        ${elenco.map(p => `
+          <div class="piatto-riga" data-id="${p.id}">
+            <div class="piatto-info">
+              <h4>${p.nome}</h4>
+              ${p.descrizione ? `<p>${p.descrizione}</p>` : ""}
+              ${(p.allergeni||[]).length ? `<span class="piatto-all">Allergeni: ${p.allergeni.join(", ")}</span>` : ""}
+            </div>
+            <div class="piatto-azione">
+              <span class="piatto-prezzo">€${p.prezzo}</span>
+              <button type="button" class="btn-piatto" data-id="${p.id}" data-nome="${p.nome.replace(/"/g,'&quot;')}">+ Aggiungi</button>
+            </div>
+          </div>`).join("")}
+      </div>`).join("");
+    corpo.querySelectorAll(".btn-piatto").forEach(btn => btn.addEventListener("click", () => {
+      const id = btn.dataset.id, nome = btn.dataset.nome;
+      const idx = piattiScelti.findIndex(p => p.id === id);
+      if(idx >= 0){ piattiScelti.splice(idx,1); btn.classList.remove("attivo"); btn.textContent = "+ Aggiungi"; }
+      else { piattiScelti.push({id, nome}); btn.classList.add("attivo"); btn.textContent = "✓ Aggiunto"; }
+      aggiornaBarraSelezione();
+    }));
+  }catch(e){
+    corpo.innerHTML = "<p class=\"carta-loading\">Non riesco a caricare la carta in questo momento.</p>";
+  }
+}
+function aggiornaBarraSelezione(){
+  const barra = $("barra-selezione");
+  if(piattiScelti.length === 0){ barra.classList.remove("visibile"); return; }
+  barra.classList.add("visibile");
+  $("barra-testo").textContent = piattiScelti.length + (piattiScelti.length===1 ? " piatto selezionato" : " piatti selezionati");
+}
+$("barra-btn").addEventListener("click", () => {
+  const elenco = piattiScelti.map(p => p.nome).join(", ");
+  const note = $("note");
+  const prefissoEsistente = note.value.replace(/^Piatti scelti dalla carta:.*?(\n\n|$)/s, "");
+  note.value = "Piatti scelti dalla carta: " + elenco + (prefissoEsistente ? "\n\n" + prefissoEsistente : "");
+  location.hash = "#prenota";
+  setTimeout(() => $("nome").focus(), 400);
+});
+caricaCarta();
 
 (async function init(){
   try{ avail = await apiGet("/api/availability"); }catch(e){ avail = {}; }
