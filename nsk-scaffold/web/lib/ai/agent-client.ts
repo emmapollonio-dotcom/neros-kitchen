@@ -1,6 +1,10 @@
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
-export type AgentName = "chef_assistant" | "food_cost_analyst" | "booking_assistant";
+export type AgentName =
+  | "chef_assistant"
+  | "food_cost_analyst"
+  | "booking_assistant"
+  | "waste_reduction_advisor";
 
 export interface AgentResponse {
   data: { response: string } | null;

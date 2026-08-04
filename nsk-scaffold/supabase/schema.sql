@@ -253,9 +253,15 @@ create table if not exists public.waste_items (
   ingredient_name text not null,
   quantity numeric(10,3),
   unit text,
+  reason text,
   image_url text,
   logged_at timestamptz not null default now()
 );
+
+-- Colonna aggiunta con lo Zero Waste AI module (Sprint 6): idempotente così
+-- non rompe schema.sql su un progetto Supabase dove waste_items esiste già
+-- senza questa colonna (vedi nota in DEPLOY-ISTRUZIONI.md).
+alter table public.waste_items add column if not exists reason text;
 
 create table if not exists public.waste_suggestions (
   id uuid primary key default gen_random_uuid(),

@@ -104,6 +104,60 @@ export async function getChefPricing(ctx: ToolContext, args: { chef_id: string }
   return data;
 }
 
+// Match esatto per nome (case-insensitive via ilike) sul catalogo ingredients.
+// Se non trova nulla ritorna known: false — il system prompt istruisce
+// l'agente a non citare importi in quel caso, invece di stimarli a caso.
+export async function searchIngredientCost(ctx: ToolContext, args: { ingredient_name: string }) {
+  const { data, error } = await ctx.supabase
+    .from("ingredients")
+    .select("name, avg_cost_per_unit, default_unit")
+    .ilike("name", args.ingredient_name)
+    .limit(1)
+    .maybeSingle();
+
+  if (error) return { error: error.message };
+  if (!data) return { known: false };
+
+  return {
+    known: true,
+    name: data.name,
+    avg_cost_per_unit: Number(data.avg_cost_per_unit ?? 0),
+    unit: data.default_unit,
+  };
+}
+
+// L'agente chiama questo tool una volta per suggerimento (systemPrompt in
+// agents.ts lo impone esplicitamente): niente testo libero non persistito.
+// RLS "waste_suggestions_owner" verifica che waste_item_id appartenga
+// all'utente corrente prima di permettere l'insert.
+export async function saveWasteSuggestion(
+  ctx: ToolContext,
+  args: {
+    waste_item_id: string;
+    suggestion_type: string;
+    title: string;
+    content: string;
+    sustainability_score: number;
+  }
+) {
+  const score = Math.max(0, Math.min(100, Math.round(args.sustainability_score)));
+
+  const { data, error } = await ctx.supabase
+    .from("waste_suggestions")
+    .insert({
+      waste_item_id: args.waste_item_id,
+      suggestion_type: args.suggestion_type,
+      title: args.title,
+      content: args.content,
+      sustainability_score: score,
+    })
+    .select()
+    .single();
+
+  if (error) return { error: error.message };
+  return { suggestion: data };
+}
+
 export const TOOL_IMPLEMENTATIONS: Record<
   string,
   (ctx: ToolContext, args: any) => Promise<unknown>
@@ -113,4 +167,6 @@ export const TOOL_IMPLEMENTATIONS: Record<
   calculate_food_cost: calculateFoodCost,
   get_chef_availability: getChefAvailability,
   get_chef_pricing: getChefPricing,
+  search_ingredient_cost: searchIngredientCost,
+  save_waste_suggestion: saveWasteSuggestion,
 };

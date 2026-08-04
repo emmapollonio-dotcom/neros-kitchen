@@ -1,9 +1,14 @@
-// Definizione dei 3 agenti attivati in Sprint 5 (Chef Assistant, Food Cost Analyst,
-// Booking Assistant — vedi Step 8 del documento di architettura per la spec completa
-// dei 10 agenti). Gli altri 7 restano documentati ma non implementati: attivarli
-// significa aggiungere qui una entry con lo stesso pattern.
+// Definizione degli agenti attivati. Sprint 5: Chef Assistant, Food Cost Analyst,
+// Booking Assistant. Sprint 6 (Zero Waste AI): Waste Reduction Advisor — vedi
+// Step 8 del documento di architettura per la spec completa dei 10 agenti.
+// Gli altri 6 restano documentati ma non implementati: attivarli significa
+// aggiungere qui una entry con lo stesso pattern.
 
-export type AgentName = "chef_assistant" | "food_cost_analyst" | "booking_assistant";
+export type AgentName =
+  | "chef_assistant"
+  | "food_cost_analyst"
+  | "booking_assistant"
+  | "waste_reduction_advisor";
 
 export interface AgentDefinition {
   name: AgentName;
@@ -121,6 +126,56 @@ export const AGENTS: Record<AgentName, AgentDefinition> = {
             type: "object",
             properties: { chef_id: { type: "string", format: "uuid" } },
             required: ["chef_id"],
+          },
+        },
+      },
+    ],
+  },
+
+  waste_reduction_advisor: {
+    name: "waste_reduction_advisor",
+    allowedRoles: ["customer", "chef", "admin"],
+    systemPrompt:
+      "Sei il Waste Reduction Advisor di N'sK. L'utente ti descrive un ingrediente che ha " +
+      "sprecato (nome, quantità, unità, motivo). Proponi 2-3 suggerimenti concreti e specifici " +
+      "per quell'ingrediente esatto: come riutilizzarlo in una ricetta semplice, come conservarlo " +
+      "meglio la prossima volta, o come cambiare le quantità acquistate/preparate per evitare che " +
+      "si ripeta. Usa search_ingredient_cost per capire se è un ingrediente costoso o economico " +
+      "(mai inventare cifre in euro: se il tool non trova il prezzo, non citare importi). Ogni " +
+      "suggerimento va SEMPRE salvato tramite lo strumento save_waste_suggestion (uno per " +
+      "chiamata) con un sustainability_score 0-100 che riflette quanto era evitabile lo spreco e " +
+      "quanto impatto ha il suggerimento — non rispondere mai solo a testo libero senza salvare.",
+    tools: [
+      {
+        type: "function",
+        function: {
+          name: "search_ingredient_cost",
+          description: "Cerca il costo medio a catalogo di un ingrediente per nome",
+          parameters: {
+            type: "object",
+            properties: { ingredient_name: { type: "string" } },
+            required: ["ingredient_name"],
+          },
+        },
+      },
+      {
+        type: "function",
+        function: {
+          name: "save_waste_suggestion",
+          description: "Salva un suggerimento per ridurre/riutilizzare uno spreco specifico",
+          parameters: {
+            type: "object",
+            properties: {
+              waste_item_id: { type: "string", format: "uuid" },
+              suggestion_type: {
+                type: "string",
+                enum: ["ricetta", "conservazione", "porzionamento", "acquisto"],
+              },
+              title: { type: "string" },
+              content: { type: "string" },
+              sustainability_score: { type: "number" },
+            },
+            required: ["waste_item_id", "suggestion_type", "title", "content", "sustainability_score"],
           },
         },
       },

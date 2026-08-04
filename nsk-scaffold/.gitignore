@@ -1,0 +1,29 @@
+# dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# next.js
+web/.next/
+web/out/
+
+# production
+web/build/
+
+# env
+.env
+.env.local
+.env*.local
+
+# testing / coverage
+web/coverage/
+
+# misc
+.DS_Store
+*.pem
+npm-debug.log*
+
+# flutter
+mobile/.dart_tool/
+mobile/.packages
+mobile/build/

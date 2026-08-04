@@ -3,10 +3,25 @@ import { NextResponse, type NextRequest } from "next/server";
 
 // Route protette per ruolo minimo richiesto.
 // Ordine dal più specifico al meno specifico: il primo prefisso che matcha vince.
+//
+// NOTA (fix Sprint 6): le entry "/pro" e "/home/tutor-ai" qui sotto non hanno
+// MAI fatto match, perché (pro) e (home) sono route group Next.js — le
+// parentesi non compaiono nell'URL reale (es. app/(pro)/crm/page.tsx serve
+// /crm, non /pro/crm). Risultato: food-cost, crm, analytics, academy-pro e
+// tutor-ai erano raggiungibili da anonimi senza redirect a /login (i dati
+// restavano comunque protetti dalle RLS e dal controllo auth nelle route
+// API, ma la UI mostrava la shell della pagina invece di rimandare al
+// login). Corretto elencando i path reali.
 const ROLE_GUARDS: Array<{ prefix: string; roles: Array<"customer" | "chef" | "admin"> }> = [
   { prefix: "/admin", roles: ["admin"] },
-  { prefix: "/pro", roles: ["chef", "admin"] }, // N'sK Pro: food-cost, haccp, crm, analytics, academy-pro
-  { prefix: "/home/tutor-ai", roles: ["customer", "chef", "admin"] },
+  // N'sK Pro
+  { prefix: "/food-cost", roles: ["chef", "admin"] },
+  { prefix: "/crm", roles: ["chef", "admin"] },
+  { prefix: "/analytics", roles: ["chef", "admin"] },
+  { prefix: "/academy-pro", roles: ["chef", "admin"] },
+  // N'sK Home
+  { prefix: "/tutor-ai", roles: ["customer", "chef", "admin"] },
+  { prefix: "/zero-waste", roles: ["customer", "chef", "admin"] },
   { prefix: "/bookings", roles: ["customer", "chef", "admin"] },
 ];
 
