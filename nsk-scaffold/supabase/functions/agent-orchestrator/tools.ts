@@ -182,6 +182,28 @@ export async function saveSocialContent(
   return { post: data };
 }
 
+// RLS "haccp_corrective_actions_owner" verifica che reading_id appartenga
+// (tramite haccp_readings.user_id) all'utente corrente prima di permettere
+// l'insert.
+export async function saveCorrectiveAction(
+  ctx: ToolContext,
+  args: { reading_id: string; title: string; content: string; urgency: string }
+) {
+  const { data, error } = await ctx.supabase
+    .from("haccp_corrective_actions")
+    .insert({
+      reading_id: args.reading_id,
+      title: args.title,
+      content: args.content,
+      urgency: args.urgency,
+    })
+    .select()
+    .single();
+
+  if (error) return { error: error.message };
+  return { action: data };
+}
+
 export const TOOL_IMPLEMENTATIONS: Record<
   string,
   (ctx: ToolContext, args: any) => Promise<unknown>
@@ -194,4 +216,5 @@ export const TOOL_IMPLEMENTATIONS: Record<
   search_ingredient_cost: searchIngredientCost,
   save_waste_suggestion: saveWasteSuggestion,
   save_social_content: saveSocialContent,
+  save_corrective_action: saveCorrectiveAction,
 };

@@ -1,16 +1,17 @@
 // Definizione degli agenti attivati. Sprint 5: Chef Assistant, Food Cost Analyst,
 // Booking Assistant. Sprint 6 (Zero Waste AI): Waste Reduction Advisor. Sprint 7
-// (Social Media Studio): Social Content Creator — vedi Step 8 del documento di
-// architettura per la spec completa dei 10 agenti. Gli altri 5 restano
-// documentati ma non implementati: attivarli significa aggiungere qui una
-// entry con lo stesso pattern.
+// (Social Media Studio): Social Content Creator. Sprint 8 (HACCP): HACCP
+// Advisor — vedi Step 8 del documento di architettura per la spec completa
+// dei 10 agenti. Gli altri 4 restano documentati ma non implementati:
+// attivarli significa aggiungere qui una entry con lo stesso pattern.
 
 export type AgentName =
   | "chef_assistant"
   | "food_cost_analyst"
   | "booking_assistant"
   | "waste_reduction_advisor"
-  | "social_content_creator";
+  | "social_content_creator"
+  | "haccp_advisor";
 
 export interface AgentDefinition {
   name: AgentName;
@@ -212,6 +213,42 @@ export const AGENTS: Record<AgentName, AgentDefinition> = {
               hashtags: { type: "array", items: { type: "string" } },
             },
             required: ["post_id", "caption", "hashtags"],
+          },
+        },
+      },
+    ],
+  },
+
+  haccp_advisor: {
+    name: "haccp_advisor",
+    allowedRoles: ["chef", "admin"],
+    systemPrompt:
+      "Sei l'HACCP Advisor di N'sK. L'utente ti segnala una rilevazione di temperatura fuori " +
+      "soglia su un punto di controllo (frigo, freezer, cella, banco caldo). Proponi un'azione " +
+      "correttiva concreta e immediatamente applicabile, in linea con le buone prassi HACCP: " +
+      "cosa fare subito con gli alimenti coinvolti (es. valutare se scartare, spostare in altro " +
+      "punto conforme, accelerare il consumo), e cosa controllare sull'apparecchio (es. guarnizioni, " +
+      "sovraccarico, sbrinamento). Non dare mai consigli medici o dichiarazioni legali di conformità " +
+      "normativa: sei un supporto operativo, la responsabilità della decisione finale resta dello " +
+      "chef. Assegna un livello di urgenza (bassa, media, alta) in base a quanto lo scostamento " +
+      "dalla soglia è ampio e al tipo di punto di controllo. Salva SEMPRE il risultato tramite lo " +
+      "strumento save_corrective_action (una sola chiamata): non rispondere mai solo a testo " +
+      "libero senza salvare.",
+    tools: [
+      {
+        type: "function",
+        function: {
+          name: "save_corrective_action",
+          description: "Salva un'azione correttiva per una rilevazione HACCP non conforme",
+          parameters: {
+            type: "object",
+            properties: {
+              reading_id: { type: "string", format: "uuid" },
+              title: { type: "string" },
+              content: { type: "string" },
+              urgency: { type: "string", enum: ["bassa", "media", "alta"] },
+            },
+            required: ["reading_id", "title", "content", "urgency"],
           },
         },
       },

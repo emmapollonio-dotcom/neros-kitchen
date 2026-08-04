@@ -274,6 +274,38 @@ create table if not exists public.waste_suggestions (
   created_at timestamptz not null default now()
 );
 
+-- ---------- HACCP ----------
+create table if not exists public.haccp_control_points (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null references public.profiles(id) on delete cascade,
+  name text not null,
+  type text not null, -- frigo | freezer | cella | banco_caldo | altro
+  temp_min numeric(5,2) not null,
+  temp_max numeric(5,2) not null,
+  active boolean not null default true,
+  created_at timestamptz not null default now()
+);
+
+create table if not exists public.haccp_readings (
+  id uuid primary key default gen_random_uuid(),
+  control_point_id uuid not null references public.haccp_control_points(id) on delete cascade,
+  user_id uuid not null references public.profiles(id) on delete cascade,
+  temperature numeric(5,2) not null,
+  is_non_conforming boolean not null default false,
+  note text,
+  recorded_at timestamptz not null default now()
+);
+
+create table if not exists public.haccp_corrective_actions (
+  id uuid primary key default gen_random_uuid(),
+  reading_id uuid not null references public.haccp_readings(id) on delete cascade,
+  title text not null,
+  content text,
+  urgency text, -- bassa | media | alta
+  ai_log_id uuid,
+  created_at timestamptz not null default now()
+);
+
 -- ---------- SOCIAL MEDIA STUDIO ----------
 create table if not exists public.social_posts (
   id uuid primary key default gen_random_uuid(),
@@ -543,6 +575,9 @@ alter table public.waste_suggestions enable row level security;
 alter table public.crm_activities enable row level security;
 alter table public.audit_logs enable row level security;
 alter table public.social_posts enable row level security;
+alter table public.haccp_control_points enable row level security;
+alter table public.haccp_readings enable row level security;
+alter table public.haccp_corrective_actions enable row level security;
 
 -- chef_availability: pubblica in lettura (serve per mostrare gli slot in booking UI), scrivibile solo dallo chef proprietario
 drop policy if exists "availability_public_read" on public.chef_availability;
@@ -619,6 +654,20 @@ drop policy if exists "waste_suggestions_owner" on public.waste_suggestions;
 create policy "waste_suggestions_owner" on public.waste_suggestions for all
   using (exists (select 1 from public.waste_items w where w.id = waste_item_id and w.user_id = auth.uid()));
 
+-- haccp_*: registri sicurezza alimentare, solo il proprietario (chef)
+drop policy if exists "haccp_control_points_owner" on public.haccp_control_points;
+create policy "haccp_control_points_owner" on public.haccp_control_points for all
+  using (auth.uid() = user_id);
+drop policy if exists "haccp_readings_owner" on public.haccp_readings;
+create policy "haccp_readings_owner" on public.haccp_readings for all
+  using (auth.uid() = user_id);
+drop policy if exists "haccp_corrective_actions_owner" on public.haccp_corrective_actions;
+create policy "haccp_corrective_actions_owner" on public.haccp_corrective_actions for all
+  using (exists (
+    select 1 from public.haccp_readings r
+    where r.id = reading_id and r.user_id = auth.uid()
+  ));
+
 -- social_posts: dati marketing personali, solo il proprietario (chef)
 drop policy if exists "social_posts_owner" on public.social_posts;
 create policy "social_posts_owner" on public.social_posts for all using (auth.uid() = user_id);
@@ -654,4 +703,11 @@ on conflict (code) do nothing;
 -- serve un merge esplicito e idempotente.
 update public.plans
 set features = features || '{"social_studio": true}'::jsonb
+where code = 'pro_growth';
+
+-- Idem per haccp: già nel valore INSERT originale, ma il merge esplicito
+-- lo rende sicuro anche se il seed iniziale sul progetto reale fosse
+-- avvenuto prima che questa chiave fosse aggiunta allo scaffold.
+update public.plans
+set features = features || '{"haccp": true}'::jsonb
 where code = 'pro_growth';

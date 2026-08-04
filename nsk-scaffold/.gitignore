@@ -28,4 +28,5 @@ mobile/.dart_tool/
 mobile/.packages
 mobile/build/
 
+# supabase CLI cache locale
 supabase/.temp/
