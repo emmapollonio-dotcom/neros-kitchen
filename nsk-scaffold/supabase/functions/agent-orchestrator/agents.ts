@@ -1,14 +1,16 @@
 // Definizione degli agenti attivati. Sprint 5: Chef Assistant, Food Cost Analyst,
-// Booking Assistant. Sprint 6 (Zero Waste AI): Waste Reduction Advisor — vedi
-// Step 8 del documento di architettura per la spec completa dei 10 agenti.
-// Gli altri 6 restano documentati ma non implementati: attivarli significa
-// aggiungere qui una entry con lo stesso pattern.
+// Booking Assistant. Sprint 6 (Zero Waste AI): Waste Reduction Advisor. Sprint 7
+// (Social Media Studio): Social Content Creator — vedi Step 8 del documento di
+// architettura per la spec completa dei 10 agenti. Gli altri 5 restano
+// documentati ma non implementati: attivarli significa aggiungere qui una
+// entry con lo stesso pattern.
 
 export type AgentName =
   | "chef_assistant"
   | "food_cost_analyst"
   | "booking_assistant"
-  | "waste_reduction_advisor";
+  | "waste_reduction_advisor"
+  | "social_content_creator";
 
 export interface AgentDefinition {
   name: AgentName;
@@ -176,6 +178,40 @@ export const AGENTS: Record<AgentName, AgentDefinition> = {
               sustainability_score: { type: "number" },
             },
             required: ["waste_item_id", "suggestion_type", "title", "content", "sustainability_score"],
+          },
+        },
+      },
+    ],
+  },
+
+  social_content_creator: {
+    name: "social_content_creator",
+    allowedRoles: ["chef", "admin"],
+    systemPrompt:
+      "Sei il Social Content Creator di N'sK. L'utente ti dà una piattaforma (instagram, " +
+      "facebook, tiktok o linkedin), un argomento/piatto e un tono desiderato. Scrivi una " +
+      "didascalia pronta per la pubblicazione, in italiano, coerente col tono richiesto, e una " +
+      "lista di hashtag pertinenti separati (senza il carattere #, lo aggiunge la UI). Rispetta " +
+      "SEMPRE questi limiti tecnici della piattaforma, non superarli mai: instagram e tiktok " +
+      "massimo 2200 caratteri di didascalia, linkedin massimo 3000, facebook non ha un limite " +
+      "pratico. Su instagram massimo 30 hashtag, sulle altre piattaforme usa 3-8 hashtag: più " +
+      "hashtag non è meglio, sono rumore se non pertinenti. Salva SEMPRE il risultato tramite lo " +
+      "strumento save_social_content (una sola chiamata): non rispondere mai solo a testo " +
+      "libero senza salvare, altrimenti l'utente non vede nulla nella sua dashboard.",
+    tools: [
+      {
+        type: "function",
+        function: {
+          name: "save_social_content",
+          description: "Salva la didascalia e gli hashtag generati per un post",
+          parameters: {
+            type: "object",
+            properties: {
+              post_id: { type: "string", format: "uuid" },
+              caption: { type: "string" },
+              hashtags: { type: "array", items: { type: "string" } },
+            },
+            required: ["post_id", "caption", "hashtags"],
           },
         },
       },

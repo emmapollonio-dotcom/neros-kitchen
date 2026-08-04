@@ -27,3 +27,5 @@ npm-debug.log*
 mobile/.dart_tool/
 mobile/.packages
 mobile/build/
+
+supabase/.temp/

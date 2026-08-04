@@ -158,6 +158,30 @@ export async function saveWasteSuggestion(
   return { suggestion: data };
 }
 
+// RLS "social_posts_owner" verifica che post_id appartenga all'utente
+// corrente prima di permettere l'update. Sovrascrive anche lo status a
+// "ready": un post con caption e hashtag salvati è pronto per la revisione
+// umana, non più un draft vuoto.
+export async function saveSocialContent(
+  ctx: ToolContext,
+  args: { post_id: string; caption: string; hashtags: string[] }
+) {
+  const { data, error } = await ctx.supabase
+    .from("social_posts")
+    .update({
+      caption: args.caption,
+      hashtags: args.hashtags,
+      status: "ready",
+      updated_at: new Date().toISOString(),
+    })
+    .eq("id", args.post_id)
+    .select()
+    .single();
+
+  if (error) return { error: error.message };
+  return { post: data };
+}
+
 export const TOOL_IMPLEMENTATIONS: Record<
   string,
   (ctx: ToolContext, args: any) => Promise<unknown>
@@ -169,4 +193,5 @@ export const TOOL_IMPLEMENTATIONS: Record<
   get_chef_pricing: getChefPricing,
   search_ingredient_cost: searchIngredientCost,
   save_waste_suggestion: saveWasteSuggestion,
+  save_social_content: saveSocialContent,
 };

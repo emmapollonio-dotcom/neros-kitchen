@@ -4,7 +4,8 @@ export type AgentName =
   | "chef_assistant"
   | "food_cost_analyst"
   | "booking_assistant"
-  | "waste_reduction_advisor";
+  | "waste_reduction_advisor"
+  | "social_content_creator";
 
 export interface AgentResponse {
   data: { response: string } | null;

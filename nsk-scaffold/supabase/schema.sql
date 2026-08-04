@@ -274,6 +274,22 @@ create table if not exists public.waste_suggestions (
   created_at timestamptz not null default now()
 );
 
+-- ---------- SOCIAL MEDIA STUDIO ----------
+create table if not exists public.social_posts (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null references public.profiles(id) on delete cascade,
+  platform text not null,
+  topic text not null,
+  tone text,
+  caption text,
+  hashtags text[] default '{}',
+  status text not null default 'draft', -- draft | ready | scheduled | published
+  scheduled_at timestamptz,
+  ai_log_id uuid,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
 -- ---------- CRM ----------
 create table if not exists public.leads (
   id uuid primary key default gen_random_uuid(),
@@ -511,6 +527,7 @@ alter table public.waste_items enable row level security;
 alter table public.waste_suggestions enable row level security;
 alter table public.crm_activities enable row level security;
 alter table public.audit_logs enable row level security;
+alter table public.social_posts enable row level security;
 
 -- chef_availability: pubblica in lettura (serve per mostrare gli slot in booking UI), scrivibile solo dallo chef proprietario
 drop policy if exists "availability_public_read" on public.chef_availability;
@@ -587,6 +604,10 @@ drop policy if exists "waste_suggestions_owner" on public.waste_suggestions;
 create policy "waste_suggestions_owner" on public.waste_suggestions for all
   using (exists (select 1 from public.waste_items w where w.id = waste_item_id and w.user_id = auth.uid()));
 
+-- social_posts: dati marketing personali, solo il proprietario (chef)
+drop policy if exists "social_posts_owner" on public.social_posts;
+create policy "social_posts_owner" on public.social_posts for all using (auth.uid() = user_id);
+
 -- crm_activities: solo lo chef titolare del lead collegato
 drop policy if exists "crm_activities_chef_owner" on public.crm_activities;
 create policy "crm_activities_chef_owner" on public.crm_activities for all
@@ -609,5 +630,13 @@ values
   ('home_free', 'N''sK Home Free', 0, 0, '{"recipes": true, "meal_planner": false}'::jsonb),
   ('home_premium', 'N''sK Home Premium', 6.99, 69.90, '{"recipes": true, "meal_planner": true, "zero_waste": true, "tutor_ai": true}'::jsonb),
   ('pro_starter', 'N''sK Pro Starter', 29, 290, '{"food_cost": true, "crm": "basic", "analytics": "basic"}'::jsonb),
-  ('pro_growth', 'N''sK Pro Growth', 79, 790, '{"food_cost": true, "haccp": true, "crm": "full", "analytics": "full", "academy_pro": true}'::jsonb)
+  ('pro_growth', 'N''sK Pro Growth', 79, 790, '{"food_cost": true, "haccp": true, "crm": "full", "analytics": "full", "academy_pro": true, "social_studio": true}'::jsonb)
 on conflict (code) do nothing;
+
+-- Il piano pro_growth potrebbe già esistere da un seed precedente (senza
+-- social_studio nelle features, aggiunto con lo Social Media Studio module):
+-- l'insert sopra con "on conflict do nothing" in quel caso non lo aggiorna,
+-- serve un merge esplicito e idempotente.
+update public.plans
+set features = features || '{"social_studio": true}'::jsonb
+where code = 'pro_growth';
