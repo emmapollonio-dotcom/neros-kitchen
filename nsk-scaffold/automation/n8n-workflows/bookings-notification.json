@@ -1,0 +1,87 @@
+{
+  "name": "N'sK - Bookings Notification",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "nsk/bookings-webhook",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Supabase DB Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [200, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "" },
+          "conditions": [
+            {
+              "leftValue": "={{$json[\"record\"][\"status\"]}}",
+              "rightValue": "requested",
+              "operator": { "type": "string", "operation": "equals" }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "if-requested",
+      "name": "IF status = requested",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "noreply@nskitchen.io",
+        "toEmail": "={{$json[\"record\"][\"chef_email\"]}}",
+        "subject": "Nuova richiesta di prenotazione — N'sK",
+        "emailType": "html",
+        "message": "<p>Hai ricevuto una nuova richiesta di prenotazione per il {{$json[\"record\"][\"event_date\"]}}.</p><p>Accedi alla dashboard per rispondere.</p>"
+      },
+      "id": "send-email-chef",
+      "name": "Notify Chef (Email)",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [700, 220]
+    },
+    {
+      "parameters": {
+        "amount": 1,
+        "unit": "days"
+      },
+      "id": "wait-reminder",
+      "name": "Wait until 24h before event",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [700, 400]
+    },
+    {
+      "parameters": {
+        "fromEmail": "noreply@nskitchen.io",
+        "toEmail": "={{$json[\"record\"][\"customer_email\"]}}",
+        "subject": "Promemoria evento — N'sK",
+        "emailType": "html",
+        "message": "<p>Il tuo evento con lo chef è tra 24 ore. Buon appetito!</p>"
+      },
+      "id": "send-reminder",
+      "name": "Send Reminder",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [950, 400]
+    }
+  ],
+  "connections": {
+    "Supabase DB Webhook": { "main": [[{ "node": "IF status = requested", "type": "main", "index": 0 }]] },
+    "IF status = requested": {
+      "main": [
+        [{ "node": "Notify Chef (Email)", "type": "main", "index": 0 }],
+        [{ "node": "Wait until 24h before event", "type": "main", "index": 0 }]
+      ]
+    },
+    "Wait until 24h before event": { "main": [[{ "node": "Send Reminder", "type": "main", "index": 0 }]] }
+  }
+}

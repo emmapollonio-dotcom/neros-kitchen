@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --nsk-charcoal: #121212;
+  --nsk-ivory: #f5f1ea;
+  --nsk-gold: #c8a96b;
+  --nsk-smoke: #555555;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--nsk-ivory);
+  color: var(--nsk-charcoal);
+}
+
+/* Focus visibile per accessibilità (WCAG) — non rimuovere l'outline senza sostituirlo */
+:focus-visible {
+  outline: 2px solid var(--nsk-gold);
+  outline-offset: 2px;
+}
+
+::selection {
+  background-color: var(--nsk-gold);
+  color: var(--nsk-charcoal);
+}

@@ -1,0 +1,98 @@
+{
+  "name": "N'sK - CRM Lead Follow-up",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "nsk/leads-webhook",
+        "responseMode": "onReceived"
+      },
+      "id": "webhook-lead",
+      "name": "New Lead Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [200, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "hello@nskitchen.io",
+        "toEmail": "={{$json[\"record\"][\"email\"]}}",
+        "subject": "Grazie per il tuo interesse — N'sK",
+        "emailType": "html",
+        "message": "<p>Ciao {{$json[\"record\"][\"full_name\"]}}, grazie per averci contattato. Ti risponderemo a breve.</p>"
+      },
+      "id": "email-1",
+      "name": "Follow-up Email 1 (immediate)",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [450, 220]
+    },
+    {
+      "parameters": { "amount": 3, "unit": "days" },
+      "id": "wait-3d",
+      "name": "Wait 3 days",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [450, 400]
+    },
+    {
+      "parameters": {
+        "fromEmail": "hello@nskitchen.io",
+        "toEmail": "={{$json[\"record\"][\"email\"]}}",
+        "subject": "Hai ancora bisogno di uno chef?",
+        "emailType": "html",
+        "message": "<p>Siamo ancora qui se vuoi organizzare il tuo evento con N'sK.</p>"
+      },
+      "id": "email-2",
+      "name": "Follow-up Email 2",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [700, 400]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "conditions": [
+            {
+              "leftValue": "={{$json[\"record\"][\"score\"]}}",
+              "rightValue": 70,
+              "operator": { "type": "number", "operation": "gte" }
+            }
+          ]
+        }
+      },
+      "id": "if-hot-lead",
+      "name": "IF score >= 70",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [950, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "system@nskitchen.io",
+        "toEmail": "={{$json[\"record\"][\"chef_email\"]}}",
+        "subject": "Lead caldo da contattare",
+        "emailType": "html",
+        "message": "<p>Un potenziale cliente ad alto punteggio ha richiesto informazioni. Contattalo entro 24h.</p>"
+      },
+      "id": "notify-chef-hot-lead",
+      "name": "Notify Chef (hot lead)",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [1200, 300]
+    }
+  ],
+  "connections": {
+    "New Lead Webhook": {
+      "main": [
+        [
+          { "node": "Follow-up Email 1 (immediate)", "type": "main", "index": 0 },
+          { "node": "Wait 3 days", "type": "main", "index": 0 },
+          { "node": "IF score >= 70", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Wait 3 days": { "main": [[{ "node": "Follow-up Email 2", "type": "main", "index": 0 }]] },
+    "IF score >= 70": { "main": [[{ "node": "Notify Chef (hot lead)", "type": "main", "index": 0 }]] }
+  }
+}

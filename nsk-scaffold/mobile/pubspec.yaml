@@ -1,0 +1,33 @@
+name: nsk_mobile
+description: Nero's Kitchen — mobile app (iOS/Android/Tablet)
+publish_to: "none"
+version: 0.1.0
+
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  supabase_flutter: ^2.6.0
+  go_router: ^14.2.0
+  flutter_riverpod: ^2.5.0
+  riverpod_annotation: ^2.3.0
+  drift: ^2.19.0
+  sqlite3_flutter_libs: ^0.5.0
+  connectivity_plus: ^6.0.0
+  google_fonts: ^6.2.0
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.19.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  riverpod_generator: ^2.4.0
+  build_runner: ^2.4.0
+  drift_dev: ^2.19.0
+
+flutter:
+  uses-material-design: true
+  generate: true

@@ -1,0 +1,129 @@
+// Definizione dei 3 agenti attivati in Sprint 5 (Chef Assistant, Food Cost Analyst,
+// Booking Assistant — vedi Step 8 del documento di architettura per la spec completa
+// dei 10 agenti). Gli altri 7 restano documentati ma non implementati: attivarli
+// significa aggiungere qui una entry con lo stesso pattern.
+
+export type AgentName = "chef_assistant" | "food_cost_analyst" | "booking_assistant";
+
+export interface AgentDefinition {
+  name: AgentName;
+  systemPrompt: string;
+  allowedRoles: Array<"customer" | "chef" | "admin">;
+  tools: OpenAITool[];
+}
+
+export interface OpenAITool {
+  type: "function";
+  function: {
+    name: string;
+    description: string;
+    parameters: Record<string, unknown>;
+  };
+}
+
+export const AGENTS: Record<AgentName, AgentDefinition> = {
+  chef_assistant: {
+    name: "chef_assistant",
+    allowedRoles: ["chef", "admin"],
+    systemPrompt:
+      "Sei il Chef Assistant di N'sK. Aiuti chef professionisti a creare, scalare e adattare " +
+      "ricette rispettando allergeni, budget e stile richiesto. Rispondi sempre in modo " +
+      "strutturato (ingredienti con quantità, procedimento a step). Non inventare valori " +
+      "nutrizionali certi: segnala esplicitamente quando è una stima. Usa lo strumento " +
+      "search_ingredients per verificare cosa esiste già a catalogo prima di inventare nomi " +
+      "di ingredienti. Non pubblicare mai la ricetta direttamente: crea sempre un draft " +
+      "tramite create_recipe_draft, sarà l'utente a decidere se renderla pubblica.",
+    tools: [
+      {
+        type: "function",
+        function: {
+          name: "search_ingredients",
+          description: "Cerca ingredienti esistenti a catalogo per nome",
+          parameters: {
+            type: "object",
+            properties: { query: { type: "string" } },
+            required: ["query"],
+          },
+        },
+      },
+      {
+        type: "function",
+        function: {
+          name: "create_recipe_draft",
+          description: "Crea una ricetta in stato privato (draft) per l'utente corrente",
+          parameters: {
+            type: "object",
+            properties: {
+              title: { type: "string" },
+              servings: { type: "number" },
+              description: { type: "string" },
+            },
+            required: ["title", "servings"],
+          },
+        },
+      },
+    ],
+  },
+
+  food_cost_analyst: {
+    name: "food_cost_analyst",
+    allowedRoles: ["chef", "admin"],
+    systemPrompt:
+      "Sei il Food Cost Analyst di N'sK. Analizzi costi ricetta e menu, suggerisci prezzi e " +
+      "margini realistici per il mercato indicato dall'utente. Il calcolo numerico va SEMPRE " +
+      "fatto tramite lo strumento calculate_food_cost (mai calcolare a mente/inventare cifre: " +
+      "il tool usa i prezzi reali degli ingredienti in database). Interpreta il risultato e dai " +
+      "raccomandazioni concrete, citando i numeri esatti restituiti dal tool.",
+    tools: [
+      {
+        type: "function",
+        function: {
+          name: "calculate_food_cost",
+          description: "Calcola food cost reale di una ricetta esistente per id",
+          parameters: {
+            type: "object",
+            properties: { recipe_id: { type: "string", format: "uuid" } },
+            required: ["recipe_id"],
+          },
+        },
+      },
+    ],
+  },
+
+  booking_assistant: {
+    name: "booking_assistant",
+    allowedRoles: ["customer", "chef", "admin"],
+    systemPrompt:
+      "Sei il Booking Assistant di N'sK. Aiuti i clienti a capire servizi e disponibilità " +
+      "dello chef indicato e generi bozze di preventivo basate su tariffe reali (mai inventate: " +
+      "usa sempre get_chef_pricing e get_chef_availability). Non confermare mai una " +
+      "prenotazione tu stesso: puoi solo proporre una bozza che lo chef dovrà approvare " +
+      "manualmente nella dashboard.",
+    tools: [
+      {
+        type: "function",
+        function: {
+          name: "get_chef_availability",
+          description: "Ottiene gli slot di disponibilità futuri e liberi di uno chef",
+          parameters: {
+            type: "object",
+            properties: { chef_id: { type: "string", format: "uuid" } },
+            required: ["chef_id"],
+          },
+        },
+      },
+      {
+        type: "function",
+        function: {
+          name: "get_chef_pricing",
+          description: "Ottiene tariffa oraria e minimo evento di uno chef",
+          parameters: {
+            type: "object",
+            properties: { chef_id: { type: "string", format: "uuid" } },
+            required: ["chef_id"],
+          },
+        },
+      },
+    ],
+  },
+};
