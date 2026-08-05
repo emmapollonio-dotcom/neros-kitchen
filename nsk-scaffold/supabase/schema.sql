@@ -792,3 +792,34 @@ values
   ('Zucchero', 'Condimenti', 'kg', 1.50, '{}', false),
   ('Vino bianco da cucina', 'Condimenti', 'L', 4.50, '{solfiti}', false)
 on conflict (lower(name)) do nothing;
+
+-- ---------- 4 agenti AI aggiuntivi (crm_lead_qualifier, academy_tutor,
+-- review_responder, allergen_advisor) — colonne e policy mancanti sulle
+-- tabelle esistenti (nessuna nuova tabella: riusano CRM/Academy/Reviews/
+-- Recipes già presenti nello schema).
+
+-- crm_lead_qualifier: nessuna colonna nuova, scrive su leads.score
+-- (già scrivibile via "leads_chef_owner") e su crm_activities con
+-- type = 'ai_suggestion' (colonna text, nessun check constraint da aggiornare).
+
+-- academy_tutor: serve conoscere le risposte dell'allievo per spiegare gli
+-- errori (prima non venivano persistite, solo punteggio/esito), e una
+-- colonna dove salvare il feedback generato.
+alter table public.quiz_attempts add column if not exists answers jsonb;
+alter table public.quiz_attempts add column if not exists ai_feedback text;
+
+-- review_responder: reviews non aveva né una colonna risposta né una policy
+-- di update (solo insert del recensore) — lo chef non poteva scrivere nulla.
+alter table public.reviews add column if not exists chef_response text;
+alter table public.reviews add column if not exists chef_response_at timestamptz;
+
+drop policy if exists "reviews_chef_respond" on public.reviews;
+create policy "reviews_chef_respond" on public.reviews for update
+  using (auth.uid() = chef_id)
+  with check (auth.uid() = chef_id);
+
+-- allergen_advisor: recipes.allergens esiste già (usato dal form ricetta),
+-- serve solo un campo testuale per le note (avvertenze contaminazione
+-- incrociata, suggerimenti di variante) che l'agente genera insieme
+-- all'elenco allergeni.
+alter table public.recipes add column if not exists allergen_notes text;

@@ -93,6 +93,10 @@ export function LeadBoard() {
     });
   }
 
+  function updateLeadScore(leadId: string, score: number) {
+    setLeads((prev) => prev.map((l) => (l.id === leadId ? { ...l, score } : l)));
+  }
+
   const hotCount = leads.filter((l) => l.score >= HOT_LEAD_SCORE_THRESHOLD).length;
   const selectedLead = leads.find((l) => l.id === selectedId) ?? null;
 
@@ -187,6 +191,7 @@ export function LeadBoard() {
         <LeadDetailPanel
           lead={selectedLead}
           onStageChange={(stage) => changeStage(selectedLead.id, stage)}
+          onQualified={(score) => updateLeadScore(selectedLead.id, score)}
           onClose={() => setSelectedId(null)}
         />
       )}
@@ -197,10 +202,12 @@ export function LeadBoard() {
 function LeadDetailPanel({
   lead,
   onStageChange,
+  onQualified,
   onClose,
 }: {
   lead: Lead;
   onStageChange: (stage: LeadStage) => void;
+  onQualified: (score: number) => void;
   onClose: () => void;
 }) {
   const [activities, setActivities] = useState<Activity[]>([]);
@@ -208,6 +215,8 @@ function LeadDetailPanel({
   const [type, setType] = useState<"note" | "call" | "email" | "meeting">("note");
   const [content, setContent] = useState("");
   const [saving, setSaving] = useState(false);
+  const [qualifying, setQualifying] = useState(false);
+  const [qualifyError, setQualifyError] = useState<string | null>(null);
 
   async function loadActivities() {
     setLoadingActivities(true);
@@ -240,6 +249,22 @@ function LeadDetailPanel({
     await loadActivities();
   }
 
+  async function handleQualify() {
+    setQualifying(true);
+    setQualifyError(null);
+
+    const res = await fetch(`/api/v1/crm/leads/${lead.id}/qualify`, { method: "POST" });
+    const body = await res.json().catch(() => null);
+
+    if (!res.ok) {
+      setQualifyError(body?.error ?? "Errore nella qualificazione del lead.");
+    } else {
+      if (typeof body?.data?.lead?.score === "number") onQualified(body.data.lead.score);
+      await loadActivities();
+    }
+    setQualifying(false);
+  }
+
   return (
     <div className="rounded-nsk border border-smoke/15 bg-white p-6">
       <div className="flex items-center justify-between">
@@ -249,10 +274,22 @@ function LeadDetailPanel({
             {lead.email ?? "—"} {lead.phone ? `· ${lead.phone}` : ""} {lead.source ? `· fonte: ${lead.source}` : ""}
           </p>
         </div>
-        <button type="button" onClick={onClose} className="font-body text-sm text-smoke underline">
-          Chiudi
-        </button>
+        <div className="flex items-center gap-3">
+          <button
+            type="button"
+            onClick={handleQualify}
+            disabled={qualifying}
+            className="rounded-nsk bg-charcoal px-4 py-2 font-body text-xs text-ivory hover:bg-gold hover:text-charcoal disabled:opacity-50"
+          >
+            {qualifying ? "Qualifico..." : "Qualifica con AI"}
+          </button>
+          <button type="button" onClick={onClose} className="font-body text-sm text-smoke underline">
+            Chiudi
+          </button>
+        </div>
       </div>
+
+      {qualifyError && <p className="mt-2 font-body text-sm text-red-600">{qualifyError}</p>}
 
       <div className="mt-4">
         <label className="font-body text-xs text-smoke">Stage</label>

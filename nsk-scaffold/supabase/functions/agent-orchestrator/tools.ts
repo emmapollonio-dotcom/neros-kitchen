@@ -204,6 +204,93 @@ export async function saveCorrectiveAction(
   return { action: data };
 }
 
+// RLS "leads_chef_owner" verifica che lead_id appartenga allo chef corrente
+// prima di permettere l'update. Lo score viene aggiornato direttamente sul
+// lead, mentre prossimo passo e bozza di follow-up vengono registrati come
+// una crm_activity di tipo "ai_suggestion" (colonna text, nessun check
+// constraint da rispettare) cosicché restino visibili nella timeline.
+export async function qualifyLead(
+  ctx: ToolContext,
+  args: { lead_id: string; score: number; next_step: string; follow_up_message: string }
+) {
+  const score = Math.max(0, Math.min(100, Math.round(args.score)));
+
+  const { error: updateError } = await ctx.supabase
+    .from("leads")
+    .update({ score })
+    .eq("id", args.lead_id);
+
+  if (updateError) return { error: updateError.message };
+
+  const content = `Prossimo passo: ${args.next_step}\n\nBozza di follow-up:\n${args.follow_up_message}`;
+
+  const { data, error } = await ctx.supabase
+    .from("crm_activities")
+    .insert({
+      lead_id: args.lead_id,
+      type: "ai_suggestion",
+      content,
+      created_by: ctx.userId,
+    })
+    .select()
+    .single();
+
+  if (error) return { error: error.message };
+  return { activity: data, score };
+}
+
+// RLS "quiz_attempts_owner" verifica che l'attempt appartenga all'utente
+// corrente prima di permettere l'update.
+export async function saveQuizFeedback(
+  ctx: ToolContext,
+  args: { attempt_id: string; feedback: string }
+) {
+  const { data, error } = await ctx.supabase
+    .from("quiz_attempts")
+    .update({ ai_feedback: args.feedback })
+    .eq("id", args.attempt_id)
+    .select()
+    .single();
+
+  if (error) return { error: error.message };
+  return { attempt: data };
+}
+
+// RLS "reviews_chef_respond" (nuova, aggiunta insieme a questo agente)
+// verifica che chef_id = auth.uid() prima di permettere l'update: solo lo
+// chef recensito può rispondere alla propria recensione.
+export async function saveReviewResponse(
+  ctx: ToolContext,
+  args: { review_id: string; response: string }
+) {
+  const { data, error } = await ctx.supabase
+    .from("reviews")
+    .update({ chef_response: args.response, chef_response_at: new Date().toISOString() })
+    .eq("id", args.review_id)
+    .select()
+    .single();
+
+  if (error) return { error: error.message };
+  return { review: data };
+}
+
+// RLS "recipes_owner_all" verifica che recipe_id appartenga all'utente
+// corrente prima di permettere l'update.
+export async function saveAllergenAnalysis(
+  ctx: ToolContext,
+  args: { recipe_id: string; allergens: string[]; notes: string }
+) {
+  const { data, error } = await ctx.supabase
+    .from("recipes")
+    .update({ allergens: args.allergens, allergen_notes: args.notes })
+    .eq("id", args.recipe_id)
+    .select()
+    .single();
+
+  if (error) return { error: error.message };
+  return { recipe: data };
+}
+
 export const TOOL_IMPLEMENTATIONS: Record<
   string,
   (ctx: ToolContext, args: any) => Promise<unknown>
@@ -217,4 +304,8 @@ export const TOOL_IMPLEMENTATIONS: Record<
   save_waste_suggestion: saveWasteSuggestion,
   save_social_content: saveSocialContent,
   save_corrective_action: saveCorrectiveAction,
+  qualify_lead: qualifyLead,
+  save_quiz_feedback: saveQuizFeedback,
+  save_review_response: saveReviewResponse,
+  save_allergen_analysis: saveAllergenAnalysis,
 };

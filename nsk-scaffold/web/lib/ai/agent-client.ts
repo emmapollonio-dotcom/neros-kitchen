@@ -6,7 +6,11 @@ export type AgentName =
   | "booking_assistant"
   | "waste_reduction_advisor"
   | "social_content_creator"
-  | "haccp_advisor";
+  | "haccp_advisor"
+  | "crm_lead_qualifier"
+  | "academy_tutor"
+  | "review_responder"
+  | "allergen_advisor";
 
 export interface AgentResponse {
   data: { response: string } | null;

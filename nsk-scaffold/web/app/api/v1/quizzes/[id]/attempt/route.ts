@@ -74,6 +74,10 @@ export async function POST(req: NextRequest, { params }: Params) {
       user_id: user.id,
       score: gradeResult.score,
       passed: gradeResult.passed,
+      // Persistite per permettere all'agente academy_tutor di spiegare
+      // esattamente quali risposte erano sbagliate e perché (prima non
+      // venivano salvate, solo punteggio/esito aggregato).
+      answers: parsed.data.answers,
     })
     .select()
     .single();

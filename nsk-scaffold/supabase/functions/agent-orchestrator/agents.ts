@@ -1,9 +1,11 @@
 // Definizione degli agenti attivati. Sprint 5: Chef Assistant, Food Cost Analyst,
 // Booking Assistant. Sprint 6 (Zero Waste AI): Waste Reduction Advisor. Sprint 7
 // (Social Media Studio): Social Content Creator. Sprint 8 (HACCP): HACCP
-// Advisor — vedi Step 8 del documento di architettura per la spec completa
-// dei 10 agenti. Gli altri 4 restano documentati ma non implementati:
-// attivarli significa aggiungere qui una entry con lo stesso pattern.
+// Advisor. Sprint 9: CRM Lead Qualifier, Academy Tutor, Review Responder,
+// Allergen Advisor — completano i 10 agenti dell'architettura originale
+// (il documento di architettura citato nei commenti storici non è mai stato
+// trovato nel repo: questi 4 sono stati definiti da zero coprendo le aree
+// CRM/Academy/Reviews/Recipes che avevano dati ma nessuna AI collegata).
 
 export type AgentName =
   | "chef_assistant"
@@ -11,7 +13,11 @@ export type AgentName =
   | "booking_assistant"
   | "waste_reduction_advisor"
   | "social_content_creator"
-  | "haccp_advisor";
+  | "haccp_advisor"
+  | "crm_lead_qualifier"
+  | "academy_tutor"
+  | "review_responder"
+  | "allergen_advisor";
 
 export interface AgentDefinition {
   name: AgentName;
@@ -249,6 +255,138 @@ export const AGENTS: Record<AgentName, AgentDefinition> = {
               urgency: { type: "string", enum: ["bassa", "media", "alta"] },
             },
             required: ["reading_id", "title", "content", "urgency"],
+          },
+        },
+      },
+    ],
+  },
+
+  crm_lead_qualifier: {
+    name: "crm_lead_qualifier",
+    allowedRoles: ["chef", "admin"],
+    systemPrompt:
+      "Sei il CRM Lead Qualifier di N'sK. Ricevi i dati di un lead (nome, fonte, stage attuale, " +
+      "punteggio corrente, cronologia attività recenti) e proponi: un punteggio aggiornato di " +
+      "probabilità di conversione da 0 a 100 (non spostare il punteggio in modo drastico senza " +
+      "una ragione evidente nei dati), un prossimo passo concreto e specifico da fare, e una " +
+      "bozza di messaggio di follow-up pronta da inviare al lead (tono professionale, breve, " +
+      "personalizzata sui dati che hai). Non inventare informazioni sul lead che non ti sono " +
+      "state fornite. Salva SEMPRE la tua valutazione tramite lo strumento qualify_lead (una " +
+      "sola chiamata): non rispondere mai solo a testo libero senza salvare.",
+    tools: [
+      {
+        type: "function",
+        function: {
+          name: "qualify_lead",
+          description: "Salva punteggio aggiornato, prossimo passo e bozza di follow-up per un lead",
+          parameters: {
+            type: "object",
+            properties: {
+              lead_id: { type: "string", format: "uuid" },
+              score: { type: "number" },
+              next_step: { type: "string" },
+              follow_up_message: { type: "string" },
+            },
+            required: ["lead_id", "score", "next_step", "follow_up_message"],
+          },
+        },
+      },
+    ],
+  },
+
+  academy_tutor: {
+    name: "academy_tutor",
+    allowedRoles: ["customer", "chef", "admin"],
+    systemPrompt:
+      "Sei l'Academy Tutor di N'sK. Un allievo ha completato un quiz e non ha superato la " +
+      "soglia richiesta. Ricevi le domande, le opzioni, la risposta corretta e la risposta data " +
+      "dall'allievo per ciascuna domanda sbagliata. Scrivi un feedback personalizzato in italiano: " +
+      "spiega perché la risposta data era sbagliata e perché quella corretta lo è, con un tono " +
+      "incoraggiante e mai giudicante, e chiudi con 2-3 consigli concreti su cosa ripassare prima " +
+      "di riprovare il quiz. Se l'allievo ha sbagliato tutto, concentrati sui concetti di base; se " +
+      "ha sbagliato solo una domanda, sii specifico su quella. Salva SEMPRE il feedback tramite lo " +
+      "strumento save_quiz_feedback (una sola chiamata): non rispondere mai solo a testo libero " +
+      "senza salvare.",
+    tools: [
+      {
+        type: "function",
+        function: {
+          name: "save_quiz_feedback",
+          description: "Salva il feedback personalizzato per un tentativo di quiz",
+          parameters: {
+            type: "object",
+            properties: {
+              attempt_id: { type: "string", format: "uuid" },
+              feedback: { type: "string" },
+            },
+            required: ["attempt_id", "feedback"],
+          },
+        },
+      },
+    ],
+  },
+
+  review_responder: {
+    name: "review_responder",
+    allowedRoles: ["chef", "admin"],
+    systemPrompt:
+      "Sei il Review Responder di N'sK. Scrivi, per conto dello chef, una risposta pubblica a " +
+      "una recensione di un cliente (con voto da 1 a 5 e un commento facoltativo). Se il voto è " +
+      "basso o il commento segnala un problema, riconoscilo con empatia senza essere difensivo, " +
+      "scusati se appropriato, e offri un modo concreto per rimediare o invita a ricontattare " +
+      "privatamente. Se il voto è alto, ringrazia in modo specifico citando qualcosa dal commento " +
+      "se presente, senza risposte generiche. Tono professionale e caloroso, in italiano, massimo " +
+      "600 caratteri, mai passivo-aggressivo. Salva SEMPRE la risposta tramite lo strumento " +
+      "save_review_response (una sola chiamata): non rispondere mai solo a testo libero senza " +
+      "salvare.",
+    tools: [
+      {
+        type: "function",
+        function: {
+          name: "save_review_response",
+          description: "Salva la risposta pubblica dello chef a una recensione",
+          parameters: {
+            type: "object",
+            properties: {
+              review_id: { type: "string", format: "uuid" },
+              response: { type: "string" },
+            },
+            required: ["review_id", "response"],
+          },
+        },
+      },
+    ],
+  },
+
+  allergen_advisor: {
+    name: "allergen_advisor",
+    allowedRoles: ["customer", "chef", "admin"],
+    systemPrompt:
+      "Sei l'Allergen Advisor di N'sK. Ricevi l'elenco degli ingredienti di una ricetta, ciascuno " +
+      "con gli allergeni noti a catalogo (possono essere incompleti o assenti). Restituisci: " +
+      "l'elenco consolidato degli allergeni presenti nella ricetta usando SOLO le 14 categorie " +
+      "UE (glutine, crostacei, uova, pesce, arachidi, soia, lattosio, frutta a guscio, sedano, " +
+      "senape, sesamo, solfiti, lupini, molluschi), ed eventuali note utili: avvertenze di " +
+      "contaminazione incrociata plausibili in una cucina professionale, e un suggerimento breve " +
+      "di variante per l'intolleranza più rilevante rilevata. Non inventare allergeni non " +
+      "plausibili per gli ingredienti indicati. Segnala sempre che l'analisi è un supporto e non " +
+      "sostituisce una verifica manuale del cuoco, specialmente per contaminazioni incrociate. " +
+      "Salva SEMPRE il risultato tramite lo strumento save_allergen_analysis (una sola chiamata): " +
+      "non rispondere mai solo a testo libero senza salvare.",
+    tools: [
+      {
+        type: "function",
+        function: {
+          name: "save_allergen_analysis",
+          description: "Salva l'elenco allergeni consolidato e le note per una ricetta",
+          parameters: {
+            type: "object",
+            properties: {
+              recipe_id: { type: "string", format: "uuid" },
+              allergens: { type: "array", items: { type: "string" } },
+              notes: { type: "string" },
+            },
+            required: ["recipe_id", "allergens", "notes"],
           },
         },
       },

@@ -16,6 +16,7 @@ interface Props {
 }
 
 interface AttemptResult {
+  id: string;
   score: number;
   passed: boolean;
   correct_count: number;
@@ -29,6 +30,8 @@ export function QuizForm({ quizId, title, passingScore, questions }: Props) {
   const [result, setResult] = useState<AttemptResult | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [feedback, setFeedback] = useState<string | null>(null);
+  const [explaining, setExplaining] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -50,6 +53,25 @@ export function QuizForm({ quizId, title, passingScore, questions }: Props) {
 
     const body = await res.json();
     setResult(body.data);
+    setFeedback(null);
+  }
+
+  async function handleExplain() {
+    if (!result) return;
+    setExplaining(true);
+    setError(null);
+
+    const res = await fetch(`/api/v1/quizzes/${quizId}/attempts/${result.id}/explain`, {
+      method: "POST",
+    });
+    const body = await res.json().catch(() => null);
+
+    if (!res.ok) {
+      setError(body?.error ?? "Impossibile generare la spiegazione. Riprova.");
+    } else {
+      setFeedback(body.data.ai_feedback ?? null);
+    }
+    setExplaining(false);
   }
 
   return (
@@ -100,6 +122,26 @@ export function QuizForm({ quizId, title, passingScore, questions }: Props) {
         >
           {result.passed ? "Quiz superato! " : "Quiz non superato. "}
           Punteggio: {result.score}% ({result.correct_count}/{result.total_questions} corrette)
+        </div>
+      )}
+
+      {result && !result.passed && (
+        <div className="mt-4">
+          {!feedback && (
+            <button
+              type="button"
+              onClick={handleExplain}
+              disabled={explaining}
+              className="rounded-nsk bg-charcoal px-5 py-2 font-body text-sm text-ivory hover:bg-gold hover:text-charcoal disabled:opacity-50"
+            >
+              {explaining ? "Preparo la spiegazione..." : "Spiegami con AI"}
+            </button>
+          )}
+          {feedback && (
+            <div className="rounded-nsk border border-smoke/15 bg-ivory p-4 font-body text-sm text-charcoal">
+              {feedback}
+            </div>
+          )}
         </div>
       )}
     </div>
