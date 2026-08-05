@@ -42,12 +42,12 @@ export function AppNavClient({ email, isPro }: Props) {
   const isActiveGroup = (items: NavItem[]) => items.some((i) => pathname.startsWith(i.href));
 
   return (
-    <div ref={navRef} className="sticky top-0 z-40 border-b border-line bg-cream/90 backdrop-blur">
+    <div ref={navRef} className="sticky top-0 z-40 border-b border-haze bg-charcoal/95 backdrop-blur">
       <nav className="mx-auto flex h-16 max-w-content items-center justify-between px-6">
         <div className="flex items-center gap-8">
           <Link
             href={isLoggedIn ? "/dashboard" : "/"}
-            className="font-display text-lg tracking-wide text-charcoal"
+            className="font-display text-lg tracking-wide text-ivory"
           >
             Nero&apos;s Kitchen
           </Link>
@@ -90,24 +90,24 @@ export function AppNavClient({ email, isPro }: Props) {
             <div className="relative hidden md:block">
               <button
                 onClick={() => setOpenMenu(openMenu === "user" ? null : "user")}
-                className="flex h-9 w-9 items-center justify-center rounded-pill bg-charcoal font-body text-sm text-ivory transition hover:bg-gold hover:text-charcoal"
+                className="flex h-9 w-9 items-center justify-center rounded-pill bg-gold font-body text-sm font-medium text-charcoal transition hover:bg-ivory"
                 aria-label="Menu utente"
               >
                 {(email[0] ?? "?").toUpperCase()}
               </button>
               {openMenu === "user" && (
-                <div className="absolute right-0 mt-3 w-56 rounded-card border border-line bg-white p-2 shadow-elevated">
-                  <p className="truncate px-3 py-2 font-body text-xs text-mist">{email}</p>
+                <div className="absolute right-0 mt-3 w-56 rounded-card border border-haze bg-ink p-2 shadow-elevated">
+                  <p className="truncate px-3 py-2 font-body text-xs text-ivory/50">{email}</p>
                   <Link
                     href="/bookings"
-                    className="block rounded-nsk px-3 py-2 font-body text-sm text-charcoal hover:bg-cream"
+                    className="block rounded-nsk px-3 py-2 font-body text-sm text-ivory hover:bg-ivory/10"
                   >
                     Le mie prenotazioni
                   </Link>
                   <form action={signOutAction}>
                     <button
                       type="submit"
-                      className="w-full rounded-nsk px-3 py-2 text-left font-body text-sm text-charcoal hover:bg-cream"
+                      className="w-full rounded-nsk px-3 py-2 text-left font-body text-sm text-ivory hover:bg-ivory/10"
                     >
                       Esci
                     </button>
@@ -117,12 +117,12 @@ export function AppNavClient({ email, isPro }: Props) {
             </div>
           ) : (
             <div className="hidden items-center gap-2 md:flex">
-              <Link href="/login" className="rounded-pill px-4 py-2 font-body text-sm text-smoke hover:bg-white hover:text-charcoal">
+              <Link href="/login" className="rounded-pill px-4 py-2 font-body text-sm text-ivory/70 hover:bg-ivory/10 hover:text-ivory">
                 Accedi
               </Link>
               <Link
                 href="/signup"
-                className="rounded-pill bg-charcoal px-5 py-2 font-body text-sm text-ivory transition hover:bg-gold hover:text-charcoal"
+                className="rounded-pill bg-gold px-5 py-2 font-body text-sm font-medium text-charcoal transition hover:bg-ivory"
               >
                 Inizia gratis
               </Link>
@@ -130,7 +130,7 @@ export function AppNavClient({ email, isPro }: Props) {
           )}
 
           <button
-            className="flex h-9 w-9 items-center justify-center rounded-nsk text-charcoal md:hidden"
+            className="flex h-9 w-9 items-center justify-center rounded-nsk text-ivory md:hidden"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Apri menu"
           >
@@ -140,7 +140,7 @@ export function AppNavClient({ email, isPro }: Props) {
       </nav>
 
       {mobileOpen && (
-        <div className="border-t border-line bg-cream px-6 py-4 md:hidden">
+        <div className="border-t border-haze bg-charcoal px-6 py-4 md:hidden">
           {isLoggedIn && (
             <>
               <MobileSection title="Home" items={[{ label: "Home", href: "/dashboard", description: "" }]} />
@@ -150,24 +150,24 @@ export function AppNavClient({ email, isPro }: Props) {
           )}
           <MobileSection title="Marketplace" items={[{ label: "Trova uno chef", href: "/chefs", description: "" }]} />
 
-          <div className="mt-4 border-t border-line pt-4">
+          <div className="mt-4 border-t border-haze pt-4">
             {isLoggedIn ? (
               <>
-                <p className="px-1 font-body text-xs text-mist">{email}</p>
+                <p className="px-1 font-body text-xs text-ivory/50">{email}</p>
                 <form action={signOutAction}>
-                  <button type="submit" className="mt-2 font-body text-sm text-charcoal underline">
+                  <button type="submit" className="mt-2 font-body text-sm text-ivory underline">
                     Esci
                   </button>
                 </form>
               </>
             ) : (
               <div className="flex flex-col gap-3">
-                <Link href="/login" className="font-body text-sm text-charcoal">
+                <Link href="/login" className="font-body text-sm text-ivory">
                   Accedi
                 </Link>
                 <Link
                   href="/signup"
-                  className="w-fit rounded-pill bg-charcoal px-5 py-2 font-body text-sm text-ivory"
+                  className="w-fit rounded-pill bg-gold px-5 py-2 font-body text-sm font-medium text-charcoal"
                 >
                   Inizia gratis
                 </Link>
@@ -193,7 +193,7 @@ function PillarLink({
     <Link
       href={href}
       className={`rounded-pill px-4 py-2 font-body text-sm transition ${
-        active ? "bg-charcoal text-ivory" : "text-smoke hover:bg-white hover:text-charcoal"
+        active ? "bg-gold text-charcoal" : "text-ivory/70 hover:bg-ivory/10 hover:text-ivory"
       }`}
     >
       {children}
@@ -219,7 +219,7 @@ function PillarDropdown({
       <button
         onClick={onToggle}
         className={`flex items-center gap-1 rounded-pill px-4 py-2 font-body text-sm transition ${
-          active ? "bg-charcoal text-ivory" : "text-smoke hover:bg-white hover:text-charcoal"
+          active ? "bg-gold text-charcoal" : "text-ivory/70 hover:bg-ivory/10 hover:text-ivory"
         }`}
       >
         {label}
@@ -227,15 +227,15 @@ function PillarDropdown({
       </button>
 
       {open && (
-        <div className="absolute left-0 mt-3 w-72 rounded-card border border-line bg-white p-2 shadow-elevated">
+        <div className="absolute left-0 mt-3 w-72 rounded-card border border-haze bg-ink p-2 shadow-elevated">
           {items.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="block rounded-nsk px-3 py-2.5 transition hover:bg-cream"
+              className="block rounded-nsk px-3 py-2.5 transition hover:bg-ivory/10"
             >
-              <p className="font-body text-sm text-charcoal">{item.label}</p>
-              <p className="mt-0.5 font-body text-xs text-mist">{item.description}</p>
+              <p className="font-body text-sm text-ivory">{item.label}</p>
+              <p className="mt-0.5 font-body text-xs text-ivory/50">{item.description}</p>
             </Link>
           ))}
         </div>
@@ -247,17 +247,17 @@ function PillarDropdown({
 function MobileSection({ title, items }: { title: string; items: NavItem[] }) {
   if (items.length === 1 && !items[0].description) {
     return (
-      <Link href={items[0].href} className="block py-2 font-body text-sm text-charcoal">
+      <Link href={items[0].href} className="block py-2 font-body text-sm text-ivory">
         {title}
       </Link>
     );
   }
   return (
     <div className="py-2">
-      <p className="font-body text-xs uppercase tracking-widest text-mist">{title}</p>
+      <p className="font-body text-xs uppercase tracking-widest text-ivory/40">{title}</p>
       <div className="mt-2 space-y-1">
         {items.map((item) => (
-          <Link key={item.href} href={item.href} className="block py-1.5 font-body text-sm text-charcoal">
+          <Link key={item.href} href={item.href} className="block py-1.5 font-body text-sm text-ivory">
             {item.label}
           </Link>
         ))}

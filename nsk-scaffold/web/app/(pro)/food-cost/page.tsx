@@ -15,10 +15,10 @@ export default async function FoodCostPage() {
     .limit(200);
 
   return (
-    <div className="mx-auto max-w-content px-6 py-14 text-charcoal">
+    <div className="mx-auto max-w-content px-6 py-14 text-ivory">
       <p className="font-body text-sm uppercase tracking-widest text-gold">N&apos;sK Pro</p>
-      <h1 className="mt-2 font-display text-display-md text-charcoal">Food Cost</h1>
-      <p className="mt-2 max-w-xl font-body text-smoke">
+      <h1 className="mt-2 font-display text-display-md text-ivory">Food Cost</h1>
+      <p className="mt-2 max-w-xl font-body text-ivory/70">
         Calcola il costo reale di una ricetta e il prezzo di vendita, con il catalogo ingredienti
         che tiene tutto aggiornato.
       </p>

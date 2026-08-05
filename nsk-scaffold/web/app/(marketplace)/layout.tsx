@@ -6,7 +6,7 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 // utente se non c'è sessione, i 4 pilastri se c'è.
 export default function MarketplaceLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex min-h-screen flex-col bg-ivory text-charcoal">
+    <div className="flex min-h-screen flex-col bg-charcoal text-ivory">
       <AppNav />
       <main className="flex-1">{children}</main>
       <SiteFooter />

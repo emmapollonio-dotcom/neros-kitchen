@@ -1,13 +1,14 @@
 export default function PrivacyPage() {
   return (
-    <div className="min-h-screen bg-ivory px-6 py-16 text-charcoal">
+    <div className="min-h-screen bg-charcoal px-6 py-16 text-ivory">
       <div className="mx-auto max-w-3xl">
         <h1 className="font-display text-3xl">Informativa sulla privacy</h1>
-        <p className="mt-2 font-body text-sm text-smoke">
+        <p className="mt-2 font-body text-sm text-ivory/70">
           Ultimo aggiornamento: 5 agosto 2026
         </p>
 
-        <p className="mt-6 rounded-nsk border border-gold/40 bg-gold/10 p-4 font-body text-sm text-charcoal">
+        <div className="mt-8 rounded-panel border border-line bg-white p-6 shadow-soft md:p-10">
+        <p className="rounded-nsk border border-gold/40 bg-gold/10 p-4 font-body text-sm text-charcoal">
           Questa pagina è una bozza completa dal punto di vista tecnico, ma i dati del titolare
           del trattamento (sezione 1) vanno completati con la ragione sociale reale prima della
           pubblicazione, ed è opportuno farla rivedere da un legale/consulente privacy prima di
@@ -175,6 +176,7 @@ export default function PrivacyPage() {
             <h2 className="font-display text-xl">11. Contatti</h2>
             <p className="mt-3">Per qualsiasi domanda su questa informativa: [email di contatto].</p>
           </section>
+        </div>
         </div>
       </div>
     </div>

@@ -23,11 +23,11 @@ export default async function RicetteIndexPage() {
     .order("updated_at", { ascending: false });
 
   return (
-    <div className="mx-auto max-w-content px-6 py-14 text-charcoal">
+    <div className="mx-auto max-w-content px-6 py-14 text-ivory">
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <p className="font-body text-sm uppercase tracking-widest text-gold">N&apos;sK Home</p>
-          <h1 className="mt-2 font-display text-display-md text-charcoal">Le tue ricette</h1>
+          <h1 className="mt-2 font-display text-display-md text-ivory">Le tue ricette</h1>
         </div>
         <Link
           href="/ricette/nuova"

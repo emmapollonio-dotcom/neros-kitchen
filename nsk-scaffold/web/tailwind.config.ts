@@ -18,6 +18,11 @@ const config: Config = {
         smoke: "#555555",
         mist: "#8A8580",
         line: "#E7E1D6",
+        // Guscio scuro (nav, sfondo pagina, header di sezione): il testo
+        // secondario qui usa questi due, non smoke/mist (pensati per testo
+        // scuro su card bianche, illeggibili su charcoal). "haze" fa da
+        // bordo/divider sul fondo scuro.
+        haze: "rgba(245, 241, 234, 0.12)",
       },
       fontFamily: {
         // Caricati via next/font/google in app/layout.tsx come CSS variable —

@@ -1,13 +1,14 @@
 export default function TerminiPage() {
   return (
-    <div className="min-h-screen bg-ivory px-6 py-16 text-charcoal">
+    <div className="min-h-screen bg-charcoal px-6 py-16 text-ivory">
       <div className="mx-auto max-w-3xl">
         <h1 className="font-display text-3xl">Termini di servizio</h1>
-        <p className="mt-2 font-body text-sm text-smoke">
+        <p className="mt-2 font-body text-sm text-ivory/70">
           Ultimo aggiornamento: 5 agosto 2026
         </p>
 
-        <p className="mt-6 rounded-nsk border border-gold/40 bg-gold/10 p-4 font-body text-sm text-charcoal">
+        <div className="mt-8 rounded-panel border border-line bg-white p-6 shadow-soft md:p-10">
+        <p className="rounded-nsk border border-gold/40 bg-gold/10 p-4 font-body text-sm text-charcoal">
           Questa pagina è una bozza completa nella struttura, ma le politiche di cancellazione e
           rimborso (sezione 4) e i dati societari (sezione 1) vanno confermati/completati da te
           prima della pubblicazione — sono scelte di business, non tecniche, e vale la pena farle
@@ -145,6 +146,7 @@ export default function TerminiPage() {
             <h2 className="font-display text-xl">13. Contatti</h2>
             <p className="mt-3">Per domande su questi termini: [email di contatto].</p>
           </section>
+        </div>
         </div>
       </div>
     </div>

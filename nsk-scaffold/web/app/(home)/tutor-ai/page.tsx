@@ -16,10 +16,10 @@ export default async function TutorAiPage() {
     .order("created_at", { ascending: false });
 
   return (
-    <div className="mx-auto max-w-content px-6 py-14 text-charcoal">
+    <div className="mx-auto max-w-content px-6 py-14 text-ivory">
       <p className="font-body text-sm uppercase tracking-widest text-gold">N&apos;sK Home</p>
-      <h1 className="mt-2 font-display text-display-md text-charcoal">Tutor AI</h1>
-      <p className="mt-2 max-w-xl font-body text-smoke">
+      <h1 className="mt-2 font-display text-display-md text-ivory">Tutor AI</h1>
+      <p className="mt-2 max-w-xl font-body text-ivory/70">
         Una guida sempre disponibile per le tue ricette, e corsi strutturati per andare più a fondo.
       </p>
 

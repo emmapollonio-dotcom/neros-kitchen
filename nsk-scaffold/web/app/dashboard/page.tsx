@@ -75,8 +75,8 @@ export default async function DashboardPage() {
 
   return (
     <div className="mx-auto max-w-content px-6 py-14">
-      <p className="font-body text-sm text-mist">{greeting}</p>
-      <h1 className="mt-1 font-display text-display-md text-charcoal">
+      <p className="font-body text-sm text-ivory/50">{greeting}</p>
+      <h1 className="mt-1 font-display text-display-md text-ivory">
         {firstName ? `Ciao, ${firstName}` : "Bentornato"}
       </h1>
 
@@ -86,7 +86,7 @@ export default async function DashboardPage() {
             <Link
               key={todo.label}
               href={todo.href}
-              className="rounded-pill border border-gold/50 bg-gold/10 px-4 py-2 font-body text-sm text-charcoal transition hover:bg-gold/20"
+              className="rounded-pill border border-gold/50 bg-gold/10 px-4 py-2 font-body text-sm text-ivory transition hover:bg-gold/20"
             >
               {todo.label}
             </Link>
@@ -96,7 +96,7 @@ export default async function DashboardPage() {
 
       {upcomingBookings && upcomingBookings.length > 0 && (
         <section className="mt-12">
-          <h2 className="font-body text-xs uppercase tracking-widest text-mist">
+          <h2 className="font-body text-xs uppercase tracking-widest text-ivory/50">
             Prossimi impegni
           </h2>
           <div className="mt-4 space-y-3">
@@ -122,7 +122,7 @@ export default async function DashboardPage() {
       )}
 
       <section className="mt-12">
-        <h2 className="font-body text-xs uppercase tracking-widest text-mist">N&apos;sK Home</h2>
+        <h2 className="font-body text-xs uppercase tracking-widest text-ivory/50">N&apos;sK Home</h2>
         <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {NSK_HOME_ITEMS.map((item) => (
             <Link
@@ -139,7 +139,7 @@ export default async function DashboardPage() {
 
       {isPro ? (
         <section className="mt-12">
-          <h2 className="font-body text-xs uppercase tracking-widest text-mist">N&apos;sK Pro</h2>
+          <h2 className="font-body text-xs uppercase tracking-widest text-ivory/50">N&apos;sK Pro</h2>
           <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {NSK_PRO_ITEMS.map((item) => (
               <Link

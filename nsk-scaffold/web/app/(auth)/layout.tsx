@@ -5,9 +5,9 @@ import Link from "next/link";
 // registrazione — lo stesso principio delle auth page di Apple/Stripe.
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-ivory text-charcoal">
+    <div className="min-h-screen bg-charcoal text-ivory">
       <div className="mx-auto max-w-content px-6 py-8">
-        <Link href="/" className="font-display text-lg tracking-wide text-charcoal">
+        <Link href="/" className="font-display text-lg tracking-wide text-ivory">
           Nero&apos;s Kitchen
         </Link>
       </div>

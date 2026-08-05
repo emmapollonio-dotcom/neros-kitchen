@@ -21,12 +21,12 @@ export default async function BookingsPage() {
     .order("event_date", { ascending: true });
 
   return (
-    <div className="min-h-screen bg-ivory px-6 py-16 text-charcoal">
+    <div className="min-h-screen bg-charcoal px-6 py-16 text-ivory">
       <div className="mx-auto max-w-3xl">
         <h1 className="font-display text-3xl">Le tue prenotazioni</h1>
 
         {(!bookings || bookings.length === 0) && (
-          <p className="mt-6 font-body text-smoke">Nessuna prenotazione ancora.</p>
+          <p className="mt-6 font-body text-ivory/70">Nessuna prenotazione ancora.</p>
         )}
 
         <ul className="mt-8 space-y-4">

@@ -44,11 +44,11 @@ export default async function CourseDetailPage({ params }: Props) {
   }
 
   return (
-    <div className="text-charcoal">
+    <div className="text-ivory">
       <section className="mx-auto max-w-3xl px-6 py-14">
         <Link
           href="/tutor-ai"
-          className="inline-flex items-center gap-1 font-body text-sm text-mist transition hover:text-charcoal"
+          className="inline-flex items-center gap-1 font-body text-sm text-ivory/50 transition hover:text-ivory"
         >
           <ChevronLeft size={16} />
           Tutor AI
@@ -57,12 +57,12 @@ export default async function CourseDetailPage({ params }: Props) {
         <p className="mt-6 font-body text-sm uppercase tracking-widest text-gold">
           {course.level ?? "tutti i livelli"} · {course.language}
         </p>
-        <h1 className="mt-2 font-display text-display-md text-charcoal">{course.title}</h1>
+        <h1 className="mt-2 font-display text-display-md text-ivory">{course.title}</h1>
         {course.description && (
-          <p className="mt-4 font-body text-smoke leading-relaxed">{course.description}</p>
+          <p className="mt-4 font-body text-ivory/70 leading-relaxed">{course.description}</p>
         )}
 
-        <p className="mt-6 font-display text-2xl text-charcoal">
+        <p className="mt-6 font-display text-2xl text-ivory">
           {course.price > 0 ? `${course.price} €` : "Gratuito"}
         </p>
 
@@ -76,7 +76,7 @@ export default async function CourseDetailPage({ params }: Props) {
         </div>
 
         <div className="mt-16">
-          <h2 className="font-display text-xl text-charcoal">Programma del corso</h2>
+          <h2 className="font-display text-xl text-ivory">Programma del corso</h2>
           <ol className="mt-4 space-y-2">
             {(lessons ?? []).map((lesson) => (
               <li

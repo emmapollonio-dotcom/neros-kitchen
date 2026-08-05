@@ -111,17 +111,17 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="border-y border-line bg-cream">
+      <section className="border-y border-haze bg-ink">
         <div className="mx-auto max-w-content px-6 py-24">
           <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
             <div>
-              <div className="flex h-12 w-12 items-center justify-center rounded-pill bg-gold/15 text-gold-dark">
+              <div className="flex h-12 w-12 items-center justify-center rounded-pill bg-gold/15 text-gold">
                 <Sparkles size={22} />
               </div>
-              <h2 className="mt-6 font-display text-display-md text-charcoal">
+              <h2 className="mt-6 font-display text-display-md text-ivory">
                 Intelligenza artificiale che lavora davvero
               </h2>
-              <p className="mt-4 max-w-md font-body text-smoke">
+              <p className="mt-4 max-w-md font-body text-ivory/70">
                 Non un chatbot generico: agenti dedicati per calcolare food cost, suggerire
                 ricette dagli scarti, rilevare allergeni, generare contenuti social e rispondere
                 alle recensioni. Sempre con un umano che verifica prima di applicare.

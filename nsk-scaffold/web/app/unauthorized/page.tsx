@@ -2,10 +2,10 @@ import Link from "next/link";
 
 export default function UnauthorizedPage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-ivory px-6 text-center">
+    <div className="flex min-h-screen items-center justify-center bg-charcoal px-6 text-center">
       <div className="max-w-sm">
-        <h1 className="font-display text-2xl text-charcoal">Accesso non consentito</h1>
-        <p className="mt-3 font-body text-sm text-smoke">
+        <h1 className="font-display text-2xl text-ivory">Accesso non consentito</h1>
+        <p className="mt-3 font-body text-sm text-ivory/70">
           Il tuo account non ha i permessi per vedere questa pagina.
         </p>
         <Link href="/" className="mt-6 inline-block text-gold underline">

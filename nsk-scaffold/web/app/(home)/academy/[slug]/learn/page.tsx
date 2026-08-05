@@ -59,10 +59,10 @@ export default async function AcademyLearnPage({ params }: Props) {
     .eq("course_id", course.id);
 
   return (
-    <div className="text-charcoal">
+    <div className="text-ivory">
       <section className="mx-auto max-w-5xl px-6 py-14">
         <p className="font-body text-sm uppercase tracking-widest text-gold">Tutor AI · Corsi</p>
-        <h1 className="mt-2 font-display text-display-md text-charcoal">{course.title}</h1>
+        <h1 className="mt-2 font-display text-display-md text-ivory">{course.title}</h1>
 
         <div className="mt-10">
           <LessonPlayer lessons={lessons ?? []} initialProgress={progress ?? []} />
@@ -70,7 +70,7 @@ export default async function AcademyLearnPage({ params }: Props) {
 
         {quizzes && quizzes.length > 0 && (
           <div className="mt-16 space-y-8">
-            <h2 className="font-display text-xl text-charcoal">Quiz di verifica</h2>
+            <h2 className="font-display text-xl text-ivory">Quiz di verifica</h2>
             {quizzes.map((quiz) => (
               <QuizForm
                 key={quiz.id}

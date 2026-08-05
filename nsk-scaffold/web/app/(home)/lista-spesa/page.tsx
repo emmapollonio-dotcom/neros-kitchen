@@ -27,9 +27,9 @@ export default async function ListaSpesaPage({ searchParams }: Props) {
 
   if (!lists || lists.length === 0) {
     return (
-      <div className="mx-auto max-w-content px-6 py-14 text-charcoal">
+      <div className="mx-auto max-w-content px-6 py-14 text-ivory">
         <p className="font-body text-sm uppercase tracking-widest text-gold">N&apos;sK Home</p>
-        <h1 className="mt-2 font-display text-display-md text-charcoal">Lista della spesa</h1>
+        <h1 className="mt-2 font-display text-display-md text-ivory">Lista della spesa</h1>
 
         <div className="mt-10 rounded-panel border border-line bg-white p-12 text-center">
           <p className="font-display text-xl text-charcoal">Nessuna lista ancora</p>
@@ -64,9 +64,9 @@ export default async function ListaSpesaPage({ searchParams }: Props) {
   const ingredientNameById = Object.fromEntries((ingredients ?? []).map((i) => [i.id, i.name]));
 
   return (
-    <div className="mx-auto max-w-3xl px-6 py-14 text-charcoal">
+    <div className="mx-auto max-w-3xl px-6 py-14 text-ivory">
       <p className="font-body text-sm uppercase tracking-widest text-gold">N&apos;sK Home</p>
-      <h1 className="mt-2 font-display text-display-md text-charcoal">{activeList.title}</h1>
+      <h1 className="mt-2 font-display text-display-md text-ivory">{activeList.title}</h1>
 
       {lists.length > 1 && (
         <div className="mt-4 flex flex-wrap gap-2">

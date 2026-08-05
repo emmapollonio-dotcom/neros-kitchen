@@ -8,35 +8,35 @@ export async function SiteHeader() {
   const user = await getCurrentUserInfo();
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-cream/90 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-haze bg-charcoal/90 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-content items-center justify-between px-6">
-        <Link href="/" className="font-display text-lg tracking-wide text-charcoal">
+        <Link href="/" className="font-display text-lg tracking-wide text-ivory">
           Nero&apos;s Kitchen
         </Link>
 
         <nav className="flex items-center gap-2 font-body text-sm">
-          <Link href="/chefs" className="rounded-pill px-4 py-2 text-smoke transition hover:bg-white hover:text-charcoal">
+          <Link href="/chefs" className="rounded-pill px-4 py-2 text-ivory/70 transition hover:bg-ivory/10 hover:text-ivory">
             Marketplace
           </Link>
-          <Link href="/pricing" className="rounded-pill px-4 py-2 text-smoke transition hover:bg-white hover:text-charcoal">
+          <Link href="/pricing" className="rounded-pill px-4 py-2 text-ivory/70 transition hover:bg-ivory/10 hover:text-ivory">
             Prezzi
           </Link>
 
           {user ? (
             <Link
               href="/dashboard"
-              className="ml-2 rounded-pill bg-charcoal px-5 py-2 text-ivory transition hover:bg-gold hover:text-charcoal"
+              className="ml-2 rounded-pill bg-gold px-5 py-2 font-medium text-charcoal transition hover:bg-ivory"
             >
               Vai alla tua Home
             </Link>
           ) : (
             <>
-              <Link href="/login" className="rounded-pill px-4 py-2 text-smoke transition hover:bg-white hover:text-charcoal">
+              <Link href="/login" className="rounded-pill px-4 py-2 text-ivory/70 transition hover:bg-ivory/10 hover:text-ivory">
                 Accedi
               </Link>
               <Link
                 href="/signup"
-                className="ml-2 rounded-pill bg-charcoal px-5 py-2 text-ivory transition hover:bg-gold hover:text-charcoal"
+                className="ml-2 rounded-pill bg-gold px-5 py-2 font-medium text-charcoal transition hover:bg-ivory"
               >
                 Inizia gratis
               </Link>

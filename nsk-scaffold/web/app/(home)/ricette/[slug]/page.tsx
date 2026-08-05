@@ -47,10 +47,10 @@ export default async function RicettaPage({ params }: Props) {
   const ingredientNameById = new Map((ingredientRows ?? []).map((i) => [i.id, i.name]));
 
   return (
-    <div className="mx-auto max-w-3xl px-6 py-14 text-charcoal">
+    <div className="mx-auto max-w-3xl px-6 py-14 text-ivory">
       <Link
         href="/ricette"
-        className="inline-flex items-center gap-1 font-body text-sm text-mist transition hover:text-charcoal"
+        className="inline-flex items-center gap-1 font-body text-sm text-ivory/50 transition hover:text-ivory"
       >
         <ChevronLeft size={16} />
         Le tue ricette

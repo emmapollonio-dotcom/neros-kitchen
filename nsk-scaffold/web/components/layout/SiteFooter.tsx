@@ -21,12 +21,12 @@ const COLUMNS: Array<{ title: string; links: Array<{ label: string; href: string
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-line bg-cream">
+    <footer className="border-t border-haze bg-ink">
       <div className="mx-auto max-w-content px-6 py-16">
         <div className="grid grid-cols-2 gap-10 sm:grid-cols-4">
           <div className="col-span-2 sm:col-span-2">
-            <span className="font-display text-lg text-charcoal">Nero&apos;s Kitchen</span>
-            <p className="mt-3 max-w-xs font-body text-sm text-smoke">
+            <span className="font-display text-lg text-ivory">Nero&apos;s Kitchen</span>
+            <p className="mt-3 max-w-xs font-body text-sm text-ivory/60">
               L&apos;ecosistema per chi vive di cucina — a casa, in cucina professionale, in
               consulenza.
             </p>
@@ -34,11 +34,11 @@ export function SiteFooter() {
 
           {COLUMNS.map((col) => (
             <div key={col.title}>
-              <p className="font-body text-xs uppercase tracking-widest text-mist">{col.title}</p>
+              <p className="font-body text-xs uppercase tracking-widest text-ivory/40">{col.title}</p>
               <ul className="mt-4 space-y-3">
                 {col.links.map((link) => (
                   <li key={link.href}>
-                    <Link href={link.href} className="font-body text-sm text-smoke hover:text-charcoal">
+                    <Link href={link.href} className="font-body text-sm text-ivory/60 hover:text-ivory">
                       {link.label}
                     </Link>
                   </li>
@@ -48,7 +48,7 @@ export function SiteFooter() {
           ))}
         </div>
 
-        <p className="mt-14 font-body text-xs text-mist">
+        <p className="mt-14 font-body text-xs text-ivory/40">
           © {new Date().getFullYear()} Nero&apos;s Kitchen. Tutti i diritti riservati.
         </p>
       </div>

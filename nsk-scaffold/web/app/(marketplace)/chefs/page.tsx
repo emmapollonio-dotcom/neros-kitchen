@@ -17,8 +17,8 @@ export default async function ChefsMarketplacePage() {
   return (
     <div className="mx-auto max-w-content px-6 py-14">
       <p className="font-body text-sm uppercase tracking-widest text-gold">Marketplace</p>
-      <h1 className="mt-2 font-display text-display-md text-charcoal">Trova il tuo chef</h1>
-      <p className="mt-3 max-w-xl font-body text-smoke">
+      <h1 className="mt-2 font-display text-display-md text-ivory">Trova il tuo chef</h1>
+      <p className="mt-3 max-w-xl font-body text-ivory/70">
         Chef privati verificati per cene, eventi, corsi di cucina e consulenza — scegli, richiedi
         disponibilità, paga solo dopo la conferma.
       </p>

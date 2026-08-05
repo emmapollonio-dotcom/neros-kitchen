@@ -48,24 +48,24 @@ export default async function ChefProfilePage({ params }: Props) {
   return (
     <div className="mx-auto max-w-content px-6 py-14">
       <div className="flex items-start gap-5">
-        <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-pill bg-charcoal font-display text-xl text-ivory">
+        <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-pill bg-gold font-display text-xl text-charcoal">
           {initials}
         </div>
         <div>
           <div className="flex flex-wrap items-center gap-3">
-            <h1 className="font-display text-display-md text-charcoal">{displayName}</h1>
+            <h1 className="font-display text-display-md text-ivory">{displayName}</h1>
             {chef.verified && (
-              <span className="rounded-pill bg-gold/15 px-3 py-1 font-body text-xs text-gold-dark">
+              <span className="rounded-pill bg-gold/15 px-3 py-1 font-body text-xs text-gold">
                 Verificato
               </span>
             )}
           </div>
           {chef.rating_count && chef.rating_count > 0 ? (
-            <p className="mt-1 font-body text-sm text-smoke">
+            <p className="mt-1 font-body text-sm text-ivory/70">
               ★ {Number(chef.rating_avg).toFixed(1)} · {chef.rating_count} recensioni
             </p>
           ) : (
-            <p className="mt-1 font-body text-sm text-mist">Nuovo su N&apos;sK</p>
+            <p className="mt-1 font-body text-sm text-ivory/50">Nuovo su N&apos;sK</p>
           )}
         </div>
       </div>
@@ -84,22 +84,22 @@ export default async function ChefProfilePage({ params }: Props) {
 
           {chef.bio && (
             <div>
-              <h2 className="font-display text-lg text-charcoal">Chi è</h2>
-              <p className="mt-3 max-w-2xl font-body leading-relaxed text-smoke">{chef.bio}</p>
+              <h2 className="font-display text-lg text-ivory">Chi è</h2>
+              <p className="mt-3 max-w-2xl font-body leading-relaxed text-ivory/70">{chef.bio}</p>
             </div>
           )}
 
           {chef.languages && chef.languages.length > 0 && (
             <div>
-              <h2 className="font-display text-lg text-charcoal">Lingue</h2>
-              <p className="mt-2 font-body text-sm text-smoke">{chef.languages.join(", ")}</p>
+              <h2 className="font-display text-lg text-ivory">Lingue</h2>
+              <p className="mt-2 font-body text-sm text-ivory/70">{chef.languages.join(", ")}</p>
             </div>
           )}
 
           <div>
-            <h2 className="font-display text-lg text-charcoal">Recensioni</h2>
+            <h2 className="font-display text-lg text-ivory">Recensioni</h2>
             {(!reviews || reviews.length === 0) ? (
-              <p className="mt-3 font-body text-sm text-smoke">Ancora nessuna recensione.</p>
+              <p className="mt-3 font-body text-sm text-ivory/70">Ancora nessuna recensione.</p>
             ) : (
               <ul className="mt-4 space-y-4">
                 {reviews.map((r) => (
