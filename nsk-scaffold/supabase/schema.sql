@@ -609,6 +609,21 @@ create policy "recipe_steps_owner_write" on public.recipe_steps for all
 drop policy if exists "ingredients_public_read" on public.ingredients;
 create policy "ingredients_public_read" on public.ingredients for select using (true);
 
+-- Catalogo condiviso (nessun owner_id): qualunque chef/admin può curarlo,
+-- non solo chi lo ha creato. Il sub-select su profiles è sicuro (non è
+-- ricorsivo: la policy vive su ingredients, non su profiles stessa — vedi
+-- il fix di profiles_self_read più sotto per il caso che invece lo era).
+drop policy if exists "ingredients_chef_write" on public.ingredients;
+create policy "ingredients_chef_write" on public.ingredients for all
+  using (exists (
+    select 1 from public.profiles
+    where id = auth.uid() and (role = 'chef'::user_role or role = 'admin'::user_role)
+  ))
+  with check (exists (
+    select 1 from public.profiles
+    where id = auth.uid() and (role = 'chef'::user_role or role = 'admin'::user_role)
+  ));
+
 -- plans: catalogo pubblico dei piani di abbonamento
 drop policy if exists "plans_public_read" on public.plans;
 create policy "plans_public_read" on public.plans for select using (true);
@@ -721,9 +736,7 @@ where code = 'pro_growth';
 -- Prezzi medi di mercato italiano indicativi (2026), NON i costi reali dei
 -- tuoi fornitori: servono a sbloccare Food Cost e Zero Waste con dati
 -- plausibili da subito. Vanno verificati e corretti con le fatture vere —
--- al momento non esiste una UI per modificarli, l'unica scrittura possibile
--- su public.ingredients è questo seed (nessuna policy RLS di insert/update
--- è definita, solo "ingredients_public_read" per la lettura).
+-- correggibili poi dalla UI /ingredienti (policy "ingredients_chef_write").
 insert into public.ingredients (name, category, default_unit, avg_cost_per_unit, allergens, is_scrap_reusable)
 values
   ('Pollo (petto)', 'Carne', 'kg', 8.50, '{}', false),

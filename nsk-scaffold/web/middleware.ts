@@ -21,6 +21,7 @@ const ROLE_GUARDS: Array<{ prefix: string; roles: Array<"customer" | "chef" | "a
   { prefix: "/academy-pro", roles: ["chef", "admin"] },
   { prefix: "/social-studio", roles: ["chef", "admin"] },
   { prefix: "/haccp", roles: ["chef", "admin"] },
+  { prefix: "/ingredienti", roles: ["chef", "admin"] },
   // N'sK Home
   { prefix: "/tutor-ai", roles: ["customer", "chef", "admin"] },
   { prefix: "/zero-waste", roles: ["customer", "chef", "admin"] },
