@@ -40,3 +40,4 @@ mobile/lib/l10n/generated/
 
 # supabase CLI cache locale
 supabase/.temp/
+.fuse_hidden*
