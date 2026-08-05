@@ -1,8 +1,7 @@
 arb-dir: lib/l10n
 template-arb-file: app_it.arb
 output-localization-file: app_localizations.dart
+# Scrive il codice generato in un file vero del progetto (non nel
+# "synthetic package" flutter_gen, deprecato): import espliciti, meno
+# sorprese tra versioni Flutter diverse.
 output-dir: lib/l10n/generated
-# synthetic-package: false scrive il codice generato in un file vero del
-# progetto (lib/l10n/generated/) invece che nel "synthetic package"
-# flutter_gen — import espliciti, meno sorprese tra versioni Flutter diverse.
-synthetic-package: false
