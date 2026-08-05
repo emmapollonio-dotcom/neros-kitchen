@@ -1,5 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:nsk_mobile/features/bookings/domain/booking.dart';
+import 'package:nsk_mobile/features/bookings/presentation/bookings_screen.dart';
+import 'package:nsk_mobile/l10n/generated/app_localizations_en.dart';
 
 void main() {
   group('Booking.fromJson', () {
@@ -42,8 +44,9 @@ void main() {
     });
   });
 
-  test('bookingStatusLabels copre tutti e 7 gli stadi di booking_status', () {
-    expect(bookingStatusLabels.keys, containsAll(<String>[
+  test('bookingStatusLabel copre tutti e 7 gli stadi di booking_status', () {
+    final l10n = AppLocalizationsEn();
+    const statuses = [
       'requested',
       'quoted',
       'confirmed',
@@ -51,6 +54,13 @@ void main() {
       'completed',
       'cancelled',
       'disputed',
-    ]));
+    ];
+
+    for (final status in statuses) {
+      // Se lo stadio non è coperto, bookingStatusLabel torna lo status grezzo
+      // invariato (vedi il default nello switch): un'etichetta tradotta deve
+      // sempre differire dalla stringa tecnica del database.
+      expect(bookingStatusLabel(l10n, status), isNot(equals(status)));
+    }
   });
 }

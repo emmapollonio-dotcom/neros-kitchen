@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../theme/colors.dart';
 import '../sync/connectivity_service.dart';
 import '../sync/sync_service.dart';
+import '../../l10n/generated/app_localizations.dart';
 import '../../features/marketplace/presentation/chef_list_screen.dart';
 import '../../features/bookings/presentation/bookings_screen.dart';
 import '../../features/zero_waste/presentation/zero_waste_screen.dart';
@@ -50,6 +51,8 @@ class _HomeShellState extends ConsumerState<HomeShell> {
       }
     });
 
+    final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
       body: IndexedStack(index: _index, children: _screens),
       bottomNavigationBar: BottomNavigationBar(
@@ -59,11 +62,11 @@ class _HomeShellState extends ConsumerState<HomeShell> {
         backgroundColor: NskColors.ivory,
         selectedItemColor: NskColors.charcoal,
         unselectedItemColor: NskColors.smoke,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.restaurant_menu), label: 'Chef'),
-          BottomNavigationBarItem(icon: Icon(Icons.event_available), label: 'Prenotazioni'),
-          BottomNavigationBarItem(icon: Icon(Icons.eco_outlined), label: 'Zero Waste'),
-          BottomNavigationBarItem(icon: Icon(Icons.person_outline), label: 'Profilo'),
+        items: [
+          BottomNavigationBarItem(icon: const Icon(Icons.restaurant_menu), label: l10n.navChef),
+          BottomNavigationBarItem(icon: const Icon(Icons.event_available), label: l10n.navBookings),
+          BottomNavigationBarItem(icon: const Icon(Icons.eco_outlined), label: l10n.navZeroWaste),
+          BottomNavigationBarItem(icon: const Icon(Icons.person_outline), label: l10n.navProfile),
         ],
       ),
     );

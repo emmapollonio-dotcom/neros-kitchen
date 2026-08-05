@@ -33,14 +33,3 @@ class Booking {
         currency: json['currency'] as String? ?? 'EUR',
       );
 }
-
-/// Etichette in italiano per i 7 stadi di public.booking_status.
-const Map<String, String> bookingStatusLabels = {
-  'requested': 'Richiesta inviata',
-  'quoted': 'Preventivo ricevuto',
-  'confirmed': 'Confermata',
-  'in_progress': 'In corso',
-  'completed': 'Completata',
-  'cancelled': 'Annullata',
-  'disputed': 'In contestazione',
-};

@@ -6,7 +6,8 @@ App Flutter (iOS/Android/Tablet) — marketplace chef, prenotazioni, Zero Waste,
 
 ```
 flutter pub get
-dart run build_runner build --delete-conflicting-outputs   # genera app_database.g.dart (drift) e i provider *.g.dart
+flutter gen-l10n                                             # genera lib/l10n/generated/app_localizations*.dart (it/en/fr/es/ar)
+dart run build_runner build --delete-conflicting-outputs    # genera app_database.g.dart (drift) e i provider *.g.dart
 ```
 
 ## Variabili richieste (--dart-define)

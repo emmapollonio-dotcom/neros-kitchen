@@ -34,6 +34,9 @@ mobile/**/*.g.dart
 # file locali con i valori --dart-define (vedi mobile/README.md), contengono
 # chiavi/id di configurazione: mai committare.
 mobile/*.local.json
+# generato da 'flutter gen-l10n' (o automaticamente da flutter pub get/build)
+# a partire da mobile/lib/l10n/*.arb: non committato, stesso motivo dei .g.dart.
+mobile/lib/l10n/generated/
 
 # supabase CLI cache locale
 supabase/.temp/

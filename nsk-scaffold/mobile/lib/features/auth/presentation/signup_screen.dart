@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../../core/theme/colors.dart';
+import '../../../l10n/generated/app_localizations.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -45,6 +46,8 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     if (_checkEmail) {
       return Scaffold(
         backgroundColor: NskColors.ivory,
@@ -53,16 +56,13 @@ class _SignupScreenState extends State<SignupScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Controlla la tua email', style: Theme.of(context).textTheme.displayLarge),
+              Text(l10n.checkEmailTitle, style: Theme.of(context).textTheme.displayLarge),
               const SizedBox(height: 12),
-              const Text(
-                'Ti abbiamo inviato un link di conferma. Aprilo per attivare il tuo account, poi torna qui ad accedere.',
-                textAlign: TextAlign.center,
-              ),
+              Text(l10n.checkEmailBody, textAlign: TextAlign.center),
               const SizedBox(height: 24),
               ElevatedButton(
                 onPressed: () => context.go('/login'),
-                child: const Text('Torna al login'),
+                child: Text(l10n.backToLogin),
               ),
             ],
           ),
@@ -78,22 +78,22 @@ class _SignupScreenState extends State<SignupScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text('Crea account', style: Theme.of(context).textTheme.displayLarge),
+            Text(l10n.createAccountTitle, style: Theme.of(context).textTheme.displayLarge),
             const SizedBox(height: 24),
             TextField(
               controller: _fullName,
-              decoration: const InputDecoration(labelText: 'Nome completo'),
+              decoration: InputDecoration(labelText: l10n.fullNameLabel),
             ),
             const SizedBox(height: 12),
             TextField(
               controller: _email,
-              decoration: const InputDecoration(labelText: 'Email'),
+              decoration: InputDecoration(labelText: l10n.emailLabel),
             ),
             const SizedBox(height: 12),
             TextField(
               controller: _password,
               obscureText: true,
-              decoration: const InputDecoration(labelText: 'Password'),
+              decoration: InputDecoration(labelText: l10n.passwordLabel),
             ),
             if (_error != null) ...[
               const SizedBox(height: 12),
@@ -104,12 +104,12 @@ class _SignupScreenState extends State<SignupScreen> {
               onPressed: _loading ? null : _signUp,
               child: _loading
                   ? const CircularProgressIndicator()
-                  : const Text('Registrati'),
+                  : Text(l10n.signupButton),
             ),
             const SizedBox(height: 12),
             TextButton(
               onPressed: () => context.go('/login'),
-              child: const Text('Hai già un account? Accedi'),
+              child: Text(l10n.haveAccountLoginLink),
             ),
           ],
         ),

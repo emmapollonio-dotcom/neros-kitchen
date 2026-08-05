@@ -5,6 +5,7 @@ import '../domain/waste_item.dart';
 import '../../../core/database/database_provider.dart';
 import '../../../core/theme/colors.dart';
 import '../../../core/widgets/offline_banner.dart';
+import '../../../l10n/generated/app_localizations.dart';
 
 final wasteRepositoryProvider = Provider((ref) => WasteRepository(ref.watch(appDatabaseProvider)));
 
@@ -18,15 +19,18 @@ class ZeroWasteScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final itemsAsync = ref.watch(myWasteItemsProvider);
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: NskColors.ivory,
+        // "Zero Waste" resta invariato in tutte le lingue: è il nome della
+        // funzionalità (stesso trattamento lato web), non un termine da tradurre.
         title: const Text('Zero Waste'),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: NskColors.charcoal,
-        onPressed: () => _showAddDialog(context, ref),
+        onPressed: () => _showAddDialog(context, ref, l10n),
         child: const Icon(Icons.add, color: NskColors.ivory),
       ),
       body: Column(
@@ -37,13 +41,13 @@ class ZeroWasteScreen extends ConsumerWidget {
               onRefresh: () => ref.refresh(myWasteItemsProvider.future),
               child: itemsAsync.when(
                 loading: () => const Center(child: CircularProgressIndicator()),
-                error: (err, _) => Center(child: Text('Errore: $err')),
+                error: (err, _) => Center(child: Text(l10n.errorPrefix('$err'))),
                 data: (items) {
                   if (items.isEmpty) {
                     return ListView(
-                      children: const [
-                        SizedBox(height: 80),
-                        Center(child: Text('Nessuno spreco registrato ancora.')),
+                      children: [
+                        const SizedBox(height: 80),
+                        Center(child: Text(l10n.noWasteYet)),
                       ],
                     );
                   }
@@ -66,7 +70,7 @@ class ZeroWasteScreen extends ConsumerWidget {
     );
   }
 
-  void _showAddDialog(BuildContext context, WidgetRef ref) {
+  void _showAddDialog(BuildContext context, WidgetRef ref, AppLocalizations l10n) {
     final nameController = TextEditingController();
     final quantityController = TextEditingController();
     final unitController = TextEditingController(text: 'kg');
@@ -75,33 +79,33 @@ class ZeroWasteScreen extends ConsumerWidget {
     showDialog<void>(
       context: context,
       builder: (dialogContext) => AlertDialog(
-        title: const Text('Registra uno spreco'),
+        title: Text(l10n.logWasteDialogTitle),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             TextField(
               controller: nameController,
-              decoration: const InputDecoration(labelText: 'Ingrediente'),
+              decoration: InputDecoration(labelText: l10n.ingredientLabel),
             ),
             TextField(
               controller: quantityController,
               keyboardType: const TextInputType.numberWithOptions(decimal: true),
-              decoration: const InputDecoration(labelText: 'Quantità'),
+              decoration: InputDecoration(labelText: l10n.quantityLabel),
             ),
             TextField(
               controller: unitController,
-              decoration: const InputDecoration(labelText: 'Unità (kg, L, pz...)'),
+              decoration: InputDecoration(labelText: l10n.unitLabel),
             ),
             TextField(
               controller: reasonController,
-              decoration: const InputDecoration(labelText: 'Motivo (opzionale)'),
+              decoration: InputDecoration(labelText: l10n.reasonLabel),
             ),
           ],
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(dialogContext).pop(),
-            child: const Text('Annulla'),
+            child: Text(l10n.cancelButton),
           ),
           ElevatedButton(
             onPressed: () async {
@@ -118,7 +122,7 @@ class ZeroWasteScreen extends ConsumerWidget {
               ref.invalidate(myWasteItemsProvider);
               if (dialogContext.mounted) Navigator.of(dialogContext).pop();
             },
-            child: const Text('Salva'),
+            child: Text(l10n.saveButton),
           ),
         ],
       ),

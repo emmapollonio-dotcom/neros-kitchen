@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../../core/theme/colors.dart';
+import '../../../l10n/generated/app_localizations.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -37,6 +38,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
       backgroundColor: NskColors.ivory,
       body: Padding(
@@ -45,17 +48,17 @@ class _LoginScreenState extends State<LoginScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text('Accedi', style: Theme.of(context).textTheme.displayLarge),
+            Text(l10n.loginTitle, style: Theme.of(context).textTheme.displayLarge),
             const SizedBox(height: 24),
             TextField(
               controller: _email,
-              decoration: const InputDecoration(labelText: 'Email'),
+              decoration: InputDecoration(labelText: l10n.emailLabel),
             ),
             const SizedBox(height: 12),
             TextField(
               controller: _password,
               obscureText: true,
-              decoration: const InputDecoration(labelText: 'Password'),
+              decoration: InputDecoration(labelText: l10n.passwordLabel),
             ),
             if (_error != null) ...[
               const SizedBox(height: 12),
@@ -66,12 +69,12 @@ class _LoginScreenState extends State<LoginScreen> {
               onPressed: _loading ? null : _signIn,
               child: _loading
                   ? const CircularProgressIndicator()
-                  : const Text('Accedi'),
+                  : Text(l10n.loginButton),
             ),
             const SizedBox(height: 12),
             TextButton(
               onPressed: () => context.go('/signup'),
-              child: const Text('Non hai un account? Registrati'),
+              child: Text(l10n.noAccountSignupLink),
             ),
           ],
         ),

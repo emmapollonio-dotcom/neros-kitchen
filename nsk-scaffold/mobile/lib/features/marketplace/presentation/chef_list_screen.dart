@@ -5,6 +5,7 @@ import '../domain/chef.dart';
 import '../../../core/database/database_provider.dart';
 import '../../../core/theme/colors.dart';
 import '../../../core/widgets/offline_banner.dart';
+import '../../../l10n/generated/app_localizations.dart';
 
 final chefRepositoryProvider = Provider((ref) => ChefRepository(ref.watch(appDatabaseProvider)));
 
@@ -18,6 +19,7 @@ class ChefListScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final chefsAsync = ref.watch(chefListProvider);
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: AppBar(
@@ -30,7 +32,7 @@ class ChefListScreen extends ConsumerWidget {
           Expanded(
             child: chefsAsync.when(
               loading: () => const Center(child: CircularProgressIndicator()),
-              error: (err, _) => Center(child: Text('Errore: $err')),
+              error: (err, _) => Center(child: Text(l10n.errorPrefix('$err'))),
               data: (chefs) => ListView.builder(
                 itemCount: chefs.length,
                 itemBuilder: (context, i) {
