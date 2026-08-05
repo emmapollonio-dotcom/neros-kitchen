@@ -3,6 +3,7 @@
 import { Suspense, useActionState } from "react";
 import { loginAction, signInWithGoogleAction, type AuthActionState } from "../actions";
 import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 const initialState: AuthActionState = { error: null };
 
@@ -89,9 +90,9 @@ function LoginForm() {
 
         <p className="mt-6 text-center font-body text-sm text-smoke">
           Non hai un account?{" "}
-          <a href="/signup" className="text-gold underline">
+          <Link href="/signup" className="text-gold underline">
             Registrati
-          </a>
+          </Link>
         </p>
       </div>
     </div>

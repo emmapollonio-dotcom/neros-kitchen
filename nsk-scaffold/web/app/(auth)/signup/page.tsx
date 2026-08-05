@@ -2,6 +2,7 @@
 
 import { useActionState } from "react";
 import { signUpAction, type AuthActionState } from "../actions";
+import Link from "next/link";
 
 const initialState: AuthActionState = { error: null };
 
@@ -73,22 +74,22 @@ export default function SignupPage() {
 
           <p className="text-center font-body text-xs text-smoke">
             Registrandoti accetti i{" "}
-            <a href="/termini" className="underline hover:text-gold">
+            <Link href="/termini" className="underline hover:text-gold">
               Termini di servizio
-            </a>{" "}
+            </Link>{" "}
             e l&apos;
-            <a href="/privacy" className="underline hover:text-gold">
+            <Link href="/privacy" className="underline hover:text-gold">
               Informativa privacy
-            </a>
+            </Link>
             .
           </p>
         </form>
 
         <p className="mt-6 text-center font-body text-sm text-smoke">
           Hai già un account?{" "}
-          <a href="/login" className="text-gold underline">
+          <Link href="/login" className="text-gold underline">
             Accedi
-          </a>
+          </Link>
         </p>
       </div>
     </div>

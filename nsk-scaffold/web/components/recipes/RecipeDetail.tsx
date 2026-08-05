@@ -83,7 +83,7 @@ export function RecipeDetail({ recipe, ingredients, isOwner }: Props) {
         )}
       </div>
 
-      <div className="mt-8 rounded-nsk border border-smoke/15 bg-white p-5">
+      <div className="mt-8 rounded-card border border-line bg-white p-5 shadow-soft">
         <div className="flex items-center justify-between">
           <h2 className="font-body text-sm font-semibold uppercase tracking-wide text-smoke">
             Allergeni

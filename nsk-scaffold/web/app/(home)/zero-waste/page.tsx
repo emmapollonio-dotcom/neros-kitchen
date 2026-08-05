@@ -6,18 +6,16 @@ import { WasteTracker } from "@/components/waste/WasteTracker";
 // "waste_items_owner": questa è solo la UX di redirect per anonimi.
 export default function ZeroWastePage() {
   return (
-    <div className="min-h-screen bg-ivory px-6 py-16 text-charcoal">
-      <div className="mx-auto max-w-4xl">
-        <p className="font-body text-sm uppercase tracking-widest text-gold">N&apos;sK Zero Waste</p>
-        <h1 className="mt-2 font-display text-3xl">Riduci gli sprechi</h1>
-        <p className="mt-2 max-w-2xl font-body text-sm text-smoke">
-          Registra ciò che butti via e lascia che l&apos;AI ti suggerisca come riutilizzarlo,
-          conservarlo meglio o acquistarne meno la prossima volta.
-        </p>
+    <div className="mx-auto max-w-content px-6 py-14 text-charcoal">
+      <p className="font-body text-sm uppercase tracking-widest text-gold">N&apos;sK Home</p>
+      <h1 className="mt-2 font-display text-display-md text-charcoal">Zero Waste</h1>
+      <p className="mt-2 max-w-xl font-body text-smoke">
+        Registra ciò che butti via e lascia che l&apos;AI ti suggerisca come riutilizzarlo,
+        conservarlo meglio o acquistarne meno la prossima volta.
+      </p>
 
-        <div className="mt-10">
-          <WasteTracker />
-        </div>
+      <div className="mt-10">
+        <WasteTracker />
       </div>
     </div>
   );

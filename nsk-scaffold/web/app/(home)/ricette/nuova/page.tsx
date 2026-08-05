@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { ChevronLeft } from "lucide-react";
 
 export default function NuovaRicettaPage() {
   const router = useRouter();
@@ -34,61 +36,77 @@ export default function NuovaRicettaPage() {
   }
 
   return (
-    <div className="min-h-screen bg-ivory px-6 py-16 text-charcoal">
-      <div className="mx-auto max-w-xl">
-        <h1 className="font-display text-3xl">Nuova ricetta</h1>
+    <div className="mx-auto max-w-xl px-6 py-14 text-charcoal">
+      <Link
+        href="/ricette"
+        className="inline-flex items-center gap-1 font-body text-sm text-mist transition hover:text-charcoal"
+      >
+        <ChevronLeft size={16} />
+        Le tue ricette
+      </Link>
 
-        <form onSubmit={handleSubmit} className="mt-8 space-y-4">
-          <div>
-            <label className="font-body text-sm text-smoke" htmlFor="title">
-              Titolo
-            </label>
-            <input
-              id="title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              required
-              minLength={3}
-              className="mt-1 w-full rounded-nsk border border-smoke/30 bg-white px-4 py-2 font-body"
-            />
-          </div>
-          <div>
-            <label className="font-body text-sm text-smoke" htmlFor="servings">
-              Porzioni
-            </label>
-            <input
-              id="servings"
-              type="number"
-              min={1}
-              value={servings}
-              onChange={(e) => setServings(Number(e.target.value))}
-              className="mt-1 w-full rounded-nsk border border-smoke/30 bg-white px-4 py-2 font-body"
-            />
-          </div>
-          <div>
-            <label className="font-body text-sm text-smoke" htmlFor="description">
-              Descrizione
-            </label>
-            <textarea
-              id="description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              rows={4}
-              className="mt-1 w-full rounded-nsk border border-smoke/30 bg-white px-4 py-2 font-body"
-            />
-          </div>
+      <p className="mt-6 font-body text-sm uppercase tracking-widest text-gold">N&apos;sK Home</p>
+      <h1 className="mt-2 font-display text-display-md text-charcoal">Nuova ricetta</h1>
+      <p className="mt-2 font-body text-sm text-smoke">
+        Aggiungi gli ingredienti dalla scheda della ricetta una volta salvata: calcoliamo food cost
+        e allergeni in automatico.
+      </p>
 
-          {error && <p className="font-body text-sm text-red-600">{error}</p>}
+      <form
+        onSubmit={handleSubmit}
+        className="mt-8 space-y-4 rounded-card border border-line bg-white p-6 shadow-soft"
+      >
+        <div>
+          <label className="font-body text-sm text-smoke" htmlFor="title">
+            Titolo
+          </label>
+          <input
+            id="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+            minLength={3}
+            placeholder="Es. Risotto allo zafferano"
+            className="mt-1 w-full rounded-nsk border border-line bg-white px-4 py-2 font-body text-sm text-charcoal placeholder:text-mist focus:border-gold focus:outline-none"
+          />
+        </div>
+        <div>
+          <label className="font-body text-sm text-smoke" htmlFor="servings">
+            Porzioni
+          </label>
+          <input
+            id="servings"
+            type="number"
+            min={1}
+            value={servings}
+            onChange={(e) => setServings(Number(e.target.value))}
+            className="mt-1 w-full rounded-nsk border border-line bg-white px-4 py-2 font-body text-sm text-charcoal focus:border-gold focus:outline-none"
+          />
+        </div>
+        <div>
+          <label className="font-body text-sm text-smoke" htmlFor="description">
+            Descrizione
+          </label>
+          <textarea
+            id="description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            rows={4}
+            placeholder="Note, provenienza, occasioni d'uso..."
+            className="mt-1 w-full rounded-nsk border border-line bg-white px-4 py-2 font-body text-sm text-charcoal placeholder:text-mist focus:border-gold focus:outline-none"
+          />
+        </div>
 
-          <button
-            type="submit"
-            disabled={submitting}
-            className="rounded-nsk bg-charcoal px-6 py-3 font-body text-ivory hover:bg-gold hover:text-charcoal disabled:opacity-50"
-          >
-            {submitting ? "Salvataggio..." : "Salva ricetta"}
-          </button>
-        </form>
-      </div>
+        {error && <p className="font-body text-sm text-red-600">{error}</p>}
+
+        <button
+          type="submit"
+          disabled={submitting}
+          className="rounded-pill bg-charcoal px-6 py-3 font-body text-sm text-ivory transition hover:bg-gold hover:text-charcoal disabled:opacity-50"
+        >
+          {submitting ? "Salvataggio..." : "Salva ricetta"}
+        </button>
+      </form>
     </div>
   );
 }

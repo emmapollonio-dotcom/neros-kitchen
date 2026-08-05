@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 const STORAGE_KEY = "nsk_cookie_consent";
 
@@ -31,9 +32,9 @@ export function CookieConsentBanner() {
       <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-4 sm:flex-row">
         <p className="font-body text-sm">
           Usiamo cookie tecnici essenziali per far funzionare l&apos;accesso al sito. Vedi la{" "}
-          <a href="/privacy" className="underline hover:text-gold">
+          <Link href="/privacy" className="underline hover:text-gold">
             informativa privacy
-          </a>
+          </Link>
           .
         </p>
         <div className="flex shrink-0 gap-3">

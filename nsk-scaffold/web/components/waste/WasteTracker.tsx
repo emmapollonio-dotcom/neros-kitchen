@@ -135,17 +135,17 @@ export function WasteTracker() {
     <div className="space-y-8">
       {totals && (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-          <div className="rounded-nsk border border-smoke/15 bg-white p-4">
+          <div className="rounded-nsk border border-line bg-white shadow-soft p-4">
             <p className="font-body text-xs text-smoke">Costo stimato spreco</p>
             <p className="font-display text-2xl text-charcoal">
               {totals.total_estimated_cost.toFixed(2)} €
             </p>
           </div>
-          <div className="rounded-nsk border border-smoke/15 bg-white p-4">
+          <div className="rounded-nsk border border-line bg-white shadow-soft p-4">
             <p className="font-body text-xs text-smoke">Voci con costo noto</p>
             <p className="font-display text-2xl text-charcoal">{totals.items_with_known_cost}</p>
           </div>
-          <div className="rounded-nsk border border-smoke/15 bg-white p-4">
+          <div className="rounded-nsk border border-line bg-white shadow-soft p-4">
             <p className="font-body text-xs text-smoke">Voci senza prezzo a catalogo</p>
             <p className="font-display text-2xl text-charcoal">{totals.items_with_unknown_cost}</p>
           </div>
@@ -154,7 +154,7 @@ export function WasteTracker() {
 
       <form
         onSubmit={handleCreate}
-        className="flex flex-wrap items-end gap-3 rounded-nsk border border-smoke/15 bg-white p-4"
+        className="flex flex-wrap items-end gap-3 rounded-nsk border border-line bg-white shadow-soft p-4"
       >
         <div>
           <label className="font-body text-xs text-smoke">Ingrediente</label>
@@ -220,7 +220,7 @@ export function WasteTracker() {
 
       <ul className="space-y-3">
         {items.map((item) => (
-          <li key={item.id} className="rounded-nsk border border-smoke/15 bg-white p-4">
+          <li key={item.id} className="rounded-nsk border border-line bg-white shadow-soft p-4">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <div>
                 <p className="font-body font-semibold text-charcoal">

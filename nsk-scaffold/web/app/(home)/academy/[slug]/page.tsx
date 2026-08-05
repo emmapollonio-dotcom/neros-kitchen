@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { ChevronLeft } from "lucide-react";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { notFound } from "next/navigation";
 import { EnrollButton } from "@/components/academy/EnrollButton";
@@ -42,12 +44,20 @@ export default async function CourseDetailPage({ params }: Props) {
   }
 
   return (
-    <div className="min-h-screen bg-ivory text-charcoal">
-      <section className="mx-auto max-w-3xl px-6 py-16">
-        <p className="font-body text-sm uppercase tracking-widest text-gold">
+    <div className="text-charcoal">
+      <section className="mx-auto max-w-3xl px-6 py-14">
+        <Link
+          href="/tutor-ai"
+          className="inline-flex items-center gap-1 font-body text-sm text-mist transition hover:text-charcoal"
+        >
+          <ChevronLeft size={16} />
+          Tutor AI
+        </Link>
+
+        <p className="mt-6 font-body text-sm uppercase tracking-widest text-gold">
           {course.level ?? "tutti i livelli"} · {course.language}
         </p>
-        <h1 className="mt-2 font-display text-4xl text-charcoal">{course.title}</h1>
+        <h1 className="mt-2 font-display text-display-md text-charcoal">{course.title}</h1>
         {course.description && (
           <p className="mt-4 font-body text-smoke leading-relaxed">{course.description}</p>
         )}
@@ -71,7 +81,7 @@ export default async function CourseDetailPage({ params }: Props) {
             {(lessons ?? []).map((lesson) => (
               <li
                 key={lesson.id}
-                className="flex items-center justify-between rounded-nsk border border-smoke/15 bg-white px-4 py-3 font-body text-sm text-charcoal"
+                className="flex items-center justify-between rounded-card border border-line bg-white px-4 py-3 font-body text-sm text-charcoal shadow-soft"
               >
                 <span>
                   {lesson.position}. {lesson.title}

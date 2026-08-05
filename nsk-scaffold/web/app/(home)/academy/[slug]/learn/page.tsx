@@ -59,10 +59,10 @@ export default async function AcademyLearnPage({ params }: Props) {
     .eq("course_id", course.id);
 
   return (
-    <div className="min-h-screen bg-ivory text-charcoal">
-      <section className="mx-auto max-w-5xl px-6 py-16">
-        <p className="font-body text-sm uppercase tracking-widest text-gold">N&apos;sK Academy</p>
-        <h1 className="mt-2 font-display text-3xl text-charcoal">{course.title}</h1>
+    <div className="text-charcoal">
+      <section className="mx-auto max-w-5xl px-6 py-14">
+        <p className="font-body text-sm uppercase tracking-widest text-gold">Tutor AI · Corsi</p>
+        <h1 className="mt-2 font-display text-display-md text-charcoal">{course.title}</h1>
 
         <div className="mt-10">
           <LessonPlayer lessons={lessons ?? []} initialProgress={progress ?? []} />

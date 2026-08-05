@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { ChevronLeft } from "lucide-react";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { notFound } from "next/navigation";
 import { RecipeDetail } from "@/components/recipes/RecipeDetail";
@@ -30,20 +32,36 @@ export default async function RicettaPage({ params }: Props) {
   const isOwner = user?.id === recipe.owner_id;
   if (recipe.visibility !== "public" && !isOwner) return notFound();
 
+  // Query separate + Map, non join embedded: il client Supabase senza tipi
+  // generati non distingue relazioni 1:1 da array (convenzione di progetto).
   const { data: ingredientLines } = await supabase
     .from("recipe_ingredients")
-    .select("id, quantity, unit, ingredients(name)")
+    .select("id, ingredient_id, quantity, unit")
     .eq("recipe_id", recipe.id)
     .order("position", { ascending: true });
 
+  const ingredientIds = [...new Set((ingredientLines ?? []).map((line) => line.ingredient_id))];
+  const { data: ingredientRows } = ingredientIds.length
+    ? await supabase.from("ingredients").select("id, name").in("id", ingredientIds)
+    : { data: [] };
+  const ingredientNameById = new Map((ingredientRows ?? []).map((i) => [i.id, i.name]));
+
   return (
-    <div className="min-h-screen bg-ivory px-6 py-16 text-charcoal">
-      <div className="mx-auto max-w-3xl">
+    <div className="mx-auto max-w-3xl px-6 py-14 text-charcoal">
+      <Link
+        href="/ricette"
+        className="inline-flex items-center gap-1 font-body text-sm text-mist transition hover:text-charcoal"
+      >
+        <ChevronLeft size={16} />
+        Le tue ricette
+      </Link>
+
+      <div className="mt-6">
         <RecipeDetail
           recipe={recipe}
           ingredients={(ingredientLines ?? []).map((line) => ({
             id: line.id,
-            name: (line as unknown as { ingredients: { name: string } | null }).ingredients?.name ?? "ingrediente",
+            name: ingredientNameById.get(line.ingredient_id) ?? "ingrediente",
             quantity: line.quantity,
             unit: line.unit,
           }))}
