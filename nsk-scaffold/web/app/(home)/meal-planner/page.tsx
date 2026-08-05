@@ -23,29 +23,39 @@ export default async function MealPlannerPage({ searchParams }: Props) {
 
   const weekStart = week && /^\d{4}-\d{2}-\d{2}$/.test(week) ? week : getMondayOf(new Date());
 
-  let { data: plan } = await supabase
+  const { data: existingPlan } = await supabase
     .from("meal_plans")
     .select("id")
     .eq("user_id", user.id)
     .eq("week_start_date", weekStart)
     .maybeSingle();
 
-  if (!plan) {
+  let planId: string | null = existingPlan?.id ?? null;
+
+  if (!planId) {
     const { data: newPlan } = await supabase
       .from("meal_plans")
       .insert({ user_id: user.id, week_start_date: weekStart, title: "Piano settimanale" })
       .select("id")
       .single();
-    plan = newPlan;
+    planId = newPlan?.id ?? null;
+  }
+
+  if (!planId) {
+    return (
+      <div className="mx-auto max-w-content px-6 py-14 text-charcoal">
+        <p className="font-body text-sm text-smoke">
+          Non è stato possibile aprire il piano di questa settimana. Riprova tra poco.
+        </p>
+      </div>
+    );
   }
 
   const [{ data: entries }, { data: recipes }] = await Promise.all([
-    plan
-      ? supabase
-          .from("meal_plan_entries")
-          .select("id, recipe_id, day_date, meal_slot, servings")
-          .eq("meal_plan_id", plan.id)
-      : Promise.resolve({ data: [] }),
+    supabase
+      .from("meal_plan_entries")
+      .select("id, recipe_id, day_date, meal_slot, servings")
+      .eq("meal_plan_id", planId),
     supabase.from("recipes").select("id, title, servings").eq("owner_id", user.id).order("title"),
   ]);
 
@@ -69,14 +79,12 @@ export default async function MealPlannerPage({ searchParams }: Props) {
       </p>
 
       <div className="mt-10">
-        {plan && (
-          <MealPlannerBoard
-            mealPlanId={plan.id}
-            weekStart={weekStart}
-            entries={entriesWithRecipe}
-            recipes={recipes ?? []}
-          />
-        )}
+        <MealPlannerBoard
+          mealPlanId={planId}
+          weekStart={weekStart}
+          entries={entriesWithRecipe}
+          recipes={recipes ?? []}
+        />
       </div>
     </div>
   );
