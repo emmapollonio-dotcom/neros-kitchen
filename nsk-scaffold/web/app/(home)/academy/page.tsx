@@ -11,7 +11,7 @@ export default async function AcademyPage() {
     .order("created_at", { ascending: false });
 
   return (
-    <main className="min-h-screen bg-ivory text-charcoal">
+    <div className="min-h-screen bg-ivory text-charcoal">
       <section className="mx-auto max-w-5xl px-6 py-16">
         <p className="font-body text-sm uppercase tracking-widest text-gold">N&apos;sK Academy</p>
         <h1 className="mt-2 font-display text-4xl text-charcoal">Corsi di cucina</h1>
@@ -47,6 +47,6 @@ export default async function AcademyPage() {
           ))}
         </div>
       </section>
-    </main>
+    </div>
   );
 }

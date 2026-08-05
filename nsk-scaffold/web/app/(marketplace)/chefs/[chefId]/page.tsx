@@ -26,7 +26,7 @@ export default async function ChefProfilePage({ params }: Props) {
     .limit(20);
 
   return (
-    <main className="min-h-screen bg-ivory text-charcoal">
+    <div className="min-h-screen bg-ivory text-charcoal">
       <section className="mx-auto max-w-4xl px-6 py-16">
         <p className="font-body text-sm uppercase tracking-widest text-gold">
           {chef.specialties?.join(" · ")}
@@ -73,6 +73,6 @@ export default async function ChefProfilePage({ params }: Props) {
           </ul>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

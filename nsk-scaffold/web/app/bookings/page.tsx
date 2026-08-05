@@ -21,7 +21,7 @@ export default async function BookingsPage() {
     .order("event_date", { ascending: true });
 
   return (
-    <main className="min-h-screen bg-ivory px-6 py-16 text-charcoal">
+    <div className="min-h-screen bg-ivory px-6 py-16 text-charcoal">
       <div className="mx-auto max-w-3xl">
         <h1 className="font-display text-3xl">Le tue prenotazioni</h1>
 
@@ -58,6 +58,6 @@ export default async function BookingsPage() {
           ))}
         </ul>
       </div>
-    </main>
+    </div>
   );
 }

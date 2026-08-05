@@ -66,7 +66,7 @@ export async function loginAction(
 
   if (error) return { error: "Credenziali non corrette" };
 
-  const redirectTo = (formData.get("redirect") as string) || "/";
+  const redirectTo = (formData.get("redirect") as string) || "/dashboard";
   redirect(redirectTo);
 }
 

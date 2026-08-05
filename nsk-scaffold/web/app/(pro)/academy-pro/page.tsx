@@ -3,7 +3,7 @@ import { CourseManager } from "@/components/academy/CourseManager";
 // Protetta da middleware.ts (/pro richiede ruolo chef/admin).
 export default function AcademyProPage() {
   return (
-    <main className="min-h-screen bg-ivory px-6 py-16 text-charcoal">
+    <div className="min-h-screen bg-ivory px-6 py-16 text-charcoal">
       <div className="mx-auto max-w-3xl">
         <p className="font-body text-sm uppercase tracking-widest text-gold">N&apos;sK Pro</p>
         <h1 className="mt-2 font-display text-3xl">Academy</h1>
@@ -15,6 +15,6 @@ export default function AcademyProPage() {
           <CourseManager />
         </div>
       </div>
-    </main>
+    </div>
   );
 }

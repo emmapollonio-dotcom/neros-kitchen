@@ -34,7 +34,7 @@ export default function NuovaRicettaPage() {
   }
 
   return (
-    <main className="min-h-screen bg-ivory px-6 py-16 text-charcoal">
+    <div className="min-h-screen bg-ivory px-6 py-16 text-charcoal">
       <div className="mx-auto max-w-xl">
         <h1 className="font-display text-3xl">Nuova ricetta</h1>
 
@@ -89,6 +89,6 @@ export default function NuovaRicettaPage() {
           </button>
         </form>
       </div>
-    </main>
+    </div>
   );
 }

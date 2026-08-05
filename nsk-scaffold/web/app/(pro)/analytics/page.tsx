@@ -31,7 +31,7 @@ export default async function AnalyticsPage() {
   const totalBookings = (revenueByMonth ?? []).reduce((sum, r) => sum + Number(r.bookings_count ?? 0), 0);
 
   return (
-    <main className="min-h-screen bg-ivory px-6 py-16 text-charcoal">
+    <div className="min-h-screen bg-ivory px-6 py-16 text-charcoal">
       <div className="mx-auto max-w-4xl">
         <p className="font-body text-sm uppercase tracking-widest text-gold">N&apos;sK Pro</p>
         <h1 className="mt-2 font-display text-3xl">Analytics</h1>
@@ -75,7 +75,7 @@ export default async function AnalyticsPage() {
           </tbody>
         </table>
       </div>
-    </main>
+    </div>
   );
 }
 

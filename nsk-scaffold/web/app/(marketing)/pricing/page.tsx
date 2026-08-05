@@ -10,7 +10,7 @@ export default async function PricingPage() {
     .order("price_monthly", { ascending: true });
 
   return (
-    <main className="min-h-screen bg-ivory px-6 py-20 text-charcoal">
+    <div className="min-h-screen bg-ivory px-6 py-20 text-charcoal">
       <div className="mx-auto max-w-5xl text-center">
         <h1 className="font-display text-4xl">Piani semplici, senza sorprese</h1>
         <p className="mt-3 font-body text-smoke">
@@ -47,6 +47,6 @@ export default async function PricingPage() {
           </div>
         ))}
       </div>
-    </main>
+    </div>
   );
 }

@@ -1,6 +1,6 @@
 export default function PrivacyPage() {
   return (
-    <main className="min-h-screen bg-ivory px-6 py-16 text-charcoal">
+    <div className="min-h-screen bg-ivory px-6 py-16 text-charcoal">
       <div className="mx-auto max-w-3xl">
         <h1 className="font-display text-3xl">Informativa sulla privacy</h1>
         <p className="mt-2 font-body text-sm text-smoke">
@@ -177,6 +177,6 @@ export default function PrivacyPage() {
           </section>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

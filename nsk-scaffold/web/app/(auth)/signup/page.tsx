@@ -9,7 +9,7 @@ export default function SignupPage() {
   const [state, formAction, pending] = useActionState(signUpAction, initialState);
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-ivory px-6">
+    <div className="flex min-h-screen items-center justify-center bg-ivory px-6">
       <div className="w-full max-w-sm">
         <h1 className="font-display text-3xl text-charcoal">Crea il tuo account</h1>
         <p className="mt-2 font-body text-sm text-smoke">
@@ -91,6 +91,6 @@ export default function SignupPage() {
           </a>
         </p>
       </div>
-    </main>
+    </div>
   );
 }

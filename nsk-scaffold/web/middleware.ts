@@ -26,7 +26,11 @@ const ROLE_GUARDS: Array<{ prefix: string; roles: Array<"customer" | "chef" | "a
   // N'sK Home
   { prefix: "/tutor-ai", roles: ["customer", "chef", "admin"] },
   { prefix: "/zero-waste", roles: ["customer", "chef", "admin"] },
+  { prefix: "/meal-planner", roles: ["customer", "chef", "admin"] },
+  { prefix: "/lista-spesa", roles: ["customer", "chef", "admin"] },
   { prefix: "/bookings", roles: ["customer", "chef", "admin"] },
+  // Dashboard personale post-login
+  { prefix: "/dashboard", roles: ["customer", "chef", "admin"] },
 ];
 
 export async function middleware(request: NextRequest) {

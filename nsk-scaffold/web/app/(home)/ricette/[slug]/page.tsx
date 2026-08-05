@@ -37,7 +37,7 @@ export default async function RicettaPage({ params }: Props) {
     .order("position", { ascending: true });
 
   return (
-    <main className="min-h-screen bg-ivory px-6 py-16 text-charcoal">
+    <div className="min-h-screen bg-ivory px-6 py-16 text-charcoal">
       <div className="mx-auto max-w-3xl">
         <RecipeDetail
           recipe={recipe}
@@ -50,6 +50,6 @@ export default async function RicettaPage({ params }: Props) {
           isOwner={isOwner}
         />
       </div>
-    </main>
+    </div>
   );
 }

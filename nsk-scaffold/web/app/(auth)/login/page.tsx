@@ -23,7 +23,7 @@ function LoginForm() {
   const [state, formAction, pending] = useActionState(loginAction, initialState);
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-ivory px-6">
+    <div className="flex min-h-screen items-center justify-center bg-ivory px-6">
       <div className="w-full max-w-sm">
         <h1 className="font-display text-3xl text-charcoal">Accedi a N&apos;sK</h1>
         <p className="mt-2 font-body text-sm text-smoke">
@@ -94,6 +94,6 @@ function LoginForm() {
           </a>
         </p>
       </div>
-    </main>
+    </div>
   );
 }

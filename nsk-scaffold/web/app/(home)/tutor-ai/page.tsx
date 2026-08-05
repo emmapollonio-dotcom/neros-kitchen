@@ -9,7 +9,7 @@ export default function TutorAiPage() {
   const [state, formAction, pending] = useActionState(askChefAssistant, initialState);
 
   return (
-    <main className="min-h-screen bg-ivory px-6 py-16 text-charcoal">
+    <div className="min-h-screen bg-ivory px-6 py-16 text-charcoal">
       <div className="mx-auto max-w-2xl">
         <p className="font-body text-sm uppercase tracking-widest text-gold">Tutor AI</p>
         <h1 className="mt-2 font-display text-3xl">Chiedi al Chef Assistant</h1>
@@ -44,6 +44,6 @@ export default function TutorAiPage() {
           </div>
         )}
       </div>
-    </main>
+    </div>
   );
 }

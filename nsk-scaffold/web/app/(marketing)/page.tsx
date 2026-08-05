@@ -1,33 +1,20 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
+import { getCurrentUserInfo } from "@/lib/auth/get-current-user";
 
 const MODULES = [
   { name: "Marketplace", desc: "Trova e prenota chef privati verificati per il tuo evento." },
   { name: "Food Cost", desc: "Calcola costi, margini e prezzi di vendita in tempo reale." },
   { name: "Zero Waste AI", desc: "Trasforma gli scarti in nuove ricette, non in rifiuti." },
-  { name: "Academy", desc: "Corsi e certificazioni dai migliori professionisti del settore." },
+  { name: "Tutor AI & corsi", desc: "Guida personalizzata e formazione dai migliori professionisti." },
 ];
 
-export default function HomePage() {
-  return (
-    <main className="min-h-screen bg-ivory text-charcoal">
-      <header className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
-        <span className="font-display text-xl tracking-wide">Nero&apos;s Kitchen</span>
-        <nav className="flex items-center gap-6 font-body text-sm">
-          <Link href="/pricing" className="text-smoke hover:text-charcoal">
-            Prezzi
-          </Link>
-          <Link href="/login" className="text-smoke hover:text-charcoal">
-            Accedi
-          </Link>
-          <Link
-            href="/signup"
-            className="rounded-nsk bg-charcoal px-4 py-2 text-ivory hover:bg-gold hover:text-charcoal"
-          >
-            Inizia gratis
-          </Link>
-        </nav>
-      </header>
+export default async function HomePage() {
+  const user = await getCurrentUserInfo();
+  if (user) redirect("/dashboard");
 
+  return (
+    <>
       <section className="mx-auto max-w-4xl px-6 py-24 text-center">
         <p className="font-body text-sm uppercase tracking-[0.2em] text-gold">
           Per chef, ristoranti, catering e scuole di cucina
@@ -65,6 +52,6 @@ export default function HomePage() {
           ))}
         </div>
       </section>
-    </main>
+    </>
   );
 }

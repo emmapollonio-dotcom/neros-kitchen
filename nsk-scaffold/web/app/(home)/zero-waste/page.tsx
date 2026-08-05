@@ -6,7 +6,7 @@ import { WasteTracker } from "@/components/waste/WasteTracker";
 // "waste_items_owner": questa è solo la UX di redirect per anonimi.
 export default function ZeroWastePage() {
   return (
-    <main className="min-h-screen bg-ivory px-6 py-16 text-charcoal">
+    <div className="min-h-screen bg-ivory px-6 py-16 text-charcoal">
       <div className="mx-auto max-w-4xl">
         <p className="font-body text-sm uppercase tracking-widest text-gold">N&apos;sK Zero Waste</p>
         <h1 className="mt-2 font-display text-3xl">Riduci gli sprechi</h1>
@@ -19,6 +19,6 @@ export default function ZeroWastePage() {
           <WasteTracker />
         </div>
       </div>
-    </main>
+    </div>
   );
 }

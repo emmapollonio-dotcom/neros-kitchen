@@ -42,7 +42,7 @@ export default async function CourseDetailPage({ params }: Props) {
   }
 
   return (
-    <main className="min-h-screen bg-ivory text-charcoal">
+    <div className="min-h-screen bg-ivory text-charcoal">
       <section className="mx-auto max-w-3xl px-6 py-16">
         <p className="font-body text-sm uppercase tracking-widest text-gold">
           {course.level ?? "tutti i livelli"} · {course.language}
@@ -84,6 +84,6 @@ export default async function CourseDetailPage({ params }: Props) {
           </ol>
         </div>
       </section>
-    </main>
+    </div>
   );
 }
