@@ -2,6 +2,7 @@ import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { TabSwitcher } from "@/components/layout/TabSwitcher";
 import { ChefAssistantForm } from "@/components/tutor-ai/ChefAssistantForm";
 import { CourseCatalog } from "@/components/tutor-ai/CourseCatalog";
+import { SectionBanner } from "@/components/layout/SectionBanner";
 
 // Server Component — hub di apprendimento unico stile MasterClass: guida AI
 // personalizzata (Chef Assistant) + corsi strutturati con chef ospiti
@@ -17,6 +18,7 @@ export default async function TutorAiPage() {
 
   return (
     <div className="mx-auto max-w-content px-6 py-14 text-ivory">
+      <SectionBanner image="/images/marketing/chef-plating.webp" />
       <p className="font-body text-sm uppercase tracking-widest text-gold">N&apos;sK Home</p>
       <h1 className="mt-2 font-display text-display-md text-ivory">Tutor AI</h1>
       <p className="mt-2 max-w-xl font-body text-ivory/70">

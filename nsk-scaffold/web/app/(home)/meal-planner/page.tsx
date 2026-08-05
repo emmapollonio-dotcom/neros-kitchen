@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { getMondayOf } from "@/lib/meal-plan/week";
 import { MealPlannerBoard } from "@/components/meal-planner/MealPlannerBoard";
+import { SectionBanner } from "@/components/layout/SectionBanner";
 
 interface Props {
   searchParams: Promise<{ week?: string }>;
@@ -72,6 +73,7 @@ export default async function MealPlannerPage({ searchParams }: Props) {
 
   return (
     <div className="mx-auto max-w-content px-6 py-14 text-ivory">
+      <SectionBanner image="/images/marketing/ingredients-flatlay.webp" />
       <p className="font-body text-sm uppercase tracking-widest text-gold">N&apos;sK Home</p>
       <h1 className="mt-2 font-display text-display-md text-ivory">Meal Planner</h1>
       <p className="mt-2 max-w-xl font-body text-ivory/70">

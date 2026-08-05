@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { ChefListClient } from "@/components/marketplace/ChefListClient";
+import { SectionBanner } from "@/components/layout/SectionBanner";
 
 export const dynamic = "force-dynamic";
 
@@ -16,6 +17,7 @@ export default async function ChefsMarketplacePage() {
 
   return (
     <div className="mx-auto max-w-content px-6 py-14">
+      <SectionBanner image="/images/marketing/chef-plating.webp" />
       <p className="font-body text-sm uppercase tracking-widest text-gold">Marketplace</p>
       <h1 className="mt-2 font-display text-display-md text-ivory">Trova il tuo chef</h1>
       <p className="mt-3 max-w-xl font-body text-ivory/70">

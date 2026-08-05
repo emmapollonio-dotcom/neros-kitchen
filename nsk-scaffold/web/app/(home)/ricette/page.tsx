@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Plus } from "lucide-react";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
+import { SectionBanner } from "@/components/layout/SectionBanner";
 
 export const dynamic = "force-dynamic";
 
@@ -24,6 +25,7 @@ export default async function RicetteIndexPage() {
 
   return (
     <div className="mx-auto max-w-content px-6 py-14 text-ivory">
+      <SectionBanner image="/images/marketing/hero-risotto.webp" />
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <p className="font-body text-sm uppercase tracking-widest text-gold">N&apos;sK Home</p>

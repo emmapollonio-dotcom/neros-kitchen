@@ -2,6 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { ShoppingListBoard } from "@/components/meal-planner/ShoppingListBoard";
+import { SectionBanner } from "@/components/layout/SectionBanner";
 
 interface Props {
   searchParams: Promise<{ list?: string }>;
@@ -28,6 +29,7 @@ export default async function ListaSpesaPage({ searchParams }: Props) {
   if (!lists || lists.length === 0) {
     return (
       <div className="mx-auto max-w-content px-6 py-14 text-ivory">
+        <SectionBanner image="/images/marketing/ingredients-flatlay.webp" />
         <p className="font-body text-sm uppercase tracking-widest text-gold">N&apos;sK Home</p>
         <h1 className="mt-2 font-display text-display-md text-ivory">Lista della spesa</h1>
 
@@ -65,6 +67,7 @@ export default async function ListaSpesaPage({ searchParams }: Props) {
 
   return (
     <div className="mx-auto max-w-3xl px-6 py-14 text-ivory">
+      <SectionBanner image="/images/marketing/ingredients-flatlay.webp" />
       <p className="font-body text-sm uppercase tracking-widest text-gold">N&apos;sK Home</p>
       <h1 className="mt-2 font-display text-display-md text-ivory">{activeList.title}</h1>
 

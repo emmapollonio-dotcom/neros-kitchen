@@ -1,6 +1,7 @@
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { SocialStudio } from "@/components/social/SocialStudio";
 import { TabSwitcher } from "@/components/layout/TabSwitcher";
+import { SectionBanner } from "@/components/layout/SectionBanner";
 
 // Protetta da middleware.ts (/analytics). Legge dalla view v_booking_revenue
 // (schema.sql, Step 4) — nessuna aggregazione duplicata lato applicazione.
@@ -78,6 +79,7 @@ export default async function AnalyticsPage() {
 
   return (
     <div className="mx-auto max-w-content px-6 py-14 text-ivory">
+      <SectionBanner image="/images/marketing/dining-event.webp" />
       <p className="font-body text-sm uppercase tracking-widest text-gold">N&apos;sK Pro</p>
       <h1 className="mt-2 font-display text-display-md text-ivory">Analytics</h1>
 

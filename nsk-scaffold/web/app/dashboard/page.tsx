@@ -2,6 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { NSK_HOME_ITEMS, NSK_PRO_ITEMS } from "@/lib/nav/pillars";
+import { SectionBanner } from "@/components/layout/SectionBanner";
 
 const STATUS_LABELS: Record<string, string> = {
   requested: "In attesa di conferma",
@@ -75,6 +76,7 @@ export default async function DashboardPage() {
 
   return (
     <div className="mx-auto max-w-content px-6 py-14">
+      <SectionBanner image="/images/marketing/hero-risotto.webp" />
       <p className="font-body text-sm text-ivory/50">{greeting}</p>
       <h1 className="mt-1 font-display text-display-md text-ivory">
         {firstName ? `Ciao, ${firstName}` : "Bentornato"}

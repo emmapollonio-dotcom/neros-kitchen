@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
+import { SectionBanner } from "@/components/layout/SectionBanner";
 
 export default function NuovaRicettaPage() {
   const router = useRouter();
@@ -37,6 +38,7 @@ export default function NuovaRicettaPage() {
 
   return (
     <div className="mx-auto max-w-xl px-6 py-14 text-ivory">
+      <SectionBanner image="/images/marketing/hero-risotto.webp" />
       <Link
         href="/ricette"
         className="inline-flex items-center gap-1 font-body text-sm text-ivory/50 transition hover:text-ivory"
