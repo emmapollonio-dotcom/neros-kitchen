@@ -81,6 +81,24 @@ Deno.serve(async (req: Request) => {
     );
   }
 
+  // Rate limiting: protegge dai costi OpenAI in caso di abuso/loop.
+  // Due finestre indipendenti: una stretta anti-burst (chiamate ravvicinate,
+  // es. un loop bacato lato client) e una oraria più larga per l'uso normale.
+  const burstOk = await checkRateLimit(supabase, `ai_burst:${user.id}`, 6, 60);
+  if (!burstOk) {
+    return jsonResponse(
+      { data: null, error: "troppe richieste in poco tempo, riprova tra qualche secondo", meta: null },
+      429
+    );
+  }
+  const hourlyOk = await checkRateLimit(supabase, `ai_hourly:${user.id}`, 30, 3600);
+  if (!hourlyOk) {
+    return jsonResponse(
+      { data: null, error: "hai raggiunto il limite di richieste AI per quest'ora, riprova più tardi", meta: null },
+      429
+    );
+  }
+
   const toolCtx: ToolContext = { supabase, userId: user.id };
 
   const messages: any[] = [
@@ -176,6 +194,27 @@ async function logAiCall(
     tokens_used: tokens,
     latency_ms: latencyMs,
   });
+}
+
+// Wrapper attorno a public.check_rate_limit (SECURITY DEFINER, vedi migration
+// add_rate_limiting): fail-open se l'RPC stessa fallisce, per non bloccare
+// utenti legittimi a causa di un problema infrastrutturale del rate limiter.
+async function checkRateLimit(
+  supabase: any,
+  key: string,
+  maxRequests: number,
+  windowSeconds: number
+): Promise<boolean> {
+  const { data, error } = await supabase.rpc("check_rate_limit", {
+    p_key: key,
+    p_max_requests: maxRequests,
+    p_window_seconds: windowSeconds,
+  });
+  if (error) {
+    console.error("rate_limit_check_failed", error);
+    return true;
+  }
+  return data === true;
 }
 
 function jsonResponse(body: unknown, status: number) {
