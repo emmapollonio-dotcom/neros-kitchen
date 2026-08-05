@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Montserrat } from "next/font/google";
+import { CookieConsentBanner } from "@/components/legal/CookieConsentBanner";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -23,7 +24,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="it" className={`${playfair.variable} ${montserrat.variable}`}>
-      <body className="font-body">{children}</body>
+      <body className="font-body">
+        {children}
+        <CookieConsentBanner />
+      </body>
     </html>
   );
 }

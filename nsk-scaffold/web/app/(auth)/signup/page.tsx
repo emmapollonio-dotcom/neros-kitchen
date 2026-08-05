@@ -70,6 +70,18 @@ export default function SignupPage() {
           >
             {pending ? "Creazione account..." : "Registrati"}
           </button>
+
+          <p className="text-center font-body text-xs text-smoke">
+            Registrandoti accetti i{" "}
+            <a href="/termini" className="underline hover:text-gold">
+              Termini di servizio
+            </a>{" "}
+            e l&apos;
+            <a href="/privacy" className="underline hover:text-gold">
+              Informativa privacy
+            </a>
+            .
+          </p>
         </form>
 
         <p className="mt-6 text-center font-body text-sm text-smoke">
