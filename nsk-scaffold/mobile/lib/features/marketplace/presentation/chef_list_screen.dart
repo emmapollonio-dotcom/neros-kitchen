@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../data/chef_repository.dart';
 import '../domain/chef.dart';
+import '../../../core/database/database_provider.dart';
 import '../../../core/theme/colors.dart';
+import '../../../core/widgets/offline_banner.dart';
 
-final chefRepositoryProvider = Provider((ref) => ChefRepository());
+final chefRepositoryProvider = Provider((ref) => ChefRepository(ref.watch(appDatabaseProvider)));
 
 final chefListProvider = FutureProvider<List<Chef>>((ref) {
   return ref.watch(chefRepositoryProvider).searchChefs();
@@ -22,20 +24,27 @@ class ChefListScreen extends ConsumerWidget {
         backgroundColor: NskColors.ivory,
         title: const Text("Nero's Kitchen"),
       ),
-      body: chefsAsync.when(
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (err, _) => Center(child: Text('Errore: $err')),
-        data: (chefs) => ListView.builder(
-          itemCount: chefs.length,
-          itemBuilder: (context, i) {
-            final chef = chefs[i];
-            return ListTile(
-              title: Text(chef.businessName ?? chef.fullName),
-              subtitle: Text('★ ${chef.ratingAvg} (${chef.ratingCount})'),
-              trailing: Text(chef.languages.join(', ')),
-            );
-          },
-        ),
+      body: Column(
+        children: [
+          const OfflineBanner(),
+          Expanded(
+            child: chefsAsync.when(
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (err, _) => Center(child: Text('Errore: $err')),
+              data: (chefs) => ListView.builder(
+                itemCount: chefs.length,
+                itemBuilder: (context, i) {
+                  final chef = chefs[i];
+                  return ListTile(
+                    title: Text(chef.businessName ?? chef.fullName),
+                    subtitle: Text('★ ${chef.ratingAvg} (${chef.ratingCount})'),
+                    trailing: Text(chef.languages.join(', ')),
+                  );
+                },
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

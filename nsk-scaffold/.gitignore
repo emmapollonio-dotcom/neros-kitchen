@@ -27,6 +27,10 @@ npm-debug.log*
 mobile/.dart_tool/
 mobile/.packages
 mobile/build/
+# generati da drift_dev/riverpod_generator (dart run build_runner build):
+# vanno rigenerati in locale/CI, non committati, per evitare che sorgente e
+# codice generato divergano.
+mobile/**/*.g.dart
 
 # supabase CLI cache locale
 supabase/.temp/

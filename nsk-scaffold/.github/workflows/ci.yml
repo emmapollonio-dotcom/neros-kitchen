@@ -49,6 +49,9 @@ jobs:
           # allineati a quanto usato in locale dagli sviluppatori.
           channel: stable
       - run: flutter pub get
+      # Genera app_database.g.dart (drift) e i provider *.g.dart
+      # (riverpod_generator): non committati di proposito, vedi .gitignore.
+      - run: dart run build_runner build --delete-conflicting-outputs
       - run: flutter analyze
       - run: flutter test
 

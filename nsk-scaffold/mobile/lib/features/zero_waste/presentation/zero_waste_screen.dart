@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../data/waste_repository.dart';
 import '../domain/waste_item.dart';
+import '../../../core/database/database_provider.dart';
 import '../../../core/theme/colors.dart';
+import '../../../core/widgets/offline_banner.dart';
 
-final wasteRepositoryProvider = Provider((ref) => WasteRepository());
+final wasteRepositoryProvider = Provider((ref) => WasteRepository(ref.watch(appDatabaseProvider)));
 
 final myWasteItemsProvider = FutureProvider<List<WasteItem>>((ref) {
   return ref.watch(wasteRepositoryProvider).myWasteItems();
@@ -27,32 +29,39 @@ class ZeroWasteScreen extends ConsumerWidget {
         onPressed: () => _showAddDialog(context, ref),
         child: const Icon(Icons.add, color: NskColors.ivory),
       ),
-      body: RefreshIndicator(
-        onRefresh: () => ref.refresh(myWasteItemsProvider.future),
-        child: itemsAsync.when(
-          loading: () => const Center(child: CircularProgressIndicator()),
-          error: (err, _) => Center(child: Text('Errore: $err')),
-          data: (items) {
-            if (items.isEmpty) {
-              return ListView(
-                children: const [
-                  SizedBox(height: 80),
-                  Center(child: Text('Nessuno spreco registrato ancora.')),
-                ],
-              );
-            }
-            return ListView.builder(
-              itemCount: items.length,
-              itemBuilder: (context, i) {
-                final item = items[i];
-                return ListTile(
-                  title: Text('${item.quantity} ${item.unit} — ${item.ingredientName}'),
-                  subtitle: item.reason != null ? Text(item.reason!) : null,
-                );
-              },
-            );
-          },
-        ),
+      body: Column(
+        children: [
+          const OfflineBanner(),
+          Expanded(
+            child: RefreshIndicator(
+              onRefresh: () => ref.refresh(myWasteItemsProvider.future),
+              child: itemsAsync.when(
+                loading: () => const Center(child: CircularProgressIndicator()),
+                error: (err, _) => Center(child: Text('Errore: $err')),
+                data: (items) {
+                  if (items.isEmpty) {
+                    return ListView(
+                      children: const [
+                        SizedBox(height: 80),
+                        Center(child: Text('Nessuno spreco registrato ancora.')),
+                      ],
+                    );
+                  }
+                  return ListView.builder(
+                    itemCount: items.length,
+                    itemBuilder: (context, i) {
+                      final item = items[i];
+                      return ListTile(
+                        title: Text('${item.quantity} ${item.unit} — ${item.ingredientName}'),
+                        subtitle: item.reason != null ? Text(item.reason!) : null,
+                      );
+                    },
+                  );
+                },
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
