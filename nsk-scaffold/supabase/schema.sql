@@ -105,6 +105,11 @@ create table if not exists public.ingredients (
   created_at timestamptz not null default now()
 );
 
+-- Assente dalla definizione originale: senza un indice unique, il seed più
+-- sotto non ha un target per "on conflict" e ogni re-run duplicherebbe le
+-- righe. Case-insensitive perché il catalogo è inserito/curato a mano.
+create unique index if not exists ingredients_name_lower_idx on public.ingredients (lower(name));
+
 create table if not exists public.recipe_ingredients (
   id uuid primary key default gen_random_uuid(),
   recipe_id uuid not null references public.recipes(id) on delete cascade,
@@ -711,3 +716,66 @@ where code = 'pro_growth';
 update public.plans
 set features = features || '{"haccp": true}'::jsonb
 where code = 'pro_growth';
+
+-- ---------- SEED (catalogo ingredienti base) ----------
+-- Prezzi medi di mercato italiano indicativi (2026), NON i costi reali dei
+-- tuoi fornitori: servono a sbloccare Food Cost e Zero Waste con dati
+-- plausibili da subito. Vanno verificati e corretti con le fatture vere —
+-- al momento non esiste una UI per modificarli, l'unica scrittura possibile
+-- su public.ingredients è questo seed (nessuna policy RLS di insert/update
+-- è definita, solo "ingredients_public_read" per la lettura).
+insert into public.ingredients (name, category, default_unit, avg_cost_per_unit, allergens, is_scrap_reusable)
+values
+  ('Pollo (petto)', 'Carne', 'kg', 8.50, '{}', false),
+  ('Pollo (intero)', 'Carne', 'kg', 4.50, '{}', false),
+  ('Manzo (controfiletto)', 'Carne', 'kg', 22.00, '{}', false),
+  ('Manzo (macinato)', 'Carne', 'kg', 11.00, '{}', false),
+  ('Maiale (lonza)', 'Carne', 'kg', 9.50, '{}', false),
+  ('Vitello (scaloppine)', 'Carne', 'kg', 24.00, '{}', false),
+  ('Agnello (cosciotto)', 'Carne', 'kg', 16.00, '{}', false),
+  ('Guanciale', 'Carne', 'kg', 18.00, '{}', false),
+  ('Pancetta', 'Carne', 'kg', 10.00, '{}', false),
+  ('Branzino (intero)', 'Pesce', 'kg', 14.00, '{pesce}', false),
+  ('Salmone (filetto)', 'Pesce', 'kg', 21.00, '{pesce}', false),
+  ('Gamberi', 'Pesce', 'kg', 26.00, '{crostacei}', false),
+  ('Cozze', 'Pesce', 'kg', 5.50, '{molluschi}', false),
+  ('Tonno (filetto)', 'Pesce', 'kg', 28.00, '{pesce}', false),
+  ('Baccalà', 'Pesce', 'kg', 15.00, '{pesce}', false),
+  ('Pomodori', 'Verdure', 'kg', 2.20, '{}', true),
+  ('Cipolle', 'Verdure', 'kg', 1.10, '{}', true),
+  ('Carote', 'Verdure', 'kg', 1.30, '{}', true),
+  ('Sedano', 'Verdure', 'kg', 1.50, '{sedano}', true),
+  ('Patate', 'Verdure', 'kg', 1.00, '{}', true),
+  ('Zucchine', 'Verdure', 'kg', 2.00, '{}', true),
+  ('Melanzane', 'Verdure', 'kg', 2.30, '{}', true),
+  ('Peperoni', 'Verdure', 'kg', 3.00, '{}', true),
+  ('Spinaci', 'Verdure', 'kg', 3.50, '{}', true),
+  ('Funghi porcini', 'Verdure', 'kg', 25.00, '{}', true),
+  ('Funghi champignon', 'Verdure', 'kg', 4.50, '{}', true),
+  ('Aglio', 'Verdure', 'kg', 5.00, '{}', true),
+  ('Basilico', 'Erbe', 'mazzo', 1.50, '{}', true),
+  ('Prezzemolo', 'Erbe', 'mazzo', 1.20, '{}', true),
+  ('Rosmarino', 'Erbe', 'mazzo', 1.20, '{}', true),
+  ('Limoni', 'Frutta', 'kg', 2.50, '{}', true),
+  ('Arance', 'Frutta', 'kg', 2.00, '{}', true),
+  ('Mele', 'Frutta', 'kg', 2.20, '{}', true),
+  ('Zafferano', 'Spezie', 'g', 15.00, '{}', false),
+  ('Burro', 'Latticini', 'kg', 8.00, '{lattosio}', false),
+  ('Panna fresca', 'Latticini', 'L', 5.50, '{lattosio}', false),
+  ('Parmigiano Reggiano', 'Latticini', 'kg', 16.00, '{lattosio}', false),
+  ('Mozzarella di bufala', 'Latticini', 'kg', 12.00, '{lattosio}', false),
+  ('Ricotta', 'Latticini', 'kg', 6.50, '{lattosio}', false),
+  ('Latte', 'Latticini', 'L', 1.30, '{lattosio}', false),
+  ('Uova', 'Uova', 'pz', 0.35, '{uova}', false),
+  ('Farina 00', 'Cereali', 'kg', 1.20, '{glutine}', false),
+  ('Farina di semola', 'Cereali', 'kg', 1.50, '{glutine}', false),
+  ('Riso Carnaroli', 'Cereali', 'kg', 3.80, '{}', false),
+  ('Pasta secca', 'Cereali', 'kg', 2.20, '{glutine}', false),
+  ('Pane', 'Cereali', 'kg', 3.50, '{glutine}', true),
+  ('Olio extravergine di oliva', 'Condimenti', 'L', 9.50, '{}', false),
+  ('Aceto balsamico', 'Condimenti', 'L', 12.00, '{}', false),
+  ('Sale', 'Condimenti', 'kg', 1.00, '{}', false),
+  ('Pepe nero', 'Condimenti', 'kg', 25.00, '{}', false),
+  ('Zucchero', 'Condimenti', 'kg', 1.50, '{}', false),
+  ('Vino bianco da cucina', 'Condimenti', 'L', 4.50, '{solfiti}', false)
+on conflict (lower(name)) do nothing;
