@@ -6,6 +6,16 @@ interface Params {
   params: Promise<{ id: string }>;
 }
 
+// Shape della riga restituita dalla select con join qui sotto: senza tipi
+// Database generati (`generate_typescript_types`, non usato in questo
+// scaffold), Supabase-js tipizza il join come `any` — lo tipizziamo qui a
+// mano invece di disabilitare la regola lint.
+interface RecipeIngredientLine {
+  quantity: number;
+  unit: string;
+  ingredients: { name: string; allergens: string[] | null } | null;
+}
+
 // POST /api/v1/recipes/{id}/detect-allergens — invoca l'agente
 // allergen_advisor sugli ingredienti collegati alla ricetta. L'agente salva
 // da sé allergens + allergen_notes tramite il tool save_allergen_analysis.
@@ -54,9 +64,9 @@ export async function POST(_req: NextRequest, { params }: Params) {
   const input = JSON.stringify({
     recipe_id: recipe.id,
     title: recipe.title,
-    ingredients: lines.map((l) => ({
-      name: (l as any).ingredients?.name ?? "sconosciuto",
-      known_allergens: (l as any).ingredients?.allergens ?? [],
+    ingredients: (lines as unknown as RecipeIngredientLine[]).map((l) => ({
+      name: l.ingredients?.name ?? "sconosciuto",
+      known_allergens: l.ingredients?.allergens ?? [],
       quantity: l.quantity,
       unit: l.unit,
     })),

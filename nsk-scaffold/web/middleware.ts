@@ -30,7 +30,7 @@ const ROLE_GUARDS: Array<{ prefix: string; roles: Array<"customer" | "chef" | "a
 ];
 
 export async function middleware(request: NextRequest) {
-  let response = NextResponse.next({ request: { headers: request.headers } });
+  const response = NextResponse.next({ request: { headers: request.headers } });
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,

@@ -52,18 +52,35 @@ jobs:
       - run: flutter analyze
       - run: flutter test
 
-  # Applica le migration sul progetto Supabase di STAGING solo dopo che
-  # verify-schema + web + mobile sono passati. Il deploy su PROD (Step 11,
-  # sezione CI/CD) è un job separato triggerato solo su merge a main, con
-  # approvazione manuale — non incluso qui per evitare deploy accidentali
-  # da uno scaffold di partenza.
-  migration-dry-run:
-    name: Supabase migration dry-run (staging)
+  # Deploy automatico dell'Agent Orchestrator (Edge Function) sul merge a
+  # main, dopo che verify-schema + web + mobile sono passati. Sostituisce il
+  # deploy manuale fatto finora via Supabase MCP/CLI. Rischio basso: è codice
+  # stateless, un rollback è semplicemente un nuovo deploy della versione
+  # precedente da git. Richiede il secret SUPABASE_ACCESS_TOKEN (vedi
+  # CI-CD-SETUP.md).
+  deploy-edge-function:
+    name: Deploy Agent Orchestrator (prod)
     runs-on: ubuntu-latest
-    needs: [verify-schema, web]
-    if: github.event_name == 'pull_request'
+    needs: [verify-schema, web, mobile]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v4
-      - name: Placeholder — richiede SUPABASE_ACCESS_TOKEN e progetto staging configurati
-        run: |
-          echo "Configurare supabase/setup-cli + 'supabase db push --dry-run' con i secrets del progetto staging."
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+      - name: Deploy agent-orchestrator
+        working-directory: supabase
+        run: supabase functions deploy agent-orchestrator --project-ref xjvrhoweghzfvwjsvwla
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+
+  # NOTA sulle migration DB: a differenza dell'Edge Function, l'apply dello
+  # schema Postgres NON è automatizzato in CI, di proposito. Non esiste un
+  # progetto Supabase di staging separato dal produzione (vedi MIGRAZIONI.md
+  # per come vengono gestiti oggi i cambi di schema): applicare
+  # automaticamente su ogni merge modifiche scritte da un'AI a un database
+  # con prenotazioni e pagamenti reali, senza un ambiente di prova
+  # intermedio, è un rischio che vale la pena tenere come passo manuale
+  # deliberato piuttosto che automatizzare "per completezza". `verify-schema`
+  # sopra resta comunque il controllo automatico statico (RLS, FK, sintassi)
+  # su ogni push/PR.
