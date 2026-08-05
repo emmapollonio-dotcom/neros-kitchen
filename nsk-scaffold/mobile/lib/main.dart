@@ -14,7 +14,9 @@ Future<void> main() async {
 
   await Supabase.initialize(
     url: const String.fromEnvironment('SUPABASE_URL'),
-    anonKey: const String.fromEnvironment('SUPABASE_ANON_KEY'),
+    // supabase_flutter 2.17+: `anonKey` è deprecato a favore di `publishableKey`,
+    // ma il valore accettato resta la stessa chiave (anon key del progetto).
+    publishableKey: const String.fromEnvironment('SUPABASE_ANON_KEY'),
   );
 
   runApp(const ProviderScope(child: NskApp()));
