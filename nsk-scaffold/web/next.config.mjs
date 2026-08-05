@@ -3,6 +3,18 @@ import { withSentryConfig } from "@sentry/nextjs";
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  images: {
+    // Foto piatti caricate su Supabase Storage (bucket "recipe-photos",
+    // vedi MediaGallery.tsx) — next/image le ottimizza solo se l'host è
+    // esplicitamente autorizzato.
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "xjvrhoweghzfvwjsvwla.supabase.co",
+        pathname: "/storage/v1/object/public/**",
+      },
+    ],
+  },
 };
 
 // withSentryConfig aggiunge l'upload dei sourcemap al build solo se

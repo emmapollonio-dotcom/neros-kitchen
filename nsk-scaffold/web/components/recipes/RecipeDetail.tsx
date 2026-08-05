@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
+import { MediaGallery } from "@/components/dashboard/MediaGallery";
 
 interface Recipe {
   id: string;
@@ -12,6 +14,7 @@ interface Recipe {
   difficulty: string | null;
   allergens: string[] | null;
   allergen_notes: string | null;
+  images: string[] | null;
 }
 
 interface IngredientLine {
@@ -65,6 +68,30 @@ export function RecipeDetail({ recipe, ingredients, isOwner }: Props) {
       {recipe.description && (
         <p className="mt-4 font-body text-charcoal leading-relaxed">{recipe.description}</p>
       )}
+
+      <div className="mt-8">
+        <h2 className="font-body text-sm font-semibold uppercase tracking-wide text-smoke">
+          Foto
+        </h2>
+        <div className="mt-3">
+          {isOwner ? (
+            <MediaGallery recipeId={recipe.id} initialImages={recipe.images ?? []} />
+          ) : (recipe.images ?? []).length > 0 ? (
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+              {(recipe.images ?? []).map((url) => (
+                <div
+                  key={url}
+                  className="relative aspect-square overflow-hidden rounded-card border border-line bg-cream shadow-soft"
+                >
+                  <Image src={url} alt="" fill sizes="(min-width: 640px) 33vw, 50vw" className="object-cover" />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="font-body text-sm text-smoke">Nessuna foto ancora.</p>
+          )}
+        </div>
+      </div>
 
       <div className="mt-8">
         <h2 className="font-body text-sm font-semibold uppercase tracking-wide text-smoke">

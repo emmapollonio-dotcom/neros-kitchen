@@ -8,6 +8,10 @@ const signupSchema = z.object({
   email: z.string().email(),
   password: z.string().min(8, "La password deve avere almeno 8 caratteri"),
   fullName: z.string().min(2),
+  // "customer" o "chef" — mai altro: solo questi due valori arrivano al
+  // trigger public.handle_new_user(), che li usa per assegnare il role
+  // reale. "admin" non è mai auto-assegnabile da qui.
+  accountType: z.enum(["customer", "chef"]).default("customer"),
 });
 
 const loginSchema = z.object({
@@ -25,6 +29,7 @@ export async function signUpAction(
     email: formData.get("email"),
     password: formData.get("password"),
     fullName: formData.get("fullName"),
+    accountType: formData.get("accountType"),
   });
 
   if (!parsed.success) {
@@ -36,7 +41,7 @@ export async function signUpAction(
     email: parsed.data.email,
     password: parsed.data.password,
     options: {
-      data: { full_name: parsed.data.fullName },
+      data: { full_name: parsed.data.fullName, account_type: parsed.data.accountType },
       emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`,
     },
   });
