@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { checkRateLimit, rateLimitResponse } from "@/lib/rate-limit";
 
 const createReviewSchema = z.object({
   booking_id: z.string().uuid(),
@@ -47,6 +48,9 @@ export async function POST(req: NextRequest) {
   if (!user) {
     return NextResponse.json({ data: null, error: "unauthorized", meta: null }, { status: 401 });
   }
+
+  const ok = await checkRateLimit(supabase, `reviews:${user.id}`, 10, 600);
+  if (!ok) return rateLimitResponse();
 
   const parsed = createReviewSchema.safeParse(await req.json());
   if (!parsed.success) {

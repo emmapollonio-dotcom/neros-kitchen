@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { checkRateLimit, rateLimitResponse } from "@/lib/rate-limit";
 
 const createBookingSchema = z.object({
   chef_id: z.string().uuid(),
@@ -54,6 +55,11 @@ export async function POST(req: NextRequest) {
       { status: 401 }
     );
   }
+
+  // Max 10 richieste di prenotazione ogni 10 minuti per utente: sufficiente
+  // per un uso normale, blocca spam/harassment verso gli chef.
+  const ok = await checkRateLimit(supabase, `bookings:${user.id}`, 10, 600);
+  if (!ok) return rateLimitResponse("hai creato troppe richieste di prenotazione, riprova tra qualche minuto");
 
   const json = await req.json();
   const parsed = createBookingSchema.safeParse(json);
