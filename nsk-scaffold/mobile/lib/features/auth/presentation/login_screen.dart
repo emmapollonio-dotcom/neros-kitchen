@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../../core/theme/colors.dart';
 
@@ -25,7 +26,8 @@ class _LoginScreenState extends State<LoginScreen> {
         email: _email.text.trim(),
         password: _password.text,
       );
-      if (mounted) Navigator.of(context).pop();
+      // Non serve navigare esplicitamente: il redirect di GoRouter (app.dart)
+      // reagisce da solo al cambio di sessione tramite GoRouterRefreshStream.
     } on AuthException catch (e) {
       setState(() => _error = e.message);
     } finally {
@@ -65,6 +67,11 @@ class _LoginScreenState extends State<LoginScreen> {
               child: _loading
                   ? const CircularProgressIndicator()
                   : const Text('Accedi'),
+            ),
+            const SizedBox(height: 12),
+            TextButton(
+              onPressed: () => context.go('/signup'),
+              child: const Text('Non hai un account? Registrati'),
             ),
           ],
         ),
