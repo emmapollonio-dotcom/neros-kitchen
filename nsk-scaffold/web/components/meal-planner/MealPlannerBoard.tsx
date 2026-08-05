@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { Plus, X } from "lucide-react";
 import { getWeekDates, shiftWeek } from "@/lib/meal-plan/week";
 import { MEAL_SLOTS, type MealSlot } from "@/lib/validators/meal-plan";
@@ -171,9 +172,9 @@ export function MealPlannerBoard({ mealPlanId, weekStart, entries: initialEntrie
       {recipes.length === 0 && (
         <p className="mt-6 font-body text-sm text-smoke">
           Non hai ancora ricette da pianificare —{" "}
-          <a href="/ricette/nuova" className="underline hover:text-gold-dark">
+          <Link href="/ricette/nuova" className="underline hover:text-gold-dark">
             creane una
-          </a>
+          </Link>
           .
         </p>
       )}

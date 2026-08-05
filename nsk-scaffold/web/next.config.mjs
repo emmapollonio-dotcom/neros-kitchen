@@ -3,12 +3,6 @@ import { withSentryConfig } from "@sentry/nextjs";
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  // DIAGNOSTICA TEMPORANEA — build che falliva su Vercel senza un log
-  // leggibile lato sandbox (tsc/eslint locali troppo lenti per completare in
-  // questo ambiente). Serve a isolare se l'errore è di tipo/lint o altro.
-  // DA RIMUOVERE non appena trovata la causa reale — vedi TODO-BUILD-FIX.md.
-  typescript: { ignoreBuildErrors: true },
-  eslint: { ignoreDuringBuilds: true },
 };
 
 // withSentryConfig aggiunge l'upload dei sourcemap al build solo se
