@@ -64,3 +64,18 @@ Apri `neros-kitchen.vercel.app` e controlla: home, `/pricing`, `/login`, una pag
 ## 8. Opzionale — n8n
 
 Importa `automation/n8n-workflows/bookings-notification.json` e `crm-lead-followup.json` in n8n (Workflows → Import from File), poi collega le credenziali email e i Database Webhooks di Supabase (Settings → Database → Webhooks) sulle tabelle `bookings` e `leads`.
+
+### 8bis. Automazioni Zero Waste / HACCP / Social Studio (già live in n8n, manca solo il collegamento Supabase)
+
+Le 3 automazioni sono già create, validate e attive nell'istanza n8n del progetto (workspace "Emmanuele Apollonio", nessun import manuale necessario — a differenza del punto 8 sopra, che si riferisce a workflow più vecchi distribuiti solo come file JSON):
+
+- **N'sK - Zero Waste Cost Alert** — notifica quando uno spreco registrato supera 15€ di costo stimato (lookup ilike sul catalogo ingredienti via PostgREST, poi calcolo quantità × prezzo). Webhook: `https://nerosk.app.n8n.cloud/webhook/nsk/waste-webhook`.
+- **N'sK - HACCP Daily Reminder** — promemoria email ogni giorno alle 8:00 per registrare le rilevazioni di temperatura. Nessun webhook: è uno Schedule Trigger, già attivo da solo, non richiede alcun collegamento Supabase.
+- **N'sK - Social Post Ready Notification** — notifica quando un post generato dall'agente `social_content_creator` passa a status `ready`. Webhook: `https://nerosk.app.n8n.cloud/webhook/nsk/social-ready-webhook`.
+
+Per attivare le prime due (quelle a webhook), in Supabase Dashboard → Settings → Database → Webhooks:
+
+1. Nuovo webhook sulla tabella `waste_items`, evento **Insert**, URL `https://nerosk.app.n8n.cloud/webhook/nsk/waste-webhook`, metodo POST.
+2. Nuovo webhook sulla tabella `social_posts`, evento **Update**, URL `https://nerosk.app.n8n.cloud/webhook/nsk/social-ready-webhook`, metodo POST (il workflow filtra da solo lato n8n i soli update che portano `status` a `ready`, quindi il webhook Supabase può restare "on every update" senza bisogno di condizioni).
+
+Tutte e 3 sono già state testate end-to-end con payload reali (curl) subito dopo la creazione: email di conferma inviate correttamente via SendGrid, nessun errore nelle ultime esecuzioni.
