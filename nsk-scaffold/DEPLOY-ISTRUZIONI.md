@@ -79,3 +79,7 @@ Per attivare le prime due (quelle a webhook), in Supabase Dashboard → Settings
 2. Nuovo webhook sulla tabella `social_posts`, evento **Update**, URL `https://nerosk.app.n8n.cloud/webhook/nsk/social-ready-webhook`, metodo POST (il workflow filtra da solo lato n8n i soli update che portano `status` a `ready`, quindi il webhook Supabase può restare "on every update" senza bisogno di condizioni).
 
 Tutte e 3 sono già state testate end-to-end con payload reali (curl) subito dopo la creazione: email di conferma inviate correttamente via SendGrid, nessun errore nelle ultime esecuzioni.
+
+### 8ter. Notifiche push stato prenotazioni (Edge Function già deployata, manca solo il setup OneSignal)
+
+La Edge Function `booking-status-notify` è già live sul progetto Supabase, ma resta inattiva (risponde sempre 401) finché non completi il setup account descritto in `NOTIFICHE-PUSH-SETUP.md` — richiede un account OneSignal (gratuito) e, per iOS, un account Apple Developer. Include anche il terzo Database Webhook da collegare (tabella `bookings`, evento Update).

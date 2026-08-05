@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'app.dart';
+import 'core/notifications/onesignal_auth_bridge.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,6 +20,17 @@ Future<void> main() async {
     // ma il valore accettato resta la stessa chiave (anon key del progetto).
     publishableKey: const String.fromEnvironment('SUPABASE_ANON_KEY'),
   );
+
+  // Notifiche push (stato prenotazioni, vedi Edge Function
+  // booking-status-notify). No-op se ONESIGNAL_APP_ID non è passato come
+  // --dart-define: finché l'account OneSignal non è configurato (vedi
+  // NOTIFICHE-PUSH-SETUP.md), l'app funziona normalmente senza push.
+  const oneSignalAppId = String.fromEnvironment('ONESIGNAL_APP_ID');
+  if (oneSignalAppId.isNotEmpty) {
+    OneSignal.initialize(oneSignalAppId);
+    OneSignal.Notifications.requestPermission(true);
+    wireOneSignalToAuth();
+  }
 
   runApp(const ProviderScope(child: NskApp()));
 }

@@ -31,6 +31,9 @@ mobile/build/
 # vanno rigenerati in locale/CI, non committati, per evitare che sorgente e
 # codice generato divergano.
 mobile/**/*.g.dart
+# file locali con i valori --dart-define (vedi mobile/README.md), contengono
+# chiavi/id di configurazione: mai committare.
+mobile/*.local.json
 
 # supabase CLI cache locale
 supabase/.temp/
