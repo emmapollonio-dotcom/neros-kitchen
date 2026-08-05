@@ -28,14 +28,14 @@ export default async function BookChefPage({ params }: Props) {
   const days = computeFreeSlots(availability ?? []);
 
   return (
-    <div className="min-h-screen bg-ivory px-6 py-16 text-charcoal">
-      <div className="mx-auto max-w-2xl">
-        <p className="font-body text-sm uppercase tracking-widest text-gold">Prenota</p>
-        <h1 className="mt-2 font-display text-3xl">{chef.business_name ?? chef.full_name}</h1>
+    <div className="mx-auto max-w-2xl px-6 py-14 text-charcoal">
+      <p className="font-body text-sm uppercase tracking-widest text-gold">Prenota</p>
+      <h1 className="mt-2 font-display text-display-md text-charcoal">
+        {chef.business_name ?? chef.full_name}
+      </h1>
 
-        <div className="mt-10">
-          <BookingForm chefId={chefId} days={days} />
-        </div>
+      <div className="mt-10 rounded-panel border border-line bg-white p-8 shadow-card">
+        <BookingForm chefId={chefId} days={days} />
       </div>
     </div>
   );
