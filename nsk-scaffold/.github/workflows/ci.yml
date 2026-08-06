@@ -80,13 +80,35 @@ jobs:
         env:
           SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
 
-  # NOTA sulle migration DB: a differenza dell'Edge Function, l'apply dello
-  # schema Postgres NON è automatizzato in CI, di proposito. Non esiste un
-  # progetto Supabase di staging separato dal produzione (vedi MIGRAZIONI.md
-  # per come vengono gestiti oggi i cambi di schema): applicare
-  # automaticamente su ogni merge modifiche scritte da un'AI a un database
-  # con prenotazioni e pagamenti reali, senza un ambiente di prova
-  # intermedio, è un rischio che vale la pena tenere come passo manuale
-  # deliberato piuttosto che automatizzare "per completezza". `verify-schema`
-  # sopra resta comunque il controllo automatico statico (RLS, FK, sintassi)
-  # su ogni push/PR.
+  # Migration DB — ora automatizzate, ma SOLO verso staging, mai verso
+  # produzione. Prima (vedi MIGRAZIONI.md) non esisteva un progetto Supabase
+  # di staging separato dalla produzione: applicare in automatico su ogni
+  # merge modifiche di schema scritte da un'AI a un database con
+  # prenotazioni e pagamenti reali, senza un ambiente di prova intermedio,
+  # era un rischio evitabile. Ora un secondo progetto Supabase gratuito
+  # (qpgjfrlpztoqrttjirpn, riuso di un progetto vuoto rimasto da un primo
+  # setup) fa da staging: ogni push/PR applica qui i file in
+  # supabase/migrations/ con `supabase db push`, così un errore di sintassi
+  # o un vincolo che rompe dati esistenti si vede in CI prima di toccare
+  # produzione. La promozione a produzione resta un passo manuale
+  # deliberato (Supabase MCP/CLI), non automatico — stesso principio di
+  # prima, ma ora con una rete di sicurezza reale prima del passo finale.
+  migrate-staging:
+    name: Applica migration su staging (Supabase)
+    runs-on: ubuntu-latest
+    needs: [verify-schema]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+      - name: supabase db push (staging)
+        working-directory: supabase
+        # --password richiesto: db push si collega direttamente a Postgres
+        # (non solo alla Management API), quindi serve anche la password del
+        # database di staging, non solo il token — secret separato, vedi
+        # CI-CD-SETUP.md.
+        run: supabase db push --project-ref qpgjfrlpztoqrttjirpn --include-all --password "$SUPABASE_STAGING_DB_PASSWORD"
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+          SUPABASE_STAGING_DB_PASSWORD: ${{ secrets.SUPABASE_STAGING_DB_PASSWORD }}
