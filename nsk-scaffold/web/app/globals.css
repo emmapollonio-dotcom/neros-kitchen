@@ -28,3 +28,44 @@ body {
   background-color: var(--nsk-gold);
   color: var(--nsk-charcoal);
 }
+
+/* ==========================================================================
+   N'sK Landing — palette "Elegance" (design handoff, 6 ago 2026)
+   Scoped sotto .nsk-landing: non tocca nessun altro colore dell'app, che
+   resta sul design system gold/charcoal esistente. Light riusa i neutrali
+   già definiti sopra/in tailwind.config.ts; dark introduce la base navy
+   dello spec, usata solo qui. Il toggle imposta data-theme sul wrapper.
+   ========================================================================== */
+.nsk-landing {
+  --nsk-l-bg: #f5f1ea;
+  --nsk-l-bg-alt: #faf8f4;
+  --nsk-l-text: #121212;
+  --nsk-l-text-secondary: #555555;
+  --nsk-l-text-muted: #8a8580;
+  --nsk-l-border: #e7e1d6;
+  --nsk-l-card-bg: #faf8f4;
+  --nsk-l-shadow: 0 24px 48px -20px rgba(18, 18, 18, 0.16), 0 4px 12px -6px rgba(18, 18, 18, 0.08);
+  --nsk-l-shadow-hover: 0 30px 56px -18px rgba(18, 18, 18, 0.2), 0 6px 16px -6px rgba(18, 18, 18, 0.1);
+  background-color: var(--nsk-l-bg);
+  color: var(--nsk-l-text);
+  transition: background-color 0.3s cubic-bezier(0.22, 1, 0.36, 1), color 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nsk-landing[data-theme="dark"] {
+  --nsk-l-bg: #0b1220;
+  --nsk-l-bg-alt: #0d1526;
+  --nsk-l-text: #f5f1ea;
+  --nsk-l-text-secondary: rgba(245, 241, 234, 0.7);
+  --nsk-l-text-muted: rgba(245, 241, 234, 0.5);
+  --nsk-l-border: rgba(245, 241, 234, 0.12);
+  --nsk-l-card-bg: #22344f;
+  --nsk-l-shadow: 0 24px 48px -20px rgba(0, 0, 0, 0.55), 0 4px 12px -6px rgba(0, 0, 0, 0.35);
+  --nsk-l-shadow-hover: 0 30px 56px -18px rgba(0, 0, 0, 0.6), 0 6px 16px -6px rgba(0, 0, 0, 0.4);
+}
+
+.nsk-landing a {
+  color: #117e8e;
+}
+.nsk-landing a:hover {
+  color: #0c5f6b;
+}

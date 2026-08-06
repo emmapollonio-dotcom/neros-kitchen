@@ -1,0 +1,16 @@
+{
+  "landing": {
+    "navCta": "Solicitar acceso",
+    "eyebrow": "Cocina inteligente, sin desperdicio",
+    "h1": "Menos desperdicio. Más sentido en cada plato.",
+    "subtitle": "N'sK convierte lo que ya tienes en la despensa en recetas a medida, para cocina doméstica y profesional.",
+    "ctaPrimary": "Descubre recetas con lo que tienes",
+    "ctaSecondary": "Ver la demo",
+    "featuresHeader": "Pensado para quienes cocinan cada día — y para quienes lo hacen de forma profesional.",
+    "featuresSub": "Cuatro herramientas, un solo objetivo: aprovechar mejor lo que ya tienes.",
+    "finalTitle": "Empieza a cocinar sin desperdicio.",
+    "finalSub": "Conecta tu despensa y recibe tus primeras recetas en minutos.",
+    "finalButton": "Comenzar",
+    "emailPlaceholder": "Tu email"
+  }
+}

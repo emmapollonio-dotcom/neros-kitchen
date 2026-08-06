@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 190" width="300" height="190" role="img" aria-label="NK logo">
+  <title>NK</title>
+  <circle cx="150" cy="72" r="58" fill="#1B2C44"></circle>
+  <g fill="none" stroke-linecap="round">
+    <line x1="126" y1="42" x2="126" y2="102" stroke="#F5F1EA" stroke-width="4.5"></line>
+    <line x1="126" y1="42" x2="150" y2="102" stroke="#F5F1EA" stroke-width="4.5"></line>
+    <line x1="150" y1="42" x2="150" y2="102" stroke="#117E8E" stroke-width="4.5"></line>
+    <line x1="150" y1="68" x2="180" y2="40" stroke="#F5F1EA" stroke-width="4.5"></line>
+    <line x1="150" y1="74" x2="182" y2="102" stroke="#F5F1EA" stroke-width="4.5"></line>
+  </g>
+  <text x="150" y="152" text-anchor="middle" font-family="Montserrat, Arial, sans-serif" font-weight="600" font-size="20" letter-spacing="5" fill="#1B2C44">NERO&#39;S KITCHEN</text>
+  <text x="150" y="174" text-anchor="middle" font-family="Montserrat, Arial, sans-serif" font-weight="500" font-size="11" letter-spacing="3" fill="#555555">CUCINA SENZA SPRECHI</text>
+</svg>

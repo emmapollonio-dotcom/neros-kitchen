@@ -34,7 +34,13 @@ const ROLE_GUARDS: Array<{ prefix: string; roles: Array<"customer" | "chef" | "a
 ];
 
 export async function middleware(request: NextRequest) {
-  const response = NextResponse.next({ request: { headers: request.headers } });
+  // x-pathname: usato da app/(marketing)/layout.tsx per sapere se siamo sulla
+  // homepage (che ha nav/footer propri, vedi components/landing/) senza
+  // dover trasformare il layout in client component. Non cambia nessun
+  // comportamento di auth qui sotto, solo un header in più forwardato.
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set("x-pathname", request.nextUrl.pathname);
+  const response = NextResponse.next({ request: { headers: requestHeaders } });
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,

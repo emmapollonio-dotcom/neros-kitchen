@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Montserrat } from "next/font/google";
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale, getMessages } from "next-intl/server";
 import { CookieConsentBanner } from "@/components/legal/CookieConsentBanner";
+import { rtlLocales } from "@/i18n/locales";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -21,12 +24,18 @@ export const metadata: Metadata = {
     "Prenota chef privati, gestisci food cost, riduci gli sprechi e cresci con gli strumenti AI di Nero's Kitchen.",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const locale = await getLocale();
+  const messages = await getMessages();
+  const dir = rtlLocales.includes(locale as (typeof rtlLocales)[number]) ? "rtl" : "ltr";
+
   return (
-    <html lang="it" className={`${playfair.variable} ${montserrat.variable}`}>
+    <html lang={locale} dir={dir} className={`${playfair.variable} ${montserrat.variable}`}>
       <body className="font-body">
-        {children}
-        <CookieConsentBanner />
+        <NextIntlClientProvider messages={messages}>
+          {children}
+          <CookieConsentBanner />
+        </NextIntlClientProvider>
       </body>
     </html>
   );
