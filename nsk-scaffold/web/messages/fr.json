@@ -127,5 +127,36 @@
     "reasonOverordered": "Surcommande",
     "reasonDamaged": "Endommagé",
     "reasonOther": "Autre"
+  },
+  "pillars": {
+    "recipes": { "label": "Recettes", "description": "Votre livre de recettes, avec le food cost calculé automatiquement." },
+    "mealPlanner": { "label": "Meal Planner", "description": "Planifiez la semaine à table en quelques minutes." },
+    "shoppingList": { "label": "Liste de courses", "description": "Générée depuis le planner, ou gérée à la main." },
+    "zeroWaste": { "label": "Zero Waste", "description": "Transformez les restes en nouvelles idées, pas en déchets." },
+    "tutorAi": { "label": "Tutor AI", "description": "Accompagnement personnalisé et cours avec les meilleurs chefs." },
+    "foodCost": { "label": "Food Cost", "description": "Coûts, marges et prix — avec le catalogue d'ingrédients." },
+    "haccp": { "label": "HACCP", "description": "Points de contrôle et températures, toujours conformes." },
+    "crm": { "label": "CRM", "description": "Leads, clients et leurs avis au même endroit." },
+    "analytics": { "label": "Analytics", "description": "Performance de l'activité et contenus sociaux." },
+    "academyPro": { "label": "Academy Pro", "description": "Créez et vendez vos cours à d'autres chefs." }
+  },
+  "dashboard": {
+    "greetingNight": "Bonne nuit",
+    "greetingMorning": "Bonjour",
+    "greetingAfternoon": "Bon après-midi",
+    "greetingEvening": "Bonsoir",
+    "welcomeBack": "Bon retour",
+    "helloName": "Bonjour, {name}",
+    "newLeadsTodo": "{count} nouveau(x) contact(s) à qualifier",
+    "pendingReviewsTodo": "{count} avis sans réponse",
+    "upcomingBookings": "Prochains rendez-vous",
+    "defaultEventType": "Événement",
+    "statusRequested": "En attente de confirmation",
+    "statusQuoted": "Devis reçu",
+    "statusConfirmed": "Confirmée",
+    "statusInProgress": "En cours",
+    "findChefTitle": "Vous cherchez un chef pour un événement ?",
+    "findChefBody": "Trouvez des chefs privés vérifiés sur la marketplace pour dîners, cours et conseil.",
+    "exploreMarketplace": "Explorer la marketplace"
   }
 }

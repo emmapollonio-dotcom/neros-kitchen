@@ -127,5 +127,36 @@
     "reasonOverordered": "Overordered",
     "reasonDamaged": "Damaged",
     "reasonOther": "Other"
+  },
+  "pillars": {
+    "recipes": { "label": "Recipes", "description": "Your recipe book, with food cost calculated automatically." },
+    "mealPlanner": { "label": "Meal Planner", "description": "Plan your week at the table in minutes." },
+    "shoppingList": { "label": "Shopping List", "description": "Generated from the planner, or managed by hand." },
+    "zeroWaste": { "label": "Zero Waste", "description": "Turn scraps into new ideas, not trash." },
+    "tutorAi": { "label": "Tutor AI", "description": "Personalized guidance and courses with top chefs." },
+    "foodCost": { "label": "Food Cost", "description": "Costs, margins and prices — with the ingredient catalog." },
+    "haccp": { "label": "HACCP", "description": "Control points and temperatures, always compliant." },
+    "crm": { "label": "CRM", "description": "Leads, customers and their reviews in one place." },
+    "analytics": { "label": "Analytics", "description": "Business performance and social content." },
+    "academyPro": { "label": "Academy Pro", "description": "Create and sell your courses to other chefs." }
+  },
+  "dashboard": {
+    "greetingNight": "Good night",
+    "greetingMorning": "Good morning",
+    "greetingAfternoon": "Good afternoon",
+    "greetingEvening": "Good evening",
+    "welcomeBack": "Welcome back",
+    "helloName": "Hi, {name}",
+    "newLeadsTodo": "{count} new lead(s) to qualify",
+    "pendingReviewsTodo": "{count} review(s) awaiting a reply",
+    "upcomingBookings": "Upcoming bookings",
+    "defaultEventType": "Event",
+    "statusRequested": "Awaiting confirmation",
+    "statusQuoted": "Quote received",
+    "statusConfirmed": "Confirmed",
+    "statusInProgress": "In progress",
+    "findChefTitle": "Looking for a chef for an event?",
+    "findChefBody": "Find verified private chefs in the marketplace for dinners, classes and consulting.",
+    "exploreMarketplace": "Explore the marketplace"
   }
 }

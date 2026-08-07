@@ -127,5 +127,36 @@
     "reasonOverordered": "Exceso de pedido",
     "reasonDamaged": "Dañado",
     "reasonOther": "Otro"
+  },
+  "pillars": {
+    "recipes": { "label": "Recetas", "description": "Tu recetario, con el food cost calculado automáticamente." },
+    "mealPlanner": { "label": "Meal Planner", "description": "Planifica la semana en la mesa en pocos minutos." },
+    "shoppingList": { "label": "Lista de la compra", "description": "Generada desde el planner, o gestionada a mano." },
+    "zeroWaste": { "label": "Zero Waste", "description": "Convierte los restos en nuevas ideas, no en basura." },
+    "tutorAi": { "label": "Tutor AI", "description": "Guía personalizada y cursos con los mejores chefs." },
+    "foodCost": { "label": "Food Cost", "description": "Costes, márgenes y precios — con el catálogo de ingredientes." },
+    "haccp": { "label": "HACCP", "description": "Puntos de control y temperaturas, siempre en regla." },
+    "crm": { "label": "CRM", "description": "Leads, clientes y sus reseñas en un solo lugar." },
+    "analytics": { "label": "Analytics", "description": "Rendimiento del negocio y contenido social." },
+    "academyPro": { "label": "Academy Pro", "description": "Crea y vende tus cursos a otros chefs." }
+  },
+  "dashboard": {
+    "greetingNight": "Buenas noches",
+    "greetingMorning": "Buenos días",
+    "greetingAfternoon": "Buenas tardes",
+    "greetingEvening": "Buenas noches",
+    "welcomeBack": "Bienvenido de nuevo",
+    "helloName": "Hola, {name}",
+    "newLeadsTodo": "{count} nuevo(s) contacto(s) por calificar",
+    "pendingReviewsTodo": "{count} reseña(s) sin respuesta",
+    "upcomingBookings": "Próximos compromisos",
+    "defaultEventType": "Evento",
+    "statusRequested": "Pendiente de confirmación",
+    "statusQuoted": "Presupuesto recibido",
+    "statusConfirmed": "Confirmada",
+    "statusInProgress": "En curso",
+    "findChefTitle": "¿Buscas un chef para un evento?",
+    "findChefBody": "En el marketplace encuentras chefs privados verificados para cenas, cursos y consultoría.",
+    "exploreMarketplace": "Explorar el marketplace"
   }
 }

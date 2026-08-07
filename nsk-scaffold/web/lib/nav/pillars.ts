@@ -1,6 +1,10 @@
 // Fonte unica dell'informazione architetturale del prodotto: i 4 pilastri
 // (Home personale, N'sK Home, N'sK Pro, Marketplace) e le loro voci. Usata
-// dalla nav applicativa (AppNavClient) — se cambia l'IA, cambia solo qui.
+// dalla nav applicativa (AppNavClient) e dalla dashboard — se cambia l'IA,
+// cambia solo qui. Label e descrizioni arrivano dal namespace i18n
+// "pillars" (vedi messages/*.json), passato come funzione di traduzione
+// dal chiamante (useTranslations lato client, getTranslations lato server)
+// così questo modulo resta senza dipendenze da next-intl/react.
 //
 // Academy (corsi) è confluita dentro Tutor AI (hub di apprendimento unico,
 // come MasterClass: guida AI personalizzata + corsi strutturati).
@@ -14,18 +18,24 @@ export interface NavItem {
   description: string;
 }
 
-export const NSK_HOME_ITEMS: NavItem[] = [
-  { label: "Ricette", href: "/ricette", description: "Il tuo ricettario, con food cost calcolato in automatico." },
-  { label: "Meal Planner", href: "/meal-planner", description: "Pianifica la settimana a tavola in pochi minuti." },
-  { label: "Lista della spesa", href: "/lista-spesa", description: "Generata dal planner, o gestita a mano." },
-  { label: "Zero Waste", href: "/zero-waste", description: "Trasforma gli scarti in nuove idee, non in rifiuti." },
-  { label: "Tutor AI", href: "/tutor-ai", description: "Guida personalizzata e corsi con i migliori chef." },
-];
+type PillarTranslator = (key: string) => string;
 
-export const NSK_PRO_ITEMS: NavItem[] = [
-  { label: "Food Cost", href: "/food-cost", description: "Costi, margini e prezzi — con il catalogo ingredienti." },
-  { label: "HACCP", href: "/haccp", description: "Punti di controllo e temperature, sempre in regola." },
-  { label: "CRM", href: "/crm", description: "Lead, clienti e le loro recensioni in un solo posto." },
-  { label: "Analytics", href: "/analytics", description: "Performance del business e contenuti social." },
-  { label: "Academy Pro", href: "/academy-pro", description: "Crea e vendi i tuoi corsi ad altri chef." },
-];
+export function getNskHomeItems(t: PillarTranslator): NavItem[] {
+  return [
+    { label: t("recipes.label"), href: "/ricette", description: t("recipes.description") },
+    { label: t("mealPlanner.label"), href: "/meal-planner", description: t("mealPlanner.description") },
+    { label: t("shoppingList.label"), href: "/lista-spesa", description: t("shoppingList.description") },
+    { label: t("zeroWaste.label"), href: "/zero-waste", description: t("zeroWaste.description") },
+    { label: t("tutorAi.label"), href: "/tutor-ai", description: t("tutorAi.description") },
+  ];
+}
+
+export function getNskProItems(t: PillarTranslator): NavItem[] {
+  return [
+    { label: t("foodCost.label"), href: "/food-cost", description: t("foodCost.description") },
+    { label: t("haccp.label"), href: "/haccp", description: t("haccp.description") },
+    { label: t("crm.label"), href: "/crm", description: t("crm.description") },
+    { label: t("analytics.label"), href: "/analytics", description: t("analytics.description") },
+    { label: t("academyPro.label"), href: "/academy-pro", description: t("academyPro.description") },
+  ];
+}

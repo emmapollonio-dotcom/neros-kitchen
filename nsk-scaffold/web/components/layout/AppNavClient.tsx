@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { ChevronDown, Menu, X } from "lucide-react";
-import { NSK_HOME_ITEMS, NSK_PRO_ITEMS, type NavItem } from "@/lib/nav/pillars";
+import { getNskHomeItems, getNskProItems, type NavItem } from "@/lib/nav/pillars";
 import { signOutAction } from "@/app/(auth)/actions";
 import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
 
@@ -21,6 +21,9 @@ interface Props {
 // Accedi/Inizia gratis — niente pilastri che rimanderebbero a /login.
 export function AppNavClient({ email, isPro }: Props) {
   const t = useTranslations("nav");
+  const tp = useTranslations("pillars");
+  const NSK_HOME_ITEMS = getNskHomeItems(tp);
+  const NSK_PRO_ITEMS = getNskProItems(tp);
   const pathname = usePathname();
   const [openMenu, setOpenMenu] = useState<"home" | "pro" | "user" | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);

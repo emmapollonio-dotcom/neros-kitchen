@@ -127,5 +127,36 @@
     "reasonOverordered": "طلب زائد",
     "reasonDamaged": "تالف",
     "reasonOther": "أخرى"
+  },
+  "pillars": {
+    "recipes": { "label": "الوصفات", "description": "دفتر وصفاتك، مع حساب تكلفة الطعام تلقائيًا." },
+    "mealPlanner": { "label": "مخطط الوجبات", "description": "خطّط لأسبوعك على المائدة في دقائق." },
+    "shoppingList": { "label": "قائمة التسوق", "description": "تُنشأ من المخطط، أو تُدار يدويًا." },
+    "zeroWaste": { "label": "بلا هدر", "description": "حوّل الفضلات إلى أفكار جديدة، لا إلى نفايات." },
+    "tutorAi": { "label": "مرشد الطهي بالذكاء الاصطناعي", "description": "إرشاد شخصي ودورات مع أفضل الطهاة." },
+    "foodCost": { "label": "تكلفة الطعام", "description": "التكاليف والهوامش والأسعار — مع كتالوج المكونات." },
+    "haccp": { "label": "نظام HACCP", "description": "نقاط التحكم ودرجات الحرارة، دائمًا وفق المعايير." },
+    "crm": { "label": "إدارة العملاء", "description": "العملاء المحتملون والعملاء وتقييماتهم في مكان واحد." },
+    "analytics": { "label": "التحليلات", "description": "أداء العمل ومحتوى التواصل الاجتماعي." },
+    "academyPro": { "label": "أكاديمي برو", "description": "أنشئ وبِع دوراتك لطهاة آخرين." }
+  },
+  "dashboard": {
+    "greetingNight": "تصبح على خير",
+    "greetingMorning": "صباح الخير",
+    "greetingAfternoon": "طاب يومك",
+    "greetingEvening": "مساء الخير",
+    "welcomeBack": "مرحبًا بعودتك",
+    "helloName": "مرحبًا، {name}",
+    "newLeadsTodo": "{count} جهة اتصال جديدة بحاجة للتأهيل",
+    "pendingReviewsTodo": "{count} تقييم بلا رد",
+    "upcomingBookings": "المواعيد القادمة",
+    "defaultEventType": "فعالية",
+    "statusRequested": "في انتظار التأكيد",
+    "statusQuoted": "تم استلام عرض السعر",
+    "statusConfirmed": "مؤكدة",
+    "statusInProgress": "قيد التنفيذ",
+    "findChefTitle": "تبحث عن طاهٍ لمناسبة؟",
+    "findChefBody": "ستجد في المتجر طهاة خاصين موثوقين للعشاء والدورات والاستشارات.",
+    "exploreMarketplace": "استكشف المتجر"
   }
 }

@@ -1,15 +1,9 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { getLocale, getTranslations } from "next-intl/server";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
-import { NSK_HOME_ITEMS, NSK_PRO_ITEMS } from "@/lib/nav/pillars";
+import { getNskHomeItems, getNskProItems } from "@/lib/nav/pillars";
 import { SectionBanner } from "@/components/layout/SectionBanner";
-
-const STATUS_LABELS: Record<string, string> = {
-  requested: "In attesa di conferma",
-  quoted: "Preventivo ricevuto",
-  confirmed: "Confermata",
-  in_progress: "In corso",
-};
 
 // Landing page personale post-login — protetta da middleware.ts. Non è una
 // griglia di widget generici: mostra solo ciò che è realmente rilevante ora
@@ -17,6 +11,9 @@ const STATUS_LABELS: Record<string, string> = {
 // / N'sK Pro), coerenti col ruolo. Zero dati finti: se non c'è niente da
 // mostrare, la sezione semplicemente non appare.
 export default async function DashboardPage() {
+  const t = await getTranslations("dashboard");
+  const tp = await getTranslations("pillars");
+  const locale = await getLocale();
   const supabase = await createSupabaseServerClient();
   const {
     data: { user },
@@ -30,9 +27,16 @@ export default async function DashboardPage() {
     .eq("id", user.id)
     .single();
 
+  const STATUS_LABELS: Record<string, string> = {
+    requested: t("statusRequested"),
+    quoted: t("statusQuoted"),
+    confirmed: t("statusConfirmed"),
+    in_progress: t("statusInProgress"),
+  };
+
   const isPro = profile?.role === "chef" || profile?.role === "admin";
   const firstName = profile?.full_name?.split(" ")[0] ?? "";
-  const greeting = getGreeting();
+  const greeting = getGreeting(t);
 
   const bookingsQuery = isPro
     ? supabase.from("bookings").select("id, event_type, event_date, status").eq("chef_id", user.id)
@@ -65,11 +69,11 @@ export default async function DashboardPage() {
 
   const todos = [
     newLeadsCount > 0 && {
-      label: `${newLeadsCount} nuovo/i contatto/i da qualificare`,
+      label: t("newLeadsTodo", { count: newLeadsCount }),
       href: "/crm",
     },
     pendingReviewsCount > 0 && {
-      label: `${pendingReviewsCount} recensione/i senza risposta`,
+      label: t("pendingReviewsTodo", { count: pendingReviewsCount }),
       href: "/crm",
     },
   ].filter(Boolean) as Array<{ label: string; href: string }>;
@@ -79,7 +83,7 @@ export default async function DashboardPage() {
       <SectionBanner image="/images/marketing/hero-risotto.webp" />
       <p className="font-body text-sm text-ivory/50">{greeting}</p>
       <h1 className="mt-1 font-display text-display-md text-ivory">
-        {firstName ? `Ciao, ${firstName}` : "Bentornato"}
+        {firstName ? t("helloName", { name: firstName }) : t("welcomeBack")}
       </h1>
 
       {todos.length > 0 && (
@@ -99,7 +103,7 @@ export default async function DashboardPage() {
       {upcomingBookings && upcomingBookings.length > 0 && (
         <section className="mt-12">
           <h2 className="font-body text-xs uppercase tracking-widest text-ivory/50">
-            Prossimi impegni
+            {t("upcomingBookings")}
           </h2>
           <div className="mt-4 space-y-3">
             {upcomingBookings.map((b) => (
@@ -109,9 +113,9 @@ export default async function DashboardPage() {
                 className="flex items-center justify-between rounded-card border border-line bg-white px-6 py-4 shadow-soft transition hover:shadow-card"
               >
                 <div>
-                  <p className="font-body text-sm font-medium text-charcoal">{b.event_type ?? "Evento"}</p>
+                  <p className="font-body text-sm font-medium text-charcoal">{b.event_type ?? t("defaultEventType")}</p>
                   <p className="mt-0.5 font-body text-xs text-mist">
-                    {new Date(b.event_date).toLocaleString("it-IT", { dateStyle: "medium", timeStyle: "short" })}
+                    {new Date(b.event_date).toLocaleString(locale, { dateStyle: "medium", timeStyle: "short" })}
                   </p>
                 </div>
                 <span className="rounded-pill bg-cream px-3 py-1 font-body text-xs text-smoke">
@@ -126,7 +130,7 @@ export default async function DashboardPage() {
       <section className="mt-12">
         <h2 className="font-body text-xs uppercase tracking-widest text-ivory/50">N&apos;sK Home</h2>
         <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {NSK_HOME_ITEMS.map((item) => (
+          {getNskHomeItems(tp).map((item) => (
             <Link
               key={item.href}
               href={item.href}
@@ -143,7 +147,7 @@ export default async function DashboardPage() {
         <section className="mt-12">
           <h2 className="font-body text-xs uppercase tracking-widest text-ivory/50">N&apos;sK Pro</h2>
           <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {NSK_PRO_ITEMS.map((item) => (
+            {getNskProItems(tp).map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
@@ -157,15 +161,13 @@ export default async function DashboardPage() {
         </section>
       ) : (
         <section className="mt-12 rounded-panel border border-line bg-white p-10">
-          <p className="font-display text-xl text-charcoal">Cerchi uno chef per un evento?</p>
-          <p className="mt-2 max-w-lg font-body text-sm text-smoke">
-            Nel marketplace trovi chef privati verificati per cene, corsi e consulenza.
-          </p>
+          <p className="font-display text-xl text-charcoal">{t("findChefTitle")}</p>
+          <p className="mt-2 max-w-lg font-body text-sm text-smoke">{t("findChefBody")}</p>
           <Link
             href="/chefs"
             className="mt-5 inline-block rounded-pill bg-charcoal px-6 py-3 font-body text-sm text-ivory transition hover:bg-teal hover:text-white"
           >
-            Esplora il marketplace
+            {t("exploreMarketplace")}
           </Link>
         </section>
       )}
@@ -173,10 +175,10 @@ export default async function DashboardPage() {
   );
 }
 
-function getGreeting(): string {
+function getGreeting(t: (key: string) => string): string {
   const hour = new Date().getHours();
-  if (hour < 6) return "Buonanotte";
-  if (hour < 12) return "Buongiorno";
-  if (hour < 18) return "Buon pomeriggio";
-  return "Buonasera";
+  if (hour < 6) return t("greetingNight");
+  if (hour < 12) return t("greetingMorning");
+  if (hour < 18) return t("greetingAfternoon");
+  return t("greetingEvening");
 }

@@ -127,5 +127,36 @@
     "reasonOverordered": "Eccesso ordinato",
     "reasonDamaged": "Danneggiato",
     "reasonOther": "Altro"
+  },
+  "pillars": {
+    "recipes": { "label": "Ricette", "description": "Il tuo ricettario, con food cost calcolato in automatico." },
+    "mealPlanner": { "label": "Meal Planner", "description": "Pianifica la settimana a tavola in pochi minuti." },
+    "shoppingList": { "label": "Lista della spesa", "description": "Generata dal planner, o gestita a mano." },
+    "zeroWaste": { "label": "Zero Waste", "description": "Trasforma gli scarti in nuove idee, non in rifiuti." },
+    "tutorAi": { "label": "Tutor AI", "description": "Guida personalizzata e corsi con i migliori chef." },
+    "foodCost": { "label": "Food Cost", "description": "Costi, margini e prezzi — con il catalogo ingredienti." },
+    "haccp": { "label": "HACCP", "description": "Punti di controllo e temperature, sempre in regola." },
+    "crm": { "label": "CRM", "description": "Lead, clienti e le loro recensioni in un solo posto." },
+    "analytics": { "label": "Analytics", "description": "Performance del business e contenuti social." },
+    "academyPro": { "label": "Academy Pro", "description": "Crea e vendi i tuoi corsi ad altri chef." }
+  },
+  "dashboard": {
+    "greetingNight": "Buonanotte",
+    "greetingMorning": "Buongiorno",
+    "greetingAfternoon": "Buon pomeriggio",
+    "greetingEvening": "Buonasera",
+    "welcomeBack": "Bentornato",
+    "helloName": "Ciao, {name}",
+    "newLeadsTodo": "{count} nuovo/i contatto/i da qualificare",
+    "pendingReviewsTodo": "{count} recensione/i senza risposta",
+    "upcomingBookings": "Prossimi impegni",
+    "defaultEventType": "Evento",
+    "statusRequested": "In attesa di conferma",
+    "statusQuoted": "Preventivo ricevuto",
+    "statusConfirmed": "Confermata",
+    "statusInProgress": "In corso",
+    "findChefTitle": "Cerchi uno chef per un evento?",
+    "findChefBody": "Nel marketplace trovi chef privati verificati per cene, corsi e consulenza.",
+    "exploreMarketplace": "Esplora il marketplace"
   }
 }
