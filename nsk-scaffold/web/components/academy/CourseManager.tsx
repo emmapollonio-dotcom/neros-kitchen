@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 
 interface Course {
   id: string;
@@ -31,6 +32,7 @@ interface QuizQuestionDraft {
 // pubblica/nasconde. Tutte le scritture passano dalle API /api/v1/courses/*
 // che a loro volta si appoggiano a RLS come unica fonte di verità sui permessi.
 export function CourseManager() {
+  const t = useTranslations("academyPro");
   const [courses, setCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState(true);
   const [expandedId, setExpandedId] = useState<string | null>(null);
@@ -76,7 +78,7 @@ export function CourseManager() {
     setCreating(false);
 
     if (!res.ok) {
-      setCreateError("Impossibile creare il corso. Controlla i dati inseriti.");
+      setCreateError(t("errorCreatingCourse"));
       return;
     }
 
@@ -98,10 +100,10 @@ export function CourseManager() {
   return (
     <div className="space-y-12">
       <div className="rounded-nsk border border-smoke/15 bg-white p-6">
-        <h2 className="font-display text-xl text-charcoal">Nuovo corso</h2>
+        <h2 className="font-display text-xl text-charcoal">{t("newCourseTitle")}</h2>
         <form onSubmit={handleCreateCourse} className="mt-4 space-y-4">
           <div>
-            <label className="font-body text-sm text-smoke">Titolo</label>
+            <label className="font-body text-sm text-smoke">{t("titleLabel")}</label>
             <input
               value={newTitle}
               onChange={(e) => setNewTitle(e.target.value)}
@@ -111,7 +113,7 @@ export function CourseManager() {
             />
           </div>
           <div>
-            <label className="font-body text-sm text-smoke">Descrizione</label>
+            <label className="font-body text-sm text-smoke">{t("descriptionLabel")}</label>
             <textarea
               value={newDescription}
               onChange={(e) => setNewDescription(e.target.value)}
@@ -121,19 +123,19 @@ export function CourseManager() {
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="font-body text-sm text-smoke">Livello</label>
+              <label className="font-body text-sm text-smoke">{t("levelLabel")}</label>
               <select
                 value={newLevel}
                 onChange={(e) => setNewLevel(e.target.value)}
                 className="mt-1 w-full rounded-nsk border border-smoke/30 px-4 py-2 font-body"
               >
-                <option value="base">Base</option>
-                <option value="intermedio">Intermedio</option>
-                <option value="avanzato">Avanzato</option>
+                <option value="base">{t("levelBase")}</option>
+                <option value="intermedio">{t("levelIntermediate")}</option>
+                <option value="avanzato">{t("levelAdvanced")}</option>
               </select>
             </div>
             <div>
-              <label className="font-body text-sm text-smoke">Prezzo (€, 0 = gratuito)</label>
+              <label className="font-body text-sm text-smoke">{t("priceLabel")}</label>
               <input
                 type="number"
                 min={0}
@@ -151,17 +153,17 @@ export function CourseManager() {
             disabled={creating}
             className="rounded-nsk bg-charcoal px-6 py-3 font-body text-ivory transition hover:bg-teal hover:text-white disabled:opacity-50"
           >
-            {creating ? "Creazione..." : "Crea corso (bozza)"}
+            {creating ? t("creating") : t("createCourseDraft")}
           </button>
         </form>
       </div>
 
       <div>
-        <h2 className="font-display text-xl text-charcoal">I tuoi corsi</h2>
+        <h2 className="font-display text-xl text-charcoal">{t("yourCoursesTitle")}</h2>
 
-        {loading && <p className="mt-4 font-body text-sm text-smoke">Caricamento...</p>}
+        {loading && <p className="mt-4 font-body text-sm text-smoke">{t("loading")}</p>}
         {!loading && courses.length === 0 && (
-          <p className="mt-4 font-body text-sm text-smoke">Non hai ancora creato corsi.</p>
+          <p className="mt-4 font-body text-sm text-smoke">{t("noCoursesCreated")}</p>
         )}
 
         <div className="mt-4 space-y-3">
@@ -171,7 +173,7 @@ export function CourseManager() {
                 <div>
                   <p className="font-body font-semibold text-charcoal">{course.title}</p>
                   <p className="font-body text-xs text-smoke">
-                    {course.published ? "Pubblicato" : "Bozza"} · {course.price > 0 ? `${course.price} €` : "Gratuito"}
+                    {course.published ? t("published") : t("draft")} · {course.price > 0 ? `${course.price} €` : t("free")}
                   </p>
                 </div>
                 <div className="flex items-center gap-3">
@@ -180,14 +182,14 @@ export function CourseManager() {
                     onClick={() => togglePublished(course)}
                     className="font-body text-sm text-teal underline"
                   >
-                    {course.published ? "Nascondi" : "Pubblica"}
+                    {course.published ? t("hide") : t("publish")}
                   </button>
                   <button
                     type="button"
                     onClick={() => setExpandedId(expandedId === course.id ? null : course.id)}
                     className="font-body text-sm text-charcoal underline"
                   >
-                    {expandedId === course.id ? "Chiudi" : "Gestisci contenuti"}
+                    {expandedId === course.id ? t("close") : t("manageContent")}
                   </button>
                 </div>
               </div>
@@ -202,6 +204,7 @@ export function CourseManager() {
 }
 
 function CourseContentEditor({ courseId }: { courseId: string }) {
+  const t = useTranslations("academyPro");
   const [lessons, setLessons] = useState<Lesson[]>([]);
   const [lessonTitle, setLessonTitle] = useState("");
   const [videoUrl, setVideoUrl] = useState("");
@@ -287,7 +290,7 @@ function CourseContentEditor({ courseId }: { courseId: string }) {
   return (
     <div className="mt-4 space-y-6 border-t border-smoke/15 pt-4">
       <div>
-        <h3 className="font-body text-sm font-semibold text-charcoal">Lezioni</h3>
+        <h3 className="font-body text-sm font-semibold text-charcoal">{t("lessonsTitle")}</h3>
         <ul className="mt-2 space-y-1">
           {lessons.map((l) => (
             <li key={l.id} className="font-body text-sm text-smoke">
@@ -297,7 +300,7 @@ function CourseContentEditor({ courseId }: { courseId: string }) {
         </ul>
         <form onSubmit={handleAddLesson} className="mt-3 flex items-end gap-2">
           <div className="flex-1">
-            <label className="font-body text-xs text-smoke">Titolo lezione</label>
+            <label className="font-body text-xs text-smoke">{t("lessonTitleLabel")}</label>
             <input
               value={lessonTitle}
               onChange={(e) => setLessonTitle(e.target.value)}
@@ -307,7 +310,7 @@ function CourseContentEditor({ courseId }: { courseId: string }) {
             />
           </div>
           <div className="flex-1">
-            <label className="font-body text-xs text-smoke">URL video (opzionale)</label>
+            <label className="font-body text-xs text-smoke">{t("videoUrlLabel")}</label>
             <input
               value={videoUrl}
               onChange={(e) => setVideoUrl(e.target.value)}
@@ -319,17 +322,17 @@ function CourseContentEditor({ courseId }: { courseId: string }) {
             disabled={savingLesson}
             className="rounded-nsk bg-charcoal px-4 py-2 font-body text-sm text-ivory hover:bg-teal hover:text-white disabled:opacity-50"
           >
-            + Aggiungi
+            {t("add")}
           </button>
         </form>
       </div>
 
       <div>
-        <h3 className="font-body text-sm font-semibold text-charcoal">Nuovo quiz</h3>
+        <h3 className="font-body text-sm font-semibold text-charcoal">{t("newQuizTitle")}</h3>
         <form onSubmit={handleCreateQuiz} className="mt-3 space-y-3">
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="font-body text-xs text-smoke">Titolo quiz</label>
+              <label className="font-body text-xs text-smoke">{t("quizTitleLabel")}</label>
               <input
                 value={quizTitle}
                 onChange={(e) => setQuizTitle(e.target.value)}
@@ -339,7 +342,7 @@ function CourseContentEditor({ courseId }: { courseId: string }) {
               />
             </div>
             <div>
-              <label className="font-body text-xs text-smoke">Soglia superamento (%)</label>
+              <label className="font-body text-xs text-smoke">{t("passingScoreLabel")}</label>
               <input
                 type="number"
                 min={0}
@@ -353,7 +356,7 @@ function CourseContentEditor({ courseId }: { courseId: string }) {
 
           {questions.map((q, qi) => (
             <div key={q.id} className="rounded-nsk border border-smoke/20 p-3">
-              <label className="font-body text-xs text-smoke">Domanda {qi + 1}</label>
+              <label className="font-body text-xs text-smoke">{t("questionLabel", { number: qi + 1 })}</label>
               <input
                 value={q.prompt}
                 onChange={(e) => updateQuestion(qi, { prompt: e.target.value })}
@@ -371,7 +374,7 @@ function CourseContentEditor({ courseId }: { courseId: string }) {
                     <input
                       value={opt}
                       onChange={(e) => updateOption(qi, oi, e.target.value)}
-                      placeholder={`Opzione ${oi + 1}`}
+                      placeholder={t("optionPlaceholder", { number: oi + 1 })}
                       className="flex-1 rounded-nsk border border-smoke/30 px-2 py-1 font-body text-sm"
                     />
                   </div>
@@ -383,17 +386,17 @@ function CourseContentEditor({ courseId }: { courseId: string }) {
                   }
                   className="font-body text-xs text-teal underline"
                 >
-                  + Opzione
+                  {t("addOption")}
                 </button>
               </div>
             </div>
           ))}
 
           <button type="button" onClick={addQuestion} className="font-body text-sm text-teal underline">
-            + Aggiungi domanda
+            {t("addQuestion")}
           </button>
 
-          {quizSaved && <p className="font-body text-sm text-green-700">Quiz salvato.</p>}
+          {quizSaved && <p className="font-body text-sm text-green-700">{t("quizSaved")}</p>}
 
           <div>
             <button
@@ -401,7 +404,7 @@ function CourseContentEditor({ courseId }: { courseId: string }) {
               disabled={savingQuiz || questions.length === 0}
               className="rounded-nsk bg-charcoal px-6 py-3 font-body text-sm text-ivory hover:bg-teal hover:text-white disabled:opacity-50"
             >
-              {savingQuiz ? "Salvataggio..." : "Salva quiz"}
+              {savingQuiz ? t("saving") : t("saveQuiz")}
             </button>
           </div>
         </form>
