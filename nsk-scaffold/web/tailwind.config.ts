@@ -29,6 +29,17 @@ const config: Config = {
         // scuro su card bianche, illeggibili su charcoal). "haze" fa da
         // bordo/divider sul fondo scuro.
         haze: "rgba(245, 241, 234, 0.12)",
+        // Token "shell" (7 ago 2026) — legati a CSS var in globals.css,
+        // invertiti da html.theme-light. Usarli per lo scafo applicativo
+        // (nav, layout wrapper, testo diretto su sfondo pagina); NON per le
+        // card (restano bg-white/text-charcoal fissi, vedi commento in
+        // globals.css). charcoal/ivory/haze sopra restano tali e quali,
+        // servono ancora per bottoni/badge che devono restare fissi.
+        shell: "var(--nsk-shell-bg)",
+        "shell-fg": "var(--nsk-shell-fg)",
+        "shell-fg-secondary": "var(--nsk-shell-fg-secondary)",
+        "shell-fg-muted": "var(--nsk-shell-fg-muted)",
+        "shell-border": "var(--nsk-shell-border)",
       },
       fontFamily: {
         // Caricati via next/font/google in app/layout.tsx come CSS variable —

@@ -19,11 +19,11 @@ export default async function TutorAiPage() {
     .order("created_at", { ascending: false });
 
   return (
-    <div className="mx-auto max-w-content px-6 py-14 text-ivory">
+    <div className="mx-auto max-w-content px-6 py-14 text-shell-fg">
       <SectionBanner image="/images/marketing/chef-plating.webp" />
       <p className="font-body text-sm uppercase tracking-widest text-teal">N&apos;sK Home</p>
-      <h1 className="mt-2 font-display text-display-md text-ivory">Tutor AI</h1>
-      <p className="mt-2 max-w-xl font-body text-ivory/70">{t("subtitle")}</p>
+      <h1 className="mt-2 font-display text-display-md text-shell-fg">Tutor AI</h1>
+      <p className="mt-2 max-w-xl font-body text-shell-fg-secondary">{t("subtitle")}</p>
 
       <div className="mt-10">
         <TabSwitcher

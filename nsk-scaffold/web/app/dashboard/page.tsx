@@ -81,8 +81,8 @@ export default async function DashboardPage() {
   return (
     <div className="mx-auto max-w-content px-6 py-14">
       <SectionBanner image="/images/marketing/hero-risotto.webp" />
-      <p className="font-body text-sm text-ivory/50">{greeting}</p>
-      <h1 className="mt-1 font-display text-display-md text-ivory">
+      <p className="font-body text-sm text-shell-fg-muted">{greeting}</p>
+      <h1 className="mt-1 font-display text-display-md text-shell-fg">
         {firstName ? t("helloName", { name: firstName }) : t("welcomeBack")}
       </h1>
 
@@ -92,7 +92,7 @@ export default async function DashboardPage() {
             <Link
               key={todo.label}
               href={todo.href}
-              className="rounded-pill border border-teal/50 bg-teal/10 px-4 py-2 font-body text-sm text-ivory transition hover:bg-teal/20"
+              className="rounded-pill border border-teal/50 bg-teal/10 px-4 py-2 font-body text-sm text-shell-fg transition hover:bg-teal/20"
             >
               {todo.label}
             </Link>
@@ -102,7 +102,7 @@ export default async function DashboardPage() {
 
       {upcomingBookings && upcomingBookings.length > 0 && (
         <section className="mt-12">
-          <h2 className="font-body text-xs uppercase tracking-widest text-ivory/50">
+          <h2 className="font-body text-xs uppercase tracking-widest text-shell-fg-muted">
             {t("upcomingBookings")}
           </h2>
           <div className="mt-4 space-y-3">
@@ -128,7 +128,7 @@ export default async function DashboardPage() {
       )}
 
       <section className="mt-12">
-        <h2 className="font-body text-xs uppercase tracking-widest text-ivory/50">N&apos;sK Home</h2>
+        <h2 className="font-body text-xs uppercase tracking-widest text-shell-fg-muted">N&apos;sK Home</h2>
         <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {getNskHomeItems(tp).map((item) => (
             <Link
@@ -145,7 +145,7 @@ export default async function DashboardPage() {
 
       {isPro ? (
         <section className="mt-12">
-          <h2 className="font-body text-xs uppercase tracking-widest text-ivory/50">N&apos;sK Pro</h2>
+          <h2 className="font-body text-xs uppercase tracking-widest text-shell-fg-muted">N&apos;sK Pro</h2>
           <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {getNskProItems(tp).map((item) => (
               <Link

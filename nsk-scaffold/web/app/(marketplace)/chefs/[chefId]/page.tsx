@@ -56,7 +56,7 @@ export default async function ChefProfilePage({ params }: Props) {
         </div>
         <div>
           <div className="flex flex-wrap items-center gap-3">
-            <h1 className="font-display text-display-md text-ivory">{displayName}</h1>
+            <h1 className="font-display text-display-md text-shell-fg">{displayName}</h1>
             {chef.verified && (
               <span className="rounded-pill bg-teal/15 px-3 py-1 font-body text-xs text-teal">
                 {t("verified")}
@@ -64,11 +64,11 @@ export default async function ChefProfilePage({ params }: Props) {
             )}
           </div>
           {chef.rating_count && chef.rating_count > 0 ? (
-            <p className="mt-1 font-body text-sm text-ivory/70">
+            <p className="mt-1 font-body text-sm text-shell-fg-secondary">
               ★ {Number(chef.rating_avg).toFixed(1)} · {t("reviewsCountSuffix", { count: chef.rating_count })}
             </p>
           ) : (
-            <p className="mt-1 font-body text-sm text-ivory/50">{t("newOnNsk")}</p>
+            <p className="mt-1 font-body text-sm text-shell-fg-muted">{t("newOnNsk")}</p>
           )}
         </div>
       </div>
@@ -87,22 +87,22 @@ export default async function ChefProfilePage({ params }: Props) {
 
           {chef.bio && (
             <div>
-              <h2 className="font-display text-lg text-ivory">{t("whoIsTitle")}</h2>
-              <p className="mt-3 max-w-2xl font-body leading-relaxed text-ivory/70">{chef.bio}</p>
+              <h2 className="font-display text-lg text-shell-fg">{t("whoIsTitle")}</h2>
+              <p className="mt-3 max-w-2xl font-body leading-relaxed text-shell-fg-secondary">{chef.bio}</p>
             </div>
           )}
 
           {chef.languages && chef.languages.length > 0 && (
             <div>
-              <h2 className="font-display text-lg text-ivory">{t("languagesTitle")}</h2>
-              <p className="mt-2 font-body text-sm text-ivory/70">{chef.languages.join(", ")}</p>
+              <h2 className="font-display text-lg text-shell-fg">{t("languagesTitle")}</h2>
+              <p className="mt-2 font-body text-sm text-shell-fg-secondary">{chef.languages.join(", ")}</p>
             </div>
           )}
 
           <div>
-            <h2 className="font-display text-lg text-ivory">{t("reviewsTitle")}</h2>
+            <h2 className="font-display text-lg text-shell-fg">{t("reviewsTitle")}</h2>
             {(!reviews || reviews.length === 0) ? (
-              <p className="mt-3 font-body text-sm text-ivory/70">{t("noReviewsYet")}</p>
+              <p className="mt-3 font-body text-sm text-shell-fg-secondary">{t("noReviewsYet")}</p>
             ) : (
               <ul className="mt-4 space-y-4">
                 {reviews.map((r) => (

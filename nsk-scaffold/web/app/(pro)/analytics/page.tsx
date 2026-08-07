@@ -47,7 +47,7 @@ export default async function AnalyticsPage() {
         <Kpi label={t("avgRatingKpi")} value={reviews?.rating_avg ? `★ ${reviews.rating_avg}` : "—"} />
       </div>
 
-      <h2 className="mt-10 font-display text-lg text-ivory">{t("revenueByMonthTitle")}</h2>
+      <h2 className="mt-10 font-display text-lg text-shell-fg">{t("revenueByMonthTitle")}</h2>
       <div className="mt-4 overflow-hidden rounded-card border border-line bg-white shadow-soft">
         <table className="w-full font-body text-sm">
           <thead>
@@ -81,10 +81,10 @@ export default async function AnalyticsPage() {
   );
 
   return (
-    <div className="mx-auto max-w-content px-6 py-14 text-ivory">
+    <div className="mx-auto max-w-content px-6 py-14 text-shell-fg">
       <SectionBanner image="/images/marketing/dining-event.webp" />
       <p className="font-body text-sm uppercase tracking-widest text-teal">N&apos;sK Pro</p>
-      <h1 className="mt-2 font-display text-display-md text-ivory">Analytics</h1>
+      <h1 className="mt-2 font-display text-display-md text-shell-fg">Analytics</h1>
 
       <div className="mt-10">
         <TabSwitcher

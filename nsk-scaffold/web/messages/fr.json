@@ -26,7 +26,9 @@
     "logout": "Se déconnecter",
     "openMenu": "Ouvrir le menu",
     "changeLanguage": "Changer de langue",
-    "findChef": "Trouver un chef"
+    "findChef": "Trouver un chef",
+    "themeToLight": "Passer au thème clair",
+    "themeToDark": "Passer au thème sombre"
   },
   "footer": {
     "tagline": "L'écosystème pour ceux qui vivent de la cuisine — à la maison, en cuisine professionnelle, en conseil.",

@@ -44,21 +44,21 @@ export function LanguageSwitcher() {
         onClick={() => setOpen((v) => !v)}
         disabled={isPending}
         aria-label="Cambia lingua"
-        className="flex items-center gap-1.5 rounded-pill px-3 py-2 font-body text-sm text-ivory/70 transition hover:bg-ivory/10 hover:text-ivory disabled:opacity-60"
+        className="flex items-center gap-1.5 rounded-pill px-3 py-2 font-body text-sm text-shell-fg-secondary transition hover:bg-shell-fg/10 hover:text-shell-fg disabled:opacity-60"
       >
         <span className="text-base leading-none">{current.flag}</span>
         <ChevronDown size={14} className={`transition ${open ? "rotate-180" : ""}`} />
       </button>
 
       {open && (
-        <div className="absolute right-0 z-50 mt-3 w-44 rounded-card border border-haze bg-ink p-2 shadow-elevated">
+        <div className="absolute right-0 z-50 mt-3 w-44 rounded-card border border-shell-border bg-shell p-2 shadow-elevated">
           {locales.map((code) => (
             <button
               key={code}
               type="button"
               onClick={() => selectLocale(code)}
-              className={`flex w-full items-center gap-2.5 rounded-nsk px-3 py-2 font-body text-sm transition hover:bg-ivory/10 ${
-                code === currentLocale ? "text-teal" : "text-ivory"
+              className={`flex w-full items-center gap-2.5 rounded-nsk px-3 py-2 font-body text-sm transition hover:bg-shell-fg/10 ${
+                code === currentLocale ? "text-teal" : "text-shell-fg"
               }`}
             >
               <span className="text-base leading-none">{FLAGS[code].flag}</span>

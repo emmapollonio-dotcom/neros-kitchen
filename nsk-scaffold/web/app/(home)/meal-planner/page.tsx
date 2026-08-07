@@ -46,8 +46,8 @@ export default async function MealPlannerPage({ searchParams }: Props) {
 
   if (!planId) {
     return (
-      <div className="mx-auto max-w-content px-6 py-14 text-ivory">
-        <p className="font-body text-sm text-ivory/70">{t("errorOpenPlan")}</p>
+      <div className="mx-auto max-w-content px-6 py-14 text-shell-fg">
+        <p className="font-body text-sm text-shell-fg-secondary">{t("errorOpenPlan")}</p>
       </div>
     );
   }
@@ -72,11 +72,11 @@ export default async function MealPlannerPage({ searchParams }: Props) {
   }));
 
   return (
-    <div className="mx-auto max-w-content px-6 py-14 text-ivory">
+    <div className="mx-auto max-w-content px-6 py-14 text-shell-fg">
       <SectionBanner image="/images/marketing/ingredients-flatlay.webp" />
       <p className="font-body text-sm uppercase tracking-widest text-teal">N&apos;sK Home</p>
-      <h1 className="mt-2 font-display text-display-md text-ivory">Meal Planner</h1>
-      <p className="mt-2 max-w-xl font-body text-ivory/70">{t("subtitle")}</p>
+      <h1 className="mt-2 font-display text-display-md text-shell-fg">Meal Planner</h1>
+      <p className="mt-2 max-w-xl font-body text-shell-fg-secondary">{t("subtitle")}</p>
 
       <div className="mt-10">
         <MealPlannerBoard

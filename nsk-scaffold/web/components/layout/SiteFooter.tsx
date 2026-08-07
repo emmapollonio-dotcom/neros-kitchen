@@ -25,21 +25,21 @@ export async function SiteFooter() {
   ];
 
   return (
-    <footer className="border-t border-haze bg-ink">
+    <footer className="border-t border-shell-border bg-shell">
       <div className="mx-auto max-w-content px-6 py-16">
         <div className="grid grid-cols-2 gap-10 sm:grid-cols-4">
           <div className="col-span-2 sm:col-span-2">
-            <span className="font-display text-lg text-ivory">Nero&apos;s Kitchen</span>
-            <p className="mt-3 max-w-xs font-body text-sm text-ivory/60">{t("tagline")}</p>
+            <span className="font-display text-lg text-shell-fg">Nero&apos;s Kitchen</span>
+            <p className="mt-3 max-w-xs font-body text-sm text-shell-fg-secondary">{t("tagline")}</p>
           </div>
 
           {columns.map((col) => (
             <div key={col.title}>
-              <p className="font-body text-xs uppercase tracking-widest text-ivory/40">{col.title}</p>
+              <p className="font-body text-xs uppercase tracking-widest text-shell-fg-muted">{col.title}</p>
               <ul className="mt-4 space-y-3">
                 {col.links.map((link) => (
                   <li key={link.href}>
-                    <Link href={link.href} className="font-body text-sm text-ivory/60 hover:text-ivory">
+                    <Link href={link.href} className="font-body text-sm text-shell-fg-secondary hover:text-shell-fg">
                       {link.label}
                     </Link>
                   </li>
@@ -49,7 +49,7 @@ export async function SiteFooter() {
           ))}
         </div>
 
-        <p className="mt-14 font-body text-xs text-ivory/40">
+        <p className="mt-14 font-body text-xs text-shell-fg-muted">
           © {new Date().getFullYear()} Nero&apos;s Kitchen. {t("copyright")}
         </p>
       </div>

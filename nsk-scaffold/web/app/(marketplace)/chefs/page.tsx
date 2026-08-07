@@ -21,8 +21,8 @@ export default async function ChefsMarketplacePage() {
     <div className="mx-auto max-w-content px-6 py-14">
       <SectionBanner image="/images/marketing/chef-plating.webp" />
       <p className="font-body text-sm uppercase tracking-widest text-teal">Marketplace</p>
-      <h1 className="mt-2 font-display text-display-md text-ivory">{t("findYourChef")}</h1>
-      <p className="mt-3 max-w-xl font-body text-ivory/70">{t("subtitle")}</p>
+      <h1 className="mt-2 font-display text-display-md text-shell-fg">{t("findYourChef")}</h1>
+      <p className="mt-3 max-w-xl font-body text-shell-fg-secondary">{t("subtitle")}</p>
 
       <div className="mt-10">
         {chefs && chefs.length > 0 ? (

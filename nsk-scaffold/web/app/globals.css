@@ -8,6 +8,27 @@
   /* Accento brand: teal, non più gold (6 ago 2026) — vedi tailwind.config.ts */
   --nsk-accent: #117e8e;
   --nsk-smoke: #555555;
+
+  /* Shell theme (7 ago 2026) — token semantici per lo "scafo" applicativo
+     (nav, layout wrapper, testo/titoli appoggiati direttamente sullo sfondo
+     di pagina, FUORI dalle card). Le card (bg-white/bg-cream + text-charcoal)
+     restano invariate in entrambi i temi: sono già superfici chiare
+     autosufficienti, leggibili sia su scafo scuro che chiaro — non vanno
+     toccate. Default = scuro (comportamento storico dell'app prima del
+     toggle). html.theme-light sotto inverte solo questi 5 valori. */
+  --nsk-shell-bg: #121212;
+  --nsk-shell-fg: #f5f1ea;
+  --nsk-shell-fg-secondary: rgba(245, 241, 234, 0.7);
+  --nsk-shell-fg-muted: rgba(245, 241, 234, 0.5);
+  --nsk-shell-border: rgba(245, 241, 234, 0.12);
+}
+
+html.theme-light {
+  --nsk-shell-bg: #f5f1ea;
+  --nsk-shell-fg: #121212;
+  --nsk-shell-fg-secondary: rgba(18, 18, 18, 0.65);
+  --nsk-shell-fg-muted: rgba(18, 18, 18, 0.45);
+  --nsk-shell-border: rgba(18, 18, 18, 0.12);
 }
 
 html {

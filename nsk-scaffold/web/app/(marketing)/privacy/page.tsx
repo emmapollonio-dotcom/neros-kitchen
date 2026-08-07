@@ -1,9 +1,9 @@
 export default function PrivacyPage() {
   return (
-    <div className="min-h-screen bg-charcoal px-6 py-16 text-ivory">
+    <div className="min-h-screen bg-shell px-6 py-16 text-shell-fg">
       <div className="mx-auto max-w-3xl">
         <h1 className="font-display text-3xl">Informativa sulla privacy</h1>
-        <p className="mt-2 font-body text-sm text-ivory/70">
+        <p className="mt-2 font-body text-sm text-shell-fg-secondary">
           Ultimo aggiornamento: 5 agosto 2026
         </p>
 

@@ -29,12 +29,12 @@ export default async function RicetteIndexPage() {
     .order("updated_at", { ascending: false });
 
   return (
-    <div className="mx-auto max-w-content px-6 py-14 text-ivory">
+    <div className="mx-auto max-w-content px-6 py-14 text-shell-fg">
       <SectionBanner image="/images/marketing/hero-risotto.webp" />
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <p className="font-body text-sm uppercase tracking-widest text-teal">{t("sectionLabel")}</p>
-          <h1 className="mt-2 font-display text-display-md text-ivory">{t("title")}</h1>
+          <h1 className="mt-2 font-display text-display-md text-shell-fg">{t("title")}</h1>
         </div>
         <Link
           href="/ricette/nuova"

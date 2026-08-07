@@ -28,7 +28,7 @@ export function CookieConsentBanner() {
   if (!visible) return null;
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-50 border-t border-smoke/20 bg-charcoal px-6 py-4 text-ivory">
+    <div className="fixed inset-x-0 bottom-0 z-50 border-t border-shell-border bg-shell px-6 py-4 text-shell-fg">
       <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-4 sm:flex-row">
         <p className="font-body text-sm">
           Usiamo cookie tecnici essenziali per far funzionare l&apos;accesso al sito. Vedi la{" "}
@@ -40,13 +40,13 @@ export function CookieConsentBanner() {
         <div className="flex shrink-0 gap-3">
           <button
             onClick={() => choose("essential")}
-            className="rounded-nsk border border-ivory/40 px-4 py-2 font-body text-sm hover:border-teal hover:text-teal"
+            className="rounded-nsk border border-shell-fg/40 px-4 py-2 font-body text-sm hover:border-teal hover:text-teal"
           >
             Solo essenziali
           </button>
           <button
             onClick={() => choose("all")}
-            className="rounded-nsk bg-teal px-4 py-2 font-body text-sm text-white hover:bg-ivory"
+            className="rounded-nsk bg-teal px-4 py-2 font-body text-sm text-white hover:bg-teal-dark"
           >
             Accetta tutti
           </button>

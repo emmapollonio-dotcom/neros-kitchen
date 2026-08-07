@@ -30,9 +30,9 @@ export default async function BookChefPage({ params }: Props) {
   const days = computeFreeSlots(availability ?? []);
 
   return (
-    <div className="mx-auto max-w-2xl px-6 py-14 text-ivory">
+    <div className="mx-auto max-w-2xl px-6 py-14 text-shell-fg">
       <p className="font-body text-sm uppercase tracking-widest text-teal">{t("eyebrow")}</p>
-      <h1 className="mt-2 font-display text-display-md text-ivory">
+      <h1 className="mt-2 font-display text-display-md text-shell-fg">
         {chef.business_name ?? chef.full_name}
       </h1>
 

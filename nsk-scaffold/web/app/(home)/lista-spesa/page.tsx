@@ -30,10 +30,10 @@ export default async function ListaSpesaPage({ searchParams }: Props) {
 
   if (!lists || lists.length === 0) {
     return (
-      <div className="mx-auto max-w-content px-6 py-14 text-ivory">
+      <div className="mx-auto max-w-content px-6 py-14 text-shell-fg">
         <SectionBanner image="/images/marketing/ingredients-flatlay.webp" />
         <p className="font-body text-sm uppercase tracking-widest text-teal">N&apos;sK Home</p>
-        <h1 className="mt-2 font-display text-display-md text-ivory">{t("title")}</h1>
+        <h1 className="mt-2 font-display text-display-md text-shell-fg">{t("title")}</h1>
 
         <div className="mt-10 rounded-panel border border-line bg-white p-12 text-center">
           <p className="font-display text-xl text-charcoal">{t("noListsTitle")}</p>
@@ -65,10 +65,10 @@ export default async function ListaSpesaPage({ searchParams }: Props) {
   const ingredientNameById = Object.fromEntries((ingredients ?? []).map((i) => [i.id, i.name]));
 
   return (
-    <div className="mx-auto max-w-3xl px-6 py-14 text-ivory">
+    <div className="mx-auto max-w-3xl px-6 py-14 text-shell-fg">
       <SectionBanner image="/images/marketing/ingredients-flatlay.webp" />
       <p className="font-body text-sm uppercase tracking-widest text-teal">N&apos;sK Home</p>
-      <h1 className="mt-2 font-display text-display-md text-ivory">{activeList.title}</h1>
+      <h1 className="mt-2 font-display text-display-md text-shell-fg">{activeList.title}</h1>
 
       {lists.length > 1 && (
         <div className="mt-4 flex flex-wrap gap-2">

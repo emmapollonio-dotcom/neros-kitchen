@@ -23,12 +23,12 @@ export default async function BookingsPage() {
     .order("event_date", { ascending: true });
 
   return (
-    <div className="min-h-screen bg-charcoal px-6 py-16 text-ivory">
+    <div className="min-h-screen bg-shell px-6 py-16 text-shell-fg">
       <div className="mx-auto max-w-3xl">
         <h1 className="font-display text-3xl">{t("title")}</h1>
 
         {(!bookings || bookings.length === 0) && (
-          <p className="mt-6 font-body text-ivory/70">{t("noBookingsYet")}</p>
+          <p className="mt-6 font-body text-shell-fg-secondary">{t("noBookingsYet")}</p>
         )}
 
         <ul className="mt-8 space-y-4">

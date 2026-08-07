@@ -37,19 +37,19 @@ export default function NuovaRicettaPage() {
   }
 
   return (
-    <div className="mx-auto max-w-xl px-6 py-14 text-ivory">
+    <div className="mx-auto max-w-xl px-6 py-14 text-shell-fg">
       <SectionBanner image="/images/marketing/hero-risotto.webp" />
       <Link
         href="/ricette"
-        className="inline-flex items-center gap-1 font-body text-sm text-ivory/50 transition hover:text-ivory"
+        className="inline-flex items-center gap-1 font-body text-sm text-shell-fg-muted transition hover:text-shell-fg"
       >
         <ChevronLeft size={16} />
         Le tue ricette
       </Link>
 
       <p className="mt-6 font-body text-sm uppercase tracking-widest text-teal">N&apos;sK Home</p>
-      <h1 className="mt-2 font-display text-display-md text-ivory">Nuova ricetta</h1>
-      <p className="mt-2 font-body text-sm text-ivory/70">
+      <h1 className="mt-2 font-display text-display-md text-shell-fg">Nuova ricetta</h1>
+      <p className="mt-2 font-body text-sm text-shell-fg-secondary">
         Aggiungi gli ingredienti dalla scheda della ricetta una volta salvata: calcoliamo food cost
         e allergeni in automatico.
       </p>

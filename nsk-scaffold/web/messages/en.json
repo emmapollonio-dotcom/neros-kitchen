@@ -26,7 +26,9 @@
     "logout": "Log out",
     "openMenu": "Open menu",
     "changeLanguage": "Change language",
-    "findChef": "Find a chef"
+    "findChef": "Find a chef",
+    "themeToLight": "Switch to light theme",
+    "themeToDark": "Switch to dark theme"
   },
   "footer": {
     "tagline": "The ecosystem for people who live and breathe cooking — at home, in a professional kitchen, or as a consultant.",

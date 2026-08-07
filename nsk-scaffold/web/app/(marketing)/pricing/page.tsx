@@ -18,10 +18,10 @@ export default async function PricingPage() {
   const firstPaidIndex = (plans ?? []).findIndex((p) => (p.price_monthly ?? 0) > 0);
 
   return (
-    <div className="mx-auto max-w-content px-6 py-20 text-ivory">
+    <div className="mx-auto max-w-content px-6 py-20 text-shell-fg">
       <div className="mx-auto max-w-2xl text-center">
-        <h1 className="font-display text-display-md text-ivory">Piani semplici, senza sorprese</h1>
-        <p className="mt-3 font-body text-ivory/70">
+        <h1 className="font-display text-display-md text-shell-fg">Piani semplici, senza sorprese</h1>
+        <p className="mt-3 font-body text-shell-fg-secondary">
           Inizia gratis con N&apos;sK Home. Passa a Pro quando il business cresce.
         </p>
       </div>
