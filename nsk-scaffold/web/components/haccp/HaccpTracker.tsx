@@ -1,17 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
 
 const CONTROL_POINT_TYPES = ["frigo", "freezer", "cella", "banco_caldo", "altro"] as const;
 type ControlPointType = (typeof CONTROL_POINT_TYPES)[number];
-
-const TYPE_LABELS: Record<ControlPointType, string> = {
-  frigo: "Frigo",
-  freezer: "Freezer",
-  cella: "Cella",
-  banco_caldo: "Banco caldo",
-  altro: "Altro",
-};
 
 interface ControlPoint {
   id: string;
@@ -39,18 +32,26 @@ interface CorrectiveAction {
   created_at: string;
 }
 
-const URGENCY_LABELS: Record<CorrectiveAction["urgency"], string> = {
-  bassa: "Bassa",
-  media: "Media",
-  alta: "Alta",
-};
-
 // Tracker HACCP: gestione punti di controllo + log rilevazioni + azioni
 // correttive AI on-demand sulle non conformità. Ogni scrittura passa da
 // /api/v1/haccp/*, che si appoggia a RLS ("haccp_*_owner") come unica fonte
 // di verità sui permessi. Il giudizio di conformità è calcolato server-side
 // (lib/haccp/check-reading.ts), qui mostrato solo per come l'ha già deciso l'API.
 export function HaccpTracker() {
+  const t = useTranslations("haccp");
+  const locale = useLocale();
+  const TYPE_LABELS: Record<ControlPointType, string> = {
+    frigo: t("typeFrigo"),
+    freezer: t("typeFreezer"),
+    cella: t("typeCella"),
+    banco_caldo: t("typeBancoCaldo"),
+    altro: t("typeAltro"),
+  };
+  const URGENCY_LABELS: Record<CorrectiveAction["urgency"], string> = {
+    bassa: t("urgencyLow"),
+    media: t("urgencyMedium"),
+    alta: t("urgencyHigh"),
+  };
   const [controlPoints, setControlPoints] = useState<ControlPoint[]>([]);
   const [readings, setReadings] = useState<Reading[]>([]);
   const [loading, setLoading] = useState(true);
@@ -114,7 +115,7 @@ export function HaccpTracker() {
 
     if (!res.ok) {
       const body = await res.json().catch(() => null);
-      setError(typeof body?.error === "string" ? body.error : "Errore nella creazione del punto di controllo.");
+      setError(typeof body?.error === "string" ? body.error : t("errorCreatingPoint"));
     } else {
       setCpName("");
     }
@@ -146,7 +147,7 @@ export function HaccpTracker() {
 
     if (!res.ok) {
       const body = await res.json().catch(() => null);
-      setError(typeof body?.error === "string" ? body.error : "Errore nella registrazione.");
+      setError(typeof body?.error === "string" ? body.error : t("errorRecording"));
     } else {
       setTemperature("");
       setNote("");
@@ -166,7 +167,7 @@ export function HaccpTracker() {
     const body = await res.json().catch(() => null);
 
     if (!res.ok) {
-      setError(typeof body?.error === "string" ? body.error : "Errore nella generazione dell'azione correttiva.");
+      setError(typeof body?.error === "string" ? body.error : t("errorGeneratingAction"));
     } else {
       setActionsByReading((prev) => ({ ...prev, [readingId]: body.data.actions ?? [] }));
     }
@@ -181,35 +182,35 @@ export function HaccpTracker() {
   return (
     <div className="space-y-8">
       <div className="rounded-nsk border border-smoke/15 bg-white p-4">
-        <h2 className="font-body text-sm font-semibold text-charcoal">Punti di controllo</h2>
+        <h2 className="font-body text-sm font-semibold text-charcoal">{t("controlPointsTitle")}</h2>
 
         <form onSubmit={handleCreateControlPoint} className="mt-3 flex flex-wrap items-end gap-3">
           <div>
-            <label className="font-body text-xs text-smoke">Nome</label>
+            <label className="font-body text-xs text-smoke">{t("nameLabel")}</label>
             <input
               value={cpName}
               onChange={(e) => setCpName(e.target.value)}
-              placeholder="es. Frigo cucina"
+              placeholder={t("namePlaceholder")}
               required
               className="mt-1 rounded-nsk border border-smoke/30 px-3 py-2 font-body text-sm"
             />
           </div>
           <div>
-            <label className="font-body text-xs text-smoke">Tipo</label>
+            <label className="font-body text-xs text-smoke">{t("typeLabel")}</label>
             <select
               value={cpType}
               onChange={(e) => setCpType(e.target.value as ControlPointType)}
               className="mt-1 rounded-nsk border border-smoke/30 px-3 py-2 font-body text-sm"
             >
-              {CONTROL_POINT_TYPES.map((t) => (
-                <option key={t} value={t}>
-                  {TYPE_LABELS[t]}
+              {CONTROL_POINT_TYPES.map((cpt) => (
+                <option key={cpt} value={cpt}>
+                  {TYPE_LABELS[cpt]}
                 </option>
               ))}
             </select>
           </div>
           <div className="w-24">
-            <label className="font-body text-xs text-smoke">Min °C</label>
+            <label className="font-body text-xs text-smoke">{t("minLabel")}</label>
             <input
               type="number"
               step="0.1"
@@ -220,7 +221,7 @@ export function HaccpTracker() {
             />
           </div>
           <div className="w-24">
-            <label className="font-body text-xs text-smoke">Max °C</label>
+            <label className="font-body text-xs text-smoke">{t("maxLabel")}</label>
             <input
               type="number"
               step="0.1"
@@ -235,7 +236,7 @@ export function HaccpTracker() {
             disabled={creatingCp}
             className="rounded-nsk bg-charcoal px-5 py-2 font-body text-sm text-ivory hover:bg-teal hover:text-white disabled:opacity-50"
           >
-            {creatingCp ? "Salvataggio..." : "+ Aggiungi punto"}
+            {creatingCp ? t("saving") : t("addPoint")}
           </button>
         </form>
 
@@ -251,7 +252,7 @@ export function HaccpTracker() {
                   type="button"
                   onClick={() => handleDeleteControlPoint(cp.id)}
                   className="text-smoke hover:text-red-600"
-                  aria-label={`Elimina ${cp.name}`}
+                  aria-label={t("deleteAria", { name: cp.name })}
                 >
                   ×
                 </button>
@@ -262,16 +263,14 @@ export function HaccpTracker() {
       </div>
 
       <div className="rounded-nsk border border-smoke/15 bg-white p-4">
-        <h2 className="font-body text-sm font-semibold text-charcoal">Registra rilevazione</h2>
+        <h2 className="font-body text-sm font-semibold text-charcoal">{t("recordReadingTitle")}</h2>
 
         {controlPoints.length === 0 ? (
-          <p className="mt-2 font-body text-sm text-smoke">
-            Aggiungi prima almeno un punto di controllo.
-          </p>
+          <p className="mt-2 font-body text-sm text-smoke">{t("addPointFirst")}</p>
         ) : (
           <form onSubmit={handleCreateReading} className="mt-3 flex flex-wrap items-end gap-3">
             <div>
-              <label className="font-body text-xs text-smoke">Punto di controllo</label>
+              <label className="font-body text-xs text-smoke">{t("controlPointLabel")}</label>
               <select
                 value={selectedCpId}
                 onChange={(e) => setSelectedCpId(e.target.value)}
@@ -285,7 +284,7 @@ export function HaccpTracker() {
               </select>
             </div>
             <div className="w-28">
-              <label className="font-body text-xs text-smoke">Temperatura °C</label>
+              <label className="font-body text-xs text-smoke">{t("temperatureLabel")}</label>
               <input
                 type="number"
                 step="0.1"
@@ -296,7 +295,7 @@ export function HaccpTracker() {
               />
             </div>
             <div>
-              <label className="font-body text-xs text-smoke">Nota (opzionale)</label>
+              <label className="font-body text-xs text-smoke">{t("noteLabel")}</label>
               <input
                 value={note}
                 onChange={(e) => setNote(e.target.value)}
@@ -308,16 +307,16 @@ export function HaccpTracker() {
               disabled={creatingReading}
               className="rounded-nsk bg-charcoal px-5 py-2 font-body text-sm text-ivory hover:bg-teal hover:text-white disabled:opacity-50"
             >
-              {creatingReading ? "Salvataggio..." : "Registra"}
+              {creatingReading ? t("saving") : t("register")}
             </button>
           </form>
         )}
       </div>
 
       {error && <p className="font-body text-sm text-red-600">{error}</p>}
-      {loading && <p className="font-body text-sm text-smoke">Caricamento...</p>}
+      {loading && <p className="font-body text-sm text-smoke">{t("loading")}</p>}
       {!loading && readings.length === 0 && (
-        <p className="font-body text-sm text-smoke">Nessuna rilevazione registrata finora.</p>
+        <p className="font-body text-sm text-smoke">{t("noReadings")}</p>
       )}
 
       <ul className="space-y-3">
@@ -334,8 +333,8 @@ export function HaccpTracker() {
                     reading.is_non_conforming ? "text-red-600" : "text-smoke"
                   }`}
                 >
-                  {reading.is_non_conforming ? "Non conforme" : "Conforme"} ·{" "}
-                  {new Date(reading.recorded_at).toLocaleString("it-IT")}
+                  {reading.is_non_conforming ? t("nonConforming") : t("conforming")} ·{" "}
+                  {new Date(reading.recorded_at).toLocaleString(locale)}
                   {reading.note ? ` · ${reading.note}` : ""}
                 </p>
               </div>
@@ -346,7 +345,7 @@ export function HaccpTracker() {
                   disabled={generatingId === reading.id}
                   className="rounded-nsk border border-teal px-3 py-1.5 font-body text-xs text-charcoal hover:bg-teal/10 disabled:opacity-50"
                 >
-                  {generatingId === reading.id ? "Genero..." : "Azione correttiva AI"}
+                  {generatingId === reading.id ? t("generating") : t("correctiveActionAi")}
                 </button>
               )}
             </div>
@@ -354,14 +353,14 @@ export function HaccpTracker() {
             {expandedReadingId === reading.id && actionsByReading[reading.id] && (
               <div className="mt-4 space-y-2 border-t border-smoke/10 pt-4">
                 {actionsByReading[reading.id].length === 0 && (
-                  <p className="font-body text-xs text-smoke">Nessuna azione generata.</p>
+                  <p className="font-body text-xs text-smoke">{t("noActionsGenerated")}</p>
                 )}
                 {actionsByReading[reading.id].map((a) => (
                   <div key={a.id} className="rounded-nsk border border-teal/40 bg-teal/10 p-3">
                     <div className="flex items-center justify-between">
                       <p className="font-body text-sm font-semibold text-charcoal">{a.title}</p>
                       <p className="font-body text-xs uppercase tracking-wide text-teal">
-                        Urgenza: {URGENCY_LABELS[a.urgency]}
+                        {t("urgencyPrefix", { urgency: URGENCY_LABELS[a.urgency] })}
                       </p>
                     </div>
                     <p className="mt-1 whitespace-pre-wrap font-body text-sm text-charcoal">
