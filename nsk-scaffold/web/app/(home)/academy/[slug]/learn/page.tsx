@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { notFound, redirect } from "next/navigation";
 import { LessonPlayer } from "@/components/academy/LessonPlayer";
@@ -12,6 +13,7 @@ interface Props {
 // controllo auth + enrollment avviene qui, con RLS come rete di sicurezza
 // sulle query sottostanti.
 export default async function AcademyLearnPage({ params }: Props) {
+  const t = await getTranslations("academyCourse");
   const { slug } = await params;
   const supabase = await createSupabaseServerClient();
 
@@ -61,7 +63,7 @@ export default async function AcademyLearnPage({ params }: Props) {
   return (
     <div className="text-ivory">
       <section className="mx-auto max-w-5xl px-6 py-14">
-        <p className="font-body text-sm uppercase tracking-widest text-teal">Tutor AI · Corsi</p>
+        <p className="font-body text-sm uppercase tracking-widest text-teal">{t("learnEyebrow")}</p>
         <h1 className="mt-2 font-display text-display-md text-ivory">{course.title}</h1>
 
         <div className="mt-10">
@@ -70,7 +72,7 @@ export default async function AcademyLearnPage({ params }: Props) {
 
         {quizzes && quizzes.length > 0 && (
           <div className="mt-16 space-y-8">
-            <h2 className="font-display text-xl text-ivory">Quiz di verifica</h2>
+            <h2 className="font-display text-xl text-ivory">{t("quizSectionTitle")}</h2>
             {quizzes.map((quiz) => (
               <QuizForm
                 key={quiz.id}

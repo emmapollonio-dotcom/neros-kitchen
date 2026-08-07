@@ -408,5 +408,32 @@
     "statusCompleted": "Completata",
     "statusCancelled": "Annullata",
     "statusDisputed": "In contestazione"
+  },
+  "academyCourse": {
+    "backToTutorAi": "Tutor AI",
+    "allLevels": "tutti i livelli",
+    "free": "Gratuito",
+    "curriculumTitle": "Programma del corso",
+    "minutesSuffix": "min",
+    "continueCourse": "Continua il corso",
+    "enrolling": "Iscrizione...",
+    "enrollButton": "Iscriviti al corso",
+    "errorEnrolling": "Impossibile completare l'iscrizione.",
+    "learnEyebrow": "Tutor AI · Corsi",
+    "quizSectionTitle": "Quiz di verifica",
+    "noLessonsAvailable": "Nessuna lezione disponibile.",
+    "downloadPdf": "Scarica materiale PDF",
+    "lessonCompleted": "Lezione completata",
+    "markAsCompleted": "Segna come completata",
+    "passingScoreLabel": "Soglia di superamento: {score}%",
+    "submitting": "Invio...",
+    "submitAnswers": "Invia risposte",
+    "errorSubmittingQuiz": "Impossibile inviare il quiz. Riprova.",
+    "quizPassed": "Quiz superato! ",
+    "quizFailed": "Quiz non superato. ",
+    "scoreLabel": "Punteggio: {score}% ({correct}/{total} corrette)",
+    "preparingExplanation": "Preparo la spiegazione...",
+    "explainWithAi": "Spiegami con AI",
+    "errorExplaining": "Impossibile generare la spiegazione. Riprova."
   }
 }

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { notFound } from "next/navigation";
 import { EnrollButton } from "@/components/academy/EnrollButton";
@@ -11,6 +12,7 @@ interface Props {
 // Server Component — pagina vendita del corso: descrizione, indice lezioni
 // (senza contenuti, riservati agli iscritti) e call-to-action iscrizione.
 export default async function CourseDetailPage({ params }: Props) {
+  const t = await getTranslations("academyCourse");
   const { slug } = await params;
   const supabase = await createSupabaseServerClient();
 
@@ -51,11 +53,11 @@ export default async function CourseDetailPage({ params }: Props) {
           className="inline-flex items-center gap-1 font-body text-sm text-ivory/50 transition hover:text-ivory"
         >
           <ChevronLeft size={16} />
-          Tutor AI
+          {t("backToTutorAi")}
         </Link>
 
         <p className="mt-6 font-body text-sm uppercase tracking-widest text-teal">
-          {course.level ?? "tutti i livelli"} · {course.language}
+          {course.level ?? t("allLevels")} · {course.language}
         </p>
         <h1 className="mt-2 font-display text-display-md text-ivory">{course.title}</h1>
         {course.description && (
@@ -63,7 +65,7 @@ export default async function CourseDetailPage({ params }: Props) {
         )}
 
         <p className="mt-6 font-display text-2xl text-ivory">
-          {course.price > 0 ? `${course.price} €` : "Gratuito"}
+          {course.price > 0 ? `${course.price} €` : t("free")}
         </p>
 
         <div className="mt-6">
@@ -76,7 +78,7 @@ export default async function CourseDetailPage({ params }: Props) {
         </div>
 
         <div className="mt-16">
-          <h2 className="font-display text-xl text-ivory">Programma del corso</h2>
+          <h2 className="font-display text-xl text-ivory">{t("curriculumTitle")}</h2>
           <ol className="mt-4 space-y-2">
             {(lessons ?? []).map((lesson) => (
               <li
@@ -87,7 +89,9 @@ export default async function CourseDetailPage({ params }: Props) {
                   {lesson.position}. {lesson.title}
                 </span>
                 {lesson.duration_seconds && (
-                  <span className="text-smoke">{Math.round(lesson.duration_seconds / 60)} min</span>
+                  <span className="text-smoke">
+                    {Math.round(lesson.duration_seconds / 60)} {t("minutesSuffix")}
+                  </span>
                 )}
               </li>
             ))}

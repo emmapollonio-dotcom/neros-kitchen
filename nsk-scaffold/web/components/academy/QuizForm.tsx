@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 interface QuizQuestion {
   id: string;
@@ -26,6 +27,7 @@ interface AttemptResult {
 // Form quiz: le risposte vengono valutate lato server da gradeQuiz()
 // (lib/academy/grade-quiz.ts) — qui inviamo solo le scelte dell'utente.
 export function QuizForm({ quizId, title, passingScore, questions }: Props) {
+  const t = useTranslations("academyCourse");
   const [answers, setAnswers] = useState<Record<string, number>>({});
   const [result, setResult] = useState<AttemptResult | null>(null);
   const [submitting, setSubmitting] = useState(false);
@@ -47,7 +49,7 @@ export function QuizForm({ quizId, title, passingScore, questions }: Props) {
     setSubmitting(false);
 
     if (!res.ok) {
-      setError("Impossibile inviare il quiz. Riprova.");
+      setError(t("errorSubmittingQuiz"));
       return;
     }
 
@@ -67,7 +69,7 @@ export function QuizForm({ quizId, title, passingScore, questions }: Props) {
     const body = await res.json().catch(() => null);
 
     if (!res.ok) {
-      setError(body?.error ?? "Impossibile generare la spiegazione. Riprova.");
+      setError(body?.error ?? t("errorExplaining"));
     } else {
       setFeedback(body.data.ai_feedback ?? null);
     }
@@ -78,7 +80,7 @@ export function QuizForm({ quizId, title, passingScore, questions }: Props) {
     <div className="rounded-nsk border border-smoke/15 bg-white p-6">
       <h2 className="font-display text-xl text-charcoal">{title}</h2>
       <p className="mt-1 font-body text-xs text-smoke">
-        Soglia di superamento: {passingScore}%
+        {t("passingScoreLabel", { score: passingScore })}
       </p>
 
       <form onSubmit={handleSubmit} className="mt-6 space-y-6">
@@ -110,7 +112,7 @@ export function QuizForm({ quizId, title, passingScore, questions }: Props) {
           disabled={submitting || Object.keys(answers).length < questions.length}
           className="rounded-nsk bg-charcoal px-6 py-3 font-body text-ivory transition hover:bg-teal hover:text-white disabled:opacity-50"
         >
-          {submitting ? "Invio..." : "Invia risposte"}
+          {submitting ? t("submitting") : t("submitAnswers")}
         </button>
       </form>
 
@@ -120,8 +122,8 @@ export function QuizForm({ quizId, title, passingScore, questions }: Props) {
             result.passed ? "border-green-600/40 bg-green-50 text-green-800" : "border-red-600/40 bg-red-50 text-red-800"
           }`}
         >
-          {result.passed ? "Quiz superato! " : "Quiz non superato. "}
-          Punteggio: {result.score}% ({result.correct_count}/{result.total_questions} corrette)
+          {result.passed ? t("quizPassed") : t("quizFailed")}
+          {t("scoreLabel", { score: result.score, correct: result.correct_count, total: result.total_questions })}
         </div>
       )}
 
@@ -134,7 +136,7 @@ export function QuizForm({ quizId, title, passingScore, questions }: Props) {
               disabled={explaining}
               className="rounded-nsk bg-charcoal px-5 py-2 font-body text-sm text-ivory hover:bg-teal hover:text-white disabled:opacity-50"
             >
-              {explaining ? "Preparo la spiegazione..." : "Spiegami con AI"}
+              {explaining ? t("preparingExplanation") : t("explainWithAi")}
             </button>
           )}
           {feedback && (

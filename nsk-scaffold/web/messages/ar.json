@@ -408,5 +408,32 @@
     "statusCompleted": "مكتملة",
     "statusCancelled": "ملغاة",
     "statusDisputed": "قيد النزاع"
+  },
+  "academyCourse": {
+    "backToTutorAi": "مرشد الطهي بالذكاء الاصطناعي",
+    "allLevels": "جميع المستويات",
+    "free": "مجاني",
+    "curriculumTitle": "برنامج الدورة",
+    "minutesSuffix": "دقيقة",
+    "continueCourse": "أكمل الدورة",
+    "enrolling": "جارٍ التسجيل...",
+    "enrollButton": "سجّل في الدورة",
+    "errorEnrolling": "تعذّر إتمام التسجيل.",
+    "learnEyebrow": "مرشد الطهي · الدورات",
+    "quizSectionTitle": "اختبار التحقق",
+    "noLessonsAvailable": "لا توجد دروس متاحة.",
+    "downloadPdf": "تنزيل ملف PDF",
+    "lessonCompleted": "تم إكمال الدرس",
+    "markAsCompleted": "وضع علامة كمكتمل",
+    "passingScoreLabel": "نسبة النجاح: {score}%",
+    "submitting": "جارٍ الإرسال...",
+    "submitAnswers": "أرسل الإجابات",
+    "errorSubmittingQuiz": "تعذّر إرسال الاختبار. حاول مرة أخرى.",
+    "quizPassed": "تم اجتياز الاختبار! ",
+    "quizFailed": "لم يتم اجتياز الاختبار. ",
+    "scoreLabel": "النتيجة: {score}% ({correct}/{total} صحيحة)",
+    "preparingExplanation": "جارٍ تحضير الشرح...",
+    "explainWithAi": "اشرح لي بالذكاء الاصطناعي",
+    "errorExplaining": "تعذّر إنشاء الشرح. حاول مرة أخرى."
   }
 }

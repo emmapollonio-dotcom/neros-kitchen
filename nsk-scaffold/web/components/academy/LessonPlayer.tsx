@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 interface Lesson {
   id: string;
@@ -24,6 +25,7 @@ interface Props {
 // Lista lezioni + player della lezione selezionata, con segna-come-completata
 // via POST /api/v1/lessons/{id}/progress (stessa API usata per tracciare last_position).
 export function LessonPlayer({ lessons, initialProgress }: Props) {
+  const t = useTranslations("academyCourse");
   const [completedIds, setCompletedIds] = useState<Set<string>>(
     new Set(initialProgress.filter((p) => p.completed).map((p) => p.lesson_id))
   );
@@ -68,7 +70,7 @@ export function LessonPlayer({ lessons, initialProgress }: Props) {
 
       <section className="rounded-nsk border border-smoke/15 bg-white p-6">
         {!activeLesson ? (
-          <p className="font-body text-sm text-smoke">Nessuna lezione disponibile.</p>
+          <p className="font-body text-sm text-smoke">{t("noLessonsAvailable")}</p>
         ) : (
           <div>
             <h2 className="font-display text-2xl text-charcoal">{activeLesson.title}</h2>
@@ -89,7 +91,7 @@ export function LessonPlayer({ lessons, initialProgress }: Props) {
                 rel="noreferrer"
                 className="mt-4 inline-block font-body text-sm text-teal underline"
               >
-                Scarica materiale PDF
+                {t("downloadPdf")}
               </a>
             )}
 
@@ -99,7 +101,7 @@ export function LessonPlayer({ lessons, initialProgress }: Props) {
               disabled={saving || completedIds.has(activeLesson.id)}
               className="mt-6 rounded-nsk bg-charcoal px-6 py-3 font-body text-ivory transition hover:bg-teal hover:text-white disabled:opacity-50"
             >
-              {completedIds.has(activeLesson.id) ? "Lezione completata" : "Segna come completata"}
+              {completedIds.has(activeLesson.id) ? t("lessonCompleted") : t("markAsCompleted")}
             </button>
           </div>
         )}

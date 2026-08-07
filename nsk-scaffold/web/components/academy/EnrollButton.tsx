@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 interface Props {
   courseId: string;
@@ -14,6 +15,7 @@ interface Props {
 // redirect di ritorno (stesso pattern del middleware). Se già iscritto, porta
 // direttamente alla pagina di apprendimento.
 export function EnrollButton({ courseId, courseSlug, isEnrolled, isAuthenticated }: Props) {
+  const t = useTranslations("academyCourse");
   const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -24,7 +26,7 @@ export function EnrollButton({ courseId, courseSlug, isEnrolled, isAuthenticated
         href={`/academy/${courseSlug}/learn`}
         className="inline-block rounded-nsk bg-charcoal px-8 py-3 font-body text-ivory transition hover:bg-teal hover:text-white"
       >
-        Continua il corso
+        {t("continueCourse")}
       </a>
     );
   }
@@ -43,7 +45,7 @@ export function EnrollButton({ courseId, courseSlug, isEnrolled, isAuthenticated
     setSubmitting(false);
 
     if (!res.ok) {
-      setError("Impossibile completare l'iscrizione.");
+      setError(t("errorEnrolling"));
       return;
     }
 
@@ -59,7 +61,7 @@ export function EnrollButton({ courseId, courseSlug, isEnrolled, isAuthenticated
         disabled={submitting}
         className="rounded-nsk bg-charcoal px-8 py-3 font-body text-ivory transition hover:bg-teal hover:text-white disabled:opacity-50"
       >
-        {submitting ? "Iscrizione..." : "Iscriviti al corso"}
+        {submitting ? t("enrolling") : t("enrollButton")}
       </button>
       {error && <p className="mt-2 font-body text-sm text-red-600">{error}</p>}
     </div>
