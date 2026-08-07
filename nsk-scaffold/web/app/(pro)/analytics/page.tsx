@@ -1,3 +1,4 @@
+import { getLocale, getTranslations } from "next-intl/server";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { SocialStudio } from "@/components/social/SocialStudio";
 import { TabSwitcher } from "@/components/layout/TabSwitcher";
@@ -8,6 +9,8 @@ import { SectionBanner } from "@/components/layout/SectionBanner";
 // "Social Studio" è confluita qui come tab: performance e contenuti per farla
 // crescere sono la stessa domanda ("come va il mio business"), non due strumenti.
 export default async function AnalyticsPage() {
+  const t = await getTranslations("analytics");
+  const locale = await getLocale();
   const supabase = await createSupabaseServerClient();
   const {
     data: { user },
@@ -38,27 +41,27 @@ export default async function AnalyticsPage() {
   const performanceContent = (
     <div>
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-        <Kpi label="Revenue (12 mesi)" value={`${totalRevenue.toFixed(0)} €`} />
-        <Kpi label="Prenotazioni completate" value={String(totalBookings)} />
-        <Kpi label="Richieste in attesa" value={String(pendingCount ?? 0)} />
-        <Kpi label="Rating medio" value={reviews?.rating_avg ? `★ ${reviews.rating_avg}` : "—"} />
+        <Kpi label={t("revenueKpi")} value={`${totalRevenue.toFixed(0)} €`} />
+        <Kpi label={t("completedBookingsKpi")} value={String(totalBookings)} />
+        <Kpi label={t("pendingRequestsKpi")} value={String(pendingCount ?? 0)} />
+        <Kpi label={t("avgRatingKpi")} value={reviews?.rating_avg ? `★ ${reviews.rating_avg}` : "—"} />
       </div>
 
-      <h2 className="mt-10 font-display text-lg text-ivory">Revenue per mese</h2>
+      <h2 className="mt-10 font-display text-lg text-ivory">{t("revenueByMonthTitle")}</h2>
       <div className="mt-4 overflow-hidden rounded-card border border-line bg-white shadow-soft">
         <table className="w-full font-body text-sm">
           <thead>
             <tr className="border-b border-line bg-cream text-left text-mist">
-              <th className="px-5 py-3 font-normal">Mese</th>
-              <th className="px-5 py-3 font-normal">Prenotazioni</th>
-              <th className="px-5 py-3 font-normal">Revenue</th>
+              <th className="px-5 py-3 font-normal">{t("monthColumn")}</th>
+              <th className="px-5 py-3 font-normal">{t("bookingsColumn")}</th>
+              <th className="px-5 py-3 font-normal">{t("revenueColumn")}</th>
             </tr>
           </thead>
           <tbody>
             {(revenueByMonth ?? []).map((r) => (
               <tr key={r.month} className="border-b border-line last:border-0">
                 <td className="px-5 py-3 text-charcoal">
-                  {new Date(r.month).toLocaleDateString("it-IT", { month: "long", year: "numeric" })}
+                  {new Date(r.month).toLocaleDateString(locale, { month: "long", year: "numeric" })}
                 </td>
                 <td className="px-5 py-3 text-charcoal">{r.bookings_count}</td>
                 <td className="px-5 py-3 text-charcoal">{Number(r.revenue).toFixed(2)} €</td>
@@ -67,7 +70,7 @@ export default async function AnalyticsPage() {
             {(!revenueByMonth || revenueByMonth.length === 0) && (
               <tr>
                 <td colSpan={3} className="px-5 py-8 text-center text-smoke">
-                  Nessun dato ancora — arriverà dopo la prima prenotazione completata e pagata.
+                  {t("noDataYet")}
                 </td>
               </tr>
             )}
@@ -86,8 +89,8 @@ export default async function AnalyticsPage() {
       <div className="mt-10">
         <TabSwitcher
           tabs={[
-            { id: "performance", label: "Performance", content: performanceContent },
-            { id: "social", label: "Social Studio", content: <SocialStudio /> },
+            { id: "performance", label: t("performanceTab"), content: performanceContent },
+            { id: "social", label: t("socialStudioTab"), content: <SocialStudio /> },
           ]}
         />
       </div>

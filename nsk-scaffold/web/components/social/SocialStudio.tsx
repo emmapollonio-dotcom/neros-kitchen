@@ -1,16 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 
 const PLATFORMS = ["instagram", "facebook", "tiktok", "linkedin"] as const;
 type Platform = (typeof PLATFORMS)[number];
-
-const PLATFORM_LABELS: Record<Platform, string> = {
-  instagram: "Instagram",
-  facebook: "Facebook",
-  tiktok: "TikTok",
-  linkedin: "LinkedIn",
-};
 
 // Duplicazione minima e intenzionale di web/lib/social/validate-post.ts:
 // qui serve solo per il badge di anteprima lato client, la fonte di verità
@@ -25,21 +19,7 @@ const PLATFORM_LIMITS: Record<Platform, { captionMaxChars: number; hashtagsMaxCo
 const TONES = ["professionale", "amichevole", "elegante", "divertente"] as const;
 type Tone = (typeof TONES)[number];
 
-const TONE_LABELS: Record<Tone, string> = {
-  professionale: "Professionale",
-  amichevole: "Amichevole",
-  elegante: "Elegante",
-  divertente: "Divertente",
-};
-
 type PostStatus = "draft" | "ready" | "scheduled" | "published";
-
-const STATUS_LABELS: Record<PostStatus, string> = {
-  draft: "Bozza",
-  ready: "Pronto",
-  scheduled: "Pianificato",
-  published: "Pubblicato",
-};
 
 interface SocialPost {
   id: string;
@@ -56,6 +36,25 @@ interface SocialPost {
 // Ogni scrittura passa da /api/v1/social/*, che si appoggia a RLS
 // ("social_posts_owner") come unica fonte di verità sui permessi.
 export function SocialStudio() {
+  const t = useTranslations("socialStudio");
+  const PLATFORM_LABELS: Record<Platform, string> = {
+    instagram: t("platformInstagram"),
+    facebook: t("platformFacebook"),
+    tiktok: t("platformTiktok"),
+    linkedin: t("platformLinkedin"),
+  };
+  const TONE_LABELS: Record<Tone, string> = {
+    professionale: t("toneProfessional"),
+    amichevole: t("toneFriendly"),
+    elegante: t("toneElegant"),
+    divertente: t("toneFun"),
+  };
+  const STATUS_LABELS: Record<PostStatus, string> = {
+    draft: t("statusDraft"),
+    ready: t("statusReady"),
+    scheduled: t("statusScheduled"),
+    published: t("statusPublished"),
+  };
   const [posts, setPosts] = useState<SocialPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -94,7 +93,7 @@ export function SocialStudio() {
 
     const createBody = await createRes.json().catch(() => null);
     if (!createRes.ok) {
-      setError(typeof createBody?.error === "string" ? createBody.error : "Errore nella creazione del post.");
+      setError(typeof createBody?.error === "string" ? createBody.error : t("errorCreatingPost"));
       setGeneratingNew(false);
       return;
     }
@@ -105,7 +104,7 @@ export function SocialStudio() {
     const genRes = await fetch(`/api/v1/social/posts/${postId}/generate`, { method: "POST" });
     if (!genRes.ok) {
       const genBody = await genRes.json().catch(() => null);
-      setError(typeof genBody?.error === "string" ? genBody.error : "Errore nella generazione AI.");
+      setError(typeof genBody?.error === "string" ? genBody.error : t("errorGeneratingAi"));
     } else {
       setTopic("");
     }
@@ -121,7 +120,7 @@ export function SocialStudio() {
     const res = await fetch(`/api/v1/social/posts/${id}/generate`, { method: "POST" });
     if (!res.ok) {
       const body = await res.json().catch(() => null);
-      setError(typeof body?.error === "string" ? body.error : "Errore nella generazione AI.");
+      setError(typeof body?.error === "string" ? body.error : t("errorGeneratingAi"));
     }
     setGeneratingId(null);
     await loadPosts();
@@ -147,7 +146,7 @@ export function SocialStudio() {
       >
         <div className="flex flex-wrap gap-3">
           <div>
-            <label className="font-body text-xs text-smoke">Piattaforma</label>
+            <label className="font-body text-xs text-smoke">{t("platformLabel")}</label>
             <select
               value={platform}
               onChange={(e) => setPlatform(e.target.value as Platform)}
@@ -161,15 +160,15 @@ export function SocialStudio() {
             </select>
           </div>
           <div>
-            <label className="font-body text-xs text-smoke">Tono</label>
+            <label className="font-body text-xs text-smoke">{t("toneLabel")}</label>
             <select
               value={tone}
               onChange={(e) => setTone(e.target.value as Tone)}
               className="mt-1 rounded-nsk border border-smoke/30 px-3 py-2 font-body text-sm"
             >
-              {TONES.map((t) => (
-                <option key={t} value={t}>
-                  {TONE_LABELS[t]}
+              {TONES.map((tn) => (
+                <option key={tn} value={tn}>
+                  {TONE_LABELS[tn]}
                 </option>
               ))}
             </select>
@@ -177,11 +176,11 @@ export function SocialStudio() {
         </div>
 
         <div>
-          <label className="font-body text-xs text-smoke">Piatto o argomento</label>
+          <label className="font-body text-xs text-smoke">{t("topicLabel")}</label>
           <input
             value={topic}
             onChange={(e) => setTopic(e.target.value)}
-            placeholder="es. Risotto alla milanese con zafferano di Sardegna"
+            placeholder={t("topicPlaceholder")}
             required
             className="mt-1 w-full rounded-nsk border border-smoke/30 px-3 py-2 font-body text-sm"
           />
@@ -192,14 +191,14 @@ export function SocialStudio() {
           disabled={generatingNew}
           className="rounded-nsk bg-charcoal px-5 py-2 font-body text-sm text-ivory hover:bg-teal hover:text-white disabled:opacity-50"
         >
-          {generatingNew ? "Genero..." : "Genera post AI"}
+          {generatingNew ? t("generating") : t("generatePostAi")}
         </button>
       </form>
 
       {error && <p className="font-body text-sm text-red-600">{error}</p>}
-      {loading && <p className="font-body text-sm text-smoke">Caricamento...</p>}
+      {loading && <p className="font-body text-sm text-smoke">{t("loading")}</p>}
       {!loading && posts.length === 0 && (
-        <p className="font-body text-sm text-smoke">Nessun post creato finora.</p>
+        <p className="font-body text-sm text-smoke">{t("noPostsYet")}</p>
       )}
 
       <ul className="space-y-4">
@@ -226,7 +225,7 @@ export function SocialStudio() {
                     disabled={generatingId === post.id}
                     className="rounded-nsk border border-teal px-3 py-1.5 font-body text-xs text-charcoal hover:bg-teal/10 disabled:opacity-50"
                   >
-                    {generatingId === post.id ? "Genero..." : post.caption ? "Rigenera" : "Genera"}
+                    {generatingId === post.id ? t("generating") : post.caption ? t("regenerate") : t("generate")}
                   </button>
                   {post.caption && (
                     <button
@@ -234,7 +233,7 @@ export function SocialStudio() {
                       onClick={() => handleCopy(post)}
                       className="rounded-nsk border border-smoke/30 px-3 py-1.5 font-body text-xs text-charcoal hover:border-teal"
                     >
-                      Copia
+                      {t("copy")}
                     </button>
                   )}
                   <button
@@ -242,7 +241,7 @@ export function SocialStudio() {
                     onClick={() => handleDelete(post.id)}
                     className="rounded-nsk border border-smoke/30 px-3 py-1.5 font-body text-xs text-smoke hover:border-red-400 hover:text-red-600"
                   >
-                    Elimina
+                    {t("delete")}
                   </button>
                 </div>
               </div>
@@ -258,10 +257,10 @@ export function SocialStudio() {
                     </p>
                   )}
                   <p className={`font-body text-xs ${overCaption || overHashtags ? "text-red-600" : "text-smoke"}`}>
-                    {captionLength}/{limits.captionMaxChars} caratteri
+                    {captionLength}/{limits.captionMaxChars} {t("charactersUnit")}
                     {limits.hashtagsMaxCount !== null &&
-                      ` · ${post.hashtags.length}/${limits.hashtagsMaxCount} hashtag`}
-                    {(overCaption || overHashtags) && " — oltre il limite della piattaforma"}
+                      ` · ${post.hashtags.length}/${limits.hashtagsMaxCount} ${t("hashtagsUnit")}`}
+                    {(overCaption || overHashtags) && ` — ${t("overLimit")}`}
                   </p>
                 </div>
               )}
