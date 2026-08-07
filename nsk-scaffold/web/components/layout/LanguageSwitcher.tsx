@@ -4,16 +4,8 @@ import { useEffect, useRef, useState, useTransition } from "react";
 import { useLocale } from "next-intl";
 import { useRouter } from "next/navigation";
 import { ChevronDown } from "lucide-react";
-import { locales, type Locale } from "@/i18n/locales";
+import { locales, LOCALE_FLAGS as FLAGS, type Locale } from "@/i18n/locales";
 import { setLocale } from "@/app/actions/set-locale";
-
-const FLAGS: Record<Locale, { flag: string; label: string }> = {
-  it: { flag: "🇮🇹", label: "Italiano" },
-  en: { flag: "🇬🇧", label: "English" },
-  es: { flag: "🇪🇸", label: "Español" },
-  fr: { flag: "🇫🇷", label: "Français" },
-  ar: { flag: "🇸🇦", label: "العربية" },
-};
 
 // Switcher lingua globale (bandierine, come richiesto) — vive nella nav
 // condivisa (SiteHeader per il pubblico, AppNavClient per l'area loggata),

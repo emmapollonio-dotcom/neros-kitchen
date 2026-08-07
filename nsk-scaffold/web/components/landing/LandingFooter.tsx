@@ -4,7 +4,7 @@ import { useLocale } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
 import Link from "next/link";
-import { locales } from "@/i18n/locales";
+import { locales, LOCALE_FLAGS } from "@/i18n/locales";
 import { setLocale } from "@/app/actions/set-locale";
 
 export function LandingFooter() {
@@ -47,13 +47,16 @@ export function LandingFooter() {
               type="button"
               disabled={isPending}
               onClick={() => selectLocale(code)}
-              className="rounded-pill border px-[11px] py-[5px] font-body text-[11px] font-semibold uppercase transition-colors duration-200 ease-nsk disabled:opacity-60"
+              aria-label={LOCALE_FLAGS[code].label}
+              title={LOCALE_FLAGS[code].label}
+              className="flex items-center gap-1.5 rounded-pill border px-[11px] py-[5px] font-body text-[11px] font-semibold uppercase transition-colors duration-200 ease-nsk disabled:opacity-60"
               style={{
                 background: active ? "#117E8E" : "transparent",
                 color: active ? "#FFFFFF" : "var(--nsk-l-text-secondary)",
                 borderColor: "var(--nsk-l-border)",
               }}
             >
+              <span className="text-sm leading-none">{LOCALE_FLAGS[code].flag}</span>
               {code}
             </button>
           );
