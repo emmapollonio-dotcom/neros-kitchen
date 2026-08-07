@@ -36,5 +36,16 @@
     "terms": "Termini di servizio",
     "privacyPolicy": "Informativa privacy",
     "copyright": "Tutti i diritti riservati."
+  },
+  "recipes": {
+    "sectionLabel": "N'sK Home",
+    "title": "Le tue ricette",
+    "newRecipe": "Nuova ricetta",
+    "emptyTitle": "Il tuo ricettario è vuoto",
+    "emptyBody": "Aggiungi la tua prima ricetta: calcoliamo food cost e allergeni automaticamente, e potrai usarla nel Meal Planner.",
+    "createFirst": "Crea la prima ricetta",
+    "defaultLabel": "Ricetta",
+    "servings": "{count} porzioni",
+    "perServing": "/porzione"
   }
 }

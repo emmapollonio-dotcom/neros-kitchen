@@ -36,5 +36,16 @@
     "terms": "Conditions d'utilisation",
     "privacyPolicy": "Politique de confidentialité",
     "copyright": "Tous droits réservés."
+  },
+  "recipes": {
+    "sectionLabel": "N'sK Home",
+    "title": "Vos recettes",
+    "newRecipe": "Nouvelle recette",
+    "emptyTitle": "Votre livre de recettes est vide",
+    "emptyBody": "Ajoutez votre première recette : nous calculons automatiquement le coût matière et les allergènes, et vous pourrez l'utiliser dans le Meal Planner.",
+    "createFirst": "Créer ma première recette",
+    "defaultLabel": "Recette",
+    "servings": "{count} portions",
+    "perServing": "/portion"
   }
 }

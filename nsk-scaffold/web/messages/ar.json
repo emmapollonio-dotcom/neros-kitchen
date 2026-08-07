@@ -36,5 +36,16 @@
     "terms": "شروط الخدمة",
     "privacyPolicy": "سياسة الخصوصية",
     "copyright": "جميع الحقوق محفوظة."
+  },
+  "recipes": {
+    "sectionLabel": "N'sK Home",
+    "title": "وصفاتك",
+    "newRecipe": "وصفة جديدة",
+    "emptyTitle": "دفتر وصفاتك فارغ",
+    "emptyBody": "أضف وصفتك الأولى: نحسب تكلفة الطعام ومسببات الحساسية تلقائيًا، ويمكنك استخدامها في مخطط الوجبات.",
+    "createFirst": "أنشئ وصفتك الأولى",
+    "defaultLabel": "وصفة",
+    "servings": "{count} حصص",
+    "perServing": "/للحصة"
   }
 }

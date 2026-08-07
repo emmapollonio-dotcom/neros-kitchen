@@ -36,5 +36,16 @@
     "terms": "Terms of service",
     "privacyPolicy": "Privacy policy",
     "copyright": "All rights reserved."
+  },
+  "recipes": {
+    "sectionLabel": "N'sK Home",
+    "title": "Your recipes",
+    "newRecipe": "New recipe",
+    "emptyTitle": "Your recipe book is empty",
+    "emptyBody": "Add your first recipe: we calculate food cost and allergens automatically, and you can use it in the Meal Planner.",
+    "createFirst": "Create your first recipe",
+    "defaultLabel": "Recipe",
+    "servings": "{count} servings",
+    "perServing": "/serving"
   }
 }
