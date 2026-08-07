@@ -1,24 +1,6 @@
 import { Star } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 import { Reveal } from "./Reveal";
-
-const TESTIMONIALS = [
-  {
-    name: "Marco Ferrari",
-    role: "Chef, ristorante La Brace",
-    quote:
-      "Abbiamo ridotto lo scarto di cucina in modo misurabile già nel primo mese. I report ci hanno aiutato a rivedere gli ordini.",
-  },
-  {
-    name: "Giulia Conti",
-    role: "Home cook",
-    quote: "Non butto quasi più niente. L'app mi propone ricette proprio con quello che sta per scadere.",
-  },
-  {
-    name: "Andrea Colombo",
-    role: "Sous-chef, hotel Aurora",
-    quote: "Semplice da integrare nel flusso di lavoro quotidiano, senza complicare la gestione della dispensa.",
-  },
-];
 
 function initials(name: string) {
   return name
@@ -28,11 +10,31 @@ function initials(name: string) {
     .toUpperCase();
 }
 
-export function Testimonials() {
+export async function Testimonials() {
+  const t = await getTranslations("landing");
+
+  const TESTIMONIALS = [
+    {
+      name: "Marco Ferrari",
+      role: t("testimonial1Role"),
+      quote: t("testimonial1Quote"),
+    },
+    {
+      name: "Giulia Conti",
+      role: t("testimonial2Role"),
+      quote: t("testimonial2Quote"),
+    },
+    {
+      name: "Andrea Colombo",
+      role: t("testimonial3Role"),
+      quote: t("testimonial3Quote"),
+    },
+  ];
+
   return (
     <div className="mx-auto max-w-content px-6 py-[clamp(48px,7vw,88px)]">
       <div className="mb-12 text-center">
-        <div className="font-body text-xs font-semibold uppercase tracking-[0.06em] text-teal-dark">Chi lo usa</div>
+        <div className="font-body text-xs font-semibold uppercase tracking-[0.06em] text-teal-dark">{t("testimonialsEyebrow")}</div>
       </div>
       <div className="grid gap-6 [grid-template-columns:repeat(auto-fit,minmax(300px,1fr))]">
         {TESTIMONIALS.map((item, i) => (

@@ -1,21 +1,24 @@
 import Image from "next/image";
+import { getTranslations } from "next-intl/server";
 import { Reveal } from "./Reveal";
 
-const PHOTOS = [
-  { src: "/images/landing/piatto-signature.webp", alt: "Piatto signature N'sK" },
-  { src: "/images/landing/ambiente-cucina.webp", alt: "Ambiente cucina" },
-  { src: "/images/landing/ingredienti-freschi.webp", alt: "Ingredienti freschi" },
-];
+export async function BrandImagery() {
+  const t = await getTranslations("landing");
 
-export function BrandImagery() {
+  const PHOTOS = [
+    { src: "/images/landing/piatto-signature.webp", alt: t("brandImageryAltDish") },
+    { src: "/images/landing/ambiente-cucina.webp", alt: t("brandImageryAltKitchen") },
+    { src: "/images/landing/ingredienti-freschi.webp", alt: t("brandImageryAltIngredients") },
+  ];
+
   return (
     <div className="mx-auto max-w-content px-6 pb-[88px]">
       <div className="mx-auto mb-10 max-w-[600px] text-center">
         <h2 className="mb-3 font-display text-[clamp(1.6rem,3vw,2.2rem)] font-bold leading-[1.2]" style={{ color: "var(--nsk-l-text)" }}>
-          Il piacere di cucinare, senza sensi di colpa
+          {t("brandImageryHeading")}
         </h2>
         <p className="font-body text-[15px] leading-[1.6]" style={{ color: "var(--nsk-l-text-secondary)" }}>
-          Ingredienti freschi, piatti che nascono da ciò che hai già in casa.
+          {t("brandImagerySubtitle")}
         </p>
       </div>
       <div className="grid gap-5 [grid-template-columns:repeat(auto-fit,minmax(260px,1fr))]">

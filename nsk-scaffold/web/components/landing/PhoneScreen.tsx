@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { getTranslations } from "next-intl/server";
 
 type Variant = "overview" | "dispensa" | "ricette" | "report" | "lista";
 
@@ -7,53 +8,57 @@ const AMBER_GOLD = "rgba(200,169,107,"; // riusa il gold del brand per le barre 
 const WARN = "oklch(60% 0.12 25)";
 const OK = "oklch(70% 0.09 150)";
 
-const OVERVIEW_ITEMS = [
-  { name: "Zucca", exp: "2 giorni", color: TEAL },
-  { name: "Salvia fresca", exp: "3 giorni", color: OK },
-  { name: "Ricotta", exp: "Oggi", color: WARN },
-  { name: "Riso carnaroli", exp: "40 giorni", color: OK },
-];
-
-const PANTRY_FILTERS = [
-  { label: "Tutti", active: true },
-  { label: "In scadenza", active: false },
-  { label: "Freschi", active: false },
-];
-
-const PANTRY_ITEMS = [
-  { name: "Ricotta", exp: "Oggi", color: WARN },
-  { name: "Zucca", exp: "2 giorni", color: WARN },
-  { name: "Salvia fresca", exp: "3 giorni", color: TEAL },
-  { name: "Burro", exp: "9 giorni", color: TEAL },
-  { name: "Riso carnaroli", exp: "40 giorni", color: OK },
-  { name: "Parmigiano", exp: "25 giorni", color: OK },
-];
-
-const RECIPE_ITEMS = [
-  { name: "Risotto zucca e salvia", meta: "25 min · usa 5 ingredienti", match: "92%", img: "/images/landing/recipe-thumb-1.webp" },
-  { name: "Ravioli ricotta", meta: "35 min · usa 3 ingredienti", match: "81%", img: "/images/landing/recipe-thumb-2.webp" },
-  { name: "Burro alla salvia", meta: "10 min · usa 2 ingredienti", match: "74%", img: "/images/landing/recipe-thumb-1.webp" },
-];
-
-const REPORT_BARS = [
-  { label: "Set 1", h: 40, opacity: 0.35 },
-  { label: "Set 2", h: 58, opacity: 0.5 },
-  { label: "Set 3", h: 46, opacity: 0.4 },
-  { label: "Set 4", h: 70, opacity: 0.65 },
-  { label: "Set 5", h: 85, opacity: 1, teal: true },
-  { label: "Set 6", h: 95, opacity: 1, teal: true },
-];
-
-const SHOPPING_GROUPS = [
-  { category: "Ortaggi", items: ["Zucchine", "Carote"] },
-  { category: "Latticini", items: ["Ricotta", "Parmigiano"] },
-  { category: "Dispensa", items: ["Riso carnaroli", "Olio EVO"] },
-];
-
 // Device frame + 5 varianti di contenuto, spec pixel-close (vedi
 // design_handoff_nsk_landing/PhoneScreen.dc.html). Presentational, dati
 // hardcoded come nel prototipo — non collegato a dati reali dell'utente.
-export function PhoneScreen({ variant }: { variant: Variant }) {
+// I nomi degli ingredienti/ricette e le etichette sono tradotti (namespace
+// "landing") cosi il mockup segue la lingua selezionata dal visitatore.
+export async function PhoneScreen({ variant }: { variant: Variant }) {
+  const t = await getTranslations("landing");
+
+  const overviewItems = [
+    { name: t("ingredientZucca"), exp: t("expInDays", { count: 2 }), color: TEAL },
+    { name: t("ingredientSalvia"), exp: t("expInDays", { count: 3 }), color: OK },
+    { name: t("ingredientRicotta"), exp: t("expToday"), color: WARN },
+    { name: t("ingredientRisoCarnaroli"), exp: t("expInDays", { count: 40 }), color: OK },
+  ];
+
+  const pantryFilters = [
+    { label: t("phoneFilterAll"), active: true },
+    { label: t("phoneFilterExpiring"), active: false },
+    { label: t("phoneFilterFresh"), active: false },
+  ];
+
+  const pantryItems = [
+    { name: t("ingredientRicotta"), exp: t("expToday"), color: WARN },
+    { name: t("ingredientZucca"), exp: t("expInDays", { count: 2 }), color: WARN },
+    { name: t("ingredientSalvia"), exp: t("expInDays", { count: 3 }), color: TEAL },
+    { name: t("ingredientBurro"), exp: t("expInDays", { count: 9 }), color: TEAL },
+    { name: t("ingredientRisoCarnaroli"), exp: t("expInDays", { count: 40 }), color: OK },
+    { name: t("ingredientParmigiano"), exp: t("expInDays", { count: 25 }), color: OK },
+  ];
+
+  const recipeItems = [
+    { name: t("recipeRisotto"), meta: t("recipeMeta", { minutes: 25, count: 5 }), match: "92%", img: "/images/landing/recipe-thumb-1.webp" },
+    { name: t("recipeRavioli"), meta: t("recipeMeta", { minutes: 35, count: 3 }), match: "81%", img: "/images/landing/recipe-thumb-2.webp" },
+    { name: t("recipeBurroSalvia"), meta: t("recipeMeta", { minutes: 10, count: 2 }), match: "74%", img: "/images/landing/recipe-thumb-1.webp" },
+  ];
+
+  const reportBars = [
+    { label: t("reportWeekLabel", { n: 1 }), h: 40, opacity: 0.35 },
+    { label: t("reportWeekLabel", { n: 2 }), h: 58, opacity: 0.5 },
+    { label: t("reportWeekLabel", { n: 3 }), h: 46, opacity: 0.4 },
+    { label: t("reportWeekLabel", { n: 4 }), h: 70, opacity: 0.65 },
+    { label: t("reportWeekLabel", { n: 5 }), h: 85, opacity: 1, teal: true },
+    { label: t("reportWeekLabel", { n: 6 }), h: 95, opacity: 1, teal: true },
+  ];
+
+  const shoppingGroups = [
+    { category: t("categoryOrtaggi"), items: [t("ingredientZucchine"), t("ingredientCarote")] },
+    { category: t("categoryLatticini"), items: [t("ingredientRicotta"), t("ingredientParmigiano")] },
+    { category: t("categoryDispensa"), items: [t("ingredientRisoCarnaroli"), t("ingredientOlioEvo")] },
+  ];
+
   return (
     <div
       className="relative box-border rounded-[44px] bg-black p-[10px] shadow-elevated"
@@ -67,17 +72,17 @@ export function PhoneScreen({ variant }: { variant: Variant }) {
         {variant === "overview" && (
           <>
             <div className="flex items-baseline justify-between">
-              <div className="font-display text-xl font-bold text-ivory">La tua dispensa</div>
+              <div className="font-display text-xl font-bold text-ivory">{t("phoneOverviewTitle")}</div>
               <div className="flex h-[34px] w-[34px] items-center justify-center rounded-pill bg-teal font-body text-xs font-bold text-white">
                 -28%
               </div>
             </div>
             <div className="font-body text-[10px] font-medium uppercase tracking-[0.04em] text-ivory/50">
-              Spreco ridotto questo mese
+              {t("phoneOverviewReducedLabel")}
             </div>
             <div className="h-px bg-ivory/10" />
             <div className="flex flex-col gap-2">
-              {OVERVIEW_ITEMS.map((it) => (
+              {overviewItems.map((it) => (
                 <div
                   key={it.name}
                   className="flex items-center gap-2.5 rounded-xl border border-ivory/10 px-3 py-[9px]"
@@ -91,7 +96,7 @@ export function PhoneScreen({ variant }: { variant: Variant }) {
             </div>
             <div className="h-px bg-ivory/10" />
             <div className="font-body text-[11px] font-semibold uppercase tracking-[0.04em] text-ivory/70">
-              Ricette suggerite
+              {t("phoneOverviewSuggestedLabel")}
             </div>
             <div className="flex items-center gap-2.5 rounded-2xl border border-ivory/10 p-3" style={{ background: "#22344F" }}>
               <Image
@@ -102,9 +107,9 @@ export function PhoneScreen({ variant }: { variant: Variant }) {
                 className="h-11 w-11 flex-none rounded-xl object-cover"
               />
               <div className="flex-1">
-                <div className="font-body text-[13px] font-bold text-ivory">Risotto zucca e salvia</div>
+                <div className="font-body text-[13px] font-bold text-ivory">{t("recipeRisotto")}</div>
                 <div className="mt-0.5 font-body text-[10px] font-medium text-ivory/55">
-                  Usa 5 ingredienti quasi in scadenza
+                  {t("phoneOverviewSuggestionBody", { count: 5 })}
                 </div>
               </div>
             </div>
@@ -113,12 +118,12 @@ export function PhoneScreen({ variant }: { variant: Variant }) {
 
         {variant === "dispensa" && (
           <>
-            <div className="font-display text-xl font-bold text-ivory">Dispensa</div>
+            <div className="font-display text-xl font-bold text-ivory">{t("phoneDispensaTitle")}</div>
             <div className="rounded-pill border border-ivory/10 px-3.5 py-2 font-body text-xs font-medium text-ivory/50" style={{ background: "#22344F" }}>
-              Cerca ingrediente…
+              {t("phoneSearchPlaceholder")}
             </div>
             <div className="flex flex-wrap gap-1.5">
-              {PANTRY_FILTERS.map((f) => (
+              {pantryFilters.map((f) => (
                 <div
                   key={f.label}
                   className="rounded-pill border border-ivory/10 px-3 py-[5px] font-body text-[10px] font-semibold"
@@ -129,7 +134,7 @@ export function PhoneScreen({ variant }: { variant: Variant }) {
               ))}
             </div>
             <div className="flex flex-col gap-2 overflow-hidden">
-              {PANTRY_ITEMS.map((it) => (
+              {pantryItems.map((it) => (
                 <div key={it.name} className="flex items-center gap-2.5 border-b border-ivory/[0.08] px-0.5 py-2">
                   <div className="h-[7px] w-[7px] flex-none rounded-pill" style={{ background: it.color }} />
                   <div className="flex-1 font-body text-[13px] font-medium text-ivory">{it.name}</div>
@@ -144,10 +149,10 @@ export function PhoneScreen({ variant }: { variant: Variant }) {
 
         {variant === "ricette" && (
           <>
-            <div className="font-display text-xl font-bold text-ivory">Ricette per te</div>
-            <div className="font-body text-[11px] font-medium text-ivory/55">In base a ciò che hai in dispensa</div>
+            <div className="font-display text-xl font-bold text-ivory">{t("phoneRicetteTitle")}</div>
+            <div className="font-body text-[11px] font-medium text-ivory/55">{t("phoneRicetteSubtitle")}</div>
             <div className="mt-1 flex flex-col gap-2.5">
-              {RECIPE_ITEMS.map((r) => (
+              {recipeItems.map((r) => (
                 <div key={r.name} className="flex items-center gap-2.5 rounded-2xl border border-ivory/10 p-[11px]" style={{ background: "#22344F" }}>
                   <Image src={r.img} alt="" width={46} height={46} className="h-[46px] w-[46px] flex-none rounded-xl object-cover" />
                   <div className="min-w-0 flex-1">
@@ -165,14 +170,14 @@ export function PhoneScreen({ variant }: { variant: Variant }) {
 
         {variant === "report" && (
           <>
-            <div className="font-display text-xl font-bold text-ivory">Report sprechi</div>
-            <div className="font-body text-[11px] font-medium text-ivory/55">Ultimi 30 giorni · cucina</div>
+            <div className="font-display text-xl font-bold text-ivory">{t("phoneReportTitle")}</div>
+            <div className="font-body text-[11px] font-medium text-ivory/55">{t("phoneReportSubtitle")}</div>
             <div className="mt-0.5 flex items-baseline gap-1.5">
               <div className="font-display text-[34px] font-bold text-teal">-31%</div>
-              <div className="font-body text-[11px] font-medium text-ivory/55">scarto vs mese precedente</div>
+              <div className="font-body text-[11px] font-medium text-ivory/55">{t("phoneReportVsLastMonth")}</div>
             </div>
             <div className="mt-2 flex h-[120px] items-end gap-2">
-              {REPORT_BARS.map((b) => (
+              {reportBars.map((b) => (
                 <div key={b.label} className="flex h-full flex-1 flex-col items-center justify-end gap-1.5">
                   <div
                     className="w-full rounded-t-md"
@@ -190,11 +195,11 @@ export function PhoneScreen({ variant }: { variant: Variant }) {
 
         {variant === "lista" && (
           <>
-            <div className="font-display text-xl font-bold text-ivory">Lista della spesa</div>
+            <div className="font-display text-xl font-bold text-ivory">{t("phoneListaTitle")}</div>
             <div className="font-body text-[11px] font-medium text-ivory/55">
-              Generata da ricette e scorte in esaurimento
+              {t("phoneListaSubtitle")}
             </div>
-            {SHOPPING_GROUPS.map((g) => (
+            {shoppingGroups.map((g) => (
               <div key={g.category} className="mt-1.5">
                 <div className="mb-1.5 font-body text-[10px] font-semibold uppercase tracking-[0.06em] text-teal">
                   {g.category}

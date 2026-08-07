@@ -3,21 +3,21 @@ import { Salad, CalendarClock, TrendingDown, ListChecks } from "lucide-react";
 import { PhoneScreen } from "./PhoneScreen";
 import { Reveal } from "./Reveal";
 
-const CARDS = [
-  {
-    icon: TrendingDown,
-    title: "Report sprechi ridotti per ristoranti",
-    body: "Dati aggregati su scarto e riduzione, pensati per il controllo costi in cucina professionale.",
-  },
-  {
-    icon: ListChecks,
-    title: "Liste della spesa intelligenti",
-    body: "Generate automaticamente dalle ricette scelte e da ciò che sta per finire in dispensa.",
-  },
-];
-
 export async function Features() {
   const t = await getTranslations("landing");
+
+  const CARDS = [
+    {
+      icon: TrendingDown,
+      title: t("featureWasteReportTitle"),
+      body: t("featureWasteReportBody"),
+    },
+    {
+      icon: ListChecks,
+      title: t("featureSmartListsTitle"),
+      body: t("featureSmartListsBody"),
+    },
+  ];
 
   return (
     <div className="mx-auto max-w-content px-6 py-[clamp(40px,6vw,80px)]" id="app-screens">
@@ -36,10 +36,10 @@ export async function Features() {
             <Salad size={20} className="text-teal" />
           </div>
           <h3 className="mb-2.5 font-display text-[22px] font-bold" style={{ color: "var(--nsk-l-text)" }}>
-            Ricette da ciò che hai in dispensa
+            {t("featureRecipesFromPantryTitle")}
           </h3>
           <p className="max-w-[420px] font-body text-[15px] leading-[1.6]" style={{ color: "var(--nsk-l-text-secondary)" }}>
-            Suggerimenti generati sugli ingredienti realmente disponibili, con priorità a ciò che sta per scadere.
+            {t("featureRecipesFromPantryBody")}
           </p>
         </div>
         <div className="flex-none">
@@ -56,10 +56,10 @@ export async function Features() {
             <CalendarClock size={20} className="text-teal" />
           </div>
           <h3 className="mb-2.5 font-display text-[22px] font-bold" style={{ color: "var(--nsk-l-text)" }}>
-            Monitoraggio scadenze ingredienti
+            {t("featureExpiryTrackingTitle")}
           </h3>
           <p className="max-w-[420px] font-body text-[15px] leading-[1.6]" style={{ color: "var(--nsk-l-text-secondary)" }}>
-            Ogni ingrediente è tracciato con la sua data di scadenza, evidenziato quando serve agire.
+            {t("featureExpiryTrackingBody")}
           </p>
         </div>
       </div>
