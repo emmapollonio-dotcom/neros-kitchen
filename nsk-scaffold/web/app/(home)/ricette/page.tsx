@@ -28,12 +28,12 @@ export default async function RicetteIndexPage() {
       <SectionBanner image="/images/marketing/hero-risotto.webp" />
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <p className="font-body text-sm uppercase tracking-widest text-gold">N&apos;sK Home</p>
+          <p className="font-body text-sm uppercase tracking-widest text-teal">N&apos;sK Home</p>
           <h1 className="mt-2 font-display text-display-md text-ivory">Le tue ricette</h1>
         </div>
         <Link
           href="/ricette/nuova"
-          className="flex items-center gap-2 rounded-pill bg-charcoal px-5 py-2.5 font-body text-sm text-ivory transition hover:bg-gold hover:text-charcoal"
+          className="flex items-center gap-2 rounded-pill bg-charcoal px-5 py-2.5 font-body text-sm text-ivory transition hover:bg-teal hover:text-white"
         >
           <Plus size={16} />
           Nuova ricetta
@@ -49,7 +49,7 @@ export default async function RicetteIndexPage() {
           </p>
           <Link
             href="/ricette/nuova"
-            className="mt-6 inline-block rounded-pill bg-charcoal px-6 py-3 font-body text-sm text-ivory transition hover:bg-gold hover:text-charcoal"
+            className="mt-6 inline-block rounded-pill bg-charcoal px-6 py-3 font-body text-sm text-ivory transition hover:bg-teal hover:text-white"
           >
             Crea la prima ricetta
           </Link>

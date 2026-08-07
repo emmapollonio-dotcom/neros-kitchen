@@ -66,7 +66,7 @@ export function ReviewResponder() {
       {reviews.map((review) => (
         <div key={review.id} className="rounded-nsk border border-smoke/15 bg-white p-5">
           <div className="flex items-center justify-between">
-            <p className="font-body text-sm text-gold">{"★".repeat(review.rating)}</p>
+            <p className="font-body text-sm text-teal">{"★".repeat(review.rating)}</p>
             <p className="font-body text-xs text-smoke">
               {new Date(review.created_at).toLocaleDateString("it-IT")}
             </p>
@@ -78,7 +78,7 @@ export function ReviewResponder() {
 
           {review.chef_response ? (
             <div className="mt-4 rounded-nsk bg-ivory p-3">
-              <p className="font-body text-xs uppercase tracking-wide text-gold">La tua risposta</p>
+              <p className="font-body text-xs uppercase tracking-wide text-teal">La tua risposta</p>
               <p className="mt-1 font-body text-sm text-charcoal">{review.chef_response}</p>
             </div>
           ) : (
@@ -86,7 +86,7 @@ export function ReviewResponder() {
               type="button"
               onClick={() => handleRespond(review.id)}
               disabled={respondingId === review.id}
-              className="mt-4 rounded-nsk bg-charcoal px-4 py-2 font-body text-xs text-ivory hover:bg-gold hover:text-charcoal disabled:opacity-50"
+              className="mt-4 rounded-nsk bg-charcoal px-4 py-2 font-body text-xs text-ivory hover:bg-teal hover:text-white disabled:opacity-50"
             >
               {respondingId === review.id ? "Genero..." : "Rispondi con AI"}
             </button>

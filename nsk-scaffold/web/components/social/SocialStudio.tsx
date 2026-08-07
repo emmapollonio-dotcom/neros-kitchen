@@ -190,7 +190,7 @@ export function SocialStudio() {
         <button
           type="submit"
           disabled={generatingNew}
-          className="rounded-nsk bg-charcoal px-5 py-2 font-body text-sm text-ivory hover:bg-gold hover:text-charcoal disabled:opacity-50"
+          className="rounded-nsk bg-charcoal px-5 py-2 font-body text-sm text-ivory hover:bg-teal hover:text-white disabled:opacity-50"
         >
           {generatingNew ? "Genero..." : "Genera post AI"}
         </button>
@@ -214,7 +214,7 @@ export function SocialStudio() {
             <li key={post.id} className="rounded-nsk border border-smoke/15 bg-white p-4">
               <div className="flex flex-wrap items-start justify-between gap-2">
                 <div>
-                  <p className="font-body text-xs uppercase tracking-wide text-gold">
+                  <p className="font-body text-xs uppercase tracking-wide text-teal">
                     {PLATFORM_LABELS[post.platform]} · {STATUS_LABELS[post.status]}
                   </p>
                   <p className="mt-1 font-body font-semibold text-charcoal">{post.topic}</p>
@@ -224,7 +224,7 @@ export function SocialStudio() {
                     type="button"
                     onClick={() => handleRegenerate(post.id)}
                     disabled={generatingId === post.id}
-                    className="rounded-nsk border border-gold px-3 py-1.5 font-body text-xs text-charcoal hover:bg-gold/10 disabled:opacity-50"
+                    className="rounded-nsk border border-teal px-3 py-1.5 font-body text-xs text-white hover:bg-teal/10 disabled:opacity-50"
                   >
                     {generatingId === post.id ? "Genero..." : post.caption ? "Rigenera" : "Genera"}
                   </button>
@@ -232,7 +232,7 @@ export function SocialStudio() {
                     <button
                       type="button"
                       onClick={() => handleCopy(post)}
-                      className="rounded-nsk border border-smoke/30 px-3 py-1.5 font-body text-xs text-charcoal hover:border-gold"
+                      className="rounded-nsk border border-smoke/30 px-3 py-1.5 font-body text-xs text-charcoal hover:border-teal"
                     >
                       Copia
                     </button>
@@ -253,7 +253,7 @@ export function SocialStudio() {
                     {post.caption}
                   </p>
                   {post.hashtags.length > 0 && (
-                    <p className="font-body text-sm text-gold">
+                    <p className="font-body text-sm text-teal">
                       {post.hashtags.map((h) => `#${h}`).join(" ")}
                     </p>
                   )}

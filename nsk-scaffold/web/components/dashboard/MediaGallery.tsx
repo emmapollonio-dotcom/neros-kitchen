@@ -131,7 +131,7 @@ export function MediaGallery({ recipeId, initialImages }: Props) {
         onDragLeave={() => setIsDraggingOver(false)}
         onDrop={handleDrop}
         className={`flex flex-col items-center justify-center gap-3 rounded-panel border-2 border-dashed p-8 text-center transition sm:flex-row sm:gap-6 ${
-          isDraggingOver ? "border-gold bg-gold/5" : "border-line bg-white"
+          isDraggingOver ? "border-teal bg-teal/5" : "border-line bg-white"
         }`}
       >
         <ImagePlus size={28} className="text-mist" />
@@ -143,14 +143,14 @@ export function MediaGallery({ recipeId, initialImages }: Props) {
             <button
               type="button"
               onClick={() => fileInputRef.current?.click()}
-              className="rounded-pill border border-line px-4 py-2 font-body text-xs text-charcoal transition hover:border-gold"
+              className="rounded-pill border border-line px-4 py-2 font-body text-xs text-charcoal transition hover:border-teal"
             >
               Scegli dal dispositivo
             </button>
             <button
               type="button"
               onClick={() => cameraInputRef.current?.click()}
-              className="flex items-center gap-1.5 rounded-pill bg-charcoal px-4 py-2 font-body text-xs text-ivory transition hover:bg-gold hover:text-charcoal"
+              className="flex items-center gap-1.5 rounded-pill bg-charcoal px-4 py-2 font-body text-xs text-ivory transition hover:bg-teal hover:text-white"
             >
               <Camera size={14} />
               Scatta una foto

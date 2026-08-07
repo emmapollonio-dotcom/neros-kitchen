@@ -12,5 +12,29 @@
     "finalSub": "Conecta tu despensa y recibe tus primeras recetas en minutos.",
     "finalButton": "Comenzar",
     "emailPlaceholder": "Tu email"
+  },
+  "nav": {
+    "marketplace": "Marketplace",
+    "pricing": "Precios",
+    "login": "Acceder",
+    "signupFree": "Empieza gratis",
+    "goToHome": "Ir a tu Home",
+    "home": "Inicio",
+    "nskHome": "N'sK Home",
+    "nskPro": "N'sK Pro",
+    "myBookings": "Mis reservas",
+    "logout": "Cerrar sesión",
+    "openMenu": "Abrir menú",
+    "changeLanguage": "Cambiar idioma",
+    "findChef": "Encuentra un chef"
+  },
+  "footer": {
+    "tagline": "El ecosistema para quienes viven de la cocina — en casa, en la cocina profesional, en consultoría.",
+    "productTitle": "Producto",
+    "legalTitle": "Legal",
+    "marketplaceChef": "Marketplace de chefs",
+    "terms": "Términos de servicio",
+    "privacyPolicy": "Política de privacidad",
+    "copyright": "Todos los derechos reservados."
   }
 }

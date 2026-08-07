@@ -32,7 +32,7 @@ export function CookieConsentBanner() {
       <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-4 sm:flex-row">
         <p className="font-body text-sm">
           Usiamo cookie tecnici essenziali per far funzionare l&apos;accesso al sito. Vedi la{" "}
-          <Link href="/privacy" className="underline hover:text-gold">
+          <Link href="/privacy" className="underline hover:text-teal">
             informativa privacy
           </Link>
           .
@@ -40,13 +40,13 @@ export function CookieConsentBanner() {
         <div className="flex shrink-0 gap-3">
           <button
             onClick={() => choose("essential")}
-            className="rounded-nsk border border-ivory/40 px-4 py-2 font-body text-sm hover:border-gold hover:text-gold"
+            className="rounded-nsk border border-ivory/40 px-4 py-2 font-body text-sm hover:border-teal hover:text-teal"
           >
             Solo essenziali
           </button>
           <button
             onClick={() => choose("all")}
-            className="rounded-nsk bg-gold px-4 py-2 font-body text-sm text-charcoal hover:bg-ivory"
+            className="rounded-nsk bg-teal px-4 py-2 font-body text-sm text-white hover:bg-ivory"
           >
             Accetta tutti
           </button>

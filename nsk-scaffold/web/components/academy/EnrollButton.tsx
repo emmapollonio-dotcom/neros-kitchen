@@ -22,7 +22,7 @@ export function EnrollButton({ courseId, courseSlug, isEnrolled, isAuthenticated
     return (
       <a
         href={`/academy/${courseSlug}/learn`}
-        className="inline-block rounded-nsk bg-charcoal px-8 py-3 font-body text-ivory transition hover:bg-gold hover:text-charcoal"
+        className="inline-block rounded-nsk bg-charcoal px-8 py-3 font-body text-ivory transition hover:bg-teal hover:text-white"
       >
         Continua il corso
       </a>
@@ -57,7 +57,7 @@ export function EnrollButton({ courseId, courseSlug, isEnrolled, isAuthenticated
         type="button"
         onClick={handleEnroll}
         disabled={submitting}
-        className="rounded-nsk bg-charcoal px-8 py-3 font-body text-ivory transition hover:bg-gold hover:text-charcoal disabled:opacity-50"
+        className="rounded-nsk bg-charcoal px-8 py-3 font-body text-ivory transition hover:bg-teal hover:text-white disabled:opacity-50"
       >
         {submitting ? "Iscrizione..." : "Iscriviti al corso"}
       </button>

@@ -42,7 +42,7 @@ function LoginForm() {
               name="email"
               type="email"
               required
-              className="mt-1 w-full rounded-nsk border border-smoke/30 bg-white px-4 py-2 font-body text-charcoal focus:border-gold focus:outline-none"
+              className="mt-1 w-full rounded-nsk border border-smoke/30 bg-white px-4 py-2 font-body text-charcoal focus:border-teal focus:outline-none"
             />
           </div>
           <div>
@@ -54,7 +54,7 @@ function LoginForm() {
               name="password"
               type="password"
               required
-              className="mt-1 w-full rounded-nsk border border-smoke/30 bg-white px-4 py-2 font-body text-charcoal focus:border-gold focus:outline-none"
+              className="mt-1 w-full rounded-nsk border border-smoke/30 bg-white px-4 py-2 font-body text-charcoal focus:border-teal focus:outline-none"
             />
           </div>
 
@@ -67,7 +67,7 @@ function LoginForm() {
           <button
             type="submit"
             disabled={pending}
-            className="w-full rounded-nsk bg-charcoal px-4 py-3 font-body text-ivory transition hover:bg-gold hover:text-charcoal disabled:opacity-50"
+            className="w-full rounded-nsk bg-charcoal px-4 py-3 font-body text-ivory transition hover:bg-teal hover:text-white disabled:opacity-50"
           >
             {pending ? "Accesso in corso..." : "Accedi"}
           </button>
@@ -82,7 +82,7 @@ function LoginForm() {
         <form action={signInWithGoogleAction} className="mt-4">
           <button
             type="submit"
-            className="w-full rounded-nsk border border-smoke/30 px-4 py-3 font-body text-charcoal transition hover:border-gold"
+            className="w-full rounded-nsk border border-smoke/30 px-4 py-3 font-body text-charcoal transition hover:border-teal"
           >
             Continua con Google
           </button>
@@ -90,7 +90,7 @@ function LoginForm() {
 
         <p className="mt-6 text-center font-body text-sm text-smoke">
           Non hai un account?{" "}
-          <Link href="/signup" className="text-gold underline">
+          <Link href="/signup" className="text-teal underline">
             Registrati
           </Link>
         </p>

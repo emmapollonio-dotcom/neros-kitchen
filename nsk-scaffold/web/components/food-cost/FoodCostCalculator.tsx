@@ -141,7 +141,7 @@ export function FoodCostCalculator({
         <button
           type="button"
           onClick={addRow}
-          className="font-body text-sm text-gold underline"
+          className="font-body text-sm text-teal underline"
         >
           + Aggiungi ingrediente
         </button>
@@ -153,13 +153,13 @@ export function FoodCostCalculator({
         type="button"
         onClick={calculate}
         disabled={loading}
-        className="rounded-nsk bg-charcoal px-6 py-3 font-body text-ivory hover:bg-gold hover:text-charcoal disabled:opacity-50"
+        className="rounded-nsk bg-charcoal px-6 py-3 font-body text-ivory hover:bg-teal hover:text-white disabled:opacity-50"
       >
         {loading ? "Calcolo..." : "Calcola food cost"}
       </button>
 
       {result && (
-        <div className="rounded-nsk border border-gold/40 bg-gold/10 p-6">
+        <div className="rounded-nsk border border-teal/40 bg-teal/10 p-6">
           <dl className="grid grid-cols-2 gap-4 font-body text-sm">
             <div>
               <dt className="text-smoke">Costo totale</dt>

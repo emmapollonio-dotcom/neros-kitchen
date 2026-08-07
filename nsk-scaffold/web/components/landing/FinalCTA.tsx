@@ -40,7 +40,7 @@ export function FinalCTA() {
           />
           <button
             type="submit"
-            className="rounded-nsk bg-teal px-6 py-[13px] font-body text-sm font-semibold text-ivory transition-colors duration-[250ms] ease-nsk hover:bg-teal-dark"
+            className="rounded-nsk bg-teal px-6 py-[13px] font-body text-sm font-semibold text-white transition-colors duration-[250ms] ease-nsk hover:bg-teal-dark"
           >
             {t("finalButton")}
           </button>

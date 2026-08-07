@@ -149,7 +149,7 @@ export function CourseManager() {
           <button
             type="submit"
             disabled={creating}
-            className="rounded-nsk bg-charcoal px-6 py-3 font-body text-ivory transition hover:bg-gold hover:text-charcoal disabled:opacity-50"
+            className="rounded-nsk bg-charcoal px-6 py-3 font-body text-ivory transition hover:bg-teal hover:text-white disabled:opacity-50"
           >
             {creating ? "Creazione..." : "Crea corso (bozza)"}
           </button>
@@ -178,7 +178,7 @@ export function CourseManager() {
                   <button
                     type="button"
                     onClick={() => togglePublished(course)}
-                    className="font-body text-sm text-gold underline"
+                    className="font-body text-sm text-teal underline"
                   >
                     {course.published ? "Nascondi" : "Pubblica"}
                   </button>
@@ -317,7 +317,7 @@ function CourseContentEditor({ courseId }: { courseId: string }) {
           <button
             type="submit"
             disabled={savingLesson}
-            className="rounded-nsk bg-charcoal px-4 py-2 font-body text-sm text-ivory hover:bg-gold hover:text-charcoal disabled:opacity-50"
+            className="rounded-nsk bg-charcoal px-4 py-2 font-body text-sm text-ivory hover:bg-teal hover:text-white disabled:opacity-50"
           >
             + Aggiungi
           </button>
@@ -381,7 +381,7 @@ function CourseContentEditor({ courseId }: { courseId: string }) {
                   onClick={() =>
                     updateQuestion(qi, { options: [...q.options, ""] })
                   }
-                  className="font-body text-xs text-gold underline"
+                  className="font-body text-xs text-teal underline"
                 >
                   + Opzione
                 </button>
@@ -389,7 +389,7 @@ function CourseContentEditor({ courseId }: { courseId: string }) {
             </div>
           ))}
 
-          <button type="button" onClick={addQuestion} className="font-body text-sm text-gold underline">
+          <button type="button" onClick={addQuestion} className="font-body text-sm text-teal underline">
             + Aggiungi domanda
           </button>
 
@@ -399,7 +399,7 @@ function CourseContentEditor({ courseId }: { courseId: string }) {
             <button
               type="submit"
               disabled={savingQuiz || questions.length === 0}
-              className="rounded-nsk bg-charcoal px-6 py-3 font-body text-sm text-ivory hover:bg-gold hover:text-charcoal disabled:opacity-50"
+              className="rounded-nsk bg-charcoal px-6 py-3 font-body text-sm text-ivory hover:bg-teal hover:text-white disabled:opacity-50"
             >
               {savingQuiz ? "Salvataggio..." : "Salva quiz"}
             </button>

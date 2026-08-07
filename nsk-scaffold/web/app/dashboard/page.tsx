@@ -88,7 +88,7 @@ export default async function DashboardPage() {
             <Link
               key={todo.label}
               href={todo.href}
-              className="rounded-pill border border-gold/50 bg-gold/10 px-4 py-2 font-body text-sm text-ivory transition hover:bg-gold/20"
+              className="rounded-pill border border-teal/50 bg-teal/10 px-4 py-2 font-body text-sm text-ivory transition hover:bg-teal/20"
             >
               {todo.label}
             </Link>
@@ -163,7 +163,7 @@ export default async function DashboardPage() {
           </p>
           <Link
             href="/chefs"
-            className="mt-5 inline-block rounded-pill bg-charcoal px-6 py-3 font-body text-sm text-ivory transition hover:bg-gold hover:text-charcoal"
+            className="mt-5 inline-block rounded-pill bg-charcoal px-6 py-3 font-body text-sm text-ivory transition hover:bg-teal hover:text-white"
           >
             Esplora il marketplace
           </Link>

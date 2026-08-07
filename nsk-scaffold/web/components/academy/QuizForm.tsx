@@ -108,7 +108,7 @@ export function QuizForm({ quizId, title, passingScore, questions }: Props) {
         <button
           type="submit"
           disabled={submitting || Object.keys(answers).length < questions.length}
-          className="rounded-nsk bg-charcoal px-6 py-3 font-body text-ivory transition hover:bg-gold hover:text-charcoal disabled:opacity-50"
+          className="rounded-nsk bg-charcoal px-6 py-3 font-body text-ivory transition hover:bg-teal hover:text-white disabled:opacity-50"
         >
           {submitting ? "Invio..." : "Invia risposte"}
         </button>
@@ -132,7 +132,7 @@ export function QuizForm({ quizId, title, passingScore, questions }: Props) {
               type="button"
               onClick={handleExplain}
               disabled={explaining}
-              className="rounded-nsk bg-charcoal px-5 py-2 font-body text-sm text-ivory hover:bg-gold hover:text-charcoal disabled:opacity-50"
+              className="rounded-nsk bg-charcoal px-5 py-2 font-body text-sm text-ivory hover:bg-teal hover:text-white disabled:opacity-50"
             >
               {explaining ? "Preparo la spiegazione..." : "Spiegami con AI"}
             </button>

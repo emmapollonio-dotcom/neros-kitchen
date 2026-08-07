@@ -17,6 +17,9 @@ export const dynamic = "force-dynamic";
 // switcher di lingua reale (next-intl, vedi i18n/request.ts) su 12 stringhe
 // come da spec, scroll-reveal, 5 varianti di phone mockup. Sostituisce
 // l'homepage precedente (gold/charcoal) — il resto del sito resta invariato.
+// (6 ago 2026, giro successivo: bg-gold/text-gold rinominati in bg-teal/
+// text-teal in TUTTA l'app — vedi tailwind.config.ts, il brand ora è teal
+// ovunque, non solo qui.)
 export default async function HomePage() {
   const user = await getCurrentUserInfo();
   if (user) redirect("/dashboard");

@@ -8,7 +8,7 @@ export default function UnauthorizedPage() {
         <p className="mt-3 font-body text-sm text-ivory/70">
           Il tuo account non ha i permessi per vedere questa pagina.
         </p>
-        <Link href="/" className="mt-6 inline-block text-gold underline">
+        <Link href="/" className="mt-6 inline-block text-teal underline">
           Torna alla home
         </Link>
       </div>

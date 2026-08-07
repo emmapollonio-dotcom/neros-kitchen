@@ -50,7 +50,7 @@ export function LandingFooter() {
               className="rounded-pill border px-[11px] py-[5px] font-body text-[11px] font-semibold uppercase transition-colors duration-200 ease-nsk disabled:opacity-60"
               style={{
                 background: active ? "#117E8E" : "transparent",
-                color: active ? "#121212" : "var(--nsk-l-text-secondary)",
+                color: active ? "#FFFFFF" : "var(--nsk-l-text-secondary)",
                 borderColor: "var(--nsk-l-border)",
               }}
             >

@@ -29,7 +29,7 @@ export default async function BookChefPage({ params }: Props) {
 
   return (
     <div className="mx-auto max-w-2xl px-6 py-14 text-ivory">
-      <p className="font-body text-sm uppercase tracking-widest text-gold">Prenota</p>
+      <p className="font-body text-sm uppercase tracking-widest text-teal">Prenota</p>
       <h1 className="mt-2 font-display text-display-md text-ivory">
         {chef.business_name ?? chef.full_name}
       </h1>

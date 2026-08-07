@@ -54,7 +54,7 @@ export default async function CourseDetailPage({ params }: Props) {
           Tutor AI
         </Link>
 
-        <p className="mt-6 font-body text-sm uppercase tracking-widest text-gold">
+        <p className="mt-6 font-body text-sm uppercase tracking-widest text-teal">
           {course.level ?? "tutti i livelli"} · {course.language}
         </p>
         <h1 className="mt-2 font-display text-display-md text-ivory">{course.title}</h1>

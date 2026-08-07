@@ -206,7 +206,7 @@ export function WasteTracker() {
         <button
           type="submit"
           disabled={creating}
-          className="rounded-nsk bg-charcoal px-5 py-2 font-body text-sm text-ivory hover:bg-gold hover:text-charcoal disabled:opacity-50"
+          className="rounded-nsk bg-charcoal px-5 py-2 font-body text-sm text-ivory hover:bg-teal hover:text-white disabled:opacity-50"
         >
           {creating ? "Salvataggio..." : "+ Registra spreco"}
         </button>
@@ -239,7 +239,7 @@ export function WasteTracker() {
                   type="button"
                   onClick={() => handleGenerateSuggestions(item.id)}
                   disabled={generatingId === item.id}
-                  className="rounded-nsk border border-gold px-3 py-1.5 font-body text-xs text-charcoal hover:bg-gold/10 disabled:opacity-50"
+                  className="rounded-nsk border border-teal px-3 py-1.5 font-body text-xs text-white hover:bg-teal/10 disabled:opacity-50"
                 >
                   {generatingId === item.id ? "Genero..." : "Suggerimenti AI"}
                 </button>
@@ -259,9 +259,9 @@ export function WasteTracker() {
                   <p className="font-body text-xs text-smoke">Nessun suggerimento generato.</p>
                 )}
                 {suggestionsByItem[item.id].map((s) => (
-                  <div key={s.id} className="rounded-nsk border border-gold/40 bg-gold/10 p-3">
+                  <div key={s.id} className="rounded-nsk border border-teal/40 bg-teal/10 p-3">
                     <div className="flex items-center justify-between">
-                      <p className="font-body text-xs uppercase tracking-wide text-gold">
+                      <p className="font-body text-xs uppercase tracking-wide text-teal">
                         {s.suggestion_type}
                       </p>
                       <p className="font-body text-xs text-smoke">

@@ -47,7 +47,7 @@ export default function NuovaRicettaPage() {
         Le tue ricette
       </Link>
 
-      <p className="mt-6 font-body text-sm uppercase tracking-widest text-gold">N&apos;sK Home</p>
+      <p className="mt-6 font-body text-sm uppercase tracking-widest text-teal">N&apos;sK Home</p>
       <h1 className="mt-2 font-display text-display-md text-ivory">Nuova ricetta</h1>
       <p className="mt-2 font-body text-sm text-ivory/70">
         Aggiungi gli ingredienti dalla scheda della ricetta una volta salvata: calcoliamo food cost
@@ -69,7 +69,7 @@ export default function NuovaRicettaPage() {
             required
             minLength={3}
             placeholder="Es. Risotto allo zafferano"
-            className="mt-1 w-full rounded-nsk border border-line bg-white px-4 py-2 font-body text-sm text-charcoal placeholder:text-mist focus:border-gold focus:outline-none"
+            className="mt-1 w-full rounded-nsk border border-line bg-white px-4 py-2 font-body text-sm text-charcoal placeholder:text-mist focus:border-teal focus:outline-none"
           />
         </div>
         <div>
@@ -82,7 +82,7 @@ export default function NuovaRicettaPage() {
             min={1}
             value={servings}
             onChange={(e) => setServings(Number(e.target.value))}
-            className="mt-1 w-full rounded-nsk border border-line bg-white px-4 py-2 font-body text-sm text-charcoal focus:border-gold focus:outline-none"
+            className="mt-1 w-full rounded-nsk border border-line bg-white px-4 py-2 font-body text-sm text-charcoal focus:border-teal focus:outline-none"
           />
         </div>
         <div>
@@ -95,7 +95,7 @@ export default function NuovaRicettaPage() {
             onChange={(e) => setDescription(e.target.value)}
             rows={4}
             placeholder="Note, provenienza, occasioni d'uso..."
-            className="mt-1 w-full rounded-nsk border border-line bg-white px-4 py-2 font-body text-sm text-charcoal placeholder:text-mist focus:border-gold focus:outline-none"
+            className="mt-1 w-full rounded-nsk border border-line bg-white px-4 py-2 font-body text-sm text-charcoal placeholder:text-mist focus:border-teal focus:outline-none"
           />
         </div>
 
@@ -104,7 +104,7 @@ export default function NuovaRicettaPage() {
         <button
           type="submit"
           disabled={submitting}
-          className="rounded-pill bg-charcoal px-6 py-3 font-body text-sm text-ivory transition hover:bg-gold hover:text-charcoal disabled:opacity-50"
+          className="rounded-pill bg-charcoal px-6 py-3 font-body text-sm text-ivory transition hover:bg-teal hover:text-white disabled:opacity-50"
         >
           {submitting ? "Salvataggio..." : "Salva ricetta"}
         </button>

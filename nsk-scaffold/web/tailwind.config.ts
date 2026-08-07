@@ -13,8 +13,14 @@ const config: Config = {
         ink: "#1C1B19",
         ivory: "#F5F1EA",
         cream: "#FAF8F4",
-        gold: "#C8A96B",
-        "gold-dark": "#A8863F",
+        // Accento del brand: teal (6 ago 2026, adottato dal design handoff
+        // della landing page e poi esteso a TUTTA l'app — sostituisce il
+        // precedente accento gold ovunque, bg-gold/text-gold ecc. sono stati
+        // rinominati bg-teal/text-teal in ogni file). Le superfici scure del
+        // toggle chiaro/scuro della landing vivono in globals.css sotto
+        // .nsk-landing come CSS var, non qui.
+        teal: "#117E8E",
+        "teal-dark": "#0C5F6B",
         smoke: "#555555",
         mist: "#8A8580",
         line: "#E7E1D6",
@@ -23,13 +29,6 @@ const config: Config = {
         // scuro su card bianche, illeggibili su charcoal). "haze" fa da
         // bordo/divider sul fondo scuro.
         haze: "rgba(245, 241, 234, 0.12)",
-        // Accento "Elegance" della landing page (design handoff 6 ago 2026,
-        // vedi web/components/landing/) — usato SOLO in quella route, il
-        // resto dell'app resta su gold. Le sue superfici scure (dark-mode
-        // toggle della landing) vivono in globals.css sotto .nsk-landing,
-        // non qui, perché sono varianti CSS-var non colori fissi.
-        teal: "#117E8E",
-        "teal-dark": "#0C5F6B",
       },
       fontFamily: {
         // Caricati via next/font/google in app/layout.tsx come CSS variable —

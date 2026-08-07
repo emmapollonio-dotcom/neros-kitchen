@@ -5,7 +5,8 @@
 :root {
   --nsk-charcoal: #121212;
   --nsk-ivory: #f5f1ea;
-  --nsk-gold: #c8a96b;
+  /* Accento brand: teal, non più gold (6 ago 2026) — vedi tailwind.config.ts */
+  --nsk-accent: #117e8e;
   --nsk-smoke: #555555;
 }
 
@@ -20,12 +21,12 @@ body {
 
 /* Focus visibile per accessibilità (WCAG) — non rimuovere l'outline senza sostituirlo */
 :focus-visible {
-  outline: 2px solid var(--nsk-gold);
+  outline: 2px solid var(--nsk-accent);
   outline-offset: 2px;
 }
 
 ::selection {
-  background-color: var(--nsk-gold);
+  background-color: var(--nsk-accent);
   color: var(--nsk-charcoal);
 }
 

@@ -66,7 +66,7 @@ function SignupForm() {
               type="text"
               required
               minLength={2}
-              className="mt-1 w-full rounded-nsk border border-smoke/30 bg-white px-4 py-2 font-body text-charcoal focus:border-gold focus:outline-none"
+              className="mt-1 w-full rounded-nsk border border-smoke/30 bg-white px-4 py-2 font-body text-charcoal focus:border-teal focus:outline-none"
             />
           </div>
           <div>
@@ -78,7 +78,7 @@ function SignupForm() {
               name="email"
               type="email"
               required
-              className="mt-1 w-full rounded-nsk border border-smoke/30 bg-white px-4 py-2 font-body text-charcoal focus:border-gold focus:outline-none"
+              className="mt-1 w-full rounded-nsk border border-smoke/30 bg-white px-4 py-2 font-body text-charcoal focus:border-teal focus:outline-none"
             />
           </div>
           <div>
@@ -91,7 +91,7 @@ function SignupForm() {
               type="password"
               required
               minLength={8}
-              className="mt-1 w-full rounded-nsk border border-smoke/30 bg-white px-4 py-2 font-body text-charcoal focus:border-gold focus:outline-none"
+              className="mt-1 w-full rounded-nsk border border-smoke/30 bg-white px-4 py-2 font-body text-charcoal focus:border-teal focus:outline-none"
             />
             <p className="mt-1 font-body text-xs text-smoke">Almeno 8 caratteri.</p>
           </div>
@@ -105,18 +105,18 @@ function SignupForm() {
           <button
             type="submit"
             disabled={pending}
-            className="w-full rounded-nsk bg-charcoal px-4 py-3 font-body text-ivory transition hover:bg-gold hover:text-charcoal disabled:opacity-50"
+            className="w-full rounded-nsk bg-charcoal px-4 py-3 font-body text-ivory transition hover:bg-teal hover:text-white disabled:opacity-50"
           >
             {pending ? "Creazione account..." : "Registrati"}
           </button>
 
           <p className="text-center font-body text-xs text-smoke">
             Registrandoti accetti i{" "}
-            <Link href="/termini" className="underline hover:text-gold">
+            <Link href="/termini" className="underline hover:text-teal">
               Termini di servizio
             </Link>{" "}
             e l&apos;
-            <Link href="/privacy" className="underline hover:text-gold">
+            <Link href="/privacy" className="underline hover:text-teal">
               Informativa privacy
             </Link>
             .
@@ -125,7 +125,7 @@ function SignupForm() {
 
         <p className="mt-6 text-center font-body text-sm text-smoke">
           Hai già un account?{" "}
-          <Link href="/login" className="text-gold underline">
+          <Link href="/login" className="text-teal underline">
             Accedi
           </Link>
         </p>
@@ -152,10 +152,10 @@ function AccountTypeCard({
       type="button"
       onClick={onClick}
       className={`rounded-card border p-4 text-left transition ${
-        selected ? "border-gold bg-gold/10" : "border-line bg-white hover:border-smoke/40"
+        selected ? "border-teal bg-teal/10" : "border-line bg-white hover:border-smoke/40"
       }`}
     >
-      <Icon size={18} className={selected ? "text-gold-dark" : "text-smoke"} />
+      <Icon size={18} className={selected ? "text-teal-dark" : "text-smoke"} />
       <p className="mt-2 font-body text-sm font-medium text-charcoal">{label}</p>
       <p className="mt-0.5 font-body text-xs text-mist">{desc}</p>
     </button>

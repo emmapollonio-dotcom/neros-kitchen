@@ -12,5 +12,29 @@
     "finalSub": "اربط مخزونك واحصل على أول وصفاتك في دقائق.",
     "finalButton": "ابدأ الآن",
     "emailPlaceholder": "بريدك الإلكتروني"
+  },
+  "nav": {
+    "marketplace": "المتجر",
+    "pricing": "الأسعار",
+    "login": "تسجيل الدخول",
+    "signupFree": "ابدأ مجانًا",
+    "goToHome": "اذهب إلى صفحتك الرئيسية",
+    "home": "الرئيسية",
+    "nskHome": "N'sK Home",
+    "nskPro": "N'sK Pro",
+    "myBookings": "حجوزاتي",
+    "logout": "تسجيل الخروج",
+    "openMenu": "افتح القائمة",
+    "changeLanguage": "تغيير اللغة",
+    "findChef": "ابحث عن طاهٍ"
+  },
+  "footer": {
+    "tagline": "المنظومة لمن يعيش عالم الطهي — في المنزل، في المطبخ الاحترافي، أو كاستشاري.",
+    "productTitle": "المنتج",
+    "legalTitle": "قانوني",
+    "marketplaceChef": "متجر الطهاة",
+    "terms": "شروط الخدمة",
+    "privacyPolicy": "سياسة الخصوصية",
+    "copyright": "جميع الحقوق محفوظة."
   }
 }

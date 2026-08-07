@@ -43,7 +43,7 @@ export function ChefListClient({ chefs }: Props) {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Cerca per nome o specialità..."
-            className="w-full rounded-pill border border-line bg-white py-3 pl-11 pr-4 font-body text-sm text-charcoal placeholder:text-mist focus:border-gold focus:outline-none"
+            className="w-full rounded-pill border border-line bg-white py-3 pl-11 pr-4 font-body text-sm text-charcoal placeholder:text-mist focus:border-teal focus:outline-none"
           />
         </div>
       </div>

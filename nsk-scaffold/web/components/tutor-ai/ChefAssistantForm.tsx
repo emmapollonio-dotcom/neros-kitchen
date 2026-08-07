@@ -39,12 +39,12 @@ export function ChefAssistantForm() {
           rows={4}
           required
           placeholder="Es. Come posso adattare questa ricetta di risotto per 12 persone senza glutine?"
-          className="w-full rounded-card border border-line bg-white px-4 py-3 font-body text-sm text-charcoal placeholder:text-mist focus:border-gold focus:outline-none"
+          className="w-full rounded-card border border-line bg-white px-4 py-3 font-body text-sm text-charcoal placeholder:text-mist focus:border-teal focus:outline-none"
         />
         <button
           type="submit"
           disabled={pending}
-          className="rounded-pill bg-charcoal px-6 py-3 font-body text-sm text-ivory transition hover:bg-gold hover:text-charcoal disabled:opacity-50"
+          className="rounded-pill bg-charcoal px-6 py-3 font-body text-sm text-ivory transition hover:bg-teal hover:text-white disabled:opacity-50"
         >
           {pending ? "Sto pensando..." : "Chiedi"}
         </button>
@@ -53,7 +53,7 @@ export function ChefAssistantForm() {
       {state.error && <p className="mt-6 font-body text-sm text-red-600">{state.error}</p>}
 
       {state.response && (
-        <div className="mt-8 whitespace-pre-wrap rounded-card border border-gold/40 bg-gold/10 p-6 font-body text-sm text-charcoal shadow-soft">
+        <div className="mt-8 whitespace-pre-wrap rounded-card border border-teal/40 bg-teal/10 p-6 font-body text-sm text-white shadow-soft">
           {state.response}
         </div>
       )}

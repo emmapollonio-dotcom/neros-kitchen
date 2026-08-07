@@ -68,7 +68,7 @@ export function PhoneScreen({ variant }: { variant: Variant }) {
           <>
             <div className="flex items-baseline justify-between">
               <div className="font-display text-xl font-bold text-ivory">La tua dispensa</div>
-              <div className="flex h-[34px] w-[34px] items-center justify-center rounded-pill bg-teal font-body text-xs font-bold text-charcoal">
+              <div className="flex h-[34px] w-[34px] items-center justify-center rounded-pill bg-teal font-body text-xs font-bold text-white">
                 -28%
               </div>
             </div>
@@ -122,7 +122,7 @@ export function PhoneScreen({ variant }: { variant: Variant }) {
                 <div
                   key={f.label}
                   className="rounded-pill border border-ivory/10 px-3 py-[5px] font-body text-[10px] font-semibold"
-                  style={{ background: f.active ? TEAL : "transparent", color: f.active ? "#121212" : "rgba(245,241,234,.7)" }}
+                  style={{ background: f.active ? TEAL : "transparent", color: f.active ? "#FFFFFF" : "rgba(245,241,234,.7)" }}
                 >
                   {f.label}
                 </div>
@@ -154,7 +154,7 @@ export function PhoneScreen({ variant }: { variant: Variant }) {
                     <div className="font-body text-[13px] font-bold text-ivory">{r.name}</div>
                     <div className="mt-0.5 font-body text-[10px] font-medium text-ivory/55">{r.meta}</div>
                   </div>
-                  <div className="flex-none rounded-pill bg-teal px-2 py-1 font-body text-[10px] font-bold text-charcoal">
+                  <div className="flex-none rounded-pill bg-teal px-2 py-1 font-body text-[10px] font-bold text-white">
                     {r.match}
                   </div>
                 </div>

@@ -23,7 +23,7 @@ export async function Hero() {
         <div className="flex flex-wrap items-center gap-[22px]">
           <Link
             href="/signup"
-            className="rounded-nsk bg-teal px-7 py-3.5 font-body text-sm font-semibold text-ivory transition-colors duration-[250ms] ease-nsk hover:bg-teal-dark"
+            className="rounded-nsk bg-teal px-7 py-3.5 font-body text-sm font-semibold text-white transition-colors duration-[250ms] ease-nsk hover:bg-teal-dark"
           >
             {t("ctaPrimary")}
           </Link>

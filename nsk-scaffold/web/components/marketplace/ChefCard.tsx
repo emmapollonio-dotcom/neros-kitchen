@@ -53,7 +53,7 @@ export function ChefCard({ chef }: { chef: ChefCardData }) {
           )}
         </div>
         {chef.verified && (
-          <span className="ml-auto shrink-0 rounded-pill bg-gold/15 px-3 py-1 font-body text-xs text-gold-dark">
+          <span className="ml-auto shrink-0 rounded-pill bg-teal/15 px-3 py-1 font-body text-xs text-teal-dark">
             Verificato
           </span>
         )}

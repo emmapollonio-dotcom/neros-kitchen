@@ -33,7 +33,7 @@ export function CourseCatalog({ courses }: { courses: CourseSummary[] }) {
           href={`/academy/${course.slug}`}
           className="rounded-card border border-line bg-white p-6 shadow-soft transition hover:-translate-y-0.5 hover:shadow-card"
         >
-          <p className="font-body text-xs uppercase tracking-wide text-gold">
+          <p className="font-body text-xs uppercase tracking-wide text-teal">
             {course.level ?? "tutti i livelli"}
           </p>
           <h2 className="mt-2 font-display text-lg text-charcoal">{course.title}</h2>

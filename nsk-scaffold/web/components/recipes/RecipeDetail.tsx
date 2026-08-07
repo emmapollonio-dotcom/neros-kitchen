@@ -57,7 +57,7 @@ export function RecipeDetail({ recipe, ingredients, isOwner }: Props) {
 
   return (
     <div>
-      <p className="font-body text-sm uppercase tracking-widest text-gold">
+      <p className="font-body text-sm uppercase tracking-widest text-teal">
         {recipe.category ?? "Ricetta"} {recipe.cuisine ? `· ${recipe.cuisine}` : ""}
       </p>
       <h1 className="mt-2 font-display text-3xl text-charcoal">{recipe.title}</h1>
@@ -120,7 +120,7 @@ export function RecipeDetail({ recipe, ingredients, isOwner }: Props) {
               type="button"
               onClick={handleDetectAllergens}
               disabled={analyzing}
-              className="rounded-nsk bg-charcoal px-4 py-2 font-body text-xs text-ivory hover:bg-gold hover:text-charcoal disabled:opacity-50"
+              className="rounded-nsk bg-charcoal px-4 py-2 font-body text-xs text-ivory hover:bg-teal hover:text-white disabled:opacity-50"
             >
               {analyzing ? "Analizzo..." : "Rileva allergeni con AI"}
             </button>
@@ -136,7 +136,7 @@ export function RecipeDetail({ recipe, ingredients, isOwner }: Props) {
             {allergens.map((a) => (
               <span
                 key={a}
-                className="rounded-full bg-gold/15 px-3 py-1 font-body text-xs text-charcoal"
+                className="rounded-full bg-teal/15 px-3 py-1 font-body text-xs text-charcoal"
               >
                 {a}
               </span>

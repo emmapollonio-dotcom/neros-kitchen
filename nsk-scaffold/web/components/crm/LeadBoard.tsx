@@ -114,7 +114,7 @@ export function LeadBoard() {
       </div>
 
       {hotCount > 0 && (
-        <p className="font-body text-sm text-gold">
+        <p className="font-body text-sm text-teal">
           🔥 {hotCount} lead {hotCount === 1 ? "caldo" : "caldi"} (score ≥ {HOT_LEAD_SCORE_THRESHOLD})
         </p>
       )}
@@ -149,7 +149,7 @@ export function LeadBoard() {
         <button
           type="submit"
           disabled={creating}
-          className="rounded-nsk bg-charcoal px-5 py-2 font-body text-sm text-ivory hover:bg-gold hover:text-charcoal disabled:opacity-50"
+          className="rounded-nsk bg-charcoal px-5 py-2 font-body text-sm text-ivory hover:bg-teal hover:text-white disabled:opacity-50"
         >
           + Aggiungi lead
         </button>
@@ -172,13 +172,13 @@ export function LeadBoard() {
                   onClick={() => setSelectedId(lead.id)}
                   className={`w-full rounded-nsk border p-3 text-left font-body text-sm transition ${
                     selectedId === lead.id
-                      ? "border-gold bg-gold/10"
-                      : "border-smoke/15 bg-white hover:border-gold"
+                      ? "border-teal bg-teal/10"
+                      : "border-smoke/15 bg-white hover:border-teal"
                   }`}
                 >
                   <p className="font-semibold text-charcoal">{lead.full_name ?? "Senza nome"}</p>
                   {lead.email && <p className="text-xs text-smoke">{lead.email}</p>}
-                  <p className={`mt-1 text-xs ${lead.score >= HOT_LEAD_SCORE_THRESHOLD ? "text-gold" : "text-smoke"}`}>
+                  <p className={`mt-1 text-xs ${lead.score >= HOT_LEAD_SCORE_THRESHOLD ? "text-teal" : "text-smoke"}`}>
                     Score: {lead.score}
                   </p>
                 </button>
@@ -279,7 +279,7 @@ function LeadDetailPanel({
             type="button"
             onClick={handleQualify}
             disabled={qualifying}
-            className="rounded-nsk bg-charcoal px-4 py-2 font-body text-xs text-ivory hover:bg-gold hover:text-charcoal disabled:opacity-50"
+            className="rounded-nsk bg-charcoal px-4 py-2 font-body text-xs text-ivory hover:bg-teal hover:text-white disabled:opacity-50"
           >
             {qualifying ? "Qualifico..." : "Qualifica con AI"}
           </button>
@@ -317,7 +317,7 @@ function LeadDetailPanel({
         <ul className="mt-3 space-y-2">
           {activities.map((a) => (
             <li key={a.id} className="rounded-nsk border border-smoke/15 p-3 font-body text-sm">
-              <p className="text-xs uppercase tracking-wide text-gold">{a.type}</p>
+              <p className="text-xs uppercase tracking-wide text-teal">{a.type}</p>
               <p className="mt-1 text-charcoal">{a.content}</p>
               <p className="mt-1 text-xs text-smoke">
                 {new Date(a.created_at).toLocaleString("it-IT")}
@@ -348,7 +348,7 @@ function LeadDetailPanel({
           <button
             type="submit"
             disabled={saving}
-            className="rounded-nsk bg-charcoal px-5 py-2 font-body text-sm text-ivory hover:bg-gold hover:text-charcoal disabled:opacity-50"
+            className="rounded-nsk bg-charcoal px-5 py-2 font-body text-sm text-ivory hover:bg-teal hover:text-white disabled:opacity-50"
           >
             {saving ? "Salvataggio..." : "Aggiungi attività"}
           </button>

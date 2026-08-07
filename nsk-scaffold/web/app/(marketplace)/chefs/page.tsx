@@ -18,7 +18,7 @@ export default async function ChefsMarketplacePage() {
   return (
     <div className="mx-auto max-w-content px-6 py-14">
       <SectionBanner image="/images/marketing/chef-plating.webp" />
-      <p className="font-body text-sm uppercase tracking-widest text-gold">Marketplace</p>
+      <p className="font-body text-sm uppercase tracking-widest text-teal">Marketplace</p>
       <h1 className="mt-2 font-display text-display-md text-ivory">Trova il tuo chef</h1>
       <p className="mt-3 max-w-xl font-body text-ivory/70">
         Chef privati verificati per cene, eventi, corsi di cucina e consulenza — scegli, richiedi
@@ -37,7 +37,7 @@ export default async function ChefsMarketplacePage() {
             </p>
             <Link
               href="/signup"
-              className="mt-6 inline-block rounded-pill bg-charcoal px-6 py-3 font-body text-sm text-ivory transition hover:bg-gold hover:text-charcoal"
+              className="mt-6 inline-block rounded-pill bg-charcoal px-6 py-3 font-body text-sm text-ivory transition hover:bg-teal hover:text-white"
             >
               Iscriviti come chef
             </Link>

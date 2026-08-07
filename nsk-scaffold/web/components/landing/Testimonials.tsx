@@ -50,7 +50,7 @@ export function Testimonials() {
                 {item.quote}
               </p>
               <div className="flex items-center gap-2.5">
-                <div className="flex h-[38px] w-[38px] flex-none items-center justify-center rounded-pill bg-teal font-body text-xs font-bold text-ivory">
+                <div className="flex h-[38px] w-[38px] flex-none items-center justify-center rounded-pill bg-teal font-body text-xs font-bold text-white">
                   {initials(item.name)}
                 </div>
                 <div>

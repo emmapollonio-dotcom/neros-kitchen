@@ -45,7 +45,7 @@ export default async function BookingsPage() {
                 </p>
               </div>
               <div className="text-right">
-                <span className="rounded-nsk bg-gold/20 px-3 py-1 font-body text-xs text-charcoal">
+                <span className="rounded-nsk bg-teal/20 px-3 py-1 font-body text-xs text-white">
                   {STATUS_LABELS[b.status] ?? b.status}
                 </span>
                 {b.quote_amount && (

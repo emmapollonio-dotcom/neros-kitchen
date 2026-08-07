@@ -33,7 +33,7 @@ export function LandingNav() {
         </button>
         <Link
           href="/signup"
-          className="rounded-nsk bg-teal px-5 py-[9px] font-body text-[13px] font-semibold text-ivory transition-colors duration-[250ms] ease-nsk hover:bg-teal-dark"
+          className="rounded-nsk bg-teal px-5 py-[9px] font-body text-[13px] font-semibold text-white transition-colors duration-[250ms] ease-nsk hover:bg-teal-dark"
         >
           {t("navCta")}
         </Link>

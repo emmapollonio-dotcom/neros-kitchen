@@ -3,9 +3,11 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { NSK_HOME_ITEMS, NSK_PRO_ITEMS, type NavItem } from "@/lib/nav/pillars";
 import { signOutAction } from "@/app/(auth)/actions";
+import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
 
 interface Props {
   email: string | null;
@@ -18,6 +20,7 @@ interface Props {
 // senza sessione: in quel caso mostra solo il logo, "Marketplace" e
 // Accedi/Inizia gratis — niente pilastri che rimanderebbero a /login.
 export function AppNavClient({ email, isPro }: Props) {
+  const t = useTranslations("nav");
   const pathname = usePathname();
   const [openMenu, setOpenMenu] = useState<"home" | "pro" | "user" | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -56,11 +59,11 @@ export function AppNavClient({ email, isPro }: Props) {
             {isLoggedIn && (
               <>
                 <PillarLink href="/dashboard" active={pathname === "/dashboard"}>
-                  Home
+                  {t("home")}
                 </PillarLink>
 
                 <PillarDropdown
-                  label="N'sK Home"
+                  label={t("nskHome")}
                   items={NSK_HOME_ITEMS}
                   open={openMenu === "home"}
                   active={isActiveGroup(NSK_HOME_ITEMS)}
@@ -69,7 +72,7 @@ export function AppNavClient({ email, isPro }: Props) {
 
                 {isPro && (
                   <PillarDropdown
-                    label="N'sK Pro"
+                    label={t("nskPro")}
                     items={NSK_PRO_ITEMS}
                     open={openMenu === "pro"}
                     active={isActiveGroup(NSK_PRO_ITEMS)}
@@ -80,17 +83,21 @@ export function AppNavClient({ email, isPro }: Props) {
             )}
 
             <PillarLink href="/chefs" active={pathname.startsWith("/chefs")}>
-              Marketplace
+              {t("marketplace")}
             </PillarLink>
           </div>
         </div>
 
         <div className="flex items-center gap-3">
+          <div className="hidden md:block">
+            <LanguageSwitcher />
+          </div>
+
           {isLoggedIn ? (
             <div className="relative hidden md:block">
               <button
                 onClick={() => setOpenMenu(openMenu === "user" ? null : "user")}
-                className="flex h-9 w-9 items-center justify-center rounded-pill bg-gold font-body text-sm font-medium text-charcoal transition hover:bg-ivory"
+                className="flex h-9 w-9 items-center justify-center rounded-pill bg-teal font-body text-sm font-medium text-white transition hover:bg-ivory"
                 aria-label="Menu utente"
               >
                 {(email[0] ?? "?").toUpperCase()}
@@ -102,14 +109,14 @@ export function AppNavClient({ email, isPro }: Props) {
                     href="/bookings"
                     className="block rounded-nsk px-3 py-2 font-body text-sm text-ivory hover:bg-ivory/10"
                   >
-                    Le mie prenotazioni
+                    {t("myBookings")}
                   </Link>
                   <form action={signOutAction}>
                     <button
                       type="submit"
                       className="w-full rounded-nsk px-3 py-2 text-left font-body text-sm text-ivory hover:bg-ivory/10"
                     >
-                      Esci
+                      {t("logout")}
                     </button>
                   </form>
                 </div>
@@ -118,13 +125,13 @@ export function AppNavClient({ email, isPro }: Props) {
           ) : (
             <div className="hidden items-center gap-2 md:flex">
               <Link href="/login" className="rounded-pill px-4 py-2 font-body text-sm text-ivory/70 hover:bg-ivory/10 hover:text-ivory">
-                Accedi
+                {t("login")}
               </Link>
               <Link
                 href="/signup"
-                className="rounded-pill bg-gold px-5 py-2 font-body text-sm font-medium text-charcoal transition hover:bg-ivory"
+                className="rounded-pill bg-teal px-5 py-2 font-body text-sm font-medium text-white transition hover:bg-ivory"
               >
-                Inizia gratis
+                {t("signupFree")}
               </Link>
             </div>
           )}
@@ -132,7 +139,7 @@ export function AppNavClient({ email, isPro }: Props) {
           <button
             className="flex h-9 w-9 items-center justify-center rounded-nsk text-ivory md:hidden"
             onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Apri menu"
+            aria-label={t("openMenu")}
           >
             {mobileOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
@@ -143,12 +150,16 @@ export function AppNavClient({ email, isPro }: Props) {
         <div className="border-t border-haze bg-charcoal px-6 py-4 md:hidden">
           {isLoggedIn && (
             <>
-              <MobileSection title="Home" items={[{ label: "Home", href: "/dashboard", description: "" }]} />
-              <MobileSection title="N'sK Home" items={NSK_HOME_ITEMS} />
-              {isPro && <MobileSection title="N'sK Pro" items={NSK_PRO_ITEMS} />}
+              <MobileSection title={t("home")} items={[{ label: t("home"), href: "/dashboard", description: "" }]} />
+              <MobileSection title={t("nskHome")} items={NSK_HOME_ITEMS} />
+              {isPro && <MobileSection title={t("nskPro")} items={NSK_PRO_ITEMS} />}
             </>
           )}
-          <MobileSection title="Marketplace" items={[{ label: "Trova uno chef", href: "/chefs", description: "" }]} />
+          <MobileSection title={t("marketplace")} items={[{ label: t("findChef"), href: "/chefs", description: "" }]} />
+
+          <div className="mt-4 border-t border-haze pt-4">
+            <LanguageSwitcher />
+          </div>
 
           <div className="mt-4 border-t border-haze pt-4">
             {isLoggedIn ? (
@@ -156,20 +167,20 @@ export function AppNavClient({ email, isPro }: Props) {
                 <p className="px-1 font-body text-xs text-ivory/50">{email}</p>
                 <form action={signOutAction}>
                   <button type="submit" className="mt-2 font-body text-sm text-ivory underline">
-                    Esci
+                    {t("logout")}
                   </button>
                 </form>
               </>
             ) : (
               <div className="flex flex-col gap-3">
                 <Link href="/login" className="font-body text-sm text-ivory">
-                  Accedi
+                  {t("login")}
                 </Link>
                 <Link
                   href="/signup"
-                  className="w-fit rounded-pill bg-gold px-5 py-2 font-body text-sm font-medium text-charcoal"
+                  className="w-fit rounded-pill bg-teal px-5 py-2 font-body text-sm font-medium text-white"
                 >
-                  Inizia gratis
+                  {t("signupFree")}
                 </Link>
               </div>
             )}
@@ -193,7 +204,7 @@ function PillarLink({
     <Link
       href={href}
       className={`rounded-pill px-4 py-2 font-body text-sm transition ${
-        active ? "bg-gold text-charcoal" : "text-ivory/70 hover:bg-ivory/10 hover:text-ivory"
+        active ? "bg-teal text-white" : "text-ivory/70 hover:bg-ivory/10 hover:text-ivory"
       }`}
     >
       {children}
@@ -219,7 +230,7 @@ function PillarDropdown({
       <button
         onClick={onToggle}
         className={`flex items-center gap-1 rounded-pill px-4 py-2 font-body text-sm transition ${
-          active ? "bg-gold text-charcoal" : "text-ivory/70 hover:bg-ivory/10 hover:text-ivory"
+          active ? "bg-teal text-white" : "text-ivory/70 hover:bg-ivory/10 hover:text-ivory"
         }`}
       >
         {label}

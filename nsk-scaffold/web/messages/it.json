@@ -12,5 +12,29 @@
     "finalSub": "Collega la tua dispensa e ricevi le prime ricette in pochi minuti.",
     "finalButton": "Inizia ora",
     "emailPlaceholder": "La tua email"
+  },
+  "nav": {
+    "marketplace": "Marketplace",
+    "pricing": "Prezzi",
+    "login": "Accedi",
+    "signupFree": "Inizia gratis",
+    "goToHome": "Vai alla tua Home",
+    "home": "Home",
+    "nskHome": "N'sK Home",
+    "nskPro": "N'sK Pro",
+    "myBookings": "Le mie prenotazioni",
+    "logout": "Esci",
+    "openMenu": "Apri menu",
+    "changeLanguage": "Cambia lingua",
+    "findChef": "Trova uno chef"
+  },
+  "footer": {
+    "tagline": "L'ecosistema per chi vive di cucina — a casa, in cucina professionale, in consulenza.",
+    "productTitle": "Prodotto",
+    "legalTitle": "Legale",
+    "marketplaceChef": "Marketplace chef",
+    "terms": "Termini di servizio",
+    "privacyPolicy": "Informativa privacy",
+    "copyright": "Tutti i diritti riservati."
   }
 }

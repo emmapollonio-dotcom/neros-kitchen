@@ -12,5 +12,29 @@
     "finalSub": "Connectez votre garde-manger et recevez vos premières recettes en quelques minutes.",
     "finalButton": "Commencer",
     "emailPlaceholder": "Votre email"
+  },
+  "nav": {
+    "marketplace": "Marketplace",
+    "pricing": "Tarifs",
+    "login": "Se connecter",
+    "signupFree": "Commencer gratuitement",
+    "goToHome": "Aller à votre Home",
+    "home": "Accueil",
+    "nskHome": "N'sK Home",
+    "nskPro": "N'sK Pro",
+    "myBookings": "Mes réservations",
+    "logout": "Se déconnecter",
+    "openMenu": "Ouvrir le menu",
+    "changeLanguage": "Changer de langue",
+    "findChef": "Trouver un chef"
+  },
+  "footer": {
+    "tagline": "L'écosystème pour ceux qui vivent de la cuisine — à la maison, en cuisine professionnelle, en conseil.",
+    "productTitle": "Produit",
+    "legalTitle": "Mentions légales",
+    "marketplaceChef": "Marketplace de chefs",
+    "terms": "Conditions d'utilisation",
+    "privacyPolicy": "Politique de confidentialité",
+    "copyright": "Tous droits réservés."
   }
 }

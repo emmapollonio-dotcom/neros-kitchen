@@ -12,5 +12,29 @@
     "finalSub": "Connect your pantry and get your first recipes in minutes.",
     "finalButton": "Get started",
     "emailPlaceholder": "Your email"
+  },
+  "nav": {
+    "marketplace": "Marketplace",
+    "pricing": "Pricing",
+    "login": "Log in",
+    "signupFree": "Start for free",
+    "goToHome": "Go to your Home",
+    "home": "Home",
+    "nskHome": "N'sK Home",
+    "nskPro": "N'sK Pro",
+    "myBookings": "My bookings",
+    "logout": "Log out",
+    "openMenu": "Open menu",
+    "changeLanguage": "Change language",
+    "findChef": "Find a chef"
+  },
+  "footer": {
+    "tagline": "The ecosystem for people who live and breathe cooking — at home, in a professional kitchen, or as a consultant.",
+    "productTitle": "Product",
+    "legalTitle": "Legal",
+    "marketplaceChef": "Chef marketplace",
+    "terms": "Terms of service",
+    "privacyPolicy": "Privacy policy",
+    "copyright": "All rights reserved."
   }
 }

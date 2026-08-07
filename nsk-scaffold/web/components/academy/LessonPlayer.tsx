@@ -55,13 +55,13 @@ export function LessonPlayer({ lessons, initialProgress }: Props) {
             className={`flex w-full items-center justify-between rounded-nsk px-4 py-3 text-left font-body text-sm transition ${
               activeLesson?.id === lesson.id
                 ? "bg-charcoal text-ivory"
-                : "bg-white text-charcoal hover:bg-gold/10"
+                : "bg-white text-white hover:bg-teal/10"
             }`}
           >
             <span>
               {lesson.position}. {lesson.title}
             </span>
-            {completedIds.has(lesson.id) && <span className="text-gold">✓</span>}
+            {completedIds.has(lesson.id) && <span className="text-teal">✓</span>}
           </button>
         ))}
       </aside>
@@ -87,7 +87,7 @@ export function LessonPlayer({ lessons, initialProgress }: Props) {
                 href={activeLesson.pdf_url}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-4 inline-block font-body text-sm text-gold underline"
+                className="mt-4 inline-block font-body text-sm text-teal underline"
               >
                 Scarica materiale PDF
               </a>
@@ -97,7 +97,7 @@ export function LessonPlayer({ lessons, initialProgress }: Props) {
               type="button"
               onClick={() => markCompleted(activeLesson.id)}
               disabled={saving || completedIds.has(activeLesson.id)}
-              className="mt-6 rounded-nsk bg-charcoal px-6 py-3 font-body text-ivory transition hover:bg-gold hover:text-charcoal disabled:opacity-50"
+              className="mt-6 rounded-nsk bg-charcoal px-6 py-3 font-body text-ivory transition hover:bg-teal hover:text-white disabled:opacity-50"
             >
               {completedIds.has(activeLesson.id) ? "Lezione completata" : "Segna come completata"}
             </button>

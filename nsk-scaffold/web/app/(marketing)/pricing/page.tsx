@@ -34,12 +34,12 @@ export default async function PricingPage() {
               key={plan.code}
               className={`flex flex-col rounded-panel border p-7 ${
                 recommended
-                  ? "border-gold bg-white shadow-elevated"
+                  ? "border-teal bg-white shadow-elevated"
                   : "border-line bg-white shadow-soft"
               }`}
             >
               {recommended && (
-                <span className="w-fit rounded-pill bg-gold/15 px-3 py-1 font-body text-xs text-gold-dark">
+                <span className="w-fit rounded-pill bg-teal/15 px-3 py-1 font-body text-xs text-teal-dark">
                   Più scelto
                 </span>
               )}
@@ -54,7 +54,7 @@ export default async function PricingPage() {
                 {Object.entries(plan.features ?? {}).map(([key, value]) => (
                   <li key={key} className="flex items-start gap-2">
                     {value ? (
-                      <Check size={16} className="mt-0.5 shrink-0 text-gold-dark" />
+                      <Check size={16} className="mt-0.5 shrink-0 text-teal-dark" />
                     ) : (
                       <span className="mt-0.5 w-4 shrink-0 text-center text-mist">—</span>
                     )}
@@ -68,8 +68,8 @@ export default async function PricingPage() {
                 href="/signup"
                 className={`mt-6 rounded-pill px-4 py-2.5 text-center font-body text-sm transition ${
                   recommended
-                    ? "bg-charcoal text-ivory hover:bg-gold hover:text-charcoal"
-                    : "border border-line text-charcoal hover:border-gold"
+                    ? "bg-charcoal text-ivory hover:bg-teal hover:text-white"
+                    : "border border-line text-white hover:border-teal"
                 }`}
               >
                 Scegli {plan.name}

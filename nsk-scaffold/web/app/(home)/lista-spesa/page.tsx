@@ -30,7 +30,7 @@ export default async function ListaSpesaPage({ searchParams }: Props) {
     return (
       <div className="mx-auto max-w-content px-6 py-14 text-ivory">
         <SectionBanner image="/images/marketing/ingredients-flatlay.webp" />
-        <p className="font-body text-sm uppercase tracking-widest text-gold">N&apos;sK Home</p>
+        <p className="font-body text-sm uppercase tracking-widest text-teal">N&apos;sK Home</p>
         <h1 className="mt-2 font-display text-display-md text-ivory">Lista della spesa</h1>
 
         <div className="mt-10 rounded-panel border border-line bg-white p-12 text-center">
@@ -41,7 +41,7 @@ export default async function ListaSpesaPage({ searchParams }: Props) {
           </p>
           <Link
             href="/meal-planner"
-            className="mt-6 inline-block rounded-pill bg-charcoal px-6 py-3 font-body text-sm text-ivory transition hover:bg-gold hover:text-charcoal"
+            className="mt-6 inline-block rounded-pill bg-charcoal px-6 py-3 font-body text-sm text-ivory transition hover:bg-teal hover:text-white"
           >
             Vai al Meal Planner
           </Link>
@@ -68,7 +68,7 @@ export default async function ListaSpesaPage({ searchParams }: Props) {
   return (
     <div className="mx-auto max-w-3xl px-6 py-14 text-ivory">
       <SectionBanner image="/images/marketing/ingredients-flatlay.webp" />
-      <p className="font-body text-sm uppercase tracking-widest text-gold">N&apos;sK Home</p>
+      <p className="font-body text-sm uppercase tracking-widest text-teal">N&apos;sK Home</p>
       <h1 className="mt-2 font-display text-display-md text-ivory">{activeList.title}</h1>
 
       {lists.length > 1 && (

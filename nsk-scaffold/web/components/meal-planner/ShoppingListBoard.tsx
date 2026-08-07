@@ -79,7 +79,7 @@ export function ShoppingListBoard({ shoppingListId, items: initialItems, ingredi
       <div className="flex items-center gap-3">
         <div className="h-1.5 flex-1 overflow-hidden rounded-pill bg-line">
           <div
-            className="h-full rounded-pill bg-gold transition-all"
+            className="h-full rounded-pill bg-teal transition-all"
             style={{ width: items.length ? `${(checkedCount / items.length) * 100}%` : "0%" }}
           />
         </div>
@@ -101,7 +101,7 @@ export function ShoppingListBoard({ shoppingListId, items: initialItems, ingredi
                   <button
                     onClick={() => toggleChecked(item)}
                     className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border transition ${
-                      item.is_checked ? "border-gold bg-gold" : "border-line"
+                      item.is_checked ? "border-teal bg-teal" : "border-line"
                     }`}
                     aria-label={item.is_checked ? "Segna come da comprare" : "Segna come comprato"}
                   >
@@ -145,12 +145,12 @@ export function ShoppingListBoard({ shoppingListId, items: initialItems, ingredi
           onChange={(e) => setNewLabel(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && addItem()}
           placeholder="Aggiungi una voce (es. tovaglioli)"
-          className="flex-1 rounded-pill border border-line bg-white px-4 py-2.5 font-body text-sm text-charcoal placeholder:text-mist focus:border-gold focus:outline-none"
+          className="flex-1 rounded-pill border border-line bg-white px-4 py-2.5 font-body text-sm text-charcoal placeholder:text-mist focus:border-teal focus:outline-none"
         />
         <button
           onClick={addItem}
           disabled={adding || !newLabel.trim()}
-          className="flex items-center gap-1 rounded-pill bg-charcoal px-4 py-2.5 font-body text-sm text-ivory transition hover:bg-gold hover:text-charcoal disabled:opacity-40"
+          className="flex items-center gap-1 rounded-pill bg-charcoal px-4 py-2.5 font-body text-sm text-ivory transition hover:bg-teal hover:text-white disabled:opacity-40"
         >
           <Plus size={16} />
           Aggiungi

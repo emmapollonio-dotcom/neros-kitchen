@@ -88,13 +88,13 @@ export function MealPlannerBoard({ mealPlanId, weekStart, entries: initialEntrie
         <div className="flex items-center gap-2">
           <button
             onClick={() => goToWeek(-1)}
-            className="rounded-pill border border-line px-4 py-2 font-body text-sm text-charcoal hover:border-gold"
+            className="rounded-pill border border-line px-4 py-2 font-body text-sm text-charcoal hover:border-teal"
           >
             ← Settimana prima
           </button>
           <button
             onClick={() => goToWeek(1)}
-            className="rounded-pill border border-line px-4 py-2 font-body text-sm text-charcoal hover:border-gold"
+            className="rounded-pill border border-line px-4 py-2 font-body text-sm text-charcoal hover:border-teal"
           >
             Settimana dopo →
           </button>
@@ -103,7 +103,7 @@ export function MealPlannerBoard({ mealPlanId, weekStart, entries: initialEntrie
         <button
           onClick={generateShoppingList}
           disabled={generating || entries.length === 0}
-          className="rounded-pill bg-charcoal px-5 py-2.5 font-body text-sm text-ivory transition hover:bg-gold hover:text-charcoal disabled:cursor-not-allowed disabled:opacity-40"
+          className="rounded-pill bg-charcoal px-5 py-2.5 font-body text-sm text-ivory transition hover:bg-teal hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
         >
           {generating ? "Genero..." : "Genera lista della spesa"}
         </button>
@@ -158,7 +158,7 @@ export function MealPlannerBoard({ mealPlanId, weekStart, entries: initialEntrie
                 <button
                   onClick={() => setAddingFor(day)}
                   disabled={recipes.length === 0}
-                  className="mt-3 flex w-full items-center justify-center gap-1 rounded-nsk border border-dashed border-line py-2 font-body text-xs text-mist transition hover:border-gold hover:text-gold-dark disabled:cursor-not-allowed disabled:opacity-40"
+                  className="mt-3 flex w-full items-center justify-center gap-1 rounded-nsk border border-dashed border-line py-2 font-body text-xs text-mist transition hover:border-teal hover:text-teal-dark disabled:cursor-not-allowed disabled:opacity-40"
                 >
                   <Plus size={13} />
                   Aggiungi
@@ -172,7 +172,7 @@ export function MealPlannerBoard({ mealPlanId, weekStart, entries: initialEntrie
       {recipes.length === 0 && (
         <p className="mt-6 font-body text-sm text-smoke">
           Non hai ancora ricette da pianificare —{" "}
-          <Link href="/ricette/nuova" className="underline hover:text-gold-dark">
+          <Link href="/ricette/nuova" className="underline hover:text-teal-dark">
             creane una
           </Link>
           .
@@ -231,7 +231,7 @@ function AddEntryForm({
       <div className="flex gap-2">
         <button
           onClick={() => recipeId && onAdd(recipeId, slot, servings)}
-          className="flex-1 rounded-nsk bg-charcoal py-1.5 font-body text-xs text-ivory hover:bg-gold hover:text-charcoal"
+          className="flex-1 rounded-nsk bg-charcoal py-1.5 font-body text-xs text-ivory hover:bg-teal hover:text-white"
         >
           Aggiungi
         </button>
