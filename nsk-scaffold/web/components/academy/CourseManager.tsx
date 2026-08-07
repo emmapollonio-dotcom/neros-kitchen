@@ -151,7 +151,7 @@ export function CourseManager() {
           <button
             type="submit"
             disabled={creating}
-            className="rounded-nsk bg-charcoal px-6 py-3 font-body text-ivory transition hover:bg-teal hover:text-white disabled:opacity-50"
+            className="rounded-nsk bg-teal px-6 py-3 font-body text-white transition hover:bg-teal-dark disabled:opacity-50"
           >
             {creating ? t("creating") : t("createCourseDraft")}
           </button>
@@ -320,7 +320,7 @@ function CourseContentEditor({ courseId }: { courseId: string }) {
           <button
             type="submit"
             disabled={savingLesson}
-            className="rounded-nsk bg-charcoal px-4 py-2 font-body text-sm text-ivory hover:bg-teal hover:text-white disabled:opacity-50"
+            className="rounded-nsk bg-teal px-4 py-2 font-body text-sm text-white hover:bg-teal-dark disabled:opacity-50"
           >
             {t("add")}
           </button>
@@ -402,7 +402,7 @@ function CourseContentEditor({ courseId }: { courseId: string }) {
             <button
               type="submit"
               disabled={savingQuiz || questions.length === 0}
-              className="rounded-nsk bg-charcoal px-6 py-3 font-body text-sm text-ivory hover:bg-teal hover:text-white disabled:opacity-50"
+              className="rounded-nsk bg-teal px-6 py-3 font-body text-sm text-white hover:bg-teal-dark disabled:opacity-50"
             >
               {savingQuiz ? t("saving") : t("saveQuiz")}
             </button>

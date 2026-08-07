@@ -105,7 +105,7 @@ function SignupForm() {
           <button
             type="submit"
             disabled={pending}
-            className="w-full rounded-nsk bg-charcoal px-4 py-3 font-body text-ivory transition hover:bg-teal hover:text-white disabled:opacity-50"
+            className="w-full rounded-nsk bg-teal px-4 py-3 font-body text-white transition hover:bg-teal-dark disabled:opacity-50"
           >
             {pending ? "Creazione account..." : "Registrati"}
           </button>

@@ -106,7 +106,7 @@ export function MealPlannerBoard({ mealPlanId, weekStart, entries: initialEntrie
         <button
           onClick={generateShoppingList}
           disabled={generating || entries.length === 0}
-          className="rounded-pill bg-charcoal px-5 py-2.5 font-body text-sm text-ivory transition hover:bg-teal hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
+          className="rounded-pill bg-teal px-5 py-2.5 font-body text-sm text-white transition hover:bg-teal-dark disabled:cursor-not-allowed disabled:opacity-40"
         >
           {generating ? t("generating") : t("generateList")}
         </button>
@@ -163,7 +163,7 @@ export function MealPlannerBoard({ mealPlanId, weekStart, entries: initialEntrie
                 <button
                   onClick={() => setAddingFor(day)}
                   disabled={recipes.length === 0}
-                  className="mt-3 flex w-full items-center justify-center gap-1 rounded-nsk border border-dashed border-line py-2 font-body text-xs text-mist transition hover:border-teal hover:text-teal-dark disabled:cursor-not-allowed disabled:opacity-40"
+                  className="mt-3 flex w-full items-center justify-center gap-1 rounded-nsk border border-dashed border-line py-2 font-body text-xs text-smoke transition hover:border-teal hover:text-teal-dark disabled:cursor-not-allowed disabled:text-mist disabled:opacity-80"
                 >
                   <Plus size={13} />
                   {t("add")}
@@ -240,7 +240,7 @@ function AddEntryForm({
       <div className="flex gap-2">
         <button
           onClick={() => recipeId && onAdd(recipeId, slot, servings)}
-          className="flex-1 rounded-nsk bg-charcoal py-1.5 font-body text-xs text-ivory hover:bg-teal hover:text-white"
+          className="flex-1 rounded-nsk bg-teal py-1.5 font-body text-xs text-white hover:bg-teal-dark"
         >
           {t("add")}
         </button>

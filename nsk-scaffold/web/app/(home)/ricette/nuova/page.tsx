@@ -104,7 +104,7 @@ export default function NuovaRicettaPage() {
         <button
           type="submit"
           disabled={submitting}
-          className="rounded-pill bg-charcoal px-6 py-3 font-body text-sm text-ivory transition hover:bg-teal hover:text-white disabled:opacity-50"
+          className="rounded-pill bg-teal px-6 py-3 font-body text-sm text-white transition hover:bg-teal-dark disabled:opacity-50"
         >
           {submitting ? "Salvataggio..." : "Salva ricetta"}
         </button>

@@ -38,7 +38,7 @@ export default async function RicetteIndexPage() {
         </div>
         <Link
           href="/ricette/nuova"
-          className="flex items-center gap-2 rounded-pill bg-charcoal px-5 py-2.5 font-body text-sm text-ivory transition hover:bg-teal hover:text-white"
+          className="flex items-center gap-2 rounded-pill bg-teal px-5 py-2.5 font-body text-sm text-white transition hover:bg-teal-dark"
         >
           <Plus size={16} />
           {t("newRecipe")}
@@ -51,7 +51,7 @@ export default async function RicetteIndexPage() {
           <p className="mx-auto mt-2 max-w-md font-body text-sm text-smoke">{t("emptyBody")}</p>
           <Link
             href="/ricette/nuova"
-            className="mt-6 inline-block rounded-pill bg-charcoal px-6 py-3 font-body text-sm text-ivory transition hover:bg-teal hover:text-white"
+            className="mt-6 inline-block rounded-pill bg-teal px-6 py-3 font-body text-sm text-white transition hover:bg-teal-dark"
           >
             {t("createFirst")}
           </Link>

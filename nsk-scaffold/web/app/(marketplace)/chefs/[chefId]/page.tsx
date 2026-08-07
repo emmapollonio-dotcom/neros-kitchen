@@ -125,7 +125,7 @@ export default async function ChefProfilePage({ params }: Props) {
             <p className="font-body text-sm text-mist">{t("startingEstimate")}</p>
             <Link
               href={`/chefs/${chefId}/book`}
-              className="mt-6 block rounded-pill bg-charcoal px-6 py-3 text-center font-body text-sm text-ivory transition hover:bg-teal hover:text-white"
+              className="mt-6 block rounded-pill bg-teal px-6 py-3 text-center font-body text-sm text-white transition hover:bg-teal-dark"
             >
               {t("requestAvailability")}
             </Link>

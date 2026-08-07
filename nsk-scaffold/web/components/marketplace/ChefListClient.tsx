@@ -55,7 +55,7 @@ export function ChefListClient({ chefs }: Props) {
           <button
             onClick={() => setSpecialty(null)}
             className={`rounded-pill px-4 py-1.5 font-body text-xs transition ${
-              specialty === null ? "bg-charcoal text-ivory" : "bg-cream text-smoke hover:bg-line"
+              specialty === null ? "bg-teal text-white" : "bg-cream text-smoke hover:bg-line"
             }`}
           >
             {t("allFilter")}
@@ -65,7 +65,7 @@ export function ChefListClient({ chefs }: Props) {
               key={s}
               onClick={() => setSpecialty(specialty === s ? null : s)}
               className={`rounded-pill px-4 py-1.5 font-body text-xs transition ${
-                specialty === s ? "bg-charcoal text-ivory" : "bg-cream text-smoke hover:bg-line"
+                specialty === s ? "bg-teal text-white" : "bg-cream text-smoke hover:bg-line"
               }`}
             >
               {s}

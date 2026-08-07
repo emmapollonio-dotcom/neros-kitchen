@@ -43,7 +43,7 @@ export function ChefCard({ chef }: { chef: ChefCardData }) {
       className="group block rounded-card border border-line bg-white p-6 shadow-soft transition hover:-translate-y-1 hover:shadow-elevated"
     >
       <div className="flex items-center gap-4">
-        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-pill bg-charcoal font-display text-lg text-ivory">
+        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-pill bg-teal font-display text-lg text-white">
           {initials}
         </div>
         <div className="min-w-0">

@@ -121,7 +121,7 @@ export function BookingForm({ chefId, days }: Props) {
       <button
         type="submit"
         disabled={submitting}
-        className="w-full rounded-nsk bg-charcoal px-6 py-3 font-body text-ivory transition hover:bg-teal hover:text-white disabled:opacity-50"
+        className="w-full rounded-nsk bg-teal px-6 py-3 font-body text-white transition hover:bg-teal-dark disabled:opacity-50"
       >
         {submitting ? t("submitting") : t("requestBooking")}
       </button>

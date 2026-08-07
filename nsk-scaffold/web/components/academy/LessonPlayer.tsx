@@ -56,7 +56,7 @@ export function LessonPlayer({ lessons, initialProgress }: Props) {
             onClick={() => setActiveLesson(lesson)}
             className={`flex w-full items-center justify-between rounded-nsk px-4 py-3 text-left font-body text-sm transition ${
               activeLesson?.id === lesson.id
-                ? "bg-charcoal text-ivory"
+                ? "bg-teal text-white"
                 : "bg-white text-charcoal hover:bg-teal/10"
             }`}
           >
@@ -99,7 +99,7 @@ export function LessonPlayer({ lessons, initialProgress }: Props) {
               type="button"
               onClick={() => markCompleted(activeLesson.id)}
               disabled={saving || completedIds.has(activeLesson.id)}
-              className="mt-6 rounded-nsk bg-charcoal px-6 py-3 font-body text-ivory transition hover:bg-teal hover:text-white disabled:opacity-50"
+              className="mt-6 rounded-nsk bg-teal px-6 py-3 font-body text-white transition hover:bg-teal-dark disabled:opacity-50"
             >
               {completedIds.has(activeLesson.id) ? t("lessonCompleted") : t("markAsCompleted")}
             </button>

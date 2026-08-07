@@ -33,7 +33,7 @@ export default async function ChefsMarketplacePage() {
             <p className="mx-auto mt-2 max-w-md font-body text-sm text-smoke">{t("emptyBody")}</p>
             <Link
               href="/signup"
-              className="mt-6 inline-block rounded-pill bg-charcoal px-6 py-3 font-body text-sm text-ivory transition hover:bg-teal hover:text-white"
+              className="mt-6 inline-block rounded-pill bg-teal px-6 py-3 font-body text-sm text-white transition hover:bg-teal-dark"
             >
               {t("joinAsChef")}
             </Link>

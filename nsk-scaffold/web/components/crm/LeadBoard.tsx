@@ -150,7 +150,7 @@ export function LeadBoard() {
         <button
           type="submit"
           disabled={creating}
-          className="rounded-nsk bg-charcoal px-5 py-2 font-body text-sm text-ivory hover:bg-teal hover:text-white disabled:opacity-50"
+          className="rounded-nsk bg-teal px-5 py-2 font-body text-sm text-white hover:bg-teal-dark disabled:opacity-50"
         >
           {t("addLead")}
         </button>
@@ -286,7 +286,7 @@ function LeadDetailPanel({
             type="button"
             onClick={handleQualify}
             disabled={qualifying}
-            className="rounded-nsk bg-charcoal px-4 py-2 font-body text-xs text-ivory hover:bg-teal hover:text-white disabled:opacity-50"
+            className="rounded-nsk bg-teal px-4 py-2 font-body text-xs text-white hover:bg-teal-dark disabled:opacity-50"
           >
             {qualifying ? t("qualifying") : t("qualifyWithAi")}
           </button>
@@ -355,7 +355,7 @@ function LeadDetailPanel({
           <button
             type="submit"
             disabled={saving}
-            className="rounded-nsk bg-charcoal px-5 py-2 font-body text-sm text-ivory hover:bg-teal hover:text-white disabled:opacity-50"
+            className="rounded-nsk bg-teal px-5 py-2 font-body text-sm text-white hover:bg-teal-dark disabled:opacity-50"
           >
             {saving ? t("saving") : t("addActivity")}
           </button>

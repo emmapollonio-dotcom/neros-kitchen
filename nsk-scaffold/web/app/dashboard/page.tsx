@@ -165,7 +165,7 @@ export default async function DashboardPage() {
           <p className="mt-2 max-w-lg font-body text-sm text-smoke">{t("findChefBody")}</p>
           <Link
             href="/chefs"
-            className="mt-5 inline-block rounded-pill bg-charcoal px-6 py-3 font-body text-sm text-ivory transition hover:bg-teal hover:text-white"
+            className="mt-5 inline-block rounded-pill bg-teal px-6 py-3 font-body text-sm text-white transition hover:bg-teal-dark"
           >
             {t("exploreMarketplace")}
           </Link>

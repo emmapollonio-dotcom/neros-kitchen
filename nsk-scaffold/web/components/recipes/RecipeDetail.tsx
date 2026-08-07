@@ -120,7 +120,7 @@ export function RecipeDetail({ recipe, ingredients, isOwner }: Props) {
               type="button"
               onClick={handleDetectAllergens}
               disabled={analyzing}
-              className="rounded-nsk bg-charcoal px-4 py-2 font-body text-xs text-ivory hover:bg-teal hover:text-white disabled:opacity-50"
+              className="rounded-nsk bg-teal px-4 py-2 font-body text-xs text-white hover:bg-teal-dark disabled:opacity-50"
             >
               {analyzing ? "Analizzo..." : "Rileva allergeni con AI"}
             </button>

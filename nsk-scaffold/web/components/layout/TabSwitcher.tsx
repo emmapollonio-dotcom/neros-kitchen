@@ -17,18 +17,23 @@ export function TabSwitcher({ tabs, defaultTab }: { tabs: Tab[]; defaultTab?: st
 
   return (
     <div>
-      <div className="flex gap-1 border-b border-line">
+      {/* Vive direttamente sullo scafo (Food Cost, CRM, Analytics, Academy
+          Pro lo montano subito sotto il sottotitolo, fuori da qualunque
+          card bianca): token shell-aware, non i toni pensati per card
+          chiare (border-line/text-charcoal/text-mist erano illeggibili
+          sullo sfondo scuro/navy). */}
+      <div className="flex gap-1 border-b border-shell-border">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActive(tab.id)}
             className={`relative px-4 py-3 font-body text-sm transition ${
-              active === tab.id ? "text-charcoal" : "text-mist hover:text-smoke"
+              active === tab.id ? "text-teal" : "text-shell-fg-muted hover:text-shell-fg-secondary"
             }`}
           >
             {tab.label}
             {active === tab.id && (
-              <span className="absolute inset-x-4 -bottom-px h-0.5 rounded-full bg-charcoal" />
+              <span className="absolute inset-x-4 -bottom-px h-0.5 rounded-full bg-teal" />
             )}
           </button>
         ))}

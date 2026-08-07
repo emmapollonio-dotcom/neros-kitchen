@@ -150,7 +150,7 @@ export function MediaGallery({ recipeId, initialImages }: Props) {
             <button
               type="button"
               onClick={() => cameraInputRef.current?.click()}
-              className="flex items-center gap-1.5 rounded-pill bg-charcoal px-4 py-2 font-body text-xs text-ivory transition hover:bg-teal hover:text-white"
+              className="flex items-center gap-1.5 rounded-pill bg-teal px-4 py-2 font-body text-xs text-white transition hover:bg-teal-dark"
             >
               <Camera size={14} />
               Scatta una foto

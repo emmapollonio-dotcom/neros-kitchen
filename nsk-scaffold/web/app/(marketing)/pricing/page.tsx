@@ -68,7 +68,7 @@ export default async function PricingPage() {
                 href="/signup"
                 className={`mt-6 rounded-pill px-4 py-2.5 text-center font-body text-sm transition ${
                   recommended
-                    ? "bg-charcoal text-ivory hover:bg-teal hover:text-white"
+                    ? "bg-teal text-white hover:bg-teal-dark"
                     : "border border-line text-charcoal hover:border-teal"
                 }`}
               >

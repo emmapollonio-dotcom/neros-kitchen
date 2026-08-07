@@ -89,7 +89,7 @@ export function ReviewResponder() {
               type="button"
               onClick={() => handleRespond(review.id)}
               disabled={respondingId === review.id}
-              className="mt-4 rounded-nsk bg-charcoal px-4 py-2 font-body text-xs text-ivory hover:bg-teal hover:text-white disabled:opacity-50"
+              className="mt-4 rounded-nsk bg-teal px-4 py-2 font-body text-xs text-white hover:bg-teal-dark disabled:opacity-50"
             >
               {respondingId === review.id ? t("generating") : t("respondWithAi")}
             </button>

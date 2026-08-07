@@ -15,8 +15,13 @@
      restano invariate in entrambi i temi: sono già superfici chiare
      autosufficienti, leggibili sia su scafo scuro che chiaro — non vanno
      toccate. Default = scuro (comportamento storico dell'app prima del
-     toggle). html.theme-light sotto inverte solo questi 5 valori. */
-  --nsk-shell-bg: #121212;
+     toggle). html.theme-light sotto inverte solo questi 5 valori.
+     Aggiornamento 7 ago 2026: shell-bg allineato al navy della palette
+     "Elegance" della landing (.nsk-landing[data-theme="dark"] sotto), non
+     più il charcoal neutro — le due superfici scure ora sono la stessa
+     identica tinta, non solo luminosità simile. Gli altri 4 valori erano
+     già identici a quelli della landing, nessuna modifica necessaria. */
+  --nsk-shell-bg: #0b1220;
   --nsk-shell-fg: #f5f1ea;
   --nsk-shell-fg-secondary: rgba(245, 241, 234, 0.7);
   --nsk-shell-fg-muted: rgba(245, 241, 234, 0.5);

@@ -40,7 +40,7 @@ export default async function ListaSpesaPage({ searchParams }: Props) {
           <p className="mx-auto mt-2 max-w-md font-body text-sm text-smoke">{t("noListsBody")}</p>
           <Link
             href="/meal-planner"
-            className="mt-6 inline-block rounded-pill bg-charcoal px-6 py-3 font-body text-sm text-ivory transition hover:bg-teal hover:text-white"
+            className="mt-6 inline-block rounded-pill bg-teal px-6 py-3 font-body text-sm text-white transition hover:bg-teal-dark"
           >
             {t("goToMealPlanner")}
           </Link>
@@ -77,7 +77,7 @@ export default async function ListaSpesaPage({ searchParams }: Props) {
               key={l.id}
               href={`/lista-spesa?list=${l.id}`}
               className={`rounded-pill px-4 py-1.5 font-body text-xs transition ${
-                l.id === activeList.id ? "bg-charcoal text-ivory" : "bg-cream text-smoke hover:bg-line"
+                l.id === activeList.id ? "bg-teal text-white" : "bg-cream text-smoke hover:bg-line"
               }`}
             >
               {l.title}

@@ -110,7 +110,7 @@ export function QuizForm({ quizId, title, passingScore, questions }: Props) {
         <button
           type="submit"
           disabled={submitting || Object.keys(answers).length < questions.length}
-          className="rounded-nsk bg-charcoal px-6 py-3 font-body text-ivory transition hover:bg-teal hover:text-white disabled:opacity-50"
+          className="rounded-nsk bg-teal px-6 py-3 font-body text-white transition hover:bg-teal-dark disabled:opacity-50"
         >
           {submitting ? t("submitting") : t("submitAnswers")}
         </button>
@@ -134,7 +134,7 @@ export function QuizForm({ quizId, title, passingScore, questions }: Props) {
               type="button"
               onClick={handleExplain}
               disabled={explaining}
-              className="rounded-nsk bg-charcoal px-5 py-2 font-body text-sm text-ivory hover:bg-teal hover:text-white disabled:opacity-50"
+              className="rounded-nsk bg-teal px-5 py-2 font-body text-sm text-white hover:bg-teal-dark disabled:opacity-50"
             >
               {explaining ? t("preparingExplanation") : t("explainWithAi")}
             </button>

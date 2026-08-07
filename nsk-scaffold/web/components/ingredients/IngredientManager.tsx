@@ -178,7 +178,7 @@ export function IngredientManager() {
         <button
           type="submit"
           disabled={creating}
-          className="rounded-nsk bg-charcoal px-5 py-2 font-body text-sm text-ivory hover:bg-teal hover:text-white disabled:opacity-50"
+          className="rounded-nsk bg-teal px-5 py-2 font-body text-sm text-white hover:bg-teal-dark disabled:opacity-50"
         >
           {creating ? t("saving") : t("addIngredient")}
         </button>

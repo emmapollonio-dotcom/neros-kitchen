@@ -153,7 +153,7 @@ export function ShoppingListBoard({ shoppingListId, items: initialItems, ingredi
         <button
           onClick={addItem}
           disabled={adding || !newLabel.trim()}
-          className="flex items-center gap-1 rounded-pill bg-charcoal px-4 py-2.5 font-body text-sm text-ivory transition hover:bg-teal hover:text-white disabled:opacity-40"
+          className="flex items-center gap-1 rounded-pill bg-teal px-4 py-2.5 font-body text-sm text-white transition hover:bg-teal-dark disabled:opacity-40"
         >
           <Plus size={16} />
           {t("add")}

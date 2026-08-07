@@ -155,7 +155,7 @@ export function FoodCostCalculator({
         type="button"
         onClick={calculate}
         disabled={loading}
-        className="rounded-nsk bg-charcoal px-6 py-3 font-body text-ivory hover:bg-teal hover:text-white disabled:opacity-50"
+        className="rounded-nsk bg-teal px-6 py-3 font-body text-white hover:bg-teal-dark disabled:opacity-50"
       >
         {loading ? t("calculating") : t("calculate")}
       </button>
