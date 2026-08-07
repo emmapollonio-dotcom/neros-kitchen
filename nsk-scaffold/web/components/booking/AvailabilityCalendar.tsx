@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
 import type { DayGroup } from "@/lib/availability/compute-free-slots";
 
 interface Props {
@@ -9,13 +10,13 @@ interface Props {
 }
 
 export function AvailabilityCalendar({ days, onSelectSlot }: Props) {
+  const t = useTranslations("booking");
+  const locale = useLocale();
   const [selectedSlotId, setSelectedSlotId] = useState<string | null>(null);
 
   if (days.length === 0) {
     return (
-      <p className="font-body text-sm text-smoke">
-        Nessuna disponibilità nei prossimi giorni. Contatta lo chef per date personalizzate.
-      </p>
+      <p className="font-body text-sm text-smoke">{t("noAvailability")}</p>
     );
   }
 
@@ -24,7 +25,7 @@ export function AvailabilityCalendar({ days, onSelectSlot }: Props) {
       {days.map((day) => (
         <div key={day.date}>
           <h4 className="font-body text-sm font-semibold text-charcoal">
-            {new Date(day.date).toLocaleDateString("it-IT", {
+            {new Date(day.date).toLocaleDateString(locale, {
               weekday: "long",
               day: "numeric",
               month: "long",
@@ -47,7 +48,7 @@ export function AvailabilityCalendar({ days, onSelectSlot }: Props) {
                       : "border-smoke/30 text-charcoal hover:border-teal"
                   }`}
                 >
-                  {new Date(slot.start_at).toLocaleTimeString("it-IT", {
+                  {new Date(slot.start_at).toLocaleTimeString(locale, {
                     hour: "2-digit",
                     minute: "2-digit",
                   })}

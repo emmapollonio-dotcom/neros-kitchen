@@ -1,19 +1,21 @@
+import { getLocale, getTranslations } from "next-intl/server";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
-
-const STATUS_LABELS: Record<string, string> = {
-  requested: "In attesa di conferma",
-  quoted: "Preventivo ricevuto",
-  confirmed: "Confermata",
-  in_progress: "In corso",
-  completed: "Completata",
-  cancelled: "Annullata",
-  disputed: "In contestazione",
-};
 
 // Protetta da middleware.ts. RLS ("bookings_participants") filtra automaticamente
 // solo le prenotazioni dove l'utente è customer_id o chef_id — nessun filtro
 // aggiuntivo necessario qui lato applicazione.
 export default async function BookingsPage() {
+  const t = await getTranslations("bookings");
+  const locale = await getLocale();
+  const STATUS_LABELS: Record<string, string> = {
+    requested: t("statusRequested"),
+    quoted: t("statusQuoted"),
+    confirmed: t("statusConfirmed"),
+    in_progress: t("statusInProgress"),
+    completed: t("statusCompleted"),
+    cancelled: t("statusCancelled"),
+    disputed: t("statusDisputed"),
+  };
   const supabase = await createSupabaseServerClient();
   const { data: bookings } = await supabase
     .from("bookings")
@@ -23,10 +25,10 @@ export default async function BookingsPage() {
   return (
     <div className="min-h-screen bg-charcoal px-6 py-16 text-ivory">
       <div className="mx-auto max-w-3xl">
-        <h1 className="font-display text-3xl">Le tue prenotazioni</h1>
+        <h1 className="font-display text-3xl">{t("title")}</h1>
 
         {(!bookings || bookings.length === 0) && (
-          <p className="mt-6 font-body text-ivory/70">Nessuna prenotazione ancora.</p>
+          <p className="mt-6 font-body text-ivory/70">{t("noBookingsYet")}</p>
         )}
 
         <ul className="mt-8 space-y-4">
@@ -38,7 +40,7 @@ export default async function BookingsPage() {
               <div>
                 <p className="font-body font-medium text-charcoal">{b.event_type}</p>
                 <p className="font-body text-sm text-smoke">
-                  {new Date(b.event_date).toLocaleString("it-IT", {
+                  {new Date(b.event_date).toLocaleString(locale, {
                     dateStyle: "medium",
                     timeStyle: "short",
                   })}

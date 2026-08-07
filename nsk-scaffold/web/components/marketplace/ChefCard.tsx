@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 export interface ChefCardData {
   id: string;
@@ -18,6 +21,7 @@ export interface ChefCardData {
 // no che placeholder finti), quindi il peso visivo va su iniziali/tipografia
 // e su segnali di fiducia concreti (verificato, rating, lingue).
 export function ChefCard({ chef }: { chef: ChefCardData }) {
+  const t = useTranslations("marketplace");
   const displayName = chef.business_name ?? chef.full_name;
   const initials = displayName
     .split(" ")
@@ -28,9 +32,9 @@ export function ChefCard({ chef }: { chef: ChefCardData }) {
 
   const priceLabel =
     chef.event_min_price != null
-      ? `Da €${chef.event_min_price} a evento`
+      ? t("priceFromEvent", { price: chef.event_min_price })
       : chef.hourly_rate != null
-        ? `Da €${chef.hourly_rate}/ora`
+        ? t("priceFromHour", { price: chef.hourly_rate })
         : null;
 
   return (
@@ -46,15 +50,15 @@ export function ChefCard({ chef }: { chef: ChefCardData }) {
           <p className="truncate font-display text-lg text-charcoal">{displayName}</p>
           {chef.rating_count && chef.rating_count > 0 ? (
             <p className="font-body text-sm text-smoke">
-              ★ {Number(chef.rating_avg).toFixed(1)} · {chef.rating_count} recensioni
+              ★ {Number(chef.rating_avg).toFixed(1)} · {t("reviewsCountSuffix", { count: chef.rating_count })}
             </p>
           ) : (
-            <p className="font-body text-sm text-mist">Nuovo su N&apos;sK</p>
+            <p className="font-body text-sm text-mist">{t("newOnNsk")}</p>
           )}
         </div>
         {chef.verified && (
           <span className="ml-auto shrink-0 rounded-pill bg-teal/15 px-3 py-1 font-body text-xs text-teal-dark">
-            Verificato
+            {t("verified")}
           </span>
         )}
       </div>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { getLocale, getTranslations } from "next-intl/server";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { notFound } from "next/navigation";
 
@@ -12,6 +13,8 @@ export const dynamic = "force-dynamic";
 // colonne stile Airbnb: contenuto a sinistra, card di prenotazione "sticky"
 // a destra su desktop, in coda su mobile.
 export default async function ChefProfilePage({ params }: Props) {
+  const t = await getTranslations("marketplace");
+  const locale = await getLocale();
   const { chefId } = await params;
   const supabase = await createSupabaseServerClient();
 
@@ -42,8 +45,8 @@ export default async function ChefProfilePage({ params }: Props) {
     chef.event_min_price != null
       ? `€${chef.event_min_price}`
       : chef.hourly_rate != null
-        ? `€${chef.hourly_rate}/ora`
-        : "Su richiesta";
+        ? t("priceHourSuffix", { price: chef.hourly_rate })
+        : t("onRequest");
 
   return (
     <div className="mx-auto max-w-content px-6 py-14">
@@ -56,16 +59,16 @@ export default async function ChefProfilePage({ params }: Props) {
             <h1 className="font-display text-display-md text-ivory">{displayName}</h1>
             {chef.verified && (
               <span className="rounded-pill bg-teal/15 px-3 py-1 font-body text-xs text-teal">
-                Verificato
+                {t("verified")}
               </span>
             )}
           </div>
           {chef.rating_count && chef.rating_count > 0 ? (
             <p className="mt-1 font-body text-sm text-ivory/70">
-              ★ {Number(chef.rating_avg).toFixed(1)} · {chef.rating_count} recensioni
+              ★ {Number(chef.rating_avg).toFixed(1)} · {t("reviewsCountSuffix", { count: chef.rating_count })}
             </p>
           ) : (
-            <p className="mt-1 font-body text-sm text-ivory/50">Nuovo su N&apos;sK</p>
+            <p className="mt-1 font-body text-sm text-ivory/50">{t("newOnNsk")}</p>
           )}
         </div>
       </div>
@@ -84,22 +87,22 @@ export default async function ChefProfilePage({ params }: Props) {
 
           {chef.bio && (
             <div>
-              <h2 className="font-display text-lg text-ivory">Chi è</h2>
+              <h2 className="font-display text-lg text-ivory">{t("whoIsTitle")}</h2>
               <p className="mt-3 max-w-2xl font-body leading-relaxed text-ivory/70">{chef.bio}</p>
             </div>
           )}
 
           {chef.languages && chef.languages.length > 0 && (
             <div>
-              <h2 className="font-display text-lg text-ivory">Lingue</h2>
+              <h2 className="font-display text-lg text-ivory">{t("languagesTitle")}</h2>
               <p className="mt-2 font-body text-sm text-ivory/70">{chef.languages.join(", ")}</p>
             </div>
           )}
 
           <div>
-            <h2 className="font-display text-lg text-ivory">Recensioni</h2>
+            <h2 className="font-display text-lg text-ivory">{t("reviewsTitle")}</h2>
             {(!reviews || reviews.length === 0) ? (
-              <p className="mt-3 font-body text-sm text-ivory/70">Ancora nessuna recensione.</p>
+              <p className="mt-3 font-body text-sm text-ivory/70">{t("noReviewsYet")}</p>
             ) : (
               <ul className="mt-4 space-y-4">
                 {reviews.map((r) => (
@@ -107,7 +110,7 @@ export default async function ChefProfilePage({ params }: Props) {
                     <p className="font-body text-sm text-teal">{"★".repeat(r.rating)}</p>
                     {r.comment && <p className="mt-2 font-body text-sm text-charcoal">{r.comment}</p>}
                     <p className="mt-2 font-body text-xs text-mist">
-                      {new Date(r.created_at).toLocaleDateString("it-IT")}
+                      {new Date(r.created_at).toLocaleDateString(locale)}
                     </p>
                   </li>
                 ))}
@@ -119,16 +122,14 @@ export default async function ChefProfilePage({ params }: Props) {
         <div className="lg:col-span-1">
           <div className="sticky top-24 rounded-panel border border-line bg-white p-7 shadow-card">
             <p className="font-display text-2xl text-charcoal">{priceLabel}</p>
-            <p className="font-body text-sm text-mist">stima di partenza</p>
+            <p className="font-body text-sm text-mist">{t("startingEstimate")}</p>
             <Link
               href={`/chefs/${chefId}/book`}
               className="mt-6 block rounded-pill bg-charcoal px-6 py-3 text-center font-body text-sm text-ivory transition hover:bg-teal hover:text-white"
             >
-              Richiedi disponibilità
+              {t("requestAvailability")}
             </Link>
-            <p className="mt-3 text-center font-body text-xs text-mist">
-              Nessun addebito ora. Lo chef confermerà con un preventivo.
-            </p>
+            <p className="mt-3 text-center font-body text-xs text-mist">{t("noChargeNow")}</p>
           </div>
         </div>
       </div>

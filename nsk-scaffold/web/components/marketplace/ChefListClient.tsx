@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 import { Search } from "lucide-react";
 import { ChefCard, type ChefCardData } from "./ChefCard";
 
@@ -13,6 +14,7 @@ interface Props {
 // marketplace non cresce — quando servirà, si sposta qui lo stesso
 // contratto (specialty + query) su /api/v1/chefs senza toccare la UI.
 export function ChefListClient({ chefs }: Props) {
+  const t = useTranslations("marketplace");
   const [query, setQuery] = useState("");
   const [specialty, setSpecialty] = useState<string | null>(null);
 
@@ -42,7 +44,7 @@ export function ChefListClient({ chefs }: Props) {
           <input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Cerca per nome o specialità..."
+            placeholder={t("searchPlaceholder")}
             className="w-full rounded-pill border border-line bg-white py-3 pl-11 pr-4 font-body text-sm text-charcoal placeholder:text-mist focus:border-teal focus:outline-none"
           />
         </div>
@@ -56,7 +58,7 @@ export function ChefListClient({ chefs }: Props) {
               specialty === null ? "bg-charcoal text-ivory" : "bg-cream text-smoke hover:bg-line"
             }`}
           >
-            Tutte
+            {t("allFilter")}
           </button>
           {allSpecialties.map((s) => (
             <button
@@ -73,9 +75,7 @@ export function ChefListClient({ chefs }: Props) {
       )}
 
       {filtered.length === 0 ? (
-        <p className="mt-10 font-body text-sm text-smoke">
-          Nessuno chef corrisponde alla ricerca. Prova un altro termine.
-        </p>
+        <p className="mt-10 font-body text-sm text-smoke">{t("noChefsFound")}</p>
       ) : (
         <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((chef) => (
