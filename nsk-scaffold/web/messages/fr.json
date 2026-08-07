@@ -158,5 +158,40 @@
     "findChefTitle": "Vous cherchez un chef pour un événement ?",
     "findChefBody": "Trouvez des chefs privés vérifiés sur la marketplace pour dîners, cours et conseil.",
     "exploreMarketplace": "Explorer la marketplace"
+  },
+  "foodCost": {
+    "subtitle": "Calculez le coût réel d'une recette et son prix de vente, avec un catalogue d'ingrédients toujours à jour.",
+    "calculatorTab": "Calculateur",
+    "ingredientsTab": "Ingrédients",
+    "servingsLabel": "Portions",
+    "targetMarginLabel": "Marge cible (%)",
+    "remove": "Supprimer",
+    "addIngredient": "+ Ajouter un ingrédient",
+    "errorNoIngredients": "Ajoutez au moins un ingrédient.",
+    "errorCalculation": "Échec du calcul. Vérifiez les valeurs saisies.",
+    "calculating": "Calcul en cours...",
+    "calculate": "Calculer le food cost",
+    "totalCost": "Coût total",
+    "costPerServing": "Coût par portion",
+    "suggestedPrice": "Prix de vente suggéré",
+    "foodCostPercentage": "Food cost %"
+  },
+  "ingredients": {
+    "nameLabel": "Nom",
+    "namePlaceholder": "ex. Basilic",
+    "categoryLabel": "Catégorie",
+    "categoryPlaceholder": "ex. Herbes",
+    "unitLabel": "Unité",
+    "costLabel": "Coût €/unité",
+    "saving": "Enregistrement...",
+    "addIngredient": "+ Ajouter un ingrédient",
+    "errorSaving": "Erreur lors de l'enregistrement.",
+    "errorUpdatingPrice": "Erreur lors de la mise à jour du prix.",
+    "errorUpdatingUnit": "Erreur lors de la mise à jour de l'unité.",
+    "loading": "Chargement...",
+    "noIngredients": "Aucun ingrédient dans le catalogue.",
+    "uncategorized": "Sans catégorie",
+    "delete": "Supprimer",
+    "deleteAria": "Supprimer {name}"
   }
 }

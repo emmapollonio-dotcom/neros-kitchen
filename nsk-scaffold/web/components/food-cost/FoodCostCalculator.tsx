@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import type { FoodCostResult } from "@/lib/food-cost/calculate";
 
 interface IngredientRow {
@@ -18,6 +19,7 @@ export function FoodCostCalculator({
 }: {
   availableIngredients: { id: string; name: string; default_unit: string }[];
 }) {
+  const t = useTranslations("foodCost");
   const [rows, setRows] = useState<IngredientRow[]>([]);
   const [servings, setServings] = useState(4);
   const [targetMargin, setTargetMargin] = useState(70);
@@ -44,7 +46,7 @@ export function FoodCostCalculator({
 
   async function calculate() {
     if (rows.length === 0) {
-      setError("Aggiungi almeno un ingrediente.");
+      setError(t("errorNoIngredients"));
       return;
     }
     setLoading(true);
@@ -67,7 +69,7 @@ export function FoodCostCalculator({
     setLoading(false);
 
     if (!res.ok) {
-      setError("Calcolo non riuscito. Controlla i valori inseriti.");
+      setError(t("errorCalculation"));
       return;
     }
 
@@ -79,7 +81,7 @@ export function FoodCostCalculator({
     <div className="space-y-6">
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="font-body text-sm text-smoke">Porzioni</label>
+          <label className="font-body text-sm text-smoke">{t("servingsLabel")}</label>
           <input
             type="number"
             min={1}
@@ -89,7 +91,7 @@ export function FoodCostCalculator({
           />
         </div>
         <div>
-          <label className="font-body text-sm text-smoke">Margine target (%)</label>
+          <label className="font-body text-sm text-smoke">{t("targetMarginLabel")}</label>
           <input
             type="number"
             min={0}
@@ -134,7 +136,7 @@ export function FoodCostCalculator({
               onClick={() => removeRow(i)}
               className="font-body text-sm text-red-600"
             >
-              Rimuovi
+              {t("remove")}
             </button>
           </div>
         ))}
@@ -143,7 +145,7 @@ export function FoodCostCalculator({
           onClick={addRow}
           className="font-body text-sm text-teal underline"
         >
-          + Aggiungi ingrediente
+          {t("addIngredient")}
         </button>
       </div>
 
@@ -155,28 +157,28 @@ export function FoodCostCalculator({
         disabled={loading}
         className="rounded-nsk bg-charcoal px-6 py-3 font-body text-ivory hover:bg-teal hover:text-white disabled:opacity-50"
       >
-        {loading ? "Calcolo..." : "Calcola food cost"}
+        {loading ? t("calculating") : t("calculate")}
       </button>
 
       {result && (
         <div className="rounded-nsk border border-teal/40 bg-teal/10 p-6">
           <dl className="grid grid-cols-2 gap-4 font-body text-sm">
             <div>
-              <dt className="text-smoke">Costo totale</dt>
+              <dt className="text-smoke">{t("totalCost")}</dt>
               <dd className="text-lg text-charcoal">{result.food_cost_total} €</dd>
             </div>
             <div>
-              <dt className="text-smoke">Costo per porzione</dt>
+              <dt className="text-smoke">{t("costPerServing")}</dt>
               <dd className="text-lg text-charcoal">{result.food_cost_per_serving} €</dd>
             </div>
             <div>
-              <dt className="text-smoke">Prezzo di vendita suggerito</dt>
+              <dt className="text-smoke">{t("suggestedPrice")}</dt>
               <dd className="text-lg text-charcoal">
                 {result.suggested_price_per_serving ?? "—"} €
               </dd>
             </div>
             <div>
-              <dt className="text-smoke">Food cost %</dt>
+              <dt className="text-smoke">{t("foodCostPercentage")}</dt>
               <dd className="text-lg text-charcoal">{result.food_cost_percentage ?? "—"}%</dd>
             </div>
           </dl>

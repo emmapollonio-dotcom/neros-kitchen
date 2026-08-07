@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { FoodCostCalculator } from "@/components/food-cost/FoodCostCalculator";
 import { IngredientManager } from "@/components/ingredients/IngredientManager";
@@ -8,6 +9,7 @@ import { SectionBanner } from "@/components/layout/SectionBanner";
 // "Ingredienti" è confluita qui come tab: è il catalogo che alimenta il
 // calcolatore, separarla in una voce di menu propria non aggiungeva chiarezza.
 export default async function FoodCostPage() {
+  const t = await getTranslations("foodCost");
   const supabase = await createSupabaseServerClient();
   const { data: ingredients } = await supabase
     .from("ingredients")
@@ -20,22 +22,19 @@ export default async function FoodCostPage() {
       <SectionBanner image="/images/marketing/ingredients-flatlay.webp" />
       <p className="font-body text-sm uppercase tracking-widest text-teal">N&apos;sK Pro</p>
       <h1 className="mt-2 font-display text-display-md text-ivory">Food Cost</h1>
-      <p className="mt-2 max-w-xl font-body text-ivory/70">
-        Calcola il costo reale di una ricetta e il prezzo di vendita, con il catalogo ingredienti
-        che tiene tutto aggiornato.
-      </p>
+      <p className="mt-2 max-w-xl font-body text-ivory/70">{t("subtitle")}</p>
 
       <div className="mt-10">
         <TabSwitcher
           tabs={[
             {
               id: "calcolatore",
-              label: "Calcolatore",
+              label: t("calculatorTab"),
               content: <FoodCostCalculator availableIngredients={ingredients ?? []} />,
             },
             {
               id: "ingredienti",
-              label: "Ingredienti",
+              label: t("ingredientsTab"),
               content: <IngredientManager />,
             },
           ]}

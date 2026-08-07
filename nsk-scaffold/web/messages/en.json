@@ -158,5 +158,40 @@
     "findChefTitle": "Looking for a chef for an event?",
     "findChefBody": "Find verified private chefs in the marketplace for dinners, classes and consulting.",
     "exploreMarketplace": "Explore the marketplace"
+  },
+  "foodCost": {
+    "subtitle": "Calculate the real cost of a recipe and its selling price, with an ingredient catalog that keeps everything up to date.",
+    "calculatorTab": "Calculator",
+    "ingredientsTab": "Ingredients",
+    "servingsLabel": "Servings",
+    "targetMarginLabel": "Target margin (%)",
+    "remove": "Remove",
+    "addIngredient": "+ Add ingredient",
+    "errorNoIngredients": "Add at least one ingredient.",
+    "errorCalculation": "Calculation failed. Check the values entered.",
+    "calculating": "Calculating...",
+    "calculate": "Calculate food cost",
+    "totalCost": "Total cost",
+    "costPerServing": "Cost per serving",
+    "suggestedPrice": "Suggested selling price",
+    "foodCostPercentage": "Food cost %"
+  },
+  "ingredients": {
+    "nameLabel": "Name",
+    "namePlaceholder": "e.g. Basil",
+    "categoryLabel": "Category",
+    "categoryPlaceholder": "e.g. Herbs",
+    "unitLabel": "Unit",
+    "costLabel": "Cost €/unit",
+    "saving": "Saving...",
+    "addIngredient": "+ Add ingredient",
+    "errorSaving": "Error while saving.",
+    "errorUpdatingPrice": "Error updating the price.",
+    "errorUpdatingUnit": "Error updating the unit.",
+    "loading": "Loading...",
+    "noIngredients": "No ingredients in the catalog.",
+    "uncategorized": "Uncategorized",
+    "delete": "Delete",
+    "deleteAria": "Delete {name}"
   }
 }

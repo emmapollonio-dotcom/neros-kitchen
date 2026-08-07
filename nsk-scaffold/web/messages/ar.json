@@ -158,5 +158,40 @@
     "findChefTitle": "تبحث عن طاهٍ لمناسبة؟",
     "findChefBody": "ستجد في المتجر طهاة خاصين موثوقين للعشاء والدورات والاستشارات.",
     "exploreMarketplace": "استكشف المتجر"
+  },
+  "foodCost": {
+    "subtitle": "احسب التكلفة الحقيقية للوصفة وسعر البيع، مع كتالوج مكونات محدّث دائمًا.",
+    "calculatorTab": "الحاسبة",
+    "ingredientsTab": "المكونات",
+    "servingsLabel": "الحصص",
+    "targetMarginLabel": "هامش الربح المستهدف (%)",
+    "remove": "إزالة",
+    "addIngredient": "+ أضف مكونًا",
+    "errorNoIngredients": "أضف مكونًا واحدًا على الأقل.",
+    "errorCalculation": "فشل الحساب. تحقق من القيم المُدخلة.",
+    "calculating": "جارٍ الحساب...",
+    "calculate": "احسب تكلفة الطعام",
+    "totalCost": "التكلفة الإجمالية",
+    "costPerServing": "التكلفة لكل حصة",
+    "suggestedPrice": "سعر البيع المقترح",
+    "foodCostPercentage": "نسبة تكلفة الطعام %"
+  },
+  "ingredients": {
+    "nameLabel": "الاسم",
+    "namePlaceholder": "مثال: ريحان",
+    "categoryLabel": "الفئة",
+    "categoryPlaceholder": "مثال: أعشاب",
+    "unitLabel": "الوحدة",
+    "costLabel": "التكلفة €/وحدة",
+    "saving": "جارٍ الحفظ...",
+    "addIngredient": "+ أضف مكونًا",
+    "errorSaving": "خطأ أثناء الحفظ.",
+    "errorUpdatingPrice": "خطأ أثناء تحديث السعر.",
+    "errorUpdatingUnit": "خطأ أثناء تحديث الوحدة.",
+    "loading": "جارٍ التحميل...",
+    "noIngredients": "لا توجد مكونات في الكتالوج.",
+    "uncategorized": "بلا فئة",
+    "delete": "حذف",
+    "deleteAria": "حذف {name}"
   }
 }

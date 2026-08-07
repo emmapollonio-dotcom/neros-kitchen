@@ -158,5 +158,40 @@
     "findChefTitle": "Cerchi uno chef per un evento?",
     "findChefBody": "Nel marketplace trovi chef privati verificati per cene, corsi e consulenza.",
     "exploreMarketplace": "Esplora il marketplace"
+  },
+  "foodCost": {
+    "subtitle": "Calcola il costo reale di una ricetta e il prezzo di vendita, con il catalogo ingredienti che tiene tutto aggiornato.",
+    "calculatorTab": "Calcolatore",
+    "ingredientsTab": "Ingredienti",
+    "servingsLabel": "Porzioni",
+    "targetMarginLabel": "Margine target (%)",
+    "remove": "Rimuovi",
+    "addIngredient": "+ Aggiungi ingrediente",
+    "errorNoIngredients": "Aggiungi almeno un ingrediente.",
+    "errorCalculation": "Calcolo non riuscito. Controlla i valori inseriti.",
+    "calculating": "Calcolo...",
+    "calculate": "Calcola food cost",
+    "totalCost": "Costo totale",
+    "costPerServing": "Costo per porzione",
+    "suggestedPrice": "Prezzo di vendita suggerito",
+    "foodCostPercentage": "Food cost %"
+  },
+  "ingredients": {
+    "nameLabel": "Nome",
+    "namePlaceholder": "es. Basilico",
+    "categoryLabel": "Categoria",
+    "categoryPlaceholder": "es. Erbe",
+    "unitLabel": "Unità",
+    "costLabel": "Costo €/unità",
+    "saving": "Salvataggio...",
+    "addIngredient": "+ Aggiungi ingrediente",
+    "errorSaving": "Errore nel salvataggio.",
+    "errorUpdatingPrice": "Errore nell'aggiornamento del prezzo.",
+    "errorUpdatingUnit": "Errore nell'aggiornamento dell'unità.",
+    "loading": "Caricamento...",
+    "noIngredients": "Nessun ingrediente a catalogo.",
+    "uncategorized": "Senza categoria",
+    "delete": "Elimina",
+    "deleteAria": "Elimina {name}"
   }
 }

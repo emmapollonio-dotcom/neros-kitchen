@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
 
 interface Ingredient {
   id: string;
@@ -17,6 +18,8 @@ interface Ingredient {
 // per-chef): ogni scrittura passa da /api/v1/ingredients, che si appoggia a
 // RLS ("ingredients_chef_write") come unica fonte di verità sui permessi.
 export function IngredientManager() {
+  const t = useTranslations("ingredients");
+  const locale = useLocale();
   const [ingredients, setIngredients] = useState<Ingredient[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -45,12 +48,12 @@ export function IngredientManager() {
   const grouped = useMemo(() => {
     const map = new Map<string, Ingredient[]>();
     for (const item of ingredients) {
-      const key = item.category ?? "Senza categoria";
+      const key = item.category ?? t("uncategorized");
       if (!map.has(key)) map.set(key, []);
       map.get(key)!.push(item);
     }
-    return [...map.entries()].sort(([a], [b]) => a.localeCompare(b));
-  }, [ingredients]);
+    return [...map.entries()].sort(([a], [b]) => a.localeCompare(b, locale));
+  }, [ingredients, t, locale]);
 
   async function handleCreate(e: React.FormEvent) {
     e.preventDefault();
@@ -71,7 +74,7 @@ export function IngredientManager() {
 
     if (!res.ok) {
       const body = await res.json().catch(() => null);
-      setError(typeof body?.error === "string" ? body.error : "Errore nel salvataggio.");
+      setError(typeof body?.error === "string" ? body.error : t("errorSaving"));
     } else {
       setName("");
       setCategory("");
@@ -96,7 +99,7 @@ export function IngredientManager() {
 
     if (!res.ok) {
       const body = await res.json().catch(() => null);
-      setError(typeof body?.error === "string" ? body.error : "Errore nell'aggiornamento del prezzo.");
+      setError(typeof body?.error === "string" ? body.error : t("errorUpdatingPrice"));
     }
     setSavingId(null);
     await loadIngredients();
@@ -115,7 +118,7 @@ export function IngredientManager() {
 
     if (!res.ok) {
       const body = await res.json().catch(() => null);
-      setError(typeof body?.error === "string" ? body.error : "Errore nell'aggiornamento dell'unità.");
+      setError(typeof body?.error === "string" ? body.error : t("errorUpdatingUnit"));
     }
     setSavingId(null);
     await loadIngredients();
@@ -134,26 +137,26 @@ export function IngredientManager() {
         className="flex flex-wrap items-end gap-3 rounded-nsk border border-smoke/15 bg-white p-4"
       >
         <div>
-          <label className="font-body text-xs text-smoke">Nome</label>
+          <label className="font-body text-xs text-smoke">{t("nameLabel")}</label>
           <input
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="es. Basilico"
+            placeholder={t("namePlaceholder")}
             required
             className="mt-1 rounded-nsk border border-smoke/30 px-3 py-2 font-body text-sm"
           />
         </div>
         <div>
-          <label className="font-body text-xs text-smoke">Categoria</label>
+          <label className="font-body text-xs text-smoke">{t("categoryLabel")}</label>
           <input
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            placeholder="es. Erbe"
+            placeholder={t("categoryPlaceholder")}
             className="mt-1 rounded-nsk border border-smoke/30 px-3 py-2 font-body text-sm"
           />
         </div>
         <div className="w-24">
-          <label className="font-body text-xs text-smoke">Unità</label>
+          <label className="font-body text-xs text-smoke">{t("unitLabel")}</label>
           <input
             value={unit}
             onChange={(e) => setUnit(e.target.value)}
@@ -162,7 +165,7 @@ export function IngredientManager() {
           />
         </div>
         <div className="w-28">
-          <label className="font-body text-xs text-smoke">Costo €/unità</label>
+          <label className="font-body text-xs text-smoke">{t("costLabel")}</label>
           <input
             type="number"
             step="0.01"
@@ -177,14 +180,14 @@ export function IngredientManager() {
           disabled={creating}
           className="rounded-nsk bg-charcoal px-5 py-2 font-body text-sm text-ivory hover:bg-teal hover:text-white disabled:opacity-50"
         >
-          {creating ? "Salvataggio..." : "+ Aggiungi ingrediente"}
+          {creating ? t("saving") : t("addIngredient")}
         </button>
       </form>
 
       {error && <p className="font-body text-sm text-red-600">{error}</p>}
-      {loading && <p className="font-body text-sm text-smoke">Caricamento...</p>}
+      {loading && <p className="font-body text-sm text-smoke">{t("loading")}</p>}
       {!loading && ingredients.length === 0 && (
-        <p className="font-body text-sm text-smoke">Nessun ingrediente a catalogo.</p>
+        <p className="font-body text-sm text-smoke">{t("noIngredients")}</p>
       )}
 
       <div className="space-y-6">
@@ -221,9 +224,9 @@ export function IngredientManager() {
                       type="button"
                       onClick={() => handleDelete(ing.id)}
                       className="font-body text-xs text-smoke hover:text-red-600"
-                      aria-label={`Elimina ${ing.name}`}
+                      aria-label={t("deleteAria", { name: ing.name })}
                     >
-                      Elimina
+                      {t("delete")}
                     </button>
                   </div>
                 </div>

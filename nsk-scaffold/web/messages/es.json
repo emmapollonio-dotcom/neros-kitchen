@@ -158,5 +158,40 @@
     "findChefTitle": "¿Buscas un chef para un evento?",
     "findChefBody": "En el marketplace encuentras chefs privados verificados para cenas, cursos y consultoría.",
     "exploreMarketplace": "Explorar el marketplace"
+  },
+  "foodCost": {
+    "subtitle": "Calcula el coste real de una receta y el precio de venta, con un catálogo de ingredientes siempre actualizado.",
+    "calculatorTab": "Calculadora",
+    "ingredientsTab": "Ingredientes",
+    "servingsLabel": "Raciones",
+    "targetMarginLabel": "Margen objetivo (%)",
+    "remove": "Eliminar",
+    "addIngredient": "+ Añadir ingrediente",
+    "errorNoIngredients": "Añade al menos un ingrediente.",
+    "errorCalculation": "El cálculo ha fallado. Revisa los valores introducidos.",
+    "calculating": "Calculando...",
+    "calculate": "Calcular food cost",
+    "totalCost": "Coste total",
+    "costPerServing": "Coste por ración",
+    "suggestedPrice": "Precio de venta sugerido",
+    "foodCostPercentage": "Food cost %"
+  },
+  "ingredients": {
+    "nameLabel": "Nombre",
+    "namePlaceholder": "ej. Albahaca",
+    "categoryLabel": "Categoría",
+    "categoryPlaceholder": "ej. Hierbas",
+    "unitLabel": "Unidad",
+    "costLabel": "Coste €/unidad",
+    "saving": "Guardando...",
+    "addIngredient": "+ Añadir ingrediente",
+    "errorSaving": "Error al guardar.",
+    "errorUpdatingPrice": "Error al actualizar el precio.",
+    "errorUpdatingUnit": "Error al actualizar la unidad.",
+    "loading": "Cargando...",
+    "noIngredients": "No hay ingredientes en el catálogo.",
+    "uncategorized": "Sin categoría",
+    "delete": "Eliminar",
+    "deleteAria": "Eliminar {name}"
   }
 }
