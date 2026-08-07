@@ -1,18 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
 
 const LEAD_STAGES = ["new", "contacted", "qualified", "proposal", "won", "lost"] as const;
 type LeadStage = (typeof LEAD_STAGES)[number];
-
-const STAGE_LABELS: Record<LeadStage, string> = {
-  new: "Nuovo",
-  contacted: "Contattato",
-  qualified: "Qualificato",
-  proposal: "Proposta",
-  won: "Vinto",
-  lost: "Perso",
-};
 
 const HOT_LEAD_SCORE_THRESHOLD = 70;
 
@@ -40,6 +32,15 @@ interface Activity {
 // appoggiano a RLS ("leads_chef_owner", "crm_activities_chef_owner") come
 // unica fonte di verità sui permessi.
 export function LeadBoard() {
+  const t = useTranslations("crm");
+  const STAGE_LABELS: Record<LeadStage, string> = {
+    new: t("stageNew"),
+    contacted: t("stageContacted"),
+    qualified: t("stageQualified"),
+    proposal: t("stageProposal"),
+    won: t("stageWon"),
+    lost: t("stageLost"),
+  };
   const [leads, setLeads] = useState<Lead[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -115,13 +116,13 @@ export function LeadBoard() {
 
       {hotCount > 0 && (
         <p className="font-body text-sm text-teal">
-          🔥 {hotCount} lead {hotCount === 1 ? "caldo" : "caldi"} (score ≥ {HOT_LEAD_SCORE_THRESHOLD})
+          {t("hotLeadsCount", { count: hotCount, threshold: HOT_LEAD_SCORE_THRESHOLD })}
         </p>
       )}
 
       <form onSubmit={handleCreateLead} className="flex flex-wrap items-end gap-3 rounded-nsk border border-smoke/15 bg-white p-4">
         <div>
-          <label className="font-body text-xs text-smoke">Nome</label>
+          <label className="font-body text-xs text-smoke">{t("nameLabel")}</label>
           <input
             value={newName}
             onChange={(e) => setNewName(e.target.value)}
@@ -129,7 +130,7 @@ export function LeadBoard() {
           />
         </div>
         <div>
-          <label className="font-body text-xs text-smoke">Email</label>
+          <label className="font-body text-xs text-smoke">{t("emailLabel")}</label>
           <input
             type="email"
             value={newEmail}
@@ -138,11 +139,11 @@ export function LeadBoard() {
           />
         </div>
         <div>
-          <label className="font-body text-xs text-smoke">Fonte</label>
+          <label className="font-body text-xs text-smoke">{t("sourceLabel")}</label>
           <input
             value={newSource}
             onChange={(e) => setNewSource(e.target.value)}
-            placeholder="es. sito, evento, passaparola"
+            placeholder={t("sourcePlaceholder")}
             className="mt-1 rounded-nsk border border-smoke/30 px-3 py-2 font-body text-sm"
           />
         </div>
@@ -151,11 +152,11 @@ export function LeadBoard() {
           disabled={creating}
           className="rounded-nsk bg-charcoal px-5 py-2 font-body text-sm text-ivory hover:bg-teal hover:text-white disabled:opacity-50"
         >
-          + Aggiungi lead
+          {t("addLead")}
         </button>
       </form>
 
-      {loading && <p className="font-body text-sm text-smoke">Caricamento...</p>}
+      {loading && <p className="font-body text-sm text-smoke">{t("loading")}</p>}
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
         {LEAD_STAGES.map((stage) => (
@@ -176,10 +177,10 @@ export function LeadBoard() {
                       : "border-smoke/15 bg-white hover:border-teal"
                   }`}
                 >
-                  <p className="font-semibold text-charcoal">{lead.full_name ?? "Senza nome"}</p>
+                  <p className="font-semibold text-charcoal">{lead.full_name ?? t("noName")}</p>
                   {lead.email && <p className="text-xs text-smoke">{lead.email}</p>}
                   <p className={`mt-1 text-xs ${lead.score >= HOT_LEAD_SCORE_THRESHOLD ? "text-teal" : "text-smoke"}`}>
-                    Score: {lead.score}
+                    {t("scoreLabel", { score: lead.score })}
                   </p>
                 </button>
               ))}
@@ -190,6 +191,7 @@ export function LeadBoard() {
       {selectedLead && (
         <LeadDetailPanel
           lead={selectedLead}
+          stageLabels={STAGE_LABELS}
           onStageChange={(stage) => changeStage(selectedLead.id, stage)}
           onQualified={(score) => updateLeadScore(selectedLead.id, score)}
           onClose={() => setSelectedId(null)}
@@ -201,15 +203,19 @@ export function LeadBoard() {
 
 function LeadDetailPanel({
   lead,
+  stageLabels,
   onStageChange,
   onQualified,
   onClose,
 }: {
   lead: Lead;
+  stageLabels: Record<LeadStage, string>;
   onStageChange: (stage: LeadStage) => void;
   onQualified: (score: number) => void;
   onClose: () => void;
 }) {
+  const t = useTranslations("crm");
+  const locale = useLocale();
   const [activities, setActivities] = useState<Activity[]>([]);
   const [loadingActivities, setLoadingActivities] = useState(true);
   const [type, setType] = useState<"note" | "call" | "email" | "meeting">("note");
@@ -257,7 +263,7 @@ function LeadDetailPanel({
     const body = await res.json().catch(() => null);
 
     if (!res.ok) {
-      setQualifyError(body?.error ?? "Errore nella qualificazione del lead.");
+      setQualifyError(body?.error ?? t("errorQualify"));
     } else {
       if (typeof body?.data?.lead?.score === "number") onQualified(body.data.lead.score);
       await loadActivities();
@@ -269,9 +275,10 @@ function LeadDetailPanel({
     <div className="rounded-nsk border border-smoke/15 bg-white p-6">
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="font-display text-xl text-charcoal">{lead.full_name ?? "Lead senza nome"}</h3>
+          <h3 className="font-display text-xl text-charcoal">{lead.full_name ?? t("leadNoName")}</h3>
           <p className="font-body text-sm text-smoke">
-            {lead.email ?? "—"} {lead.phone ? `· ${lead.phone}` : ""} {lead.source ? `· fonte: ${lead.source}` : ""}
+            {lead.email ?? "—"} {lead.phone ? `· ${lead.phone}` : ""}{" "}
+            {lead.source ? `· ${t("sourcePrefix", { source: lead.source })}` : ""}
           </p>
         </div>
         <div className="flex items-center gap-3">
@@ -281,10 +288,10 @@ function LeadDetailPanel({
             disabled={qualifying}
             className="rounded-nsk bg-charcoal px-4 py-2 font-body text-xs text-ivory hover:bg-teal hover:text-white disabled:opacity-50"
           >
-            {qualifying ? "Qualifico..." : "Qualifica con AI"}
+            {qualifying ? t("qualifying") : t("qualifyWithAi")}
           </button>
           <button type="button" onClick={onClose} className="font-body text-sm text-smoke underline">
-            Chiudi
+            {t("close")}
           </button>
         </div>
       </div>
@@ -292,7 +299,7 @@ function LeadDetailPanel({
       {qualifyError && <p className="mt-2 font-body text-sm text-red-600">{qualifyError}</p>}
 
       <div className="mt-4">
-        <label className="font-body text-xs text-smoke">Stage</label>
+        <label className="font-body text-xs text-smoke">{t("stageLabel")}</label>
         <select
           value={lead.stage}
           onChange={(e) => onStageChange(e.target.value as LeadStage)}
@@ -300,18 +307,18 @@ function LeadDetailPanel({
         >
           {LEAD_STAGES.map((s) => (
             <option key={s} value={s}>
-              {STAGE_LABELS[s]}
+              {stageLabels[s]}
             </option>
           ))}
         </select>
       </div>
 
       <div className="mt-6">
-        <h4 className="font-body text-sm font-semibold text-charcoal">Timeline attività</h4>
+        <h4 className="font-body text-sm font-semibold text-charcoal">{t("activityTimeline")}</h4>
 
-        {loadingActivities && <p className="mt-2 font-body text-sm text-smoke">Caricamento...</p>}
+        {loadingActivities && <p className="mt-2 font-body text-sm text-smoke">{t("loading")}</p>}
         {!loadingActivities && activities.length === 0 && (
-          <p className="mt-2 font-body text-sm text-smoke">Nessuna attività registrata.</p>
+          <p className="mt-2 font-body text-sm text-smoke">{t("noActivities")}</p>
         )}
 
         <ul className="mt-3 space-y-2">
@@ -320,7 +327,7 @@ function LeadDetailPanel({
               <p className="text-xs uppercase tracking-wide text-teal">{a.type}</p>
               <p className="mt-1 text-charcoal">{a.content}</p>
               <p className="mt-1 text-xs text-smoke">
-                {new Date(a.created_at).toLocaleString("it-IT")}
+                {new Date(a.created_at).toLocaleString(locale)}
               </p>
             </li>
           ))}
@@ -333,15 +340,15 @@ function LeadDetailPanel({
               onChange={(e) => setType(e.target.value as typeof type)}
               className="rounded-nsk border border-smoke/30 px-3 py-2 font-body text-sm"
             >
-              <option value="note">Nota</option>
-              <option value="call">Chiamata</option>
-              <option value="email">Email</option>
-              <option value="meeting">Incontro</option>
+              <option value="note">{t("typeNote")}</option>
+              <option value="call">{t("typeCall")}</option>
+              <option value="email">{t("typeEmail")}</option>
+              <option value="meeting">{t("typeMeeting")}</option>
             </select>
             <input
               value={content}
               onChange={(e) => setContent(e.target.value)}
-              placeholder="Cosa è successo?"
+              placeholder={t("contentPlaceholder")}
               className="flex-1 rounded-nsk border border-smoke/30 px-3 py-2 font-body text-sm"
             />
           </div>
@@ -350,7 +357,7 @@ function LeadDetailPanel({
             disabled={saving}
             className="rounded-nsk bg-charcoal px-5 py-2 font-body text-sm text-ivory hover:bg-teal hover:text-white disabled:opacity-50"
           >
-            {saving ? "Salvataggio..." : "Aggiungi attività"}
+            {saving ? t("saving") : t("addActivity")}
           </button>
         </form>
       </div>

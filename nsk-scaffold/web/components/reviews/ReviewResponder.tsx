@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
 
 interface Review {
   id: string;
@@ -16,6 +17,8 @@ interface Review {
 // appoggia a RLS ("reviews_chef_respond") come unica fonte di verità sui
 // permessi.
 export function ReviewResponder() {
+  const t = useTranslations("reviews");
+  const locale = useLocale();
   const [reviews, setReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState(true);
   const [respondingId, setRespondingId] = useState<string | null>(null);
@@ -43,7 +46,7 @@ export function ReviewResponder() {
     const body = await res.json().catch(() => null);
 
     if (!res.ok) {
-      setError(body?.error ?? "Errore nella generazione della risposta.");
+      setError(body?.error ?? t("errorRespond"));
     } else {
       setReviews((prev) =>
         prev.map((r) =>
@@ -56,9 +59,9 @@ export function ReviewResponder() {
     setRespondingId(null);
   }
 
-  if (loading) return <p className="font-body text-sm text-smoke">Caricamento...</p>;
+  if (loading) return <p className="font-body text-sm text-smoke">{t("loading")}</p>;
   if (reviews.length === 0)
-    return <p className="font-body text-sm text-smoke">Nessuna recensione ricevuta ancora.</p>;
+    return <p className="font-body text-sm text-smoke">{t("noReviews")}</p>;
 
   return (
     <div className="space-y-4">
@@ -68,7 +71,7 @@ export function ReviewResponder() {
           <div className="flex items-center justify-between">
             <p className="font-body text-sm text-teal">{"★".repeat(review.rating)}</p>
             <p className="font-body text-xs text-smoke">
-              {new Date(review.created_at).toLocaleDateString("it-IT")}
+              {new Date(review.created_at).toLocaleDateString(locale)}
             </p>
           </div>
 
@@ -78,7 +81,7 @@ export function ReviewResponder() {
 
           {review.chef_response ? (
             <div className="mt-4 rounded-nsk bg-ivory p-3">
-              <p className="font-body text-xs uppercase tracking-wide text-teal">La tua risposta</p>
+              <p className="font-body text-xs uppercase tracking-wide text-teal">{t("yourResponse")}</p>
               <p className="mt-1 font-body text-sm text-charcoal">{review.chef_response}</p>
             </div>
           ) : (
@@ -88,7 +91,7 @@ export function ReviewResponder() {
               disabled={respondingId === review.id}
               className="mt-4 rounded-nsk bg-charcoal px-4 py-2 font-body text-xs text-ivory hover:bg-teal hover:text-white disabled:opacity-50"
             >
-              {respondingId === review.id ? "Genero..." : "Rispondi con AI"}
+              {respondingId === review.id ? t("generating") : t("respondWithAi")}
             </button>
           )}
         </div>
