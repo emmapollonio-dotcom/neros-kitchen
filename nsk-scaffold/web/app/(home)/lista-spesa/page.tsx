@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { ShoppingListBoard } from "@/components/meal-planner/ShoppingListBoard";
 import { SectionBanner } from "@/components/layout/SectionBanner";
@@ -12,6 +13,7 @@ interface Props {
 // solito quella appena generata dal Meal Planner), con uno switcher se ce
 // n'è più di una.
 export default async function ListaSpesaPage({ searchParams }: Props) {
+  const t = await getTranslations("shoppingList");
   const { list } = await searchParams;
   const supabase = await createSupabaseServerClient();
   const {
@@ -31,19 +33,16 @@ export default async function ListaSpesaPage({ searchParams }: Props) {
       <div className="mx-auto max-w-content px-6 py-14 text-ivory">
         <SectionBanner image="/images/marketing/ingredients-flatlay.webp" />
         <p className="font-body text-sm uppercase tracking-widest text-teal">N&apos;sK Home</p>
-        <h1 className="mt-2 font-display text-display-md text-ivory">Lista della spesa</h1>
+        <h1 className="mt-2 font-display text-display-md text-ivory">{t("title")}</h1>
 
         <div className="mt-10 rounded-panel border border-line bg-white p-12 text-center">
-          <p className="font-display text-xl text-charcoal">Nessuna lista ancora</p>
-          <p className="mx-auto mt-2 max-w-md font-body text-sm text-smoke">
-            Pianifica la settimana nel Meal Planner e genera la lista in automatico, oppure inizia
-            da qui una lista vuota.
-          </p>
+          <p className="font-display text-xl text-charcoal">{t("noListsTitle")}</p>
+          <p className="mx-auto mt-2 max-w-md font-body text-sm text-smoke">{t("noListsBody")}</p>
           <Link
             href="/meal-planner"
             className="mt-6 inline-block rounded-pill bg-charcoal px-6 py-3 font-body text-sm text-ivory transition hover:bg-teal hover:text-white"
           >
-            Vai al Meal Planner
+            {t("goToMealPlanner")}
           </Link>
         </div>
       </div>

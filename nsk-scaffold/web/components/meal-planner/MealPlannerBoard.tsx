@@ -2,17 +2,11 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
 import { Plus, X } from "lucide-react";
 import { getWeekDates, shiftWeek } from "@/lib/meal-plan/week";
 import { MEAL_SLOTS, type MealSlot } from "@/lib/validators/meal-plan";
-
-const SLOT_LABELS: Record<MealSlot, string> = {
-  breakfast: "Colazione",
-  lunch: "Pranzo",
-  dinner: "Cena",
-  snack: "Spuntino",
-};
 
 interface RecipeOption {
   id: string;
@@ -37,6 +31,8 @@ interface Props {
 }
 
 export function MealPlannerBoard({ mealPlanId, weekStart, entries: initialEntries, recipes }: Props) {
+  const t = useTranslations("mealPlanner");
+  const locale = useLocale();
   const router = useRouter();
   const [entries, setEntries] = useState(initialEntries);
   const [addingFor, setAddingFor] = useState<string | null>(null);
@@ -78,9 +74,16 @@ export function MealPlannerBoard({ mealPlanId, weekStart, entries: initialEntrie
       router.push("/lista-spesa");
     } else {
       const body = await res.json();
-      setGeneratedMessage(typeof body.error === "string" ? body.error : "Impossibile generare la lista.");
+      setGeneratedMessage(typeof body.error === "string" ? body.error : t("generateListError"));
     }
   }
+
+  const slotLabels: Record<MealSlot, string> = {
+    breakfast: t("slotBreakfast"),
+    lunch: t("slotLunch"),
+    dinner: t("slotDinner"),
+    snack: t("slotSnack"),
+  };
 
   return (
     <div>
@@ -90,13 +93,13 @@ export function MealPlannerBoard({ mealPlanId, weekStart, entries: initialEntrie
             onClick={() => goToWeek(-1)}
             className="rounded-pill border border-line px-4 py-2 font-body text-sm text-charcoal hover:border-teal"
           >
-            ← Settimana prima
+            {t("prevWeek")}
           </button>
           <button
             onClick={() => goToWeek(1)}
             className="rounded-pill border border-line px-4 py-2 font-body text-sm text-charcoal hover:border-teal"
           >
-            Settimana dopo →
+            {t("nextWeek")}
           </button>
         </div>
 
@@ -105,7 +108,7 @@ export function MealPlannerBoard({ mealPlanId, weekStart, entries: initialEntrie
           disabled={generating || entries.length === 0}
           className="rounded-pill bg-charcoal px-5 py-2.5 font-body text-sm text-ivory transition hover:bg-teal hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
         >
-          {generating ? "Genero..." : "Genera lista della spesa"}
+          {generating ? t("generating") : t("generateList")}
         </button>
       </div>
 
@@ -123,7 +126,7 @@ export function MealPlannerBoard({ mealPlanId, weekStart, entries: initialEntrie
           return (
             <div key={day} className="rounded-card border border-line bg-white p-4 shadow-soft">
               <p className="font-body text-xs uppercase tracking-wide text-mist">
-                {new Date(day + "T00:00:00").toLocaleDateString("it-IT", { weekday: "short" })}
+                {new Date(day + "T00:00:00").toLocaleDateString(locale, { weekday: "short" })}
               </p>
               <p className="font-display text-lg text-charcoal">
                 {new Date(day + "T00:00:00").getDate()}
@@ -135,15 +138,15 @@ export function MealPlannerBoard({ mealPlanId, weekStart, entries: initialEntrie
                     <button
                       onClick={() => removeEntry(entry.id)}
                       className="absolute right-1 top-1 rounded-full p-0.5 text-mist opacity-0 transition hover:text-charcoal group-hover:opacity-100"
-                      aria-label="Rimuovi"
+                      aria-label={t("removeAria")}
                     >
                       <X size={13} />
                     </button>
-                    <p className="pr-4 font-body text-xs text-mist">{SLOT_LABELS[entry.meal_slot]}</p>
+                    <p className="pr-4 font-body text-xs text-mist">{slotLabels[entry.meal_slot]}</p>
                     <p className="font-body text-sm text-charcoal">
-                      {entry.recipe?.title ?? "Ricetta"}
+                      {entry.recipe?.title ?? t("defaultRecipe")}
                     </p>
-                    <p className="font-body text-xs text-mist">{entry.servings} porzioni</p>
+                    <p className="font-body text-xs text-mist">{t("servings", { count: entry.servings })}</p>
                   </div>
                 ))}
               </div>
@@ -151,6 +154,8 @@ export function MealPlannerBoard({ mealPlanId, weekStart, entries: initialEntrie
               {isAdding ? (
                 <AddEntryForm
                   recipes={recipes}
+                  slotLabels={slotLabels}
+                  t={t}
                   onAdd={(recipeId, slot, servings) => addEntry(day, recipeId, slot, servings)}
                   onCancel={() => setAddingFor(null)}
                 />
@@ -161,7 +166,7 @@ export function MealPlannerBoard({ mealPlanId, weekStart, entries: initialEntrie
                   className="mt-3 flex w-full items-center justify-center gap-1 rounded-nsk border border-dashed border-line py-2 font-body text-xs text-mist transition hover:border-teal hover:text-teal-dark disabled:cursor-not-allowed disabled:opacity-40"
                 >
                   <Plus size={13} />
-                  Aggiungi
+                  {t("add")}
                 </button>
               )}
             </div>
@@ -171,9 +176,9 @@ export function MealPlannerBoard({ mealPlanId, weekStart, entries: initialEntrie
 
       {recipes.length === 0 && (
         <p className="mt-6 font-body text-sm text-smoke">
-          Non hai ancora ricette da pianificare —{" "}
+          {t("noRecipesYet")}{" "}
           <Link href="/ricette/nuova" className="underline hover:text-teal-dark">
-            creane una
+            {t("createOne")}
           </Link>
           .
         </p>
@@ -184,10 +189,14 @@ export function MealPlannerBoard({ mealPlanId, weekStart, entries: initialEntrie
 
 function AddEntryForm({
   recipes,
+  slotLabels,
+  t,
   onAdd,
   onCancel,
 }: {
   recipes: RecipeOption[];
+  slotLabels: Record<MealSlot, string>;
+  t: ReturnType<typeof useTranslations>;
   onAdd: (recipeId: string, slot: MealSlot, servings: number) => void;
   onCancel: () => void;
 }) {
@@ -216,7 +225,7 @@ function AddEntryForm({
         >
           {MEAL_SLOTS.map((s) => (
             <option key={s} value={s}>
-              {SLOT_LABELS[s]}
+              {slotLabels[s]}
             </option>
           ))}
         </select>
@@ -233,10 +242,10 @@ function AddEntryForm({
           onClick={() => recipeId && onAdd(recipeId, slot, servings)}
           className="flex-1 rounded-nsk bg-charcoal py-1.5 font-body text-xs text-ivory hover:bg-teal hover:text-white"
         >
-          Aggiungi
+          {t("add")}
         </button>
         <button onClick={onCancel} className="rounded-nsk px-3 font-body text-xs text-mist hover:text-charcoal">
-          Annulla
+          {t("cancel")}
         </button>
       </div>
     </div>

@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { TabSwitcher } from "@/components/layout/TabSwitcher";
 import { ChefAssistantForm } from "@/components/tutor-ai/ChefAssistantForm";
@@ -9,6 +10,7 @@ import { SectionBanner } from "@/components/layout/SectionBanner";
 // ("Corsi", ex /academy: la voce di menu separata è confluita qui, vedi
 // lib/nav/pillars.ts). /academy resta come redirect per i link esistenti.
 export default async function TutorAiPage() {
+  const t = await getTranslations("tutorAi");
   const supabase = await createSupabaseServerClient();
   const { data: courses } = await supabase
     .from("courses")
@@ -21,21 +23,19 @@ export default async function TutorAiPage() {
       <SectionBanner image="/images/marketing/chef-plating.webp" />
       <p className="font-body text-sm uppercase tracking-widest text-teal">N&apos;sK Home</p>
       <h1 className="mt-2 font-display text-display-md text-ivory">Tutor AI</h1>
-      <p className="mt-2 max-w-xl font-body text-ivory/70">
-        Una guida sempre disponibile per le tue ricette, e corsi strutturati per andare più a fondo.
-      </p>
+      <p className="mt-2 max-w-xl font-body text-ivory/70">{t("subtitle")}</p>
 
       <div className="mt-10">
         <TabSwitcher
           tabs={[
             {
               id: "assistant",
-              label: "Chef Assistant",
+              label: t("assistantTab"),
               content: <ChefAssistantForm />,
             },
             {
               id: "corsi",
-              label: "Corsi",
+              label: t("coursesTab"),
               content: <CourseCatalog courses={courses ?? []} />,
             },
           ]}

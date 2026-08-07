@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { getMondayOf } from "@/lib/meal-plan/week";
 import { MealPlannerBoard } from "@/components/meal-planner/MealPlannerBoard";
@@ -14,6 +15,7 @@ interface Props {
 // della route API (niente join embedded, il client Supabase senza tipi
 // generati non sa distinguere relazioni 1:1 da array).
 export default async function MealPlannerPage({ searchParams }: Props) {
+  const t = await getTranslations("mealPlanner");
   const { week } = await searchParams;
   const supabase = await createSupabaseServerClient();
   const {
@@ -45,9 +47,7 @@ export default async function MealPlannerPage({ searchParams }: Props) {
   if (!planId) {
     return (
       <div className="mx-auto max-w-content px-6 py-14 text-ivory">
-        <p className="font-body text-sm text-ivory/70">
-          Non è stato possibile aprire il piano di questa settimana. Riprova tra poco.
-        </p>
+        <p className="font-body text-sm text-ivory/70">{t("errorOpenPlan")}</p>
       </div>
     );
   }
@@ -76,9 +76,7 @@ export default async function MealPlannerPage({ searchParams }: Props) {
       <SectionBanner image="/images/marketing/ingredients-flatlay.webp" />
       <p className="font-body text-sm uppercase tracking-widest text-teal">N&apos;sK Home</p>
       <h1 className="mt-2 font-display text-display-md text-ivory">Meal Planner</h1>
-      <p className="mt-2 max-w-xl font-body text-ivory/70">
-        Pianifica la settimana e genera la lista della spesa in un clic.
-      </p>
+      <p className="mt-2 max-w-xl font-body text-ivory/70">{t("subtitle")}</p>
 
       <div className="mt-10">
         <MealPlannerBoard

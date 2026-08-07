@@ -1,29 +1,24 @@
 "use client";
 
 import { useActionState } from "react";
+import { useTranslations } from "next-intl";
 import { askChefAssistant, type TutorState } from "@/app/(home)/tutor-ai/actions";
 
 const initialState: TutorState = { response: null, error: null };
 
-const PROMPT_IDEAS = [
-  "Come adatto questo risotto per 12 persone senza glutine?",
-  "Con cosa posso sostituire il burro in una frolla?",
-  "Idee menu degustazione 5 portate, stagione autunno.",
-];
-
 // Estratto da tutor-ai/page.tsx per permettere alla pagina di diventare un
 // Server Component con TabSwitcher (Chef Assistant + Corsi, ex Academy).
 export function ChefAssistantForm() {
+  const t = useTranslations("tutorAi");
   const [state, formAction, pending] = useActionState(askChefAssistant, initialState);
+  const promptIdeas = [t("promptIdea1"), t("promptIdea2"), t("promptIdea3")];
 
   return (
     <div className="max-w-2xl">
-      <p className="font-body text-sm text-smoke">
-        Sostituzioni ingredienti, adattamento ricette, idee menu — chiedi pure, in qualsiasi lingua.
-      </p>
+      <p className="font-body text-sm text-smoke">{t("assistantHelp")}</p>
 
       <div className="mt-4 flex flex-wrap gap-2">
-        {PROMPT_IDEAS.map((idea) => (
+        {promptIdeas.map((idea) => (
           <span
             key={idea}
             className="rounded-pill border border-line bg-white px-3 py-1.5 font-body text-xs text-mist"
@@ -38,7 +33,7 @@ export function ChefAssistantForm() {
           name="question"
           rows={4}
           required
-          placeholder="Es. Come posso adattare questa ricetta di risotto per 12 persone senza glutine?"
+          placeholder={t("questionPlaceholder")}
           className="w-full rounded-card border border-line bg-white px-4 py-3 font-body text-sm text-charcoal placeholder:text-mist focus:border-teal focus:outline-none"
         />
         <button
@@ -46,7 +41,7 @@ export function ChefAssistantForm() {
           disabled={pending}
           className="rounded-pill bg-charcoal px-6 py-3 font-body text-sm text-ivory transition hover:bg-teal hover:text-white disabled:opacity-50"
         >
-          {pending ? "Sto pensando..." : "Chiedi"}
+          {pending ? t("thinking") : t("ask")}
         </button>
       </form>
 

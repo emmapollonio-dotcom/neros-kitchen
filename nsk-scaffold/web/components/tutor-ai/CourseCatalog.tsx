@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 
 export interface CourseSummary {
   id: string;
@@ -13,14 +14,14 @@ export interface CourseSummary {
 // apprendimento unico stile MasterClass: guida AI + corsi strutturati). Il
 // dettaglio corso e la lezione restano su /academy/[slug] e
 // /academy/[slug]/learn, invariati: qui cambia solo il punto d'ingresso.
-export function CourseCatalog({ courses }: { courses: CourseSummary[] }) {
+export async function CourseCatalog({ courses }: { courses: CourseSummary[] }) {
+  const t = await getTranslations("tutorAi");
+
   if (courses.length === 0) {
     return (
       <div className="rounded-panel border border-line bg-white p-12 text-center">
-        <p className="font-display text-xl text-charcoal">Nessun corso disponibile</p>
-        <p className="mx-auto mt-2 max-w-md font-body text-sm text-smoke">
-          Stiamo preparando i primi corsi con chef ospiti. Torna a trovarci presto.
-        </p>
+        <p className="font-display text-xl text-charcoal">{t("noCoursesTitle")}</p>
+        <p className="mx-auto mt-2 max-w-md font-body text-sm text-smoke">{t("noCoursesBody")}</p>
       </div>
     );
   }
@@ -34,14 +35,14 @@ export function CourseCatalog({ courses }: { courses: CourseSummary[] }) {
           className="rounded-card border border-line bg-white p-6 shadow-soft transition hover:-translate-y-0.5 hover:shadow-card"
         >
           <p className="font-body text-xs uppercase tracking-wide text-teal">
-            {course.level ?? "tutti i livelli"}
+            {course.level ?? t("allLevels")}
           </p>
           <h2 className="mt-2 font-display text-lg text-charcoal">{course.title}</h2>
           {course.description && (
             <p className="mt-2 line-clamp-3 font-body text-sm text-smoke">{course.description}</p>
           )}
           <p className="mt-4 font-body text-sm text-charcoal">
-            {course.price > 0 ? `€${course.price}` : "Gratuito"}
+            {course.price > 0 ? `€${course.price}` : t("free")}
           </p>
         </Link>
       ))}

@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
 import { Plus, Trash2 } from "lucide-react";
 
 export interface ShoppingListItem {
@@ -20,6 +21,8 @@ interface Props {
 }
 
 export function ShoppingListBoard({ shoppingListId, items: initialItems, ingredientNameById }: Props) {
+  const t = useTranslations("shoppingList");
+  const locale = useLocale();
   const [items, setItems] = useState(initialItems);
   const [newLabel, setNewLabel] = useState("");
   const [adding, setAdding] = useState(false);
@@ -27,17 +30,17 @@ export function ShoppingListBoard({ shoppingListId, items: initialItems, ingredi
   const grouped = useMemo(() => {
     const groups = new Map<string, ShoppingListItem[]>();
     for (const item of items) {
-      const key = item.category ?? "Altro";
+      const key = item.category ?? t("defaultItem");
       if (!groups.has(key)) groups.set(key, []);
       groups.get(key)!.push(item);
     }
-    return [...groups.entries()].sort(([a], [b]) => a.localeCompare(b, "it"));
-  }, [items]);
+    return [...groups.entries()].sort(([a], [b]) => a.localeCompare(b, locale));
+  }, [items, t, locale]);
 
   function itemLabel(item: ShoppingListItem): string {
     if (item.custom_label) return item.custom_label;
-    if (item.ingredient_id) return ingredientNameById[item.ingredient_id] ?? "Ingrediente";
-    return "Voce";
+    if (item.ingredient_id) return ingredientNameById[item.ingredient_id] ?? t("defaultIngredient");
+    return t("defaultItem");
   }
 
   async function toggleChecked(item: ShoppingListItem) {
@@ -103,7 +106,7 @@ export function ShoppingListBoard({ shoppingListId, items: initialItems, ingredi
                     className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border transition ${
                       item.is_checked ? "border-teal bg-teal" : "border-line"
                     }`}
-                    aria-label={item.is_checked ? "Segna come da comprare" : "Segna come comprato"}
+                    aria-label={item.is_checked ? t("markAsToBuy") : t("markAsBought")}
                   >
                     {item.is_checked && <span className="h-2 w-2 rounded-full bg-charcoal" />}
                   </button>
@@ -124,7 +127,7 @@ export function ShoppingListBoard({ shoppingListId, items: initialItems, ingredi
                   <button
                     onClick={() => removeItem(item.id)}
                     className="text-mist opacity-0 transition hover:text-charcoal group-hover:opacity-100"
-                    aria-label="Rimuovi"
+                    aria-label={t("removeAria")}
                   >
                     <Trash2 size={15} />
                   </button>
@@ -135,7 +138,7 @@ export function ShoppingListBoard({ shoppingListId, items: initialItems, ingredi
         ))}
 
         {items.length === 0 && (
-          <p className="font-body text-sm text-smoke">Lista vuota — aggiungi una voce qui sotto.</p>
+          <p className="font-body text-sm text-smoke">{t("emptyList")}</p>
         )}
       </div>
 
@@ -144,7 +147,7 @@ export function ShoppingListBoard({ shoppingListId, items: initialItems, ingredi
           value={newLabel}
           onChange={(e) => setNewLabel(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && addItem()}
-          placeholder="Aggiungi una voce (es. tovaglioli)"
+          placeholder={t("addPlaceholder")}
           className="flex-1 rounded-pill border border-line bg-white px-4 py-2.5 font-body text-sm text-charcoal placeholder:text-mist focus:border-teal focus:outline-none"
         />
         <button
@@ -153,7 +156,7 @@ export function ShoppingListBoard({ shoppingListId, items: initialItems, ingredi
           className="flex items-center gap-1 rounded-pill bg-charcoal px-4 py-2.5 font-body text-sm text-ivory transition hover:bg-teal hover:text-white disabled:opacity-40"
         >
           <Plus size={16} />
-          Aggiungi
+          {t("add")}
         </button>
       </div>
     </div>
