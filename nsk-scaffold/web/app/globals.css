@@ -26,6 +26,22 @@
   --nsk-shell-fg-secondary: rgba(245, 241, 234, 0.7);
   --nsk-shell-fg-muted: rgba(245, 241, 234, 0.5);
   --nsk-shell-border: rgba(245, 241, 234, 0.12);
+
+  /* Card theme (7 ago 2026) — token semantici per le superfici "card"
+     (form, tabelle, liste, riquadri) dentro lo scafo. Prima erano fisse
+     bianche (bg-white/text-charcoal) in entrambi i temi: in dark mode
+     risultavano scollegate dalla palette navy della landing (foto di
+     riferimento utente: card navy translucide, testo chiaro). Ora in dark
+     riusano esattamente i colori .nsk-landing[data-theme="dark"] sotto
+     (stessa identica card-bg #22344f); in tema chiaro restano bianche come
+     sempre (nessuna regressione lì). card-alt è la superficie "annidata"
+     dentro una card (input, tag, riga di tabella alternata). */
+  --nsk-card-bg: #22344f;
+  --nsk-card-alt-bg: #1a2740;
+  --nsk-card-fg: #f5f1ea;
+  --nsk-card-fg-secondary: rgba(245, 241, 234, 0.7);
+  --nsk-card-fg-muted: rgba(245, 241, 234, 0.5);
+  --nsk-card-border: rgba(245, 241, 234, 0.12);
 }
 
 html.theme-light {
@@ -34,6 +50,13 @@ html.theme-light {
   --nsk-shell-fg-secondary: rgba(18, 18, 18, 0.65);
   --nsk-shell-fg-muted: rgba(18, 18, 18, 0.45);
   --nsk-shell-border: rgba(18, 18, 18, 0.12);
+
+  --nsk-card-bg: #ffffff;
+  --nsk-card-alt-bg: #faf8f4;
+  --nsk-card-fg: #121212;
+  --nsk-card-fg-secondary: #555555;
+  --nsk-card-fg-muted: #8a8580;
+  --nsk-card-border: #e7e1d6;
 }
 
 html {

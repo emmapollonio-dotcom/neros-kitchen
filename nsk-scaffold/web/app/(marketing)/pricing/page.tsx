@@ -34,8 +34,8 @@ export default async function PricingPage() {
               key={plan.code}
               className={`flex flex-col rounded-panel border p-7 ${
                 recommended
-                  ? "border-teal bg-white shadow-elevated"
-                  : "border-line bg-white shadow-soft"
+                  ? "border-teal bg-card shadow-elevated"
+                  : "border-card-border bg-card shadow-soft"
               }`}
             >
               {recommended && (
@@ -43,22 +43,22 @@ export default async function PricingPage() {
                   Più scelto
                 </span>
               )}
-              <h3 className="mt-3 font-display text-lg text-charcoal">{plan.name}</h3>
-              <p className="mt-3 font-display text-3xl text-charcoal">
+              <h3 className="mt-3 font-display text-lg text-card-fg">{plan.name}</h3>
+              <p className="mt-3 font-display text-3xl text-card-fg">
                 {plan.price_monthly === 0 ? "Gratis" : `${plan.price_monthly}€`}
                 {plan.price_monthly > 0 && (
-                  <span className="font-body text-sm font-normal text-smoke">/mese</span>
+                  <span className="font-body text-sm font-normal text-card-fg-secondary">/mese</span>
                 )}
               </p>
-              <ul className="mt-6 flex-1 space-y-3 font-body text-sm text-smoke">
+              <ul className="mt-6 flex-1 space-y-3 font-body text-sm text-card-fg-secondary">
                 {Object.entries(plan.features ?? {}).map(([key, value]) => (
                   <li key={key} className="flex items-start gap-2">
                     {value ? (
                       <Check size={16} className="mt-0.5 shrink-0 text-teal-dark" />
                     ) : (
-                      <span className="mt-0.5 w-4 shrink-0 text-center text-mist">—</span>
+                      <span className="mt-0.5 w-4 shrink-0 text-center text-card-fg-muted">—</span>
                     )}
-                    <span className={value ? "text-charcoal" : "text-mist"}>
+                    <span className={value ? "text-card-fg" : "text-card-fg-muted"}>
                       {key.replace(/_/g, " ")}
                     </span>
                   </li>
@@ -69,7 +69,7 @@ export default async function PricingPage() {
                 className={`mt-6 rounded-pill px-4 py-2.5 text-center font-body text-sm transition ${
                   recommended
                     ? "bg-teal text-white hover:bg-teal-dark"
-                    : "border border-line text-charcoal hover:border-teal"
+                    : "border border-card-border text-card-fg hover:border-teal"
                 }`}
               >
                 Scegli {plan.name}

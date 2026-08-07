@@ -16,7 +16,7 @@ export function AvailabilityCalendar({ days, onSelectSlot }: Props) {
 
   if (days.length === 0) {
     return (
-      <p className="font-body text-sm text-smoke">{t("noAvailability")}</p>
+      <p className="font-body text-sm text-card-fg-secondary">{t("noAvailability")}</p>
     );
   }
 
@@ -24,7 +24,7 @@ export function AvailabilityCalendar({ days, onSelectSlot }: Props) {
     <div className="space-y-6">
       {days.map((day) => (
         <div key={day.date}>
-          <h4 className="font-body text-sm font-semibold text-charcoal">
+          <h4 className="font-body text-sm font-semibold text-card-fg">
             {new Date(day.date).toLocaleDateString(locale, {
               weekday: "long",
               day: "numeric",
@@ -45,7 +45,7 @@ export function AvailabilityCalendar({ days, onSelectSlot }: Props) {
                   className={`rounded-nsk border px-4 py-2 font-body text-sm transition ${
                     isSelected
                       ? "border-teal bg-teal text-white"
-                      : "border-smoke/30 text-charcoal hover:border-teal"
+                      : "border-smoke/30 text-card-fg hover:border-teal"
                   }`}
                 >
                   {new Date(slot.start_at).toLocaleTimeString(locale, {

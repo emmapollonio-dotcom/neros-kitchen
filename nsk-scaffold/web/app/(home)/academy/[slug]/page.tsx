@@ -83,13 +83,13 @@ export default async function CourseDetailPage({ params }: Props) {
             {(lessons ?? []).map((lesson) => (
               <li
                 key={lesson.id}
-                className="flex items-center justify-between rounded-card border border-line bg-white px-4 py-3 font-body text-sm text-charcoal shadow-soft"
+                className="flex items-center justify-between rounded-card border border-card-border bg-card px-4 py-3 font-body text-sm text-card-fg shadow-soft"
               >
                 <span>
                   {lesson.position}. {lesson.title}
                 </span>
                 {lesson.duration_seconds && (
-                  <span className="text-smoke">
+                  <span className="text-card-fg-secondary">
                     {Math.round(lesson.duration_seconds / 60)} {t("minutesSuffix")}
                   </span>
                 )}

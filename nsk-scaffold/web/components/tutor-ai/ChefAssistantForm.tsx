@@ -15,13 +15,13 @@ export function ChefAssistantForm() {
 
   return (
     <div className="max-w-2xl">
-      <p className="font-body text-sm text-smoke">{t("assistantHelp")}</p>
+      <p className="font-body text-sm text-card-fg-secondary">{t("assistantHelp")}</p>
 
       <div className="mt-4 flex flex-wrap gap-2">
         {promptIdeas.map((idea) => (
           <span
             key={idea}
-            className="rounded-pill border border-line bg-white px-3 py-1.5 font-body text-xs text-mist"
+            className="rounded-pill border border-card-border bg-card px-3 py-1.5 font-body text-xs text-card-fg-muted"
           >
             {idea}
           </span>
@@ -34,7 +34,7 @@ export function ChefAssistantForm() {
           rows={4}
           required
           placeholder={t("questionPlaceholder")}
-          className="w-full rounded-card border border-line bg-white px-4 py-3 font-body text-sm text-charcoal placeholder:text-mist focus:border-teal focus:outline-none"
+          className="w-full rounded-card border border-card-border bg-card px-4 py-3 font-body text-sm text-card-fg placeholder:text-card-fg-muted focus:border-teal focus:outline-none"
         />
         <button
           type="submit"

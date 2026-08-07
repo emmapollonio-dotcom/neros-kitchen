@@ -137,29 +137,29 @@ export function WasteTracker() {
     <div className="space-y-8">
       {totals && (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-          <div className="rounded-nsk border border-line bg-white shadow-soft p-4">
-            <p className="font-body text-xs text-smoke">{t("estimatedCost")}</p>
-            <p className="font-display text-2xl text-charcoal">
+          <div className="rounded-nsk border border-card-border bg-card shadow-soft p-4">
+            <p className="font-body text-xs text-card-fg-secondary">{t("estimatedCost")}</p>
+            <p className="font-display text-2xl text-card-fg">
               {totals.total_estimated_cost.toFixed(2)} €
             </p>
           </div>
-          <div className="rounded-nsk border border-line bg-white shadow-soft p-4">
-            <p className="font-body text-xs text-smoke">{t("itemsKnownCost")}</p>
-            <p className="font-display text-2xl text-charcoal">{totals.items_with_known_cost}</p>
+          <div className="rounded-nsk border border-card-border bg-card shadow-soft p-4">
+            <p className="font-body text-xs text-card-fg-secondary">{t("itemsKnownCost")}</p>
+            <p className="font-display text-2xl text-card-fg">{totals.items_with_known_cost}</p>
           </div>
-          <div className="rounded-nsk border border-line bg-white shadow-soft p-4">
-            <p className="font-body text-xs text-smoke">{t("itemsUnknownCost")}</p>
-            <p className="font-display text-2xl text-charcoal">{totals.items_with_unknown_cost}</p>
+          <div className="rounded-nsk border border-card-border bg-card shadow-soft p-4">
+            <p className="font-body text-xs text-card-fg-secondary">{t("itemsUnknownCost")}</p>
+            <p className="font-display text-2xl text-card-fg">{totals.items_with_unknown_cost}</p>
           </div>
         </div>
       )}
 
       <form
         onSubmit={handleCreate}
-        className="flex flex-wrap items-end gap-3 rounded-nsk border border-line bg-white shadow-soft p-4"
+        className="flex flex-wrap items-end gap-3 rounded-nsk border border-card-border bg-card shadow-soft p-4"
       >
         <div>
-          <label className="font-body text-xs text-smoke">{t("ingredientLabel")}</label>
+          <label className="font-body text-xs text-card-fg-secondary">{t("ingredientLabel")}</label>
           <input
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -169,7 +169,7 @@ export function WasteTracker() {
           />
         </div>
         <div className="w-24">
-          <label className="font-body text-xs text-smoke">{t("quantityLabel")}</label>
+          <label className="font-body text-xs text-card-fg-secondary">{t("quantityLabel")}</label>
           <input
             type="number"
             step="0.001"
@@ -181,7 +181,7 @@ export function WasteTracker() {
           />
         </div>
         <div className="w-24">
-          <label className="font-body text-xs text-smoke">{t("unitLabel")}</label>
+          <label className="font-body text-xs text-card-fg-secondary">{t("unitLabel")}</label>
           <input
             value={unit}
             onChange={(e) => setUnit(e.target.value)}
@@ -191,7 +191,7 @@ export function WasteTracker() {
           />
         </div>
         <div>
-          <label className="font-body text-xs text-smoke">{t("reasonLabel")}</label>
+          <label className="font-body text-xs text-card-fg-secondary">{t("reasonLabel")}</label>
           <select
             value={reason}
             onChange={(e) => setReason(e.target.value as WasteReason | "")}
@@ -215,23 +215,23 @@ export function WasteTracker() {
       </form>
 
       {error && <p className="font-body text-sm text-red-600">{error}</p>}
-      {loading && <p className="font-body text-sm text-smoke">{t("loading")}</p>}
+      {loading && <p className="font-body text-sm text-card-fg-secondary">{t("loading")}</p>}
       {!loading && items.length === 0 && (
-        <p className="font-body text-sm text-smoke">{t("noWasteYet")}</p>
+        <p className="font-body text-sm text-card-fg-secondary">{t("noWasteYet")}</p>
       )}
 
       <ul className="space-y-3">
         {items.map((item) => (
-          <li key={item.id} className="rounded-nsk border border-line bg-white shadow-soft p-4">
+          <li key={item.id} className="rounded-nsk border border-card-border bg-card shadow-soft p-4">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <div>
-                <p className="font-body font-semibold text-charcoal">
+                <p className="font-body font-semibold text-card-fg">
                   {item.ingredient_name}{" "}
-                  <span className="font-normal text-smoke">
+                  <span className="font-normal text-card-fg-secondary">
                     · {item.quantity} {item.unit}
                   </span>
                 </p>
-                <p className="font-body text-xs text-smoke">
+                <p className="font-body text-xs text-card-fg-secondary">
                   {item.reason ? reasonLabels[item.reason] : t("noReasonIndicated")} ·{" "}
                   {new Date(item.logged_at).toLocaleDateString(locale)}
                 </p>
@@ -241,14 +241,14 @@ export function WasteTracker() {
                   type="button"
                   onClick={() => handleGenerateSuggestions(item.id)}
                   disabled={generatingId === item.id}
-                  className="rounded-nsk border border-teal px-3 py-1.5 font-body text-xs text-charcoal hover:bg-teal/10 disabled:opacity-50"
+                  className="rounded-nsk border border-teal px-3 py-1.5 font-body text-xs text-card-fg hover:bg-teal/10 disabled:opacity-50"
                 >
                   {generatingId === item.id ? t("generating") : t("aiSuggestions")}
                 </button>
                 <button
                   type="button"
                   onClick={() => handleDelete(item.id)}
-                  className="rounded-nsk border border-smoke/30 px-3 py-1.5 font-body text-xs text-smoke hover:border-red-400 hover:text-red-600"
+                  className="rounded-nsk border border-smoke/30 px-3 py-1.5 font-body text-xs text-card-fg-secondary hover:border-red-400 hover:text-red-600"
                 >
                   {t("delete")}
                 </button>
@@ -258,7 +258,7 @@ export function WasteTracker() {
             {expandedId === item.id && suggestionsByItem[item.id] && (
               <div className="mt-4 space-y-2 border-t border-smoke/10 pt-4">
                 {suggestionsByItem[item.id].length === 0 && (
-                  <p className="font-body text-xs text-smoke">{t("noSuggestionsYet")}</p>
+                  <p className="font-body text-xs text-card-fg-secondary">{t("noSuggestionsYet")}</p>
                 )}
                 {suggestionsByItem[item.id].map((s) => (
                   <div key={s.id} className="rounded-nsk border border-teal/40 bg-teal/10 p-3">
@@ -266,12 +266,12 @@ export function WasteTracker() {
                       <p className="font-body text-xs uppercase tracking-wide text-teal">
                         {s.suggestion_type}
                       </p>
-                      <p className="font-body text-xs text-smoke">
+                      <p className="font-body text-xs text-card-fg-secondary">
                         {t("impact", { score: s.sustainability_score })}
                       </p>
                     </div>
-                    <p className="mt-1 font-body text-sm font-semibold text-charcoal">{s.title}</p>
-                    <p className="mt-1 whitespace-pre-wrap font-body text-sm text-charcoal">
+                    <p className="mt-1 font-body text-sm font-semibold text-card-fg">{s.title}</p>
+                    <p className="mt-1 whitespace-pre-wrap font-body text-sm text-card-fg">
                       {s.content}
                     </p>
                   </div>

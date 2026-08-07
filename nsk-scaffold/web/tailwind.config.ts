@@ -40,6 +40,17 @@ const config: Config = {
         "shell-fg-secondary": "var(--nsk-shell-fg-secondary)",
         "shell-fg-muted": "var(--nsk-shell-fg-muted)",
         "shell-border": "var(--nsk-shell-border)",
+        // Token "card" (7 ago 2026) — superfici di form/tabelle/liste dentro
+        // lo scafo. In dark riusano la stessa card-bg navy della landing
+        // (#22344f), in tema chiaro restano bianche come da sempre. Sostituiscono
+        // bg-white/text-charcoal/text-smoke/text-mist/bg-cream/border-line
+        // ovunque il contenuto viva dentro una card, non sullo scafo nudo.
+        card: "var(--nsk-card-bg)",
+        "card-alt": "var(--nsk-card-alt-bg)",
+        "card-fg": "var(--nsk-card-fg)",
+        "card-fg-secondary": "var(--nsk-card-fg-secondary)",
+        "card-fg-muted": "var(--nsk-card-fg-muted)",
+        "card-border": "var(--nsk-card-border)",
       },
       fontFamily: {
         // Caricati via next/font/google in app/layout.tsx come CSS variable —

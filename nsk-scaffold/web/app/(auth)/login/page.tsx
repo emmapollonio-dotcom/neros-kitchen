@@ -25,16 +25,16 @@ function LoginForm() {
 
   return (
     <div className="flex min-h-[calc(100vh-88px)] items-center justify-center px-6 py-12">
-      <div className="w-full max-w-sm rounded-panel border border-line bg-white p-8 shadow-elevated">
-        <h1 className="font-display text-3xl text-charcoal">Accedi a N&apos;sK</h1>
-        <p className="mt-2 font-body text-sm text-smoke">
+      <div className="w-full max-w-sm rounded-panel border border-card-border bg-card p-8 shadow-elevated">
+        <h1 className="font-display text-3xl text-card-fg">Accedi a N&apos;sK</h1>
+        <p className="mt-2 font-body text-sm text-card-fg-secondary">
           Ricette, prenotazioni chef e strumenti di business in un unico posto.
         </p>
 
         <form action={formAction} className="mt-8 space-y-4">
           <input type="hidden" name="redirect" value={redirectTo} />
           <div>
-            <label className="font-body text-sm text-smoke" htmlFor="email">
+            <label className="font-body text-sm text-card-fg-secondary" htmlFor="email">
               Email
             </label>
             <input
@@ -42,11 +42,11 @@ function LoginForm() {
               name="email"
               type="email"
               required
-              className="mt-1 w-full rounded-nsk border border-smoke/30 bg-white px-4 py-2 font-body text-charcoal focus:border-teal focus:outline-none"
+              className="mt-1 w-full rounded-nsk border border-smoke/30 bg-card px-4 py-2 font-body text-card-fg focus:border-teal focus:outline-none"
             />
           </div>
           <div>
-            <label className="font-body text-sm text-smoke" htmlFor="password">
+            <label className="font-body text-sm text-card-fg-secondary" htmlFor="password">
               Password
             </label>
             <input
@@ -54,7 +54,7 @@ function LoginForm() {
               name="password"
               type="password"
               required
-              className="mt-1 w-full rounded-nsk border border-smoke/30 bg-white px-4 py-2 font-body text-charcoal focus:border-teal focus:outline-none"
+              className="mt-1 w-full rounded-nsk border border-smoke/30 bg-card px-4 py-2 font-body text-card-fg focus:border-teal focus:outline-none"
             />
           </div>
 
@@ -75,20 +75,20 @@ function LoginForm() {
 
         <div className="mt-4 flex items-center gap-3">
           <div className="h-px flex-1 bg-smoke/20" />
-          <span className="font-body text-xs text-smoke">oppure</span>
+          <span className="font-body text-xs text-card-fg-secondary">oppure</span>
           <div className="h-px flex-1 bg-smoke/20" />
         </div>
 
         <form action={signInWithGoogleAction} className="mt-4">
           <button
             type="submit"
-            className="w-full rounded-nsk border border-smoke/30 px-4 py-3 font-body text-charcoal transition hover:border-teal"
+            className="w-full rounded-nsk border border-smoke/30 px-4 py-3 font-body text-card-fg transition hover:border-teal"
           >
             Continua con Google
           </button>
         </form>
 
-        <p className="mt-6 text-center font-body text-sm text-smoke">
+        <p className="mt-6 text-center font-body text-sm text-card-fg-secondary">
           Non hai un account?{" "}
           <Link href="/signup" className="text-teal underline">
             Registrati

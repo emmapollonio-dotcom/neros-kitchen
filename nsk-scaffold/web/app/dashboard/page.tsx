@@ -110,15 +110,15 @@ export default async function DashboardPage() {
               <Link
                 key={b.id}
                 href="/bookings"
-                className="flex items-center justify-between rounded-card border border-line bg-white px-6 py-4 shadow-soft transition hover:shadow-card"
+                className="flex items-center justify-between rounded-card border border-card-border bg-card px-6 py-4 shadow-soft transition hover:shadow-card"
               >
                 <div>
-                  <p className="font-body text-sm font-medium text-charcoal">{b.event_type ?? t("defaultEventType")}</p>
-                  <p className="mt-0.5 font-body text-xs text-mist">
+                  <p className="font-body text-sm font-medium text-card-fg">{b.event_type ?? t("defaultEventType")}</p>
+                  <p className="mt-0.5 font-body text-xs text-card-fg-muted">
                     {new Date(b.event_date).toLocaleString(locale, { dateStyle: "medium", timeStyle: "short" })}
                   </p>
                 </div>
-                <span className="rounded-pill bg-cream px-3 py-1 font-body text-xs text-smoke">
+                <span className="rounded-pill bg-card-alt px-3 py-1 font-body text-xs text-card-fg-secondary">
                   {STATUS_LABELS[b.status] ?? b.status}
                 </span>
               </Link>
@@ -134,10 +134,10 @@ export default async function DashboardPage() {
             <Link
               key={item.href}
               href={item.href}
-              className="rounded-card border border-line bg-white p-6 shadow-soft transition hover:-translate-y-0.5 hover:shadow-card"
+              className="rounded-card border border-card-border bg-card p-6 shadow-soft transition hover:-translate-y-0.5 hover:shadow-card"
             >
-              <p className="font-display text-lg text-charcoal">{item.label}</p>
-              <p className="mt-2 font-body text-sm text-smoke">{item.description}</p>
+              <p className="font-display text-lg text-card-fg">{item.label}</p>
+              <p className="mt-2 font-body text-sm text-card-fg-secondary">{item.description}</p>
             </Link>
           ))}
         </div>
@@ -151,18 +151,18 @@ export default async function DashboardPage() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="rounded-card border border-line bg-white p-6 shadow-soft transition hover:-translate-y-0.5 hover:shadow-card"
+                className="rounded-card border border-card-border bg-card p-6 shadow-soft transition hover:-translate-y-0.5 hover:shadow-card"
               >
-                <p className="font-display text-lg text-charcoal">{item.label}</p>
-                <p className="mt-2 font-body text-sm text-smoke">{item.description}</p>
+                <p className="font-display text-lg text-card-fg">{item.label}</p>
+                <p className="mt-2 font-body text-sm text-card-fg-secondary">{item.description}</p>
               </Link>
             ))}
           </div>
         </section>
       ) : (
-        <section className="mt-12 rounded-panel border border-line bg-white p-10">
-          <p className="font-display text-xl text-charcoal">{t("findChefTitle")}</p>
-          <p className="mt-2 max-w-lg font-body text-sm text-smoke">{t("findChefBody")}</p>
+        <section className="mt-12 rounded-panel border border-card-border bg-card p-10">
+          <p className="font-display text-xl text-card-fg">{t("findChefTitle")}</p>
+          <p className="mt-2 max-w-lg font-body text-sm text-card-fg-secondary">{t("findChefBody")}</p>
           <Link
             href="/chefs"
             className="mt-5 inline-block rounded-pill bg-teal px-6 py-3 font-body text-sm text-white transition hover:bg-teal-dark"

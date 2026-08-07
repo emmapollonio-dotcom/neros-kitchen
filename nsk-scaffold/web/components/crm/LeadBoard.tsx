@@ -105,9 +105,9 @@ export function LeadBoard() {
     <div className="space-y-8">
       <div className="grid grid-cols-3 gap-4 sm:grid-cols-6">
         {LEAD_STAGES.map((stage) => (
-          <div key={stage} className="rounded-nsk border border-smoke/15 bg-white p-3 text-center">
-            <p className="font-body text-xs text-smoke">{STAGE_LABELS[stage]}</p>
-            <p className="font-display text-xl text-charcoal">
+          <div key={stage} className="rounded-nsk border border-smoke/15 bg-card p-3 text-center">
+            <p className="font-body text-xs text-card-fg-secondary">{STAGE_LABELS[stage]}</p>
+            <p className="font-display text-xl text-card-fg">
               {leads.filter((l) => l.stage === stage).length}
             </p>
           </div>
@@ -120,9 +120,9 @@ export function LeadBoard() {
         </p>
       )}
 
-      <form onSubmit={handleCreateLead} className="flex flex-wrap items-end gap-3 rounded-nsk border border-smoke/15 bg-white p-4">
+      <form onSubmit={handleCreateLead} className="flex flex-wrap items-end gap-3 rounded-nsk border border-smoke/15 bg-card p-4">
         <div>
-          <label className="font-body text-xs text-smoke">{t("nameLabel")}</label>
+          <label className="font-body text-xs text-card-fg-secondary">{t("nameLabel")}</label>
           <input
             value={newName}
             onChange={(e) => setNewName(e.target.value)}
@@ -130,7 +130,7 @@ export function LeadBoard() {
           />
         </div>
         <div>
-          <label className="font-body text-xs text-smoke">{t("emailLabel")}</label>
+          <label className="font-body text-xs text-card-fg-secondary">{t("emailLabel")}</label>
           <input
             type="email"
             value={newEmail}
@@ -139,7 +139,7 @@ export function LeadBoard() {
           />
         </div>
         <div>
-          <label className="font-body text-xs text-smoke">{t("sourceLabel")}</label>
+          <label className="font-body text-xs text-card-fg-secondary">{t("sourceLabel")}</label>
           <input
             value={newSource}
             onChange={(e) => setNewSource(e.target.value)}
@@ -156,12 +156,12 @@ export function LeadBoard() {
         </button>
       </form>
 
-      {loading && <p className="font-body text-sm text-smoke">{t("loading")}</p>}
+      {loading && <p className="font-body text-sm text-card-fg-secondary">{t("loading")}</p>}
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
         {LEAD_STAGES.map((stage) => (
           <div key={stage} className="space-y-2">
-            <h3 className="font-body text-xs font-semibold uppercase tracking-wide text-smoke">
+            <h3 className="font-body text-xs font-semibold uppercase tracking-wide text-card-fg-secondary">
               {STAGE_LABELS[stage]}
             </h3>
             {leads
@@ -174,12 +174,12 @@ export function LeadBoard() {
                   className={`w-full rounded-nsk border p-3 text-left font-body text-sm transition ${
                     selectedId === lead.id
                       ? "border-teal bg-teal/10"
-                      : "border-smoke/15 bg-white hover:border-teal"
+                      : "border-smoke/15 bg-card hover:border-teal"
                   }`}
                 >
-                  <p className="font-semibold text-charcoal">{lead.full_name ?? t("noName")}</p>
-                  {lead.email && <p className="text-xs text-smoke">{lead.email}</p>}
-                  <p className={`mt-1 text-xs ${lead.score >= HOT_LEAD_SCORE_THRESHOLD ? "text-teal" : "text-smoke"}`}>
+                  <p className="font-semibold text-card-fg">{lead.full_name ?? t("noName")}</p>
+                  {lead.email && <p className="text-xs text-card-fg-secondary">{lead.email}</p>}
+                  <p className={`mt-1 text-xs ${lead.score >= HOT_LEAD_SCORE_THRESHOLD ? "text-teal" : "text-card-fg-secondary"}`}>
                     {t("scoreLabel", { score: lead.score })}
                   </p>
                 </button>
@@ -272,11 +272,11 @@ function LeadDetailPanel({
   }
 
   return (
-    <div className="rounded-nsk border border-smoke/15 bg-white p-6">
+    <div className="rounded-nsk border border-smoke/15 bg-card p-6">
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="font-display text-xl text-charcoal">{lead.full_name ?? t("leadNoName")}</h3>
-          <p className="font-body text-sm text-smoke">
+          <h3 className="font-display text-xl text-card-fg">{lead.full_name ?? t("leadNoName")}</h3>
+          <p className="font-body text-sm text-card-fg-secondary">
             {lead.email ?? "—"} {lead.phone ? `· ${lead.phone}` : ""}{" "}
             {lead.source ? `· ${t("sourcePrefix", { source: lead.source })}` : ""}
           </p>
@@ -290,7 +290,7 @@ function LeadDetailPanel({
           >
             {qualifying ? t("qualifying") : t("qualifyWithAi")}
           </button>
-          <button type="button" onClick={onClose} className="font-body text-sm text-smoke underline">
+          <button type="button" onClick={onClose} className="font-body text-sm text-card-fg-secondary underline">
             {t("close")}
           </button>
         </div>
@@ -299,7 +299,7 @@ function LeadDetailPanel({
       {qualifyError && <p className="mt-2 font-body text-sm text-red-600">{qualifyError}</p>}
 
       <div className="mt-4">
-        <label className="font-body text-xs text-smoke">{t("stageLabel")}</label>
+        <label className="font-body text-xs text-card-fg-secondary">{t("stageLabel")}</label>
         <select
           value={lead.stage}
           onChange={(e) => onStageChange(e.target.value as LeadStage)}
@@ -314,19 +314,19 @@ function LeadDetailPanel({
       </div>
 
       <div className="mt-6">
-        <h4 className="font-body text-sm font-semibold text-charcoal">{t("activityTimeline")}</h4>
+        <h4 className="font-body text-sm font-semibold text-card-fg">{t("activityTimeline")}</h4>
 
-        {loadingActivities && <p className="mt-2 font-body text-sm text-smoke">{t("loading")}</p>}
+        {loadingActivities && <p className="mt-2 font-body text-sm text-card-fg-secondary">{t("loading")}</p>}
         {!loadingActivities && activities.length === 0 && (
-          <p className="mt-2 font-body text-sm text-smoke">{t("noActivities")}</p>
+          <p className="mt-2 font-body text-sm text-card-fg-secondary">{t("noActivities")}</p>
         )}
 
         <ul className="mt-3 space-y-2">
           {activities.map((a) => (
             <li key={a.id} className="rounded-nsk border border-smoke/15 p-3 font-body text-sm">
               <p className="text-xs uppercase tracking-wide text-teal">{a.type}</p>
-              <p className="mt-1 text-charcoal">{a.content}</p>
-              <p className="mt-1 text-xs text-smoke">
+              <p className="mt-1 text-card-fg">{a.content}</p>
+              <p className="mt-1 text-xs text-card-fg-secondary">
                 {new Date(a.created_at).toLocaleString(locale)}
               </p>
             </li>

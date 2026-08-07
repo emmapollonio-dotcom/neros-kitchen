@@ -7,8 +7,8 @@ export default function PrivacyPage() {
           Ultimo aggiornamento: 5 agosto 2026
         </p>
 
-        <div className="mt-8 rounded-panel border border-line bg-white p-6 shadow-soft md:p-10">
-        <p className="rounded-nsk border border-teal/40 bg-teal/10 p-4 font-body text-sm text-charcoal">
+        <div className="mt-8 rounded-panel border border-card-border bg-card p-6 shadow-soft md:p-10">
+        <p className="rounded-nsk border border-teal/40 bg-teal/10 p-4 font-body text-sm text-card-fg">
           Questa pagina è una bozza completa dal punto di vista tecnico, ma i dati del titolare
           del trattamento (sezione 1) vanno completati con la ragione sociale reale prima della
           pubblicazione, ed è opportuno farla rivedere da un legale/consulente privacy prima di
@@ -16,7 +16,7 @@ export default function PrivacyPage() {
           extra-UE.
         </p>
 
-        <div className="mt-10 space-y-10 font-body text-sm leading-relaxed text-charcoal">
+        <div className="mt-10 space-y-10 font-body text-sm leading-relaxed text-card-fg">
           <section>
             <h2 className="font-display text-xl">1. Titolare del trattamento</h2>
             <p className="mt-3">

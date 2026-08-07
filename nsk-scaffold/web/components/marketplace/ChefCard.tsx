@@ -40,20 +40,20 @@ export function ChefCard({ chef }: { chef: ChefCardData }) {
   return (
     <Link
       href={`/chefs/${chef.id}`}
-      className="group block rounded-card border border-line bg-white p-6 shadow-soft transition hover:-translate-y-1 hover:shadow-elevated"
+      className="group block rounded-card border border-card-border bg-card p-6 shadow-soft transition hover:-translate-y-1 hover:shadow-elevated"
     >
       <div className="flex items-center gap-4">
         <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-pill bg-teal font-display text-lg text-white">
           {initials}
         </div>
         <div className="min-w-0">
-          <p className="truncate font-display text-lg text-charcoal">{displayName}</p>
+          <p className="truncate font-display text-lg text-card-fg">{displayName}</p>
           {chef.rating_count && chef.rating_count > 0 ? (
-            <p className="font-body text-sm text-smoke">
+            <p className="font-body text-sm text-card-fg-secondary">
               ★ {Number(chef.rating_avg).toFixed(1)} · {t("reviewsCountSuffix", { count: chef.rating_count })}
             </p>
           ) : (
-            <p className="font-body text-sm text-mist">{t("newOnNsk")}</p>
+            <p className="font-body text-sm text-card-fg-muted">{t("newOnNsk")}</p>
           )}
         </div>
         {chef.verified && (
@@ -64,19 +64,19 @@ export function ChefCard({ chef }: { chef: ChefCardData }) {
       </div>
 
       {chef.bio && (
-        <p className="mt-4 line-clamp-2 font-body text-sm text-smoke">{chef.bio}</p>
+        <p className="mt-4 line-clamp-2 font-body text-sm text-card-fg-secondary">{chef.bio}</p>
       )}
 
       <div className="mt-4 flex flex-wrap gap-2">
         {(chef.specialties ?? []).slice(0, 3).map((s) => (
-          <span key={s} className="rounded-pill bg-cream px-3 py-1 font-body text-xs text-smoke">
+          <span key={s} className="rounded-pill bg-card-alt px-3 py-1 font-body text-xs text-card-fg-secondary">
             {s}
           </span>
         ))}
       </div>
 
       {priceLabel && (
-        <p className="mt-4 font-body text-sm font-medium text-charcoal">{priceLabel}</p>
+        <p className="mt-4 font-body text-sm font-medium text-card-fg">{priceLabel}</p>
       )}
     </Link>
   );

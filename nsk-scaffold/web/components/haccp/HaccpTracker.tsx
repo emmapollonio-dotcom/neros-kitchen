@@ -181,12 +181,12 @@ export function HaccpTracker() {
 
   return (
     <div className="space-y-8">
-      <div className="rounded-nsk border border-smoke/15 bg-white p-4">
-        <h2 className="font-body text-sm font-semibold text-charcoal">{t("controlPointsTitle")}</h2>
+      <div className="rounded-nsk border border-smoke/15 bg-card p-4">
+        <h2 className="font-body text-sm font-semibold text-card-fg">{t("controlPointsTitle")}</h2>
 
         <form onSubmit={handleCreateControlPoint} className="mt-3 flex flex-wrap items-end gap-3">
           <div>
-            <label className="font-body text-xs text-smoke">{t("nameLabel")}</label>
+            <label className="font-body text-xs text-card-fg-secondary">{t("nameLabel")}</label>
             <input
               value={cpName}
               onChange={(e) => setCpName(e.target.value)}
@@ -196,7 +196,7 @@ export function HaccpTracker() {
             />
           </div>
           <div>
-            <label className="font-body text-xs text-smoke">{t("typeLabel")}</label>
+            <label className="font-body text-xs text-card-fg-secondary">{t("typeLabel")}</label>
             <select
               value={cpType}
               onChange={(e) => setCpType(e.target.value as ControlPointType)}
@@ -210,7 +210,7 @@ export function HaccpTracker() {
             </select>
           </div>
           <div className="w-24">
-            <label className="font-body text-xs text-smoke">{t("minLabel")}</label>
+            <label className="font-body text-xs text-card-fg-secondary">{t("minLabel")}</label>
             <input
               type="number"
               step="0.1"
@@ -221,7 +221,7 @@ export function HaccpTracker() {
             />
           </div>
           <div className="w-24">
-            <label className="font-body text-xs text-smoke">{t("maxLabel")}</label>
+            <label className="font-body text-xs text-card-fg-secondary">{t("maxLabel")}</label>
             <input
               type="number"
               step="0.1"
@@ -245,13 +245,13 @@ export function HaccpTracker() {
             {controlPoints.map((cp) => (
               <li
                 key={cp.id}
-                className="flex items-center gap-2 rounded-nsk border border-smoke/15 px-3 py-1.5 font-body text-xs text-charcoal"
+                className="flex items-center gap-2 rounded-nsk border border-smoke/15 px-3 py-1.5 font-body text-xs text-card-fg"
               >
                 {cp.name} · {TYPE_LABELS[cp.type]} · {cp.temp_min}/{cp.temp_max}°C
                 <button
                   type="button"
                   onClick={() => handleDeleteControlPoint(cp.id)}
-                  className="text-smoke hover:text-red-600"
+                  className="text-card-fg-secondary hover:text-red-600"
                   aria-label={t("deleteAria", { name: cp.name })}
                 >
                   ×
@@ -262,15 +262,15 @@ export function HaccpTracker() {
         )}
       </div>
 
-      <div className="rounded-nsk border border-smoke/15 bg-white p-4">
-        <h2 className="font-body text-sm font-semibold text-charcoal">{t("recordReadingTitle")}</h2>
+      <div className="rounded-nsk border border-smoke/15 bg-card p-4">
+        <h2 className="font-body text-sm font-semibold text-card-fg">{t("recordReadingTitle")}</h2>
 
         {controlPoints.length === 0 ? (
-          <p className="mt-2 font-body text-sm text-smoke">{t("addPointFirst")}</p>
+          <p className="mt-2 font-body text-sm text-card-fg-secondary">{t("addPointFirst")}</p>
         ) : (
           <form onSubmit={handleCreateReading} className="mt-3 flex flex-wrap items-end gap-3">
             <div>
-              <label className="font-body text-xs text-smoke">{t("controlPointLabel")}</label>
+              <label className="font-body text-xs text-card-fg-secondary">{t("controlPointLabel")}</label>
               <select
                 value={selectedCpId}
                 onChange={(e) => setSelectedCpId(e.target.value)}
@@ -284,7 +284,7 @@ export function HaccpTracker() {
               </select>
             </div>
             <div className="w-28">
-              <label className="font-body text-xs text-smoke">{t("temperatureLabel")}</label>
+              <label className="font-body text-xs text-card-fg-secondary">{t("temperatureLabel")}</label>
               <input
                 type="number"
                 step="0.1"
@@ -295,7 +295,7 @@ export function HaccpTracker() {
               />
             </div>
             <div>
-              <label className="font-body text-xs text-smoke">{t("noteLabel")}</label>
+              <label className="font-body text-xs text-card-fg-secondary">{t("noteLabel")}</label>
               <input
                 value={note}
                 onChange={(e) => setNote(e.target.value)}
@@ -314,23 +314,23 @@ export function HaccpTracker() {
       </div>
 
       {error && <p className="font-body text-sm text-red-600">{error}</p>}
-      {loading && <p className="font-body text-sm text-smoke">{t("loading")}</p>}
+      {loading && <p className="font-body text-sm text-card-fg-secondary">{t("loading")}</p>}
       {!loading && readings.length === 0 && (
-        <p className="font-body text-sm text-smoke">{t("noReadings")}</p>
+        <p className="font-body text-sm text-card-fg-secondary">{t("noReadings")}</p>
       )}
 
       <ul className="space-y-3">
         {readings.map((reading) => (
-          <li key={reading.id} className="rounded-nsk border border-smoke/15 bg-white p-4">
+          <li key={reading.id} className="rounded-nsk border border-smoke/15 bg-card p-4">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <div>
-                <p className="font-body font-semibold text-charcoal">
+                <p className="font-body font-semibold text-card-fg">
                   {controlPointLabel(reading.control_point_id)}{" "}
-                  <span className="font-normal text-smoke">· {reading.temperature}°C</span>
+                  <span className="font-normal text-card-fg-secondary">· {reading.temperature}°C</span>
                 </p>
                 <p
                   className={`font-body text-xs ${
-                    reading.is_non_conforming ? "text-red-600" : "text-smoke"
+                    reading.is_non_conforming ? "text-red-600" : "text-card-fg-secondary"
                   }`}
                 >
                   {reading.is_non_conforming ? t("nonConforming") : t("conforming")} ·{" "}
@@ -343,7 +343,7 @@ export function HaccpTracker() {
                   type="button"
                   onClick={() => handleGenerateAction(reading.id)}
                   disabled={generatingId === reading.id}
-                  className="rounded-nsk border border-teal px-3 py-1.5 font-body text-xs text-charcoal hover:bg-teal/10 disabled:opacity-50"
+                  className="rounded-nsk border border-teal px-3 py-1.5 font-body text-xs text-card-fg hover:bg-teal/10 disabled:opacity-50"
                 >
                   {generatingId === reading.id ? t("generating") : t("correctiveActionAi")}
                 </button>
@@ -353,17 +353,17 @@ export function HaccpTracker() {
             {expandedReadingId === reading.id && actionsByReading[reading.id] && (
               <div className="mt-4 space-y-2 border-t border-smoke/10 pt-4">
                 {actionsByReading[reading.id].length === 0 && (
-                  <p className="font-body text-xs text-smoke">{t("noActionsGenerated")}</p>
+                  <p className="font-body text-xs text-card-fg-secondary">{t("noActionsGenerated")}</p>
                 )}
                 {actionsByReading[reading.id].map((a) => (
                   <div key={a.id} className="rounded-nsk border border-teal/40 bg-teal/10 p-3">
                     <div className="flex items-center justify-between">
-                      <p className="font-body text-sm font-semibold text-charcoal">{a.title}</p>
+                      <p className="font-body text-sm font-semibold text-card-fg">{a.title}</p>
                       <p className="font-body text-xs uppercase tracking-wide text-teal">
                         {t("urgencyPrefix", { urgency: URGENCY_LABELS[a.urgency] })}
                       </p>
                     </div>
-                    <p className="mt-1 whitespace-pre-wrap font-body text-sm text-charcoal">
+                    <p className="mt-1 whitespace-pre-wrap font-body text-sm text-card-fg">
                       {a.content}
                     </p>
                   </div>

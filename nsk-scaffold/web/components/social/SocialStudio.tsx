@@ -142,11 +142,11 @@ export function SocialStudio() {
     <div className="space-y-8">
       <form
         onSubmit={handleCreateAndGenerate}
-        className="space-y-4 rounded-nsk border border-smoke/15 bg-white p-4"
+        className="space-y-4 rounded-nsk border border-smoke/15 bg-card p-4"
       >
         <div className="flex flex-wrap gap-3">
           <div>
-            <label className="font-body text-xs text-smoke">{t("platformLabel")}</label>
+            <label className="font-body text-xs text-card-fg-secondary">{t("platformLabel")}</label>
             <select
               value={platform}
               onChange={(e) => setPlatform(e.target.value as Platform)}
@@ -160,7 +160,7 @@ export function SocialStudio() {
             </select>
           </div>
           <div>
-            <label className="font-body text-xs text-smoke">{t("toneLabel")}</label>
+            <label className="font-body text-xs text-card-fg-secondary">{t("toneLabel")}</label>
             <select
               value={tone}
               onChange={(e) => setTone(e.target.value as Tone)}
@@ -176,7 +176,7 @@ export function SocialStudio() {
         </div>
 
         <div>
-          <label className="font-body text-xs text-smoke">{t("topicLabel")}</label>
+          <label className="font-body text-xs text-card-fg-secondary">{t("topicLabel")}</label>
           <input
             value={topic}
             onChange={(e) => setTopic(e.target.value)}
@@ -196,9 +196,9 @@ export function SocialStudio() {
       </form>
 
       {error && <p className="font-body text-sm text-red-600">{error}</p>}
-      {loading && <p className="font-body text-sm text-smoke">{t("loading")}</p>}
+      {loading && <p className="font-body text-sm text-card-fg-secondary">{t("loading")}</p>}
       {!loading && posts.length === 0 && (
-        <p className="font-body text-sm text-smoke">{t("noPostsYet")}</p>
+        <p className="font-body text-sm text-card-fg-secondary">{t("noPostsYet")}</p>
       )}
 
       <ul className="space-y-4">
@@ -210,20 +210,20 @@ export function SocialStudio() {
             limits.hashtagsMaxCount !== null && post.hashtags.length > limits.hashtagsMaxCount;
 
           return (
-            <li key={post.id} className="rounded-nsk border border-smoke/15 bg-white p-4">
+            <li key={post.id} className="rounded-nsk border border-smoke/15 bg-card p-4">
               <div className="flex flex-wrap items-start justify-between gap-2">
                 <div>
                   <p className="font-body text-xs uppercase tracking-wide text-teal">
                     {PLATFORM_LABELS[post.platform]} · {STATUS_LABELS[post.status]}
                   </p>
-                  <p className="mt-1 font-body font-semibold text-charcoal">{post.topic}</p>
+                  <p className="mt-1 font-body font-semibold text-card-fg">{post.topic}</p>
                 </div>
                 <div className="flex gap-2">
                   <button
                     type="button"
                     onClick={() => handleRegenerate(post.id)}
                     disabled={generatingId === post.id}
-                    className="rounded-nsk border border-teal px-3 py-1.5 font-body text-xs text-charcoal hover:bg-teal/10 disabled:opacity-50"
+                    className="rounded-nsk border border-teal px-3 py-1.5 font-body text-xs text-card-fg hover:bg-teal/10 disabled:opacity-50"
                   >
                     {generatingId === post.id ? t("generating") : post.caption ? t("regenerate") : t("generate")}
                   </button>
@@ -231,7 +231,7 @@ export function SocialStudio() {
                     <button
                       type="button"
                       onClick={() => handleCopy(post)}
-                      className="rounded-nsk border border-smoke/30 px-3 py-1.5 font-body text-xs text-charcoal hover:border-teal"
+                      className="rounded-nsk border border-smoke/30 px-3 py-1.5 font-body text-xs text-card-fg hover:border-teal"
                     >
                       {t("copy")}
                     </button>
@@ -239,7 +239,7 @@ export function SocialStudio() {
                   <button
                     type="button"
                     onClick={() => handleDelete(post.id)}
-                    className="rounded-nsk border border-smoke/30 px-3 py-1.5 font-body text-xs text-smoke hover:border-red-400 hover:text-red-600"
+                    className="rounded-nsk border border-smoke/30 px-3 py-1.5 font-body text-xs text-card-fg-secondary hover:border-red-400 hover:text-red-600"
                   >
                     {t("delete")}
                   </button>
@@ -248,7 +248,7 @@ export function SocialStudio() {
 
               {post.caption && (
                 <div className="mt-4 space-y-2 border-t border-smoke/10 pt-4">
-                  <p className="whitespace-pre-wrap font-body text-sm text-charcoal">
+                  <p className="whitespace-pre-wrap font-body text-sm text-card-fg">
                     {post.caption}
                   </p>
                   {post.hashtags.length > 0 && (
@@ -256,7 +256,7 @@ export function SocialStudio() {
                       {post.hashtags.map((h) => `#${h}`).join(" ")}
                     </p>
                   )}
-                  <p className={`font-body text-xs ${overCaption || overHashtags ? "text-red-600" : "text-smoke"}`}>
+                  <p className={`font-body text-xs ${overCaption || overHashtags ? "text-red-600" : "text-card-fg-secondary"}`}>
                     {captionLength}/{limits.captionMaxChars} {t("charactersUnit")}
                     {limits.hashtagsMaxCount !== null &&
                       ` · ${post.hashtags.length}/${limits.hashtagsMaxCount} ${t("hashtagsUnit")}`}

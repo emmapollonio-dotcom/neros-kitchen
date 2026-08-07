@@ -99,11 +99,11 @@ export function CourseManager() {
 
   return (
     <div className="space-y-12">
-      <div className="rounded-nsk border border-smoke/15 bg-white p-6">
-        <h2 className="font-display text-xl text-charcoal">{t("newCourseTitle")}</h2>
+      <div className="rounded-nsk border border-smoke/15 bg-card p-6">
+        <h2 className="font-display text-xl text-card-fg">{t("newCourseTitle")}</h2>
         <form onSubmit={handleCreateCourse} className="mt-4 space-y-4">
           <div>
-            <label className="font-body text-sm text-smoke">{t("titleLabel")}</label>
+            <label className="font-body text-sm text-card-fg-secondary">{t("titleLabel")}</label>
             <input
               value={newTitle}
               onChange={(e) => setNewTitle(e.target.value)}
@@ -113,7 +113,7 @@ export function CourseManager() {
             />
           </div>
           <div>
-            <label className="font-body text-sm text-smoke">{t("descriptionLabel")}</label>
+            <label className="font-body text-sm text-card-fg-secondary">{t("descriptionLabel")}</label>
             <textarea
               value={newDescription}
               onChange={(e) => setNewDescription(e.target.value)}
@@ -123,7 +123,7 @@ export function CourseManager() {
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="font-body text-sm text-smoke">{t("levelLabel")}</label>
+              <label className="font-body text-sm text-card-fg-secondary">{t("levelLabel")}</label>
               <select
                 value={newLevel}
                 onChange={(e) => setNewLevel(e.target.value)}
@@ -135,7 +135,7 @@ export function CourseManager() {
               </select>
             </div>
             <div>
-              <label className="font-body text-sm text-smoke">{t("priceLabel")}</label>
+              <label className="font-body text-sm text-card-fg-secondary">{t("priceLabel")}</label>
               <input
                 type="number"
                 min={0}
@@ -159,20 +159,20 @@ export function CourseManager() {
       </div>
 
       <div>
-        <h2 className="font-display text-xl text-charcoal">{t("yourCoursesTitle")}</h2>
+        <h2 className="font-display text-xl text-card-fg">{t("yourCoursesTitle")}</h2>
 
-        {loading && <p className="mt-4 font-body text-sm text-smoke">{t("loading")}</p>}
+        {loading && <p className="mt-4 font-body text-sm text-card-fg-secondary">{t("loading")}</p>}
         {!loading && courses.length === 0 && (
-          <p className="mt-4 font-body text-sm text-smoke">{t("noCoursesCreated")}</p>
+          <p className="mt-4 font-body text-sm text-card-fg-secondary">{t("noCoursesCreated")}</p>
         )}
 
         <div className="mt-4 space-y-3">
           {courses.map((course) => (
-            <div key={course.id} className="rounded-nsk border border-smoke/15 bg-white p-4">
+            <div key={course.id} className="rounded-nsk border border-smoke/15 bg-card p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="font-body font-semibold text-charcoal">{course.title}</p>
-                  <p className="font-body text-xs text-smoke">
+                  <p className="font-body font-semibold text-card-fg">{course.title}</p>
+                  <p className="font-body text-xs text-card-fg-secondary">
                     {course.published ? t("published") : t("draft")} · {course.price > 0 ? `${course.price} €` : t("free")}
                   </p>
                 </div>
@@ -187,7 +187,7 @@ export function CourseManager() {
                   <button
                     type="button"
                     onClick={() => setExpandedId(expandedId === course.id ? null : course.id)}
-                    className="font-body text-sm text-charcoal underline"
+                    className="font-body text-sm text-card-fg underline"
                   >
                     {expandedId === course.id ? t("close") : t("manageContent")}
                   </button>
@@ -290,17 +290,17 @@ function CourseContentEditor({ courseId }: { courseId: string }) {
   return (
     <div className="mt-4 space-y-6 border-t border-smoke/15 pt-4">
       <div>
-        <h3 className="font-body text-sm font-semibold text-charcoal">{t("lessonsTitle")}</h3>
+        <h3 className="font-body text-sm font-semibold text-card-fg">{t("lessonsTitle")}</h3>
         <ul className="mt-2 space-y-1">
           {lessons.map((l) => (
-            <li key={l.id} className="font-body text-sm text-smoke">
+            <li key={l.id} className="font-body text-sm text-card-fg-secondary">
               {l.position}. {l.title}
             </li>
           ))}
         </ul>
         <form onSubmit={handleAddLesson} className="mt-3 flex items-end gap-2">
           <div className="flex-1">
-            <label className="font-body text-xs text-smoke">{t("lessonTitleLabel")}</label>
+            <label className="font-body text-xs text-card-fg-secondary">{t("lessonTitleLabel")}</label>
             <input
               value={lessonTitle}
               onChange={(e) => setLessonTitle(e.target.value)}
@@ -310,7 +310,7 @@ function CourseContentEditor({ courseId }: { courseId: string }) {
             />
           </div>
           <div className="flex-1">
-            <label className="font-body text-xs text-smoke">{t("videoUrlLabel")}</label>
+            <label className="font-body text-xs text-card-fg-secondary">{t("videoUrlLabel")}</label>
             <input
               value={videoUrl}
               onChange={(e) => setVideoUrl(e.target.value)}
@@ -328,11 +328,11 @@ function CourseContentEditor({ courseId }: { courseId: string }) {
       </div>
 
       <div>
-        <h3 className="font-body text-sm font-semibold text-charcoal">{t("newQuizTitle")}</h3>
+        <h3 className="font-body text-sm font-semibold text-card-fg">{t("newQuizTitle")}</h3>
         <form onSubmit={handleCreateQuiz} className="mt-3 space-y-3">
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="font-body text-xs text-smoke">{t("quizTitleLabel")}</label>
+              <label className="font-body text-xs text-card-fg-secondary">{t("quizTitleLabel")}</label>
               <input
                 value={quizTitle}
                 onChange={(e) => setQuizTitle(e.target.value)}
@@ -342,7 +342,7 @@ function CourseContentEditor({ courseId }: { courseId: string }) {
               />
             </div>
             <div>
-              <label className="font-body text-xs text-smoke">{t("passingScoreLabel")}</label>
+              <label className="font-body text-xs text-card-fg-secondary">{t("passingScoreLabel")}</label>
               <input
                 type="number"
                 min={0}
@@ -356,7 +356,7 @@ function CourseContentEditor({ courseId }: { courseId: string }) {
 
           {questions.map((q, qi) => (
             <div key={q.id} className="rounded-nsk border border-smoke/20 p-3">
-              <label className="font-body text-xs text-smoke">{t("questionLabel", { number: qi + 1 })}</label>
+              <label className="font-body text-xs text-card-fg-secondary">{t("questionLabel", { number: qi + 1 })}</label>
               <input
                 value={q.prompt}
                 onChange={(e) => updateQuestion(qi, { prompt: e.target.value })}

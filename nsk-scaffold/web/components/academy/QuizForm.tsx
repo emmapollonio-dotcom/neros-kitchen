@@ -77,21 +77,21 @@ export function QuizForm({ quizId, title, passingScore, questions }: Props) {
   }
 
   return (
-    <div className="rounded-nsk border border-smoke/15 bg-white p-6">
-      <h2 className="font-display text-xl text-charcoal">{title}</h2>
-      <p className="mt-1 font-body text-xs text-smoke">
+    <div className="rounded-nsk border border-smoke/15 bg-card p-6">
+      <h2 className="font-display text-xl text-card-fg">{title}</h2>
+      <p className="mt-1 font-body text-xs text-card-fg-secondary">
         {t("passingScoreLabel", { score: passingScore })}
       </p>
 
       <form onSubmit={handleSubmit} className="mt-6 space-y-6">
         {questions.map((q, qi) => (
           <fieldset key={q.id}>
-            <legend className="font-body text-sm font-semibold text-charcoal">
+            <legend className="font-body text-sm font-semibold text-card-fg">
               {qi + 1}. {q.prompt}
             </legend>
             <div className="mt-2 space-y-2">
               {q.options.map((option, oi) => (
-                <label key={oi} className="flex items-center gap-2 font-body text-sm text-charcoal">
+                <label key={oi} className="flex items-center gap-2 font-body text-sm text-card-fg">
                   <input
                     type="radio"
                     name={q.id}
@@ -140,7 +140,7 @@ export function QuizForm({ quizId, title, passingScore, questions }: Props) {
             </button>
           )}
           {feedback && (
-            <div className="rounded-nsk border border-smoke/15 bg-ivory p-4 font-body text-sm text-charcoal">
+            <div className="rounded-nsk border border-smoke/15 bg-ivory p-4 font-body text-sm text-card-fg">
               {feedback}
             </div>
           )}

@@ -57,7 +57,7 @@ export function LessonPlayer({ lessons, initialProgress }: Props) {
             className={`flex w-full items-center justify-between rounded-nsk px-4 py-3 text-left font-body text-sm transition ${
               activeLesson?.id === lesson.id
                 ? "bg-teal text-white"
-                : "bg-white text-charcoal hover:bg-teal/10"
+                : "bg-card text-card-fg hover:bg-teal/10"
             }`}
           >
             <span>
@@ -68,12 +68,12 @@ export function LessonPlayer({ lessons, initialProgress }: Props) {
         ))}
       </aside>
 
-      <section className="rounded-nsk border border-smoke/15 bg-white p-6">
+      <section className="rounded-nsk border border-smoke/15 bg-card p-6">
         {!activeLesson ? (
-          <p className="font-body text-sm text-smoke">{t("noLessonsAvailable")}</p>
+          <p className="font-body text-sm text-card-fg-secondary">{t("noLessonsAvailable")}</p>
         ) : (
           <div>
-            <h2 className="font-display text-2xl text-charcoal">{activeLesson.title}</h2>
+            <h2 className="font-display text-2xl text-card-fg">{activeLesson.title}</h2>
 
             {activeLesson.video_url && (
               <video

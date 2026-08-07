@@ -59,30 +59,30 @@ export function ReviewResponder() {
     setRespondingId(null);
   }
 
-  if (loading) return <p className="font-body text-sm text-smoke">{t("loading")}</p>;
+  if (loading) return <p className="font-body text-sm text-card-fg-secondary">{t("loading")}</p>;
   if (reviews.length === 0)
-    return <p className="font-body text-sm text-smoke">{t("noReviews")}</p>;
+    return <p className="font-body text-sm text-card-fg-secondary">{t("noReviews")}</p>;
 
   return (
     <div className="space-y-4">
       {error && <p className="font-body text-sm text-red-600">{error}</p>}
       {reviews.map((review) => (
-        <div key={review.id} className="rounded-nsk border border-smoke/15 bg-white p-5">
+        <div key={review.id} className="rounded-nsk border border-smoke/15 bg-card p-5">
           <div className="flex items-center justify-between">
             <p className="font-body text-sm text-teal">{"★".repeat(review.rating)}</p>
-            <p className="font-body text-xs text-smoke">
+            <p className="font-body text-xs text-card-fg-secondary">
               {new Date(review.created_at).toLocaleDateString(locale)}
             </p>
           </div>
 
           {review.comment && (
-            <p className="mt-2 font-body text-sm text-charcoal">{review.comment}</p>
+            <p className="mt-2 font-body text-sm text-card-fg">{review.comment}</p>
           )}
 
           {review.chef_response ? (
             <div className="mt-4 rounded-nsk bg-ivory p-3">
               <p className="font-body text-xs uppercase tracking-wide text-teal">{t("yourResponse")}</p>
-              <p className="mt-1 font-body text-sm text-charcoal">{review.chef_response}</p>
+              <p className="mt-1 font-body text-sm text-card-fg">{review.chef_response}</p>
             </div>
           ) : (
             <button

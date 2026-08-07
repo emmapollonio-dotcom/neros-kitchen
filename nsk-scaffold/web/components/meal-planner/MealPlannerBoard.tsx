@@ -91,13 +91,13 @@ export function MealPlannerBoard({ mealPlanId, weekStart, entries: initialEntrie
         <div className="flex items-center gap-2">
           <button
             onClick={() => goToWeek(-1)}
-            className="rounded-pill border border-line px-4 py-2 font-body text-sm text-charcoal hover:border-teal"
+            className="rounded-pill border border-card-border px-4 py-2 font-body text-sm text-card-fg hover:border-teal"
           >
             {t("prevWeek")}
           </button>
           <button
             onClick={() => goToWeek(1)}
-            className="rounded-pill border border-line px-4 py-2 font-body text-sm text-charcoal hover:border-teal"
+            className="rounded-pill border border-card-border px-4 py-2 font-body text-sm text-card-fg hover:border-teal"
           >
             {t("nextWeek")}
           </button>
@@ -124,29 +124,29 @@ export function MealPlannerBoard({ mealPlanId, weekStart, entries: initialEntrie
           const isAdding = addingFor === day;
 
           return (
-            <div key={day} className="rounded-card border border-line bg-white p-4 shadow-soft">
-              <p className="font-body text-xs uppercase tracking-wide text-mist">
+            <div key={day} className="rounded-card border border-card-border bg-card p-4 shadow-soft">
+              <p className="font-body text-xs uppercase tracking-wide text-card-fg-muted">
                 {new Date(day + "T00:00:00").toLocaleDateString(locale, { weekday: "short" })}
               </p>
-              <p className="font-display text-lg text-charcoal">
+              <p className="font-display text-lg text-card-fg">
                 {new Date(day + "T00:00:00").getDate()}
               </p>
 
               <div className="mt-3 space-y-2">
                 {dayEntries.map((entry) => (
-                  <div key={entry.id} className="group relative rounded-nsk bg-cream p-2.5">
+                  <div key={entry.id} className="group relative rounded-nsk bg-card-alt p-2.5">
                     <button
                       onClick={() => removeEntry(entry.id)}
-                      className="absolute right-1 top-1 rounded-full p-0.5 text-mist opacity-0 transition hover:text-charcoal group-hover:opacity-100"
+                      className="absolute right-1 top-1 rounded-full p-0.5 text-card-fg-muted opacity-0 transition hover:text-card-fg group-hover:opacity-100"
                       aria-label={t("removeAria")}
                     >
                       <X size={13} />
                     </button>
-                    <p className="pr-4 font-body text-xs text-mist">{slotLabels[entry.meal_slot]}</p>
-                    <p className="font-body text-sm text-charcoal">
+                    <p className="pr-4 font-body text-xs text-card-fg-muted">{slotLabels[entry.meal_slot]}</p>
+                    <p className="font-body text-sm text-card-fg">
                       {entry.recipe?.title ?? t("defaultRecipe")}
                     </p>
-                    <p className="font-body text-xs text-mist">{t("servings", { count: entry.servings })}</p>
+                    <p className="font-body text-xs text-card-fg-muted">{t("servings", { count: entry.servings })}</p>
                   </div>
                 ))}
               </div>
@@ -163,7 +163,7 @@ export function MealPlannerBoard({ mealPlanId, weekStart, entries: initialEntrie
                 <button
                   onClick={() => setAddingFor(day)}
                   disabled={recipes.length === 0}
-                  className="mt-3 flex w-full items-center justify-center gap-1 rounded-nsk border border-dashed border-line py-2 font-body text-xs text-smoke transition hover:border-teal hover:text-teal-dark disabled:cursor-not-allowed disabled:text-mist disabled:opacity-80"
+                  className="mt-3 flex w-full items-center justify-center gap-1 rounded-nsk border border-dashed border-card-border py-2 font-body text-xs text-card-fg-secondary transition hover:border-teal hover:text-teal-dark disabled:cursor-not-allowed disabled:text-card-fg-muted disabled:opacity-80"
                 >
                   <Plus size={13} />
                   {t("add")}
@@ -175,7 +175,7 @@ export function MealPlannerBoard({ mealPlanId, weekStart, entries: initialEntrie
       </div>
 
       {recipes.length === 0 && (
-        <p className="mt-6 font-body text-sm text-smoke">
+        <p className="mt-6 font-body text-sm text-card-fg-secondary">
           {t("noRecipesYet")}{" "}
           <Link href="/ricette/nuova" className="underline hover:text-teal-dark">
             {t("createOne")}
@@ -205,11 +205,11 @@ function AddEntryForm({
   const [servings, setServings] = useState(recipes[0]?.servings ?? 2);
 
   return (
-    <div className="mt-3 space-y-2 rounded-nsk border border-line p-2.5">
+    <div className="mt-3 space-y-2 rounded-nsk border border-card-border p-2.5">
       <select
         value={recipeId}
         onChange={(e) => setRecipeId(e.target.value)}
-        className="w-full rounded-nsk border border-line bg-white px-2 py-1.5 font-body text-xs text-charcoal"
+        className="w-full rounded-nsk border border-card-border bg-card px-2 py-1.5 font-body text-xs text-card-fg"
       >
         {recipes.map((r) => (
           <option key={r.id} value={r.id}>
@@ -221,7 +221,7 @@ function AddEntryForm({
         <select
           value={slot}
           onChange={(e) => setSlot(e.target.value as MealSlot)}
-          className="flex-1 rounded-nsk border border-line bg-white px-2 py-1.5 font-body text-xs text-charcoal"
+          className="flex-1 rounded-nsk border border-card-border bg-card px-2 py-1.5 font-body text-xs text-card-fg"
         >
           {MEAL_SLOTS.map((s) => (
             <option key={s} value={s}>
@@ -234,7 +234,7 @@ function AddEntryForm({
           min={1}
           value={servings}
           onChange={(e) => setServings(Number(e.target.value))}
-          className="w-16 rounded-nsk border border-line bg-white px-2 py-1.5 font-body text-xs text-charcoal"
+          className="w-16 rounded-nsk border border-card-border bg-card px-2 py-1.5 font-body text-xs text-card-fg"
         />
       </div>
       <div className="flex gap-2">
@@ -244,7 +244,7 @@ function AddEntryForm({
         >
           {t("add")}
         </button>
-        <button onClick={onCancel} className="rounded-nsk px-3 font-body text-xs text-mist hover:text-charcoal">
+        <button onClick={onCancel} className="rounded-nsk px-3 font-body text-xs text-card-fg-muted hover:text-card-fg">
           {t("cancel")}
         </button>
       </div>

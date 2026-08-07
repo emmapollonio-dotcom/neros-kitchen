@@ -48,10 +48,10 @@ export default async function AnalyticsPage() {
       </div>
 
       <h2 className="mt-10 font-display text-lg text-shell-fg">{t("revenueByMonthTitle")}</h2>
-      <div className="mt-4 overflow-hidden rounded-card border border-line bg-white shadow-soft">
+      <div className="mt-4 overflow-hidden rounded-card border border-card-border bg-card shadow-soft">
         <table className="w-full font-body text-sm">
           <thead>
-            <tr className="border-b border-line bg-cream text-left text-mist">
+            <tr className="border-b border-card-border bg-card-alt text-left text-card-fg-muted">
               <th className="px-5 py-3 font-normal">{t("monthColumn")}</th>
               <th className="px-5 py-3 font-normal">{t("bookingsColumn")}</th>
               <th className="px-5 py-3 font-normal">{t("revenueColumn")}</th>
@@ -59,17 +59,17 @@ export default async function AnalyticsPage() {
           </thead>
           <tbody>
             {(revenueByMonth ?? []).map((r) => (
-              <tr key={r.month} className="border-b border-line last:border-0">
-                <td className="px-5 py-3 text-charcoal">
+              <tr key={r.month} className="border-b border-card-border last:border-0">
+                <td className="px-5 py-3 text-card-fg">
                   {new Date(r.month).toLocaleDateString(locale, { month: "long", year: "numeric" })}
                 </td>
-                <td className="px-5 py-3 text-charcoal">{r.bookings_count}</td>
-                <td className="px-5 py-3 text-charcoal">{Number(r.revenue).toFixed(2)} €</td>
+                <td className="px-5 py-3 text-card-fg">{r.bookings_count}</td>
+                <td className="px-5 py-3 text-card-fg">{Number(r.revenue).toFixed(2)} €</td>
               </tr>
             ))}
             {(!revenueByMonth || revenueByMonth.length === 0) && (
               <tr>
-                <td colSpan={3} className="px-5 py-8 text-center text-smoke">
+                <td colSpan={3} className="px-5 py-8 text-center text-card-fg-secondary">
                   {t("noDataYet")}
                 </td>
               </tr>
@@ -100,9 +100,9 @@ export default async function AnalyticsPage() {
 
 function Kpi({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-card border border-line bg-white p-5 shadow-soft">
-      <p className="font-body text-xs uppercase tracking-wide text-mist">{label}</p>
-      <p className="mt-2 font-display text-2xl text-charcoal">{value}</p>
+    <div className="rounded-card border border-card-border bg-card p-5 shadow-soft">
+      <p className="font-body text-xs uppercase tracking-wide text-card-fg-muted">{label}</p>
+      <p className="mt-2 font-display text-2xl text-card-fg">{value}</p>
     </div>
   );
 }

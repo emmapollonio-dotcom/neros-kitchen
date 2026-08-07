@@ -40,12 +40,12 @@ export function ChefListClient({ chefs }: Props) {
     <div>
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
         <div className="relative flex-1">
-          <Search size={16} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-mist" />
+          <Search size={16} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-card-fg-muted" />
           <input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder={t("searchPlaceholder")}
-            className="w-full rounded-pill border border-line bg-white py-3 pl-11 pr-4 font-body text-sm text-charcoal placeholder:text-mist focus:border-teal focus:outline-none"
+            className="w-full rounded-pill border border-card-border bg-card py-3 pl-11 pr-4 font-body text-sm text-card-fg placeholder:text-card-fg-muted focus:border-teal focus:outline-none"
           />
         </div>
       </div>
@@ -55,7 +55,7 @@ export function ChefListClient({ chefs }: Props) {
           <button
             onClick={() => setSpecialty(null)}
             className={`rounded-pill px-4 py-1.5 font-body text-xs transition ${
-              specialty === null ? "bg-teal text-white" : "bg-cream text-smoke hover:bg-line"
+              specialty === null ? "bg-teal text-white" : "bg-card-alt text-card-fg-secondary hover:bg-card-border"
             }`}
           >
             {t("allFilter")}
@@ -65,7 +65,7 @@ export function ChefListClient({ chefs }: Props) {
               key={s}
               onClick={() => setSpecialty(specialty === s ? null : s)}
               className={`rounded-pill px-4 py-1.5 font-body text-xs transition ${
-                specialty === s ? "bg-teal text-white" : "bg-cream text-smoke hover:bg-line"
+                specialty === s ? "bg-teal text-white" : "bg-card-alt text-card-fg-secondary hover:bg-card-border"
               }`}
             >
               {s}
@@ -75,7 +75,7 @@ export function ChefListClient({ chefs }: Props) {
       )}
 
       {filtered.length === 0 ? (
-        <p className="mt-10 font-body text-sm text-smoke">{t("noChefsFound")}</p>
+        <p className="mt-10 font-body text-sm text-card-fg-secondary">{t("noChefsFound")}</p>
       ) : (
         <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((chef) => (

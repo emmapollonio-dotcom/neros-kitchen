@@ -81,7 +81,7 @@ export function FoodCostCalculator({
     <div className="space-y-6">
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="font-body text-sm text-smoke">{t("servingsLabel")}</label>
+          <label className="font-body text-sm text-card-fg-secondary">{t("servingsLabel")}</label>
           <input
             type="number"
             min={1}
@@ -91,7 +91,7 @@ export function FoodCostCalculator({
           />
         </div>
         <div>
-          <label className="font-body text-sm text-smoke">{t("targetMarginLabel")}</label>
+          <label className="font-body text-sm text-card-fg-secondary">{t("targetMarginLabel")}</label>
           <input
             type="number"
             min={0}
@@ -130,7 +130,7 @@ export function FoodCostCalculator({
               onChange={(e) => updateRow(i, { quantity: Number(e.target.value) })}
               className="w-24 rounded-nsk border border-smoke/30 px-3 py-2 font-body text-sm"
             />
-            <span className="font-body text-sm text-smoke">{row.unit}</span>
+            <span className="font-body text-sm text-card-fg-secondary">{row.unit}</span>
             <button
               type="button"
               onClick={() => removeRow(i)}
@@ -164,22 +164,22 @@ export function FoodCostCalculator({
         <div className="rounded-nsk border border-teal/40 bg-teal/10 p-6">
           <dl className="grid grid-cols-2 gap-4 font-body text-sm">
             <div>
-              <dt className="text-smoke">{t("totalCost")}</dt>
-              <dd className="text-lg text-charcoal">{result.food_cost_total} €</dd>
+              <dt className="text-card-fg-secondary">{t("totalCost")}</dt>
+              <dd className="text-lg text-card-fg">{result.food_cost_total} €</dd>
             </div>
             <div>
-              <dt className="text-smoke">{t("costPerServing")}</dt>
-              <dd className="text-lg text-charcoal">{result.food_cost_per_serving} €</dd>
+              <dt className="text-card-fg-secondary">{t("costPerServing")}</dt>
+              <dd className="text-lg text-card-fg">{result.food_cost_per_serving} €</dd>
             </div>
             <div>
-              <dt className="text-smoke">{t("suggestedPrice")}</dt>
-              <dd className="text-lg text-charcoal">
+              <dt className="text-card-fg-secondary">{t("suggestedPrice")}</dt>
+              <dd className="text-lg text-card-fg">
                 {result.suggested_price_per_serving ?? "—"} €
               </dd>
             </div>
             <div>
-              <dt className="text-smoke">{t("foodCostPercentage")}</dt>
-              <dd className="text-lg text-charcoal">{result.food_cost_percentage ?? "—"}%</dd>
+              <dt className="text-card-fg-secondary">{t("foodCostPercentage")}</dt>
+              <dd className="text-lg text-card-fg">{result.food_cost_percentage ?? "—"}%</dd>
             </div>
           </dl>
         </div>

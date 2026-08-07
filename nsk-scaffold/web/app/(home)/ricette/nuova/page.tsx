@@ -56,10 +56,10 @@ export default function NuovaRicettaPage() {
 
       <form
         onSubmit={handleSubmit}
-        className="mt-8 space-y-4 rounded-card border border-line bg-white p-6 shadow-soft"
+        className="mt-8 space-y-4 rounded-card border border-card-border bg-card p-6 shadow-soft"
       >
         <div>
-          <label className="font-body text-sm text-smoke" htmlFor="title">
+          <label className="font-body text-sm text-card-fg-secondary" htmlFor="title">
             Titolo
           </label>
           <input
@@ -69,11 +69,11 @@ export default function NuovaRicettaPage() {
             required
             minLength={3}
             placeholder="Es. Risotto allo zafferano"
-            className="mt-1 w-full rounded-nsk border border-line bg-white px-4 py-2 font-body text-sm text-charcoal placeholder:text-mist focus:border-teal focus:outline-none"
+            className="mt-1 w-full rounded-nsk border border-card-border bg-card px-4 py-2 font-body text-sm text-card-fg placeholder:text-card-fg-muted focus:border-teal focus:outline-none"
           />
         </div>
         <div>
-          <label className="font-body text-sm text-smoke" htmlFor="servings">
+          <label className="font-body text-sm text-card-fg-secondary" htmlFor="servings">
             Porzioni
           </label>
           <input
@@ -82,11 +82,11 @@ export default function NuovaRicettaPage() {
             min={1}
             value={servings}
             onChange={(e) => setServings(Number(e.target.value))}
-            className="mt-1 w-full rounded-nsk border border-line bg-white px-4 py-2 font-body text-sm text-charcoal focus:border-teal focus:outline-none"
+            className="mt-1 w-full rounded-nsk border border-card-border bg-card px-4 py-2 font-body text-sm text-card-fg focus:border-teal focus:outline-none"
           />
         </div>
         <div>
-          <label className="font-body text-sm text-smoke" htmlFor="description">
+          <label className="font-body text-sm text-card-fg-secondary" htmlFor="description">
             Descrizione
           </label>
           <textarea
@@ -95,7 +95,7 @@ export default function NuovaRicettaPage() {
             onChange={(e) => setDescription(e.target.value)}
             rows={4}
             placeholder="Note, provenienza, occasioni d'uso..."
-            className="mt-1 w-full rounded-nsk border border-line bg-white px-4 py-2 font-body text-sm text-charcoal placeholder:text-mist focus:border-teal focus:outline-none"
+            className="mt-1 w-full rounded-nsk border border-card-border bg-card px-4 py-2 font-body text-sm text-card-fg placeholder:text-card-fg-muted focus:border-teal focus:outline-none"
           />
         </div>
 

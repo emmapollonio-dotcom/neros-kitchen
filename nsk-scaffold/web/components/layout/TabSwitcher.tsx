@@ -20,7 +20,7 @@ export function TabSwitcher({ tabs, defaultTab }: { tabs: Tab[]; defaultTab?: st
       {/* Vive direttamente sullo scafo (Food Cost, CRM, Analytics, Academy
           Pro lo montano subito sotto il sottotitolo, fuori da qualunque
           card bianca): token shell-aware, non i toni pensati per card
-          chiare (border-line/text-charcoal/text-mist erano illeggibili
+          chiare (border-card-border/text-card-fg/text-card-fg-muted erano illeggibili
           sullo sfondo scuro/navy). */}
       <div className="flex gap-1 border-b border-shell-border">
         {tabs.map((tab) => (

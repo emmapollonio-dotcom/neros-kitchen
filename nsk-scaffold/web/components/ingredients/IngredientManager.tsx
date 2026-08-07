@@ -134,10 +134,10 @@ export function IngredientManager() {
     <div className="space-y-8">
       <form
         onSubmit={handleCreate}
-        className="flex flex-wrap items-end gap-3 rounded-nsk border border-smoke/15 bg-white p-4"
+        className="flex flex-wrap items-end gap-3 rounded-nsk border border-smoke/15 bg-card p-4"
       >
         <div>
-          <label className="font-body text-xs text-smoke">{t("nameLabel")}</label>
+          <label className="font-body text-xs text-card-fg-secondary">{t("nameLabel")}</label>
           <input
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -147,7 +147,7 @@ export function IngredientManager() {
           />
         </div>
         <div>
-          <label className="font-body text-xs text-smoke">{t("categoryLabel")}</label>
+          <label className="font-body text-xs text-card-fg-secondary">{t("categoryLabel")}</label>
           <input
             value={category}
             onChange={(e) => setCategory(e.target.value)}
@@ -156,7 +156,7 @@ export function IngredientManager() {
           />
         </div>
         <div className="w-24">
-          <label className="font-body text-xs text-smoke">{t("unitLabel")}</label>
+          <label className="font-body text-xs text-card-fg-secondary">{t("unitLabel")}</label>
           <input
             value={unit}
             onChange={(e) => setUnit(e.target.value)}
@@ -165,7 +165,7 @@ export function IngredientManager() {
           />
         </div>
         <div className="w-28">
-          <label className="font-body text-xs text-smoke">{t("costLabel")}</label>
+          <label className="font-body text-xs text-card-fg-secondary">{t("costLabel")}</label>
           <input
             type="number"
             step="0.01"
@@ -185,24 +185,24 @@ export function IngredientManager() {
       </form>
 
       {error && <p className="font-body text-sm text-red-600">{error}</p>}
-      {loading && <p className="font-body text-sm text-smoke">{t("loading")}</p>}
+      {loading && <p className="font-body text-sm text-card-fg-secondary">{t("loading")}</p>}
       {!loading && ingredients.length === 0 && (
-        <p className="font-body text-sm text-smoke">{t("noIngredients")}</p>
+        <p className="font-body text-sm text-card-fg-secondary">{t("noIngredients")}</p>
       )}
 
       <div className="space-y-6">
         {grouped.map(([category, items]) => (
           <div key={category}>
-            <h2 className="font-body text-xs font-semibold uppercase tracking-wide text-smoke">
+            <h2 className="font-body text-xs font-semibold uppercase tracking-wide text-card-fg-secondary">
               {category}
             </h2>
-            <div className="mt-2 divide-y divide-smoke/10 rounded-nsk border border-smoke/15 bg-white">
+            <div className="mt-2 divide-y divide-smoke/10 rounded-nsk border border-smoke/15 bg-card">
               {items.map((ing) => (
                 <div
                   key={ing.id}
                   className="flex flex-wrap items-center justify-between gap-3 px-4 py-3"
                 >
-                  <p className="font-body text-sm text-charcoal">{ing.name}</p>
+                  <p className="font-body text-sm text-card-fg">{ing.name}</p>
                   <div className="flex items-center gap-2">
                     <input
                       type="number"
@@ -213,7 +213,7 @@ export function IngredientManager() {
                       disabled={savingId === ing.id}
                       className="w-24 rounded-nsk border border-smoke/30 px-2 py-1 font-body text-sm"
                     />
-                    <span className="font-body text-xs text-smoke">€ /</span>
+                    <span className="font-body text-xs text-card-fg-secondary">€ /</span>
                     <input
                       defaultValue={ing.default_unit}
                       onBlur={(e) => handleUpdateUnit(ing.id, e.target.value)}
@@ -223,7 +223,7 @@ export function IngredientManager() {
                     <button
                       type="button"
                       onClick={() => handleDelete(ing.id)}
-                      className="font-body text-xs text-smoke hover:text-red-600"
+                      className="font-body text-xs text-card-fg-secondary hover:text-red-600"
                       aria-label={t("deleteAria", { name: ing.name })}
                     >
                       {t("delete")}

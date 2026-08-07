@@ -59,7 +59,7 @@ export function BookingForm({ chefId, days }: Props) {
   return (
     <form onSubmit={handleSubmit} className="space-y-8">
       <div>
-        <h3 className="font-body text-sm font-semibold text-charcoal">
+        <h3 className="font-body text-sm font-semibold text-card-fg">
           {t("chooseDateTime")}
         </h3>
         <div className="mt-3">
@@ -69,14 +69,14 @@ export function BookingForm({ chefId, days }: Props) {
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="font-body text-sm text-smoke" htmlFor="eventType">
+          <label className="font-body text-sm text-card-fg-secondary" htmlFor="eventType">
             {t("eventTypeLabel")}
           </label>
           <select
             id="eventType"
             value={eventType}
             onChange={(e) => setEventType(e.target.value)}
-            className="mt-1 w-full rounded-nsk border border-smoke/30 bg-white px-4 py-2 font-body text-charcoal"
+            className="mt-1 w-full rounded-nsk border border-smoke/30 bg-card px-4 py-2 font-body text-card-fg"
           >
             <option value="cena privata">{t("eventTypePrivateDinner")}</option>
             <option value="evento aziendale">{t("eventTypeCorporate")}</option>
@@ -85,7 +85,7 @@ export function BookingForm({ chefId, days }: Props) {
           </select>
         </div>
         <div>
-          <label className="font-body text-sm text-smoke" htmlFor="guestCount">
+          <label className="font-body text-sm text-card-fg-secondary" htmlFor="guestCount">
             {t("guestCountLabel")}
           </label>
           <input
@@ -94,13 +94,13 @@ export function BookingForm({ chefId, days }: Props) {
             min={1}
             value={guestCount}
             onChange={(e) => setGuestCount(Number(e.target.value))}
-            className="mt-1 w-full rounded-nsk border border-smoke/30 bg-white px-4 py-2 font-body text-charcoal"
+            className="mt-1 w-full rounded-nsk border border-smoke/30 bg-card px-4 py-2 font-body text-card-fg"
           />
         </div>
       </div>
 
       <div>
-        <label className="font-body text-sm text-smoke" htmlFor="notes">
+        <label className="font-body text-sm text-card-fg-secondary" htmlFor="notes">
           {t("notesLabel")}
         </label>
         <textarea
@@ -108,7 +108,7 @@ export function BookingForm({ chefId, days }: Props) {
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
           rows={4}
-          className="mt-1 w-full rounded-nsk border border-smoke/30 bg-white px-4 py-2 font-body text-charcoal"
+          className="mt-1 w-full rounded-nsk border border-smoke/30 bg-card px-4 py-2 font-body text-card-fg"
         />
       </div>
 
@@ -125,7 +125,7 @@ export function BookingForm({ chefId, days }: Props) {
       >
         {submitting ? t("submitting") : t("requestBooking")}
       </button>
-      <p className="text-center font-body text-xs text-smoke">{t("noChargeNow")}</p>
+      <p className="text-center font-body text-xs text-card-fg-secondary">{t("noChargeNow")}</p>
     </form>
   );
 }

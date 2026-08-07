@@ -28,9 +28,9 @@ export default async function ChefsMarketplacePage() {
         {chefs && chefs.length > 0 ? (
           <ChefListClient chefs={chefs} />
         ) : (
-          <div className="rounded-panel border border-line bg-white p-12 text-center">
-            <p className="font-display text-xl text-charcoal">{t("emptyTitle")}</p>
-            <p className="mx-auto mt-2 max-w-md font-body text-sm text-smoke">{t("emptyBody")}</p>
+          <div className="rounded-panel border border-card-border bg-card p-12 text-center">
+            <p className="font-display text-xl text-card-fg">{t("emptyTitle")}</p>
+            <p className="mx-auto mt-2 max-w-md font-body text-sm text-card-fg-secondary">{t("emptyBody")}</p>
             <Link
               href="/signup"
               className="mt-6 inline-block rounded-pill bg-teal px-6 py-3 font-body text-sm text-white transition hover:bg-teal-dark"

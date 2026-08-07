@@ -35,11 +35,11 @@ export default async function BookingsPage() {
           {(bookings ?? []).map((b) => (
             <li
               key={b.id}
-              className="flex items-center justify-between rounded-nsk border border-smoke/15 bg-white p-5"
+              className="flex items-center justify-between rounded-nsk border border-smoke/15 bg-card p-5"
             >
               <div>
-                <p className="font-body font-medium text-charcoal">{b.event_type}</p>
-                <p className="font-body text-sm text-smoke">
+                <p className="font-body font-medium text-card-fg">{b.event_type}</p>
+                <p className="font-body text-sm text-card-fg-secondary">
                   {new Date(b.event_date).toLocaleString(locale, {
                     dateStyle: "medium",
                     timeStyle: "short",
@@ -51,7 +51,7 @@ export default async function BookingsPage() {
                   {STATUS_LABELS[b.status] ?? b.status}
                 </span>
                 {b.quote_amount && (
-                  <p className="mt-1 font-body text-sm text-smoke">
+                  <p className="mt-1 font-body text-sm text-card-fg-secondary">
                     {b.quote_amount} {b.currency}
                   </p>
                 )}

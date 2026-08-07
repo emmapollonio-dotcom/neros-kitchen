@@ -131,19 +131,19 @@ export function MediaGallery({ recipeId, initialImages }: Props) {
         onDragLeave={() => setIsDraggingOver(false)}
         onDrop={handleDrop}
         className={`flex flex-col items-center justify-center gap-3 rounded-panel border-2 border-dashed p-8 text-center transition sm:flex-row sm:gap-6 ${
-          isDraggingOver ? "border-teal bg-teal/5" : "border-line bg-white"
+          isDraggingOver ? "border-teal bg-teal/5" : "border-card-border bg-card"
         }`}
       >
-        <ImagePlus size={28} className="text-mist" />
+        <ImagePlus size={28} className="text-card-fg-muted" />
         <div>
-          <p className="font-body text-sm text-charcoal">
+          <p className="font-body text-sm text-card-fg">
             Trascina qui le foto del piatto, oppure
           </p>
           <div className="mt-3 flex flex-wrap justify-center gap-2 sm:justify-start">
             <button
               type="button"
               onClick={() => fileInputRef.current?.click()}
-              className="rounded-pill border border-line px-4 py-2 font-body text-xs text-charcoal transition hover:border-teal"
+              className="rounded-pill border border-card-border px-4 py-2 font-body text-xs text-card-fg transition hover:border-teal"
             >
               Scegli dal dispositivo
             </button>
@@ -190,7 +190,7 @@ export function MediaGallery({ recipeId, initialImages }: Props) {
           {images.map((url) => (
             <div
               key={url}
-              className="group relative aspect-square overflow-hidden rounded-card border border-line bg-cream shadow-soft"
+              className="group relative aspect-square overflow-hidden rounded-card border border-card-border bg-card-alt shadow-soft"
             >
               <Image src={url} alt="" fill sizes="(min-width: 1024px) 25vw, 50vw" className="object-cover" />
               <button
@@ -208,7 +208,7 @@ export function MediaGallery({ recipeId, initialImages }: Props) {
           {pending.map((p) => (
             <div
               key={p.localId}
-              className="relative aspect-square overflow-hidden rounded-card border border-line bg-cream shadow-soft"
+              className="relative aspect-square overflow-hidden rounded-card border border-card-border bg-card-alt shadow-soft"
             >
               {/* eslint-disable-next-line @next/next/no-img-element -- anteprima locale da blob URL, non un asset ottimizzabile da next/image */}
               <img src={p.previewUrl} alt="" className="h-full w-full object-cover opacity-60" />
@@ -225,7 +225,7 @@ export function MediaGallery({ recipeId, initialImages }: Props) {
       )}
 
       {images.length === 0 && pending.length === 0 && (
-        <p className="mt-4 font-body text-xs text-mist">Nessuna foto ancora — max 8MB per file.</p>
+        <p className="mt-4 font-body text-xs text-card-fg-muted">Nessuna foto ancora — max 8MB per file.</p>
       )}
     </div>
   );

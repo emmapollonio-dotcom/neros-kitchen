@@ -78,7 +78,7 @@ export default async function ChefProfilePage({ params }: Props) {
           {chef.specialties && chef.specialties.length > 0 && (
             <div className="flex flex-wrap gap-2">
               {chef.specialties.map((s: string) => (
-                <span key={s} className="rounded-pill bg-cream px-3 py-1.5 font-body text-xs text-smoke">
+                <span key={s} className="rounded-pill bg-card-alt px-3 py-1.5 font-body text-xs text-card-fg-secondary">
                   {s}
                 </span>
               ))}
@@ -106,10 +106,10 @@ export default async function ChefProfilePage({ params }: Props) {
             ) : (
               <ul className="mt-4 space-y-4">
                 {reviews.map((r) => (
-                  <li key={r.id} className="rounded-card border border-line bg-white p-5 shadow-soft">
+                  <li key={r.id} className="rounded-card border border-card-border bg-card p-5 shadow-soft">
                     <p className="font-body text-sm text-teal">{"★".repeat(r.rating)}</p>
-                    {r.comment && <p className="mt-2 font-body text-sm text-charcoal">{r.comment}</p>}
-                    <p className="mt-2 font-body text-xs text-mist">
+                    {r.comment && <p className="mt-2 font-body text-sm text-card-fg">{r.comment}</p>}
+                    <p className="mt-2 font-body text-xs text-card-fg-muted">
                       {new Date(r.created_at).toLocaleDateString(locale)}
                     </p>
                   </li>
@@ -120,16 +120,16 @@ export default async function ChefProfilePage({ params }: Props) {
         </div>
 
         <div className="lg:col-span-1">
-          <div className="sticky top-24 rounded-panel border border-line bg-white p-7 shadow-card">
-            <p className="font-display text-2xl text-charcoal">{priceLabel}</p>
-            <p className="font-body text-sm text-mist">{t("startingEstimate")}</p>
+          <div className="sticky top-24 rounded-panel border border-card-border bg-card p-7 shadow-card">
+            <p className="font-display text-2xl text-card-fg">{priceLabel}</p>
+            <p className="font-body text-sm text-card-fg-muted">{t("startingEstimate")}</p>
             <Link
               href={`/chefs/${chefId}/book`}
               className="mt-6 block rounded-pill bg-teal px-6 py-3 text-center font-body text-sm text-white transition hover:bg-teal-dark"
             >
               {t("requestAvailability")}
             </Link>
-            <p className="mt-3 text-center font-body text-xs text-mist">{t("noChargeNow")}</p>
+            <p className="mt-3 text-center font-body text-xs text-card-fg-muted">{t("noChargeNow")}</p>
           </div>
         </div>
       </div>

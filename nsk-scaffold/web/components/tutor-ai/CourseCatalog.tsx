@@ -19,9 +19,9 @@ export async function CourseCatalog({ courses }: { courses: CourseSummary[] }) {
 
   if (courses.length === 0) {
     return (
-      <div className="rounded-panel border border-line bg-white p-12 text-center">
-        <p className="font-display text-xl text-charcoal">{t("noCoursesTitle")}</p>
-        <p className="mx-auto mt-2 max-w-md font-body text-sm text-smoke">{t("noCoursesBody")}</p>
+      <div className="rounded-panel border border-card-border bg-card p-12 text-center">
+        <p className="font-display text-xl text-card-fg">{t("noCoursesTitle")}</p>
+        <p className="mx-auto mt-2 max-w-md font-body text-sm text-card-fg-secondary">{t("noCoursesBody")}</p>
       </div>
     );
   }
@@ -32,16 +32,16 @@ export async function CourseCatalog({ courses }: { courses: CourseSummary[] }) {
         <Link
           key={course.id}
           href={`/academy/${course.slug}`}
-          className="rounded-card border border-line bg-white p-6 shadow-soft transition hover:-translate-y-0.5 hover:shadow-card"
+          className="rounded-card border border-card-border bg-card p-6 shadow-soft transition hover:-translate-y-0.5 hover:shadow-card"
         >
           <p className="font-body text-xs uppercase tracking-wide text-teal">
             {course.level ?? t("allLevels")}
           </p>
-          <h2 className="mt-2 font-display text-lg text-charcoal">{course.title}</h2>
+          <h2 className="mt-2 font-display text-lg text-card-fg">{course.title}</h2>
           {course.description && (
-            <p className="mt-2 line-clamp-3 font-body text-sm text-smoke">{course.description}</p>
+            <p className="mt-2 line-clamp-3 font-body text-sm text-card-fg-secondary">{course.description}</p>
           )}
-          <p className="mt-4 font-body text-sm text-charcoal">
+          <p className="mt-4 font-body text-sm text-card-fg">
             {course.price > 0 ? `€${course.price}` : t("free")}
           </p>
         </Link>

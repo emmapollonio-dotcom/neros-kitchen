@@ -46,9 +46,9 @@ export default async function RicetteIndexPage() {
       </div>
 
       {!recipes || recipes.length === 0 ? (
-        <div className="mt-10 rounded-panel border border-line bg-white p-12 text-center">
-          <p className="font-display text-xl text-charcoal">{t("emptyTitle")}</p>
-          <p className="mx-auto mt-2 max-w-md font-body text-sm text-smoke">{t("emptyBody")}</p>
+        <div className="mt-10 rounded-panel border border-card-border bg-card p-12 text-center">
+          <p className="font-display text-xl text-card-fg">{t("emptyTitle")}</p>
+          <p className="mx-auto mt-2 max-w-md font-body text-sm text-card-fg-secondary">{t("emptyBody")}</p>
           <Link
             href="/ricette/nuova"
             className="mt-6 inline-block rounded-pill bg-teal px-6 py-3 font-body text-sm text-white transition hover:bg-teal-dark"
@@ -62,13 +62,13 @@ export default async function RicetteIndexPage() {
             <Link
               key={r.id}
               href={`/ricette/${r.slug}`}
-              className="rounded-card border border-line bg-white p-6 shadow-soft transition hover:-translate-y-0.5 hover:shadow-card"
+              className="rounded-card border border-card-border bg-card p-6 shadow-soft transition hover:-translate-y-0.5 hover:shadow-card"
             >
-              <p className="font-display text-lg text-charcoal">{r.title}</p>
-              <p className="mt-1 font-body text-sm text-mist">
+              <p className="font-display text-lg text-card-fg">{r.title}</p>
+              <p className="mt-1 font-body text-sm text-card-fg-muted">
                 {[r.cuisine, r.category].filter(Boolean).join(" · ") || t("defaultLabel")}
               </p>
-              <div className="mt-4 flex items-center justify-between font-body text-sm text-smoke">
+              <div className="mt-4 flex items-center justify-between font-body text-sm text-card-fg-secondary">
                 <span>{t("servings", { count: r.servings })}</span>
                 {r.food_cost_per_serving != null && (
                   <span>

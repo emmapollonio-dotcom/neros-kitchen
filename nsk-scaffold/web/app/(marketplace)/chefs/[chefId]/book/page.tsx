@@ -36,7 +36,7 @@ export default async function BookChefPage({ params }: Props) {
         {chef.business_name ?? chef.full_name}
       </h1>
 
-      <div className="mt-10 rounded-panel border border-line bg-white p-8 shadow-card">
+      <div className="mt-10 rounded-panel border border-card-border bg-card p-8 shadow-card">
         <BookingForm chefId={chefId} days={days} />
       </div>
     </div>

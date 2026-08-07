@@ -60,17 +60,17 @@ export function RecipeDetail({ recipe, ingredients, isOwner }: Props) {
       <p className="font-body text-sm uppercase tracking-widest text-teal">
         {recipe.category ?? "Ricetta"} {recipe.cuisine ? `· ${recipe.cuisine}` : ""}
       </p>
-      <h1 className="mt-2 font-display text-3xl text-charcoal">{recipe.title}</h1>
-      <p className="mt-2 font-body text-sm text-smoke">
+      <h1 className="mt-2 font-display text-3xl text-card-fg">{recipe.title}</h1>
+      <p className="mt-2 font-body text-sm text-card-fg-secondary">
         {recipe.servings} porzioni {recipe.difficulty ? `· difficoltà ${recipe.difficulty}` : ""}
       </p>
 
       {recipe.description && (
-        <p className="mt-4 font-body text-charcoal leading-relaxed">{recipe.description}</p>
+        <p className="mt-4 font-body text-card-fg leading-relaxed">{recipe.description}</p>
       )}
 
       <div className="mt-8">
-        <h2 className="font-body text-sm font-semibold uppercase tracking-wide text-smoke">
+        <h2 className="font-body text-sm font-semibold uppercase tracking-wide text-card-fg-secondary">
           Foto
         </h2>
         <div className="mt-3">
@@ -81,28 +81,28 @@ export function RecipeDetail({ recipe, ingredients, isOwner }: Props) {
               {(recipe.images ?? []).map((url) => (
                 <div
                   key={url}
-                  className="relative aspect-square overflow-hidden rounded-card border border-line bg-cream shadow-soft"
+                  className="relative aspect-square overflow-hidden rounded-card border border-card-border bg-card-alt shadow-soft"
                 >
                   <Image src={url} alt="" fill sizes="(min-width: 640px) 33vw, 50vw" className="object-cover" />
                 </div>
               ))}
             </div>
           ) : (
-            <p className="font-body text-sm text-smoke">Nessuna foto ancora.</p>
+            <p className="font-body text-sm text-card-fg-secondary">Nessuna foto ancora.</p>
           )}
         </div>
       </div>
 
       <div className="mt-8">
-        <h2 className="font-body text-sm font-semibold uppercase tracking-wide text-smoke">
+        <h2 className="font-body text-sm font-semibold uppercase tracking-wide text-card-fg-secondary">
           Ingredienti
         </h2>
         {ingredients.length === 0 ? (
-          <p className="mt-2 font-body text-sm text-smoke">Nessun ingrediente collegato.</p>
+          <p className="mt-2 font-body text-sm text-card-fg-secondary">Nessun ingrediente collegato.</p>
         ) : (
           <ul className="mt-3 space-y-1">
             {ingredients.map((line) => (
-              <li key={line.id} className="font-body text-sm text-charcoal">
+              <li key={line.id} className="font-body text-sm text-card-fg">
                 {line.quantity} {line.unit} — {line.name}
               </li>
             ))}
@@ -110,9 +110,9 @@ export function RecipeDetail({ recipe, ingredients, isOwner }: Props) {
         )}
       </div>
 
-      <div className="mt-8 rounded-card border border-line bg-white p-5 shadow-soft">
+      <div className="mt-8 rounded-card border border-card-border bg-card p-5 shadow-soft">
         <div className="flex items-center justify-between">
-          <h2 className="font-body text-sm font-semibold uppercase tracking-wide text-smoke">
+          <h2 className="font-body text-sm font-semibold uppercase tracking-wide text-card-fg-secondary">
             Allergeni
           </h2>
           {isOwner && ingredients.length > 0 && (
@@ -130,13 +130,13 @@ export function RecipeDetail({ recipe, ingredients, isOwner }: Props) {
         {error && <p className="mt-2 font-body text-sm text-red-600">{error}</p>}
 
         {allergens.length === 0 ? (
-          <p className="mt-3 font-body text-sm text-smoke">Nessun allergene rilevato.</p>
+          <p className="mt-3 font-body text-sm text-card-fg-secondary">Nessun allergene rilevato.</p>
         ) : (
           <div className="mt-3 flex flex-wrap gap-2">
             {allergens.map((a) => (
               <span
                 key={a}
-                className="rounded-full bg-teal/15 px-3 py-1 font-body text-xs text-charcoal"
+                className="rounded-full bg-teal/15 px-3 py-1 font-body text-xs text-card-fg"
               >
                 {a}
               </span>
@@ -144,7 +144,7 @@ export function RecipeDetail({ recipe, ingredients, isOwner }: Props) {
           </div>
         )}
 
-        {notes && <p className="mt-3 font-body text-sm text-smoke">{notes}</p>}
+        {notes && <p className="mt-3 font-body text-sm text-card-fg-secondary">{notes}</p>}
       </div>
     </div>
   );

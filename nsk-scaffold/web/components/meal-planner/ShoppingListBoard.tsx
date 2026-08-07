@@ -80,13 +80,13 @@ export function ShoppingListBoard({ shoppingListId, items: initialItems, ingredi
   return (
     <div>
       <div className="flex items-center gap-3">
-        <div className="h-1.5 flex-1 overflow-hidden rounded-pill bg-line">
+        <div className="h-1.5 flex-1 overflow-hidden rounded-pill bg-card-border">
           <div
             className="h-full rounded-pill bg-teal transition-all"
             style={{ width: items.length ? `${(checkedCount / items.length) * 100}%` : "0%" }}
           />
         </div>
-        <p className="shrink-0 font-body text-xs text-mist">
+        <p className="shrink-0 font-body text-xs text-card-fg-muted">
           {checkedCount}/{items.length}
         </p>
       </div>
@@ -94,17 +94,17 @@ export function ShoppingListBoard({ shoppingListId, items: initialItems, ingredi
       <div className="mt-8 space-y-8">
         {grouped.map(([category, groupItems]) => (
           <div key={category}>
-            <h2 className="font-body text-xs uppercase tracking-widest text-mist">{category}</h2>
+            <h2 className="font-body text-xs uppercase tracking-widest text-card-fg-muted">{category}</h2>
             <div className="mt-3 space-y-2">
               {groupItems.map((item) => (
                 <div
                   key={item.id}
-                  className="group flex items-center gap-3 rounded-card border border-line bg-white px-4 py-3 shadow-soft"
+                  className="group flex items-center gap-3 rounded-card border border-card-border bg-card px-4 py-3 shadow-soft"
                 >
                   <button
                     onClick={() => toggleChecked(item)}
                     className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border transition ${
-                      item.is_checked ? "border-teal bg-teal" : "border-line"
+                      item.is_checked ? "border-teal bg-teal" : "border-card-border"
                     }`}
                     aria-label={item.is_checked ? t("markAsToBuy") : t("markAsBought")}
                   >
@@ -113,20 +113,20 @@ export function ShoppingListBoard({ shoppingListId, items: initialItems, ingredi
                   <div className="flex-1">
                     <p
                       className={`font-body text-sm ${
-                        item.is_checked ? "text-mist line-through" : "text-charcoal"
+                        item.is_checked ? "text-card-fg-muted line-through" : "text-card-fg"
                       }`}
                     >
                       {itemLabel(item)}
                     </p>
                     {(item.quantity || item.unit) && (
-                      <p className="font-body text-xs text-mist">
+                      <p className="font-body text-xs text-card-fg-muted">
                         {item.quantity} {item.unit}
                       </p>
                     )}
                   </div>
                   <button
                     onClick={() => removeItem(item.id)}
-                    className="text-mist opacity-0 transition hover:text-charcoal group-hover:opacity-100"
+                    className="text-card-fg-muted opacity-0 transition hover:text-card-fg group-hover:opacity-100"
                     aria-label={t("removeAria")}
                   >
                     <Trash2 size={15} />
@@ -138,7 +138,7 @@ export function ShoppingListBoard({ shoppingListId, items: initialItems, ingredi
         ))}
 
         {items.length === 0 && (
-          <p className="font-body text-sm text-smoke">{t("emptyList")}</p>
+          <p className="font-body text-sm text-card-fg-secondary">{t("emptyList")}</p>
         )}
       </div>
 
@@ -148,7 +148,7 @@ export function ShoppingListBoard({ shoppingListId, items: initialItems, ingredi
           onChange={(e) => setNewLabel(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && addItem()}
           placeholder={t("addPlaceholder")}
-          className="flex-1 rounded-pill border border-line bg-white px-4 py-2.5 font-body text-sm text-charcoal placeholder:text-mist focus:border-teal focus:outline-none"
+          className="flex-1 rounded-pill border border-card-border bg-card px-4 py-2.5 font-body text-sm text-card-fg placeholder:text-card-fg-muted focus:border-teal focus:outline-none"
         />
         <button
           onClick={addItem}

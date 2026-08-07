@@ -35,9 +35,9 @@ export default async function ListaSpesaPage({ searchParams }: Props) {
         <p className="font-body text-sm uppercase tracking-widest text-teal">N&apos;sK Home</p>
         <h1 className="mt-2 font-display text-display-md text-shell-fg">{t("title")}</h1>
 
-        <div className="mt-10 rounded-panel border border-line bg-white p-12 text-center">
-          <p className="font-display text-xl text-charcoal">{t("noListsTitle")}</p>
-          <p className="mx-auto mt-2 max-w-md font-body text-sm text-smoke">{t("noListsBody")}</p>
+        <div className="mt-10 rounded-panel border border-card-border bg-card p-12 text-center">
+          <p className="font-display text-xl text-card-fg">{t("noListsTitle")}</p>
+          <p className="mx-auto mt-2 max-w-md font-body text-sm text-card-fg-secondary">{t("noListsBody")}</p>
           <Link
             href="/meal-planner"
             className="mt-6 inline-block rounded-pill bg-teal px-6 py-3 font-body text-sm text-white transition hover:bg-teal-dark"
@@ -77,7 +77,7 @@ export default async function ListaSpesaPage({ searchParams }: Props) {
               key={l.id}
               href={`/lista-spesa?list=${l.id}`}
               className={`rounded-pill px-4 py-1.5 font-body text-xs transition ${
-                l.id === activeList.id ? "bg-teal text-white" : "bg-cream text-smoke hover:bg-line"
+                l.id === activeList.id ? "bg-teal text-white" : "bg-card-alt text-card-fg-secondary hover:bg-card-border"
               }`}
             >
               {l.title}
