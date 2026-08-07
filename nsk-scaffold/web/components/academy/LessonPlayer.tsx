@@ -55,7 +55,7 @@ export function LessonPlayer({ lessons, initialProgress }: Props) {
             className={`flex w-full items-center justify-between rounded-nsk px-4 py-3 text-left font-body text-sm transition ${
               activeLesson?.id === lesson.id
                 ? "bg-charcoal text-ivory"
-                : "bg-white text-white hover:bg-teal/10"
+                : "bg-white text-charcoal hover:bg-teal/10"
             }`}
           >
             <span>

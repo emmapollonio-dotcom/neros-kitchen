@@ -69,7 +69,7 @@ export default async function PricingPage() {
                 className={`mt-6 rounded-pill px-4 py-2.5 text-center font-body text-sm transition ${
                   recommended
                     ? "bg-charcoal text-ivory hover:bg-teal hover:text-white"
-                    : "border border-line text-white hover:border-teal"
+                    : "border border-line text-charcoal hover:border-teal"
                 }`}
               >
                 Scegli {plan.name}

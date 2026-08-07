@@ -8,7 +8,7 @@ export default function TerminiPage() {
         </p>
 
         <div className="mt-8 rounded-panel border border-line bg-white p-6 shadow-soft md:p-10">
-        <p className="rounded-nsk border border-teal/40 bg-teal/10 p-4 font-body text-sm text-white">
+        <p className="rounded-nsk border border-teal/40 bg-teal/10 p-4 font-body text-sm text-charcoal">
           Questa pagina è una bozza completa nella struttura, ma le politiche di cancellazione e
           rimborso (sezione 4) e i dati societari (sezione 1) vanno confermati/completati da te
           prima della pubblicazione — sono scelte di business, non tecniche, e vale la pena farle

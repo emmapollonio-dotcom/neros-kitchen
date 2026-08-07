@@ -8,7 +8,7 @@ export default function PrivacyPage() {
         </p>
 
         <div className="mt-8 rounded-panel border border-line bg-white p-6 shadow-soft md:p-10">
-        <p className="rounded-nsk border border-teal/40 bg-teal/10 p-4 font-body text-sm text-white">
+        <p className="rounded-nsk border border-teal/40 bg-teal/10 p-4 font-body text-sm text-charcoal">
           Questa pagina è una bozza completa dal punto di vista tecnico, ma i dati del titolare
           del trattamento (sezione 1) vanno completati con la ragione sociale reale prima della
           pubblicazione, ed è opportuno farla rivedere da un legale/consulente privacy prima di

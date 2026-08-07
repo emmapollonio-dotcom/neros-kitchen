@@ -44,7 +44,7 @@ export function AvailabilityCalendar({ days, onSelectSlot }: Props) {
                   className={`rounded-nsk border px-4 py-2 font-body text-sm transition ${
                     isSelected
                       ? "border-teal bg-teal text-white"
-                      : "border-smoke/30 text-white hover:border-teal"
+                      : "border-smoke/30 text-charcoal hover:border-teal"
                   }`}
                 >
                   {new Date(slot.start_at).toLocaleTimeString("it-IT", {

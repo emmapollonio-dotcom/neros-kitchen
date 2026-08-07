@@ -344,7 +344,7 @@ export function HaccpTracker() {
                   type="button"
                   onClick={() => handleGenerateAction(reading.id)}
                   disabled={generatingId === reading.id}
-                  className="rounded-nsk border border-teal px-3 py-1.5 font-body text-xs text-white hover:bg-teal/10 disabled:opacity-50"
+                  className="rounded-nsk border border-teal px-3 py-1.5 font-body text-xs text-charcoal hover:bg-teal/10 disabled:opacity-50"
                 >
                   {generatingId === reading.id ? "Genero..." : "Azione correttiva AI"}
                 </button>
