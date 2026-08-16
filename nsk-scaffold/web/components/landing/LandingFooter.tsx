@@ -1,24 +1,9 @@
 "use client";
 
-import { useLocale } from "next-intl";
-import { useRouter } from "next/navigation";
-import { useTransition } from "react";
 import Link from "next/link";
-import { locales, LOCALE_FLAGS } from "@/i18n/locales";
-import { setLocale } from "@/app/actions/set-locale";
+import { LandingLanguageSwitcher } from "./LandingLanguageSwitcher";
 
 export function LandingFooter() {
-  const currentLocale = useLocale();
-  const router = useRouter();
-  const [isPending, startTransition] = useTransition();
-
-  function selectLocale(locale: string) {
-    startTransition(async () => {
-      await setLocale(locale);
-      router.refresh();
-    });
-  }
-
   return (
     <div
       className="mx-auto flex max-w-content flex-wrap items-center justify-between gap-5 border-t px-6 py-8"
@@ -38,30 +23,7 @@ export function LandingFooter() {
           Privacy
         </Link>
       </div>
-      <div className="flex gap-1.5">
-        {locales.map((code) => {
-          const active = code === currentLocale;
-          return (
-            <button
-              key={code}
-              type="button"
-              disabled={isPending}
-              onClick={() => selectLocale(code)}
-              aria-label={LOCALE_FLAGS[code].label}
-              title={LOCALE_FLAGS[code].label}
-              className="flex items-center gap-1.5 rounded-pill border px-[11px] py-[5px] font-body text-[11px] font-semibold uppercase transition-colors duration-200 ease-nsk disabled:opacity-60"
-              style={{
-                background: active ? "#117E8E" : "transparent",
-                color: active ? "#FFFFFF" : "var(--nsk-l-text-secondary)",
-                borderColor: "var(--nsk-l-border)",
-              }}
-            >
-              <span className="text-sm leading-none">{LOCALE_FLAGS[code].flag}</span>
-              {code}
-            </button>
-          );
-        })}
-      </div>
+      <LandingLanguageSwitcher />
     </div>
   );
 }
