@@ -33,7 +33,7 @@ export async function Features() {
       <div className="mb-[88px] flex flex-wrap items-center gap-14">
         <div className="min-w-[280px] flex-[1_1_380px]">
           <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-pill border" style={{ borderColor: "var(--nsk-l-border)" }}>
-            <Salad size={20} className="text-teal" />
+            <Salad size={20} className="text-[var(--nsk-l-accent)]" />
           </div>
           <h3 className="mb-2.5 font-display text-[22px] font-bold" style={{ color: "var(--nsk-l-text)" }}>
             {t("featureRecipesFromPantryTitle")}
@@ -53,7 +53,7 @@ export async function Features() {
         </div>
         <div className="min-w-[280px] flex-[1_1_380px]">
           <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-pill border" style={{ borderColor: "var(--nsk-l-border)" }}>
-            <CalendarClock size={20} className="text-teal" />
+            <CalendarClock size={20} className="text-[var(--nsk-l-accent)]" />
           </div>
           <h3 className="mb-2.5 font-display text-[22px] font-bold" style={{ color: "var(--nsk-l-text)" }}>
             {t("featureExpiryTrackingTitle")}
@@ -72,7 +72,7 @@ export async function Features() {
               style={{ background: "var(--nsk-l-card-bg)", borderColor: "var(--nsk-l-border)" }}
             >
               <div className="mb-[18px] flex h-10 w-10 items-center justify-center rounded-pill border" style={{ borderColor: "var(--nsk-l-border)" }}>
-                <card.icon size={18} className="text-teal" />
+                <card.icon size={18} className="text-[var(--nsk-l-accent)]" />
               </div>
               <h4 className="mb-2 font-display text-lg font-bold" style={{ color: "var(--nsk-l-text)" }}>
                 {card.title}

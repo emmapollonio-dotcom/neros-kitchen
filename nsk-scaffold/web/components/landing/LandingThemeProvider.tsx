@@ -9,13 +9,15 @@ interface LandingThemeContextValue {
 
 const LandingThemeContext = createContext<LandingThemeContextValue | null>(null);
 
-// Stato del toggle chiaro/scuro della landing, come da spec (default light —
-// isDark: false). Scoped a questa route: non è il tema del resto dell'app
-// (che è permanentemente scuro), è un'interazione richiesta esplicitamente
-// dal design handoff. Il data-theme sul wrapper guida le CSS var in
-// .nsk-landing (globals.css).
+// Stato del toggle chiaro/scuro della landing. Default scuro (10 ago 2026,
+// cambiato da light) — la nuova palette nero+oro ispirata a
+// neroskitchen.co.uk è pensata per essere vista scura di default, come il
+// sito di riferimento; il toggle resta comunque disponibile. Scoped a
+// questa route: non è il tema del resto dell'app (permanentemente scuro
+// navy+teal). Il data-theme sul wrapper guida le CSS var in .nsk-landing
+// (globals.css).
 export function LandingThemeProvider({ children }: { children: ReactNode }) {
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState(true);
 
   return (
     <LandingThemeContext.Provider value={{ isDark, toggle: () => setIsDark((v) => !v) }}>

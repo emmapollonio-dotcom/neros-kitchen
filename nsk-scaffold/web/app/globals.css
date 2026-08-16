@@ -96,26 +96,43 @@ body {
   --nsk-l-card-bg: #faf8f4;
   --nsk-l-shadow: 0 24px 48px -20px rgba(18, 18, 18, 0.16), 0 4px 12px -6px rgba(18, 18, 18, 0.08);
   --nsk-l-shadow-hover: 0 30px 56px -18px rgba(18, 18, 18, 0.2), 0 6px 16px -6px rgba(18, 18, 18, 0.1);
+  /* Accento landing (10 ago 2026) — oro, ispirato allo stile di
+     neroskitchen.co.uk (attività reale dell'utente). Scoped qui: non è
+     il teal del prodotto/app, resta separato di proposito (vedi commento
+     su .nsk-landing[data-theme="dark"] sotto). In chiaro un oro più scuro
+     per contrasto leggibile su fondo crema. */
+  --nsk-l-accent: #9c7a45;
+  --nsk-l-accent-dark: #7a5f37;
   background-color: var(--nsk-l-bg);
   color: var(--nsk-l-text);
   transition: background-color 0.3s cubic-bezier(0.22, 1, 0.36, 1), color 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .nsk-landing[data-theme="dark"] {
-  --nsk-l-bg: #0b1220;
-  --nsk-l-bg-alt: #0d1526;
-  --nsk-l-text: #f5f1ea;
-  --nsk-l-text-secondary: rgba(245, 241, 234, 0.7);
-  --nsk-l-text-muted: rgba(245, 241, 234, 0.5);
-  --nsk-l-border: rgba(245, 241, 234, 0.12);
-  --nsk-l-card-bg: #22344f;
-  --nsk-l-shadow: 0 24px 48px -20px rgba(0, 0, 0, 0.55), 0 4px 12px -6px rgba(0, 0, 0, 0.35);
-  --nsk-l-shadow-hover: 0 30px 56px -18px rgba(0, 0, 0, 0.6), 0 6px 16px -6px rgba(0, 0, 0, 0.4);
+  /* Palette "Nero+Oro" (10 ago 2026) — sostituisce il navy #0b1220 su
+     richiesta esplicita dell'utente, che vuole lo STILE del proprio sito
+     reale (neroskitchen.co.uk: nero profondo + accento oro, tipografia
+     serif drammatica) applicato alla landing N'sK, contenuti N'sK invariati.
+     Nota: questo scolla di proposito il navy scuro landing dal navy scuro
+     shell/card del resto dell'app (dashboard, tool Pro/Home), che restano
+     sul design system navy+teal esistente — la landing pubblica ha ora
+     un'identità visiva distinta dal prodotto interno. */
+  --nsk-l-bg: #111110;
+  --nsk-l-bg-alt: #1a1a18;
+  --nsk-l-text: #f6f1e7;
+  --nsk-l-text-secondary: rgba(246, 241, 231, 0.7);
+  --nsk-l-text-muted: rgba(246, 241, 231, 0.5);
+  --nsk-l-border: rgba(246, 241, 231, 0.12);
+  --nsk-l-card-bg: #1c1c19;
+  --nsk-l-accent: #c8a165;
+  --nsk-l-accent-dark: #9c7a45;
+  --nsk-l-shadow: 0 24px 48px -20px rgba(0, 0, 0, 0.6), 0 4px 12px -6px rgba(0, 0, 0, 0.4);
+  --nsk-l-shadow-hover: 0 30px 56px -18px rgba(0, 0, 0, 0.65), 0 6px 16px -6px rgba(0, 0, 0, 0.45);
 }
 
 .nsk-landing a {
-  color: #117e8e;
+  color: var(--nsk-l-accent);
 }
 .nsk-landing a:hover {
-  color: #0c5f6b;
+  color: var(--nsk-l-accent-dark);
 }

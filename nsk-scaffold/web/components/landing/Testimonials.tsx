@@ -34,7 +34,7 @@ export async function Testimonials() {
   return (
     <div className="mx-auto max-w-content px-6 py-[clamp(48px,7vw,88px)]">
       <div className="mb-12 text-center">
-        <div className="font-body text-xs font-semibold uppercase tracking-[0.06em] text-teal-dark">{t("testimonialsEyebrow")}</div>
+        <div className="font-body text-xs font-semibold uppercase tracking-[0.06em] text-[var(--nsk-l-accent-dark)]">{t("testimonialsEyebrow")}</div>
       </div>
       <div className="grid gap-6 [grid-template-columns:repeat(auto-fit,minmax(300px,1fr))]">
         {TESTIMONIALS.map((item, i) => (
@@ -45,14 +45,14 @@ export async function Testimonials() {
             >
               <div className="mb-4 flex gap-[3px]">
                 {Array.from({ length: 5 }).map((_, s) => (
-                  <Star key={s} size={12} className="fill-teal text-teal" />
+                  <Star key={s} size={12} className="fill-[var(--nsk-l-accent)] text-[var(--nsk-l-accent)]" />
                 ))}
               </div>
               <p className="mb-5 font-body text-[15px] leading-[1.6]" style={{ color: "var(--nsk-l-text)" }}>
                 {item.quote}
               </p>
               <div className="flex items-center gap-2.5">
-                <div className="flex h-[38px] w-[38px] flex-none items-center justify-center rounded-pill bg-teal font-body text-xs font-bold text-white">
+                <div className="flex h-[38px] w-[38px] flex-none items-center justify-center rounded-pill bg-[var(--nsk-l-accent)] font-body text-xs font-bold text-[#121212]">
                   {initials(item.name)}
                 </div>
                 <div>
