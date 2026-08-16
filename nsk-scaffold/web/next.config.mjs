@@ -18,13 +18,6 @@ const nextConfig = {
         hostname: "xjvrhoweghzfvwjsvwla.supabase.co",
         pathname: "/storage/v1/object/public/**",
       },
-      {
-        // Placeholder fotografici per la pagina /nero-tapas-bar (vedi
-        // components/nero-tapas-bar/) — da sostituire con foto reali del
-        // locale quando disponibili.
-        protocol: "https",
-        hostname: "images.unsplash.com",
-      },
     ],
   },
 };
